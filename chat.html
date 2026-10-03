@@ -3,8 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#000000"
+    >
 
     <title>Chat · Spatium GameVault</title>
 
@@ -13,20 +21,32 @@
         content="Chat with the Spatium community."
     >
 
-    <link rel="icon" href="assets/favicon.svg">
+    <link
+        rel="icon"
+        href="assets/favicon.svg"
+    >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="css/chat.css">
+    <link
+        rel="stylesheet"
+        href="css/chat.css"
+    >
 
     <style>
-        /* Account required screen */
+        /* =====================================================
+           ACCOUNT REQUIRED SCREEN
+           ===================================================== */
 
         .chat-login-required {
             position: fixed;
@@ -140,9 +160,9 @@
             color: #fff;
         }
 
-        #chatApp {
-            display: none;
-        }
+        /* =====================================================
+           LOADING
+           ===================================================== */
 
         #chatLoading {
             position: fixed;
@@ -161,977 +181,638 @@
 
             z-index: 10000;
         }
+
+        /* =====================================================
+           CHAT APP
+           ===================================================== */
+
+        #chatApp {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
 
-<!-- AUTH CHECK LOADING -->
-<div id="chatLoading">
-    Checking your account...
-</div>
+    <!-- =====================================================
+         AUTH CHECK LOADING
+         ===================================================== -->
+
+    <div id="chatLoading">
+        Checking your account...
+    </div>
 
 
-<!-- LOGIN REQUIRED -->
-<div
-    class="chat-login-required"
-    id="chatLoginRequired"
-    style="display:none;"
->
+    <!-- =====================================================
+         LOGIN REQUIRED
+         ===================================================== -->
 
-    <div class="chat-login-card">
+    <div
+        class="chat-login-required"
+        id="chatLoginRequired"
+        style="display: none;"
+    >
 
-        <div class="chat-login-logo">
-            S
+        <div class="chat-login-card">
+
+            <div class="chat-login-logo">
+                S
+            </div>
+
+            <h1>
+                Account required
+            </h1>
+
+            <p>
+                You need a Spatium account to join the community
+                chat, send messages, and interact with other users.
+            </p>
+
+            <button
+                class="chat-login-button"
+                id="goToAccount"
+                type="button"
+            >
+                Sign in / Create account
+            </button>
+
+            <a
+                href="index.html"
+                class="chat-login-close"
+            >
+                Return to Spatium
+            </a>
+
         </div>
-
-        <h1>
-            Account required
-        </h1>
-
-        <p>
-            You need a Spatium account to join the community chat,
-            send messages, and interact with other users.
-        </p>
-
-        <button
-            class="chat-login-button"
-            id="goToAccount"
-            type="button"
-        >
-            Sign in / Create account
-        </button>
-
-        <a
-            href="index.html"
-            class="chat-login-close"
-        >
-            Return to Spatium
-        </a>
 
     </div>
 
-</div>
 
-
-<!-- ACTUAL CHAT -->
-<div
-    class="chat-page"
-    id="chatApp"
->
+    <!-- =====================================================
+         ACTUAL CHAT
+         ===================================================== -->
 
     <div
-        class="gv-chat gv-chat-full gv-chat-in"
-        role="dialog"
-        aria-label="Chat"
+        class="chat-page"
+        id="chatApp"
     >
 
-        <div class="gv-chat-frame">
+        <div
+            class="gv-chat gv-chat-full gv-chat-in"
+            role="dialog"
+            aria-label="Chat"
+        >
 
-            <!-- SIDEBAR -->
-            <aside
-                class="gv-chat-side"
-                id="chatSidebar"
-            >
+            <div class="gv-chat-frame">
 
-                <div class="gv-chat-side-head">
+                <!-- =================================================
+                     SIDEBAR
+                     ================================================= -->
 
-                    <span>
-                        Chats
-                    </span>
+                <aside
+                    class="gv-chat-side"
+                    id="chatSidebar"
+                >
 
-                    <button
-                        class="gv-chat-icon"
-                        type="button"
-                        aria-label="Pop-ups over games are on"
-                        title="Pop-ups over games are on"
-                    >
-                        <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                        </svg>
-                    </button>
+                    <div class="gv-chat-side-head">
 
-                </div>
-
-
-                <div class="gv-chat-list">
-
-                    <button
-                        class="gv-chat-row"
-                        type="button"
-                        aria-current="true"
-                    >
-
-                        <span class="gv-chat-dot">
-                            #
+                        <span>
+                            Chats
                         </span>
 
-                        <span class="gv-chat-row-text">
+                        <button
+                            class="gv-chat-icon"
+                            type="button"
+                            aria-label="Pop-ups over games are on"
+                            title="Pop-ups over games are on"
+                        >
 
-                            <span class="gv-chat-row-name">
-                                Server
-                            </span>
-
-                            <span
-                                class="gv-chat-row-last"
-                                id="sidebarLastMsg"
+                            <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
                             >
-                                Talk with everyone on Spatium
-                            </span>
+                                <path
+                                    d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"
+                                ></path>
 
-                        </span>
+                                <path
+                                    d="M10.3 21a1.94 1.94 0 0 0 3.4 0"
+                                ></path>
+                            </svg>
 
-                    </button>
-
-                </div>
-
-
-                <div class="gv-chat-foot">
-
-                    <button
-                        class="gv-chat-pill primary"
-                        type="button"
-                        id="composeBtn"
-                    >
-                        Compose
-                    </button>
-
-                    <button
-                        class="gv-chat-pill"
-                        type="button"
-                        id="groupChatBtn"
-                    >
-                        Group chat
-                    </button>
-
-                </div>
-
-            </aside>
-
-
-            <!-- MAIN CHAT -->
-            <section class="gv-chat-main">
-
-                <!-- HEADER -->
-                <div class="gv-chat-head">
-
-                    <button
-                        class="gv-chat-icon"
-                        type="button"
-                        aria-label="Mute"
-                        title="Mute"
-                    >
-                        <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                        </svg>
-                    </button>
-
-
-                    <div class="gv-chat-title">
-
-                        <b>
-                            Server
-                        </b>
-
-                        <small>
-                            Everyone on Spatium
-                        </small>
+                        </button>
 
                     </div>
 
 
-                    <!-- ONLY EXIT BUTTON -->
-                    <button
-                        class="gv-chat-icon gv-chat-close"
-                        id="closeChatBtn"
-                        type="button"
-                        aria-label="Close chat"
-                        title="Close chat"
-                    >
-                        ×
-                    </button>
+                    <div class="gv-chat-list">
 
-                </div>
+                        <button
+                            class="gv-chat-row"
+                            type="button"
+                            aria-current="true"
+                        >
 
-
-                <!-- MESSAGES -->
-                <div
-                    class="gv-chat-log"
-                    id="messages"
-                    role="log"
-                    aria-live="polite"
-                ></div>
-
-
-                <!-- COMPOSER -->
-                <div class="composer-wrapper">
-
-                    <div
-                        class="mention-list"
-                        id="mentionList"
-                    ></div>
-
-                    <div class="composer">
-
-                        <textarea
-                            id="messageInput"
-                            maxlength="300"
-                            placeholder="Type a message..."
-                            rows="1"
-                            autocomplete="off"
-                            spellcheck="true"
-                            aria-label="Message"
-                        ></textarea>
-
-                        <div class="composer-bottom">
-
-                            <span id="characterCount">
-                                0 / 300
+                            <span class="gv-chat-dot">
+                                #
                             </span>
 
-                            <button
-                                id="sendButton"
-                                type="button"
+                            <span class="gv-chat-row-text">
+
+                                <span class="gv-chat-row-name">
+                                    Server
+                                </span>
+
+                                <span
+                                    class="gv-chat-row-last"
+                                    id="sidebarLastMsg"
+                                >
+                                    Talk with everyone on Spatium
+                                </span>
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="gv-chat-foot">
+
+                        <button
+                            class="gv-chat-pill primary"
+                            type="button"
+                            id="composeBtn"
+                        >
+                            Compose
+                        </button>
+
+                        <button
+                            class="gv-chat-pill"
+                            type="button"
+                            id="groupChatBtn"
+                        >
+                            Group chat
+                        </button>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- =================================================
+                     MAIN CHAT
+                     ================================================= -->
+
+                <section class="gv-chat-main">
+
+                    <!-- HEADER -->
+
+                    <div class="gv-chat-head">
+
+                        <button
+                            class="gv-chat-icon"
+                            type="button"
+                            aria-label="Mute"
+                            title="Mute"
+                        >
+
+                            <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
                             >
-                                Send
-                            </button>
+
+                                <path
+                                    d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"
+                                ></path>
+
+                                <path
+                                    d="M10.3 21a1.94 1.94 0 0 0 3.4 0"
+                                ></path>
+
+                            </svg>
+
+                        </button>
+
+
+                        <div class="gv-chat-title">
+
+                            <b>
+                                Server
+                            </b>
+
+                            <small>
+                                Everyone on Spatium
+                            </small>
+
+                        </div>
+
+
+                        <!-- ONLY EXIT BUTTON -->
+
+                        <button
+                            class="gv-chat-icon gv-chat-close"
+                            id="closeChatBtn"
+                            type="button"
+                            aria-label="Close chat"
+                            title="Close chat"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MESSAGES
+                         ================================================= -->
+
+                    <div
+                        class="gv-chat-log"
+                        id="messages"
+                        role="log"
+                        aria-live="polite"
+                    ></div>
+
+
+                    <!-- =================================================
+                         COMPOSER
+                         ================================================= -->
+
+                    <div class="composer-wrapper">
+
+                        <div
+                            class="mention-list"
+                            id="mentionList"
+                        ></div>
+
+                        <div class="composer">
+
+                            <textarea
+                                id="messageInput"
+                                maxlength="300"
+                                placeholder="Type a message..."
+                                rows="1"
+                                autocomplete="off"
+                                spellcheck="true"
+                                aria-label="Message"
+                            ></textarea>
+
+                            <div class="composer-bottom">
+
+                                <span id="characterCount">
+                                    0 / 300
+                                </span>
+
+                                <button
+                                    id="sendButton"
+                                    type="button"
+                                >
+                                    Send
+                                </button>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
+                </section>
 
-            </section>
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
+    <!-- =====================================================
+         SUPABASE
+         ===================================================== -->
 
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
-<!-- YOUR SUPABASE CONFIG -->
-<script
-    src="js/supabase-config.js"
-></script>
 
+    <!-- =====================================================
+         SPATIUM SUPABASE CONFIG
+         ===================================================== -->
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
+    <script
+        src="js/supabase-config.js"
+    ></script>
 
-    /*
-    ============================================================
-    ELEMENTS
-    ============================================================
-    */
 
-    const loading =
-        document.getElementById("chatLoading");
+    <!-- =====================================================
+         AUTH UI
+         ===================================================== -->
 
-    const loginRequired =
-        document.getElementById("chatLoginRequired");
-
-    const chatApp =
-        document.getElementById("chatApp");
-
-    const goToAccount =
-        document.getElementById("goToAccount");
-
-    const closeChatBtn =
-        document.getElementById("closeChatBtn");
-
-    const messageInput =
-        document.getElementById("messageInput");
-
-    const sendButton =
-        document.getElementById("sendButton");
-
-    const characterCount =
-        document.getElementById("characterCount");
-
-    const messagesContainer =
-        document.getElementById("messages");
-
-    const sidebarLastMsg =
-        document.getElementById("sidebarLastMsg");
-
-
-    /*
-    ============================================================
-    SUPABASE
-    ============================================================
-    */
-
-    let supabaseClient = null;
-
-    /*
-     * This supports the common config formats:
-     *
-     * window.supabaseClient
-     *
-     * OR
-     *
-     * window.SUPABASE_URL
-     * window.SUPABASE_ANON_KEY
-     */
-
-    if (
-        window.supabaseClient
-    ) {
-
-        supabaseClient =
-            window.supabaseClient;
-
-    } else if (
-        window.SUPABASE_URL &&
-        window.SUPABASE_ANON_KEY &&
-        window.supabase
-    ) {
-
-        supabaseClient =
-            window.supabase.createClient(
-                window.SUPABASE_URL,
-                window.SUPABASE_ANON_KEY
-            );
-
-    }
-
-
-    /*
-    ============================================================
-    ACCOUNT CHECK
-    ============================================================
-    */
-
-    let currentUser = null;
-
-
-    async function checkAccount() {
-
-        if (!supabaseClient) {
-
-            console.error(
-                "Supabase client was not found."
-            );
-
-            loading.style.display =
-                "none";
-
-            loginRequired.style.display =
-                "flex";
-
-            return false;
-
-        }
-
-
-        try {
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth.getUser();
-
-
-            if (
-                error ||
-                !data ||
-                !data.user
-            ) {
-
-                showLoginRequired();
-
-                return false;
-
-            }
-
-
-            currentUser =
-                data.user;
-
-
-            loading.style.display =
-                "none";
-
-            chatApp.style.display =
-                "block";
-
-
-            return true;
-
-        } catch (error) {
-
-            console.error(
-                "Authentication check failed:",
-                error
-            );
-
-            showLoginRequired();
-
-            return false;
-
-        }
-
-    }
-
-
-    /*
-    ============================================================
-    LOGIN SCREEN
-    ============================================================
-    */
-
-    function showLoginRequired() {
-
-        loading.style.display =
-            "none";
-
-        chatApp.style.display =
-            "none";
-
-        loginRequired.style.display =
-            "flex";
-
-    }
-
-
-    /*
-    ============================================================
-    ACCOUNT PAGE
-    ============================================================
-    */
-
-    goToAccount.addEventListener(
-        "click",
-        () => {
-
-            window.location.href =
-                "account.html";
-
-        }
-    );
-
-
-    /*
-    ============================================================
-    ESCAPE HTML
-    ============================================================
-    */
-
-    function escapeHTML(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    /*
-    ============================================================
-    FORMAT MESSAGE
-    ============================================================
-    */
-
-    function formatMessage(text) {
-
-        const escaped =
-            escapeHTML(text);
-
-
-        return escaped.replace(
-            /@(\w+)/g,
-            '<button class="gv-mention" type="button">@$1</button>'
-        );
-
-    }
-
-
-    /*
-    ============================================================
-    GET USERNAME
-    ============================================================
-    */
-
-    function getUsername(user) {
-
-        if (!user) {
-            return "User";
-        }
-
-
-        return (
-            user.user_metadata?.username ||
-            user.user_metadata?.display_name ||
-            user.user_metadata?.name ||
-            user.email?.split("@")[0] ||
-            "User"
-        );
-
-    }
-
-
-    /*
-    ============================================================
-    RENDER MESSAGE
-    ============================================================
-    */
-
-    function renderMessage(msg) {
-
-        const msgEl =
-            document.createElement("div");
-
-        msgEl.className =
-            "gv-msg";
-
-
-        msgEl.dataset.id =
-            msg.id || Date.now();
-
-
-        const date =
-            new Date(msg.created_at || msg.time);
-
-
-        const time =
-            date.toLocaleTimeString(
-                [],
-                {
-                    hour: "numeric",
-                    minute: "2-digit"
-                }
-            );
-
-
-        msgEl.innerHTML = `
-            <div class="gv-msg-head">
-
-                <button
-                    class="gv-msg-name"
-                    type="button"
-                >
-                    ${escapeHTML(
-                        msg.username ||
-                        msg.author ||
-                        "User"
-                    )}
-                </button>
-
-                <time
-                    class="gv-msg-time"
-                    datetime="${escapeHTML(
-                        msg.created_at ||
-                        msg.time ||
-                        new Date().toISOString()
-                    )}"
-                >
-                    ${time}
-                </time>
-
-                <button
-                    class="gv-msg-report"
-                    type="button"
-                >
-                    Report
-                </button>
-
-            </div>
-
-            <div class="gv-msg-body">
-                ${formatMessage(
-                    msg.message ||
-                    msg.content ||
-                    ""
-                )}
-            </div>
-        `;
-
-
-        messagesContainer.appendChild(
-            msgEl
-        );
-
-    }
-
-
-    /*
-    ============================================================
-    SCROLL
-    ============================================================
-    */
-
-    function scrollToBottom() {
-
-        requestAnimationFrame(() => {
-
-            messagesContainer.scrollTop =
-                messagesContainer.scrollHeight;
-
-        });
-
-    }
-
-
-    /*
-    ============================================================
-    LOAD MESSAGES
-    ============================================================
-    */
-
-    async function loadMessages() {
-
-        /*
-         * IMPORTANT:
-         *
-         * Your existing Supabase table name/columns need to
-         * match this query.
-         *
-         * Change "messages" if your old database used another
-         * table name.
-         */
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("messages")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending: true
-                    }
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Could not load messages:",
-                error
-            );
-
-            return;
-
-        }
-
-
-        messagesContainer.innerHTML =
-            "";
-
-
-        if (!data) {
-            return;
-        }
-
-
-        data.forEach(
-            renderMessage
-        );
-
-
-        if (data.length) {
-
-            const last =
-                data[data.length - 1];
-
-
-            sidebarLastMsg.textContent =
-                `${last.username || "User"}: ${
-                    last.message ||
-                    last.content ||
-                    ""
-                }`;
-
-        }
-
-
-        scrollToBottom();
-
-    }
-
-
-    /*
-    ============================================================
-    SEND MESSAGE
-    ============================================================
-    */
-
-    async function sendMessage() {
-
-        const text =
-            messageInput.value.trim();
-
-
-        if (!text) {
-            return;
-        }
-
-
-        if (!currentUser) {
-
-            showLoginRequired();
-
-            return;
-
-        }
-
-
-        sendButton.disabled =
-            true;
-
-
-        const username =
-            getUsername(currentUser);
-
-
-        try {
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .from("messages")
-                    .insert({
-
-                        user_id:
-                            currentUser.id,
-
-                        username:
-                            username,
-
-                        message:
-                            text
-
-                    });
-
-
-            if (error) {
-
-                console.error(
-                    "Message could not be sent:",
-                    error
-                );
-
-                alert(
-                    "Your message could not be sent."
-                );
-
-                return;
-
-            }
-
-
-            messageInput.value =
-                "";
-
-            messageInput.style.height =
-                "auto";
-
-            characterCount.textContent =
-                "0 / 300";
-
-
-            sidebarLastMsg.textContent =
-                `${username}: ${text}`;
-
-
-            await loadMessages();
-
-        } finally {
-
-            sendButton.disabled =
-                false;
-
-        }
-
-    }
-
-
-    /*
-    ============================================================
-    INPUT
-    ============================================================
-    */
-
-    messageInput.addEventListener(
-        "input",
-        () => {
-
-            const length =
-                messageInput.value.length;
-
-
-            characterCount.textContent =
-                `${length} / 300`;
-
-
-            messageInput.style.height =
-                "auto";
-
-
-            messageInput.style.height =
-                Math.min(
-                    messageInput.scrollHeight,
-                    120
-                ) + "px";
-
-        }
-    );
-
-
-    /*
-    ============================================================
-    ENTER
-    ============================================================
-    */
-
-    messageInput.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Enter" &&
-                !event.shiftKey
-            ) {
-
-                event.preventDefault();
-
-                sendMessage();
-
-            }
-
-        }
-    );
-
-
-    /*
-    ============================================================
-    SEND BUTTON
-    ============================================================
-    */
-
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
-
-
-    /*
-    ============================================================
-    REPORT
-    ============================================================
-    */
-
-    messagesContainer.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target.classList.contains(
-                    "gv-msg-report"
-                )
-            ) {
-
-                event.target.textContent =
-                    "Reported";
-
-                event.target.style.color =
-                    "var(--gv-green)";
-
-                event.target.disabled =
-                    true;
-
-            }
-
-        }
-    );
-
-
-    /*
-    ============================================================
-    CLOSE
-    ============================================================
-    */
-
-    closeChatBtn.addEventListener(
-        "click",
-        () => {
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-    /*
-    ============================================================
-    COMPOSE
-    ============================================================
-    */
-
-    document
-        .getElementById("composeBtn")
-        ?.addEventListener(
-            "click",
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded",
             () => {
 
-                messageInput.focus();
+                const loading =
+                    document.getElementById(
+                        "chatLoading"
+                    );
+
+                const loginRequired =
+                    document.getElementById(
+                        "chatLoginRequired"
+                    );
+
+                const chatApp =
+                    document.getElementById(
+                        "chatApp"
+                    );
+
+                const goToAccount =
+                    document.getElementById(
+                        "goToAccount"
+                    );
+
+                const closeChatBtn =
+                    document.getElementById(
+                        "closeChatBtn"
+                    );
+
+
+                /*
+                 * Use the EXACT same Supabase client
+                 * created by supabase-config.js.
+                 */
+                const supabase =
+                    window.spatiumSupabase;
+
+
+                if (!supabase) {
+
+                    console.error(
+                        "[Spatium Chat] Supabase client not found."
+                    );
+
+                    loading.style.display =
+                        "none";
+
+                    loginRequired.style.display =
+                        "flex";
+
+                    return;
+                }
+
+
+                /*
+                 * Show the login screen.
+                 */
+
+                function showLoginRequired() {
+
+                    loading.style.display =
+                        "none";
+
+                    chatApp.style.display =
+                        "none";
+
+                    loginRequired.style.display =
+                        "flex";
+                }
+
+
+                /*
+                 * Show the actual chat.
+                 */
+
+                function showChat() {
+
+                    loading.style.display =
+                        "none";
+
+                    loginRequired.style.display =
+                        "none";
+
+                    chatApp.style.display =
+                        "block";
+                }
+
+
+                /*
+                 * Account button.
+                 */
+
+                if (goToAccount) {
+
+                    goToAccount.addEventListener(
+                        "click",
+                        () => {
+
+                            window.location.href =
+                                "account.html";
+
+                        }
+                    );
+
+                }
+
+
+                /*
+                 * Close button.
+                 */
+
+                if (closeChatBtn) {
+
+                    closeChatBtn.addEventListener(
+                        "click",
+                        () => {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+                    );
+
+                }
+
+
+                /*
+                 * IMPORTANT
+                 *
+                 * Wait for Supabase's initial session
+                 * before deciding whether the user is
+                 * authenticated.
+                 *
+                 * This prevents chat.html from checking
+                 * too early while the persisted session
+                 * is being restored.
+                 */
+
+                let authFinished = false;
+
+
+                const {
+                    data: authListener
+                } =
+                    supabase.auth.onAuthStateChange(
+                        async (
+                            event,
+                            session
+                        ) => {
+
+                            console.log(
+                                "[Spatium Chat] Auth event:",
+                                event
+                            );
+
+
+                            if (
+                                event ===
+                                "INITIAL_SESSION"
+                            ) {
+
+                                authFinished =
+                                    true;
+
+
+                                if (
+                                    session &&
+                                    session.user
+                                ) {
+
+                                    showChat();
+
+                                } else {
+
+                                    showLoginRequired();
+
+                                }
+
+                            }
+
+
+                            if (
+                                event ===
+                                "SIGNED_IN"
+                            ) {
+
+                                showChat();
+
+                            }
+
+
+                            if (
+                                event ===
+                                "SIGNED_OUT"
+                            ) {
+
+                                showLoginRequired();
+
+                            }
+
+                        }
+                    );
+
+
+                /*
+                 * Backup check.
+                 *
+                 * If INITIAL_SESSION has already been
+                 * resolved before our listener processes it,
+                 * getSession() still gives us the current
+                 * persisted session.
+                 */
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabase.auth.getSession();
+
+
+                    if (error) {
+
+                        console.error(
+                            "[Spatium Chat] Session check failed:",
+                            error
+                        );
+
+                        if (!authFinished) {
+
+                            authFinished =
+                                true;
+
+                            showLoginRequired();
+
+                        }
+
+                    } else if (
+                        !authFinished
+                    ) {
+
+                        authFinished =
+                            true;
+
+
+                        if (
+                            data?.session &&
+                            data.session.user
+                        ) {
+
+                            showChat();
+
+                        } else {
+
+                            showLoginRequired();
+
+                        }
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "[Spatium Chat] Auth initialization failed:",
+                        error
+                    );
+
+                    if (!authFinished) {
+
+                        authFinished =
+                            true;
+
+                        showLoginRequired();
+
+                    }
+
+                }
 
             }
         );
+    </script>
 
 
-    /*
-    ============================================================
-    START
-    ============================================================
-    */
+    <!-- =====================================================
+         CHAT JAVASCRIPT
+         ===================================================== -->
 
-    const authenticated =
-        await checkAccount();
-
-
-    if (!authenticated) {
-        return;
-    }
-
-
-    await loadMessages();
-
-});
-</script>
+    <script
+        src="js/chat.js"
+    ></script>
 
 </body>
+
 </html>
