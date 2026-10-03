@@ -1,20 +1,13 @@
 "use strict";
 
-
 /* =========================================
    SUPABASE
 ========================================= */
 
-const supabaseClient =
-    window.spatiumSupabase;
-
+const supabaseClient = window.spatiumSupabase;
 
 if (!supabaseClient) {
-
-    console.error(
-        "[Spatium Chat] Supabase client not found."
-    );
-
+    console.error("[Spatium Chat] Supabase client not found.");
 }
 
 
@@ -35,59 +28,37 @@ const characterCount =
     document.getElementById("characterCount");
 
 const connectionStatus =
-    document.getElementById(
-        "connectionStatus"
-    );
+    document.getElementById("connectionStatus");
 
 const chatStatus =
-    document.getElementById(
-        "chatStatus"
-    );
+    document.getElementById("chatStatus");
 
 const accountName =
-    document.getElementById(
-        "accountName"
-    );
+    document.getElementById("accountName");
 
 const accountStatus =
-    document.getElementById(
-        "accountStatus"
-    );
+    document.getElementById("accountStatus");
 
 const headerUsername =
-    document.getElementById(
-        "headerUsername"
-    );
+    document.getElementById("headerUsername");
 
 const mentionList =
-    document.getElementById(
-        "mentionList"
-    );
+    document.getElementById("mentionList");
 
 const reportModal =
-    document.getElementById(
-        "reportModal"
-    );
+    document.getElementById("reportModal");
 
 const reportReason =
-    document.getElementById(
-        "reportReason"
-    );
+    document.getElementById("reportReason");
 
 const reportError =
-    document.getElementById(
-        "reportError"
-    );
+    document.getElementById("reportError");
 
 const closeReport =
-    document.getElementById(
-        "closeReport"
-    );
+    document.getElementById("closeReport");
 
 const submitReport =
-    document.getElementById(
-        "submitReport"
-    );
+    document.getElementById("submitReport");
 
 
 /* =========================================
@@ -97,8 +68,6 @@ const submitReport =
 let currentUser = null;
 
 let messages = [];
-
-let lastMessageId = 0;
 
 let usernames = [];
 
@@ -129,39 +98,26 @@ async function initSpatiumChat() {
         );
 
         return;
-
     }
 
-
-    /*
-     * Check the current session.
-     */
 
     await updateUser();
 
 
-    /*
-     * Listen for login/logout changes.
-     */
-
     const {
         data
-    } =
-        supabaseClient.auth.onAuthStateChange(
-            async () => {
+    } = await supabaseClient.auth.onAuthStateChange(
+        async () => {
 
-                await updateUser();
+            await updateUser();
 
-            }
-        );
-
-
-    authSubscription = data.subscription;
+        }
+    );
 
 
-    /*
-     * Start polling.
-     */
+    authSubscription =
+        data.subscription;
+
 
     startPolling();
 
@@ -236,6 +192,12 @@ async function updateUser() {
     );
 
 
+    /*
+     * THIS IS THE IMPORTANT PART:
+     * Load messages directly from
+     * gv_chat_recent using p_limit.
+     */
+
     await loadMessages();
 
 }
@@ -273,36 +235,30 @@ function showSignedOut() {
 
     currentUser = null;
 
+    messages = [];
 
     accountName.textContent =
         "Not signed in";
 
-
     accountStatus.textContent =
         "Sign in to chat";
-
 
     headerUsername.textContent =
         "Guest";
 
-
     messageInput.disabled =
         true;
-
 
     sendButton.disabled =
         true;
 
-
     messageInput.placeholder =
         "Sign in to send a message...";
-
 
     setConnection(
         "Sign in required",
         false
     );
-
 
     messagesEl.innerHTML = `
         <div class="empty-state">
@@ -333,9 +289,7 @@ function showSignedOut() {
 async function loadMessages() {
 
     if (!currentUser) {
-
         return;
-
     }
 
 
@@ -352,7 +306,7 @@ async function loadMessages() {
         await supabaseClient.rpc(
             "gv_chat_recent",
             {
-                p_after_id: 0
+                p_limit: 200
             }
         );
 
@@ -360,24 +314,20 @@ async function loadMessages() {
     if (error) {
 
         console.error(
-            "[Spatium Chat]",
+            "[Spatium Chat] Load error:",
             error
         );
-
 
         showError(
             error.message
         );
-
 
         setConnection(
             "Connection error",
             false
         );
 
-
         return;
-
     }
 
 
@@ -387,18 +337,18 @@ async function loadMessages() {
         );
 
 
+    /*
+     * The RPC returns newest first.
+     * Reverse it so the oldest message
+     * appears first in the chat.
+     */
+
     messages =
-        rows;
-
-
-    lastMessageId =
-        getLastMessageId(
-            rows
-        );
+        rows.reverse();
 
 
     collectUsernames(
-        rows
+        messages
     );
 
 
@@ -422,27 +372,23 @@ async function loadMessages() {
 function startPolling() {
 
     if (pollingTimer) {
-
         return;
-
     }
 
 
     pollingTimer =
         setInterval(
-            checkForNewMessages,
+            loadMessagesQuietly,
             3000
         );
 
 }
 
 
-async function checkForNewMessages() {
+async function loadMessagesQuietly() {
 
     if (!currentUser) {
-
         return;
-
     }
 
 
@@ -453,8 +399,7 @@ async function checkForNewMessages() {
         await supabaseClient.rpc(
             "gv_chat_recent",
             {
-                p_after_id:
-                    lastMessageId
+                p_limit: 200
             }
         );
 
@@ -467,79 +412,66 @@ async function checkForNewMessages() {
         );
 
         return;
-
     }
 
 
-    const newRows =
+    const rows =
         normalizeRpcResult(
             data
         );
 
 
-    if (
-        !newRows.length
-    ) {
+    if (!rows.length) {
 
         return;
-
     }
 
 
-    let added =
-        false;
+    const newestMessages =
+        rows.reverse();
 
 
-    for (
-        const message
-        of newRows
-    ) {
+    /*
+     * Replace local state with the
+     * actual database state.
+     *
+     * This guarantees that a refresh
+     * and a poll use the same data.
+     */
 
-        const exists =
-            messages.some(
-                existing =>
-                    String(
-                        existing.id
-                    ) ===
+    const oldIds =
+        new Set(
+            messages.map(
+                message =>
                     String(
                         message.id
                     )
-            );
-
-
-        if (!exists) {
-
-            messages.push(
-                message
-            );
-
-            added = true;
-
-        }
-
-    }
-
-
-    if (!added) {
-
-        return;
-
-    }
-
-
-    lastMessageId =
-        getLastMessageId(
-            messages
+            )
         );
 
 
+    const hadNewMessage =
+        newestMessages.some(
+            message =>
+                !oldIds.has(
+                    String(
+                        message.id
+                    )
+                )
+        );
+
+
+    messages =
+        newestMessages;
+
+
     collectUsernames(
-        newRows
+        messages
     );
 
 
     renderMessages(
-        true
+        hadNewMessage
     );
 
 }
@@ -558,14 +490,11 @@ async function sendMessage() {
         );
 
         return;
-
     }
 
 
     if (sending) {
-
         return;
-
     }
 
 
@@ -574,9 +503,7 @@ async function sendMessage() {
 
 
     if (!body) {
-
         return;
-
     }
 
 
@@ -587,32 +514,20 @@ async function sendMessage() {
         );
 
         return;
-
     }
 
 
     sending = true;
 
-
     sendButton.disabled =
         true;
-
 
     setStatus(
         "Sending..."
     );
 
 
-    /*
-     * The SQL function accepts UUID[]
-     * for mentions.
-     *
-     * The backend also performs its own
-     * mention validation.
-     */
-
-    const mentions =
-        [];
+    const mentions = [];
 
 
     const {
@@ -630,7 +545,6 @@ async function sendMessage() {
 
     sending = false;
 
-
     sendButton.disabled =
         false;
 
@@ -642,7 +556,6 @@ async function sendMessage() {
         );
 
         return;
-
     }
 
 
@@ -652,65 +565,28 @@ async function sendMessage() {
         );
 
 
-    if (message) {
+    /*
+     * Clear the input immediately.
+     */
 
-        const exists =
-            messages.some(
-                existing =>
-                    String(
-                        existing.id
-                    ) ===
-                    String(
-                        message.id
-                    )
-            );
-
-
-        if (!exists) {
-
-            messages.push(
-                message
-            );
-
-        }
-
-
-        lastMessageId =
-            Math.max(
-                lastMessageId,
-                Number(
-                    message.id
-                ) || 0
-            );
-
-
-        collectUsernames(
-            [
-                message
-            ]
-        );
-
-
-        renderMessages(
-            true
-        );
-
-    }
-
-
-    messageInput.value =
-        "";
-
+    messageInput.value = "";
 
     updateCharacterCount();
-
 
     hideMentions();
 
 
-    setStatus(
-        ""
-    );
+    /*
+     * The database is the source of truth.
+     *
+     * Reload messages instead of trying
+     * to manually construct the message.
+     */
+
+    await loadMessages();
+
+
+    setStatus("");
 
 }
 
@@ -786,9 +662,7 @@ function renderMessages(
     forceScroll = false
 ) {
 
-    if (
-        !messages.length
-    ) {
+    if (!messages.length) {
 
         messagesEl.innerHTML = `
             <div class="empty-state">
@@ -810,7 +684,6 @@ function renderMessages(
         `;
 
         return;
-
     }
 
 
@@ -821,10 +694,17 @@ function renderMessages(
         180;
 
 
+    /*
+     * Sort using timestamps.
+     *
+     * DO NOT use Number(id).
+     * Supabase IDs are UUIDs.
+     */
+
     messages.sort(
         (a, b) =>
-            Number(a.id) -
-            Number(b.id)
+            new Date(a.created_at).getTime() -
+            new Date(b.created_at).getTime()
     );
 
 
@@ -860,7 +740,9 @@ function renderMessage(
     const username =
         escapeHtml(
             message.username ||
-            "User"
+            getMessageUsername(
+                message
+            )
         );
 
 
@@ -878,17 +760,12 @@ function renderMessage(
 
 
     const mine =
-        Boolean(
-            message.mine
-        ) ||
-        (
-            currentUser &&
-            String(
-                message.user_id
-            ) ===
-            String(
-                currentUser.id
-            )
+        currentUser &&
+        String(
+            message.user_id
+        ) ===
+        String(
+            currentUser.id
         );
 
 
@@ -913,21 +790,29 @@ function renderMessage(
 
     const avatar =
         escapeHtml(
-            (
-                message.username ||
-                "U"
+            getMessageUsername(
+                message
             )
             .charAt(0)
             .toUpperCase()
         );
 
 
+    /*
+     * UUIDs must NOT be converted with
+     * Number().
+     */
+
+    const safeMessageId =
+        escapeAttribute(
+            message.id
+        );
+
+
     return `
         <article
             class="message${mineClass}"
-            data-message-id="${escapeAttribute(
-                message.id
-            )}"
+            data-message-id="${safeMessageId}"
         >
 
             <div class="message-avatar">
@@ -962,9 +847,7 @@ function renderMessage(
                             <button
                                 class="report-button"
                                 type="button"
-                                onclick="openReport(${Number(
-                                    message.id
-                                )})"
+                                onclick="openReport('${safeMessageId}')"
                             >
                                 Report
                             </button>
@@ -976,6 +859,51 @@ function renderMessage(
 
         </article>
     `;
+
+}
+
+
+/* =========================================
+   MESSAGE USERNAME
+========================================= */
+
+function getMessageUsername(
+    message
+) {
+
+    /*
+     * If your RPC later returns a username,
+     * use it.
+     */
+
+    if (
+        message.username
+    ) {
+
+        return message.username;
+
+    }
+
+
+    /*
+     * Own messages can always use the
+     * current account username.
+     */
+
+    if (
+        currentUser &&
+        String(message.user_id) ===
+        String(currentUser.id)
+    ) {
+
+        return getUsername(
+            currentUser
+        );
+
+    }
+
+
+    return "User";
 
 }
 
@@ -994,7 +922,6 @@ window.openReport =
             );
 
             return;
-
         }
 
 
@@ -1087,12 +1014,8 @@ submitReport.addEventListener(
 
 async function submitMessageReport() {
 
-    if (
-        !reportMessageId
-    ) {
-
+    if (!reportMessageId) {
         return;
-
     }
 
 
@@ -1106,7 +1029,6 @@ async function submitMessageReport() {
             "Please enter a reason.";
 
         return;
-
     }
 
 
@@ -1119,7 +1041,6 @@ async function submitMessageReport() {
 
 
     const {
-        data,
         error
     } =
         await supabaseClient.rpc(
@@ -1144,7 +1065,6 @@ async function submitMessageReport() {
             error.message;
 
         return;
-
     }
 
 
@@ -1159,9 +1079,7 @@ async function submitMessageReport() {
     setTimeout(
         () => {
 
-            setStatus(
-                ""
-            );
+            setStatus("");
 
         },
         3000
@@ -1222,7 +1140,6 @@ function showMentionSuggestions() {
         hideMentions();
 
         return;
-
     }
 
 
@@ -1251,7 +1168,6 @@ function showMentionSuggestions() {
         hideMentions();
 
         return;
-
     }
 
 
@@ -1316,9 +1232,7 @@ function selectMention(
 
     hideMentions();
 
-
     messageInput.focus();
-
 
     updateCharacterCount();
 
@@ -1347,9 +1261,7 @@ function normalizeRpcResult(
 ) {
 
     if (!data) {
-
         return [];
-
     }
 
 
@@ -1424,8 +1336,21 @@ function normalizeSingleRpcResult(
 ) {
 
     if (!data) {
-
         return null;
+    }
+
+
+    /*
+     * Supabase RPC functions that return
+     * a table/record can sometimes return
+     * an array with one object.
+     */
+
+    if (
+        Array.isArray(data)
+    ) {
+
+        return data[0] || null;
 
     }
 
@@ -1436,9 +1361,20 @@ function normalizeSingleRpcResult(
 
         try {
 
-            return JSON.parse(
-                data
-            );
+            const parsed =
+                JSON.parse(data);
+
+
+            if (
+                Array.isArray(parsed)
+            ) {
+
+                return parsed[0] || null;
+
+            }
+
+
+            return parsed;
 
         } catch {
 
@@ -1450,31 +1386,6 @@ function normalizeSingleRpcResult(
 
 
     return data;
-
-}
-
-
-function getLastMessageId(
-    rows
-) {
-
-    if (
-        !rows.length
-    ) {
-
-        return 0;
-
-    }
-
-
-    return Math.max(
-        ...rows.map(
-            row =>
-                Number(
-                    row.id
-                ) || 0
-        )
-    );
 
 }
 
@@ -1497,14 +1408,6 @@ function handleRpcError(
         error?.message ||
         "Unable to send message.";
 
-
-    /*
-     * Slow mode.
-     *
-     * Your SQL can return:
-     *
-     * hint=wait=5
-     */
 
     const waitMatch =
         message.match(
@@ -1530,17 +1433,11 @@ function handleRpcError(
     }
 
 
-    /*
-     * Ban.
-     */
-
-    const banMatch =
-        message.match(
-            /hint=until=([^\s]+)/
-        );
-
-
-    if (banMatch) {
+    if (
+        message
+            .toLowerCase()
+            .includes("banned")
+    ) {
 
         setStatus(
             "You are currently banned from chat."
@@ -1551,10 +1448,6 @@ function handleRpcError(
 
     }
 
-
-    /*
-     * Generic error.
-     */
 
     setStatus(
         message
@@ -1571,6 +1464,11 @@ function setConnection(
     text,
     connected
 ) {
+
+    if (!connectionStatus) {
+        return;
+    }
+
 
     connectionStatus.textContent =
         text;
@@ -1590,8 +1488,36 @@ function setStatus(
     text
 ) {
 
+    if (!chatStatus) {
+        return;
+    }
+
+
     chatStatus.textContent =
         text;
+
+}
+
+
+/* =========================================
+   ERROR DISPLAY
+========================================= */
+
+function showError(
+    text
+) {
+
+    console.error(
+        "[Spatium Chat]",
+        text
+    );
+
+    if (chatStatus) {
+
+        chatStatus.textContent =
+            text;
+
+    }
 
 }
 
@@ -1605,9 +1531,7 @@ function formatTime(
 ) {
 
     if (!date) {
-
         return "";
-
     }
 
 
@@ -1624,7 +1548,6 @@ function formatTime(
     ) {
 
         return "";
-
     }
 
 
