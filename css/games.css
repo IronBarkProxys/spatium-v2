@@ -506,8 +506,7 @@ a {
     background:
         rgba(66, 66, 66, 0.39);
 
-    border:
-        solid 3px rgb(92, 92, 92);
+   border: none;
 
     box-shadow:
         0 4px 14px
