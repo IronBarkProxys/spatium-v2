@@ -3,7 +3,7 @@
 // Email + Password Authentication
 // ============================================================
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     const supabase = window.spatiumSupabase;
 
@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const signupUsername = document.getElementById("signupUsername");
     const signupEmail = document.getElementById("signupEmail");
     const signupPassword = document.getElementById("signupPassword");
+    const signupPasswordConfirm =
+        document.getElementById("signupPasswordConfirm");
 
     const loginMessage = document.getElementById("loginMessage");
     const signupMessage = document.getElementById("signupMessage");
@@ -36,8 +38,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const loginButton = document.getElementById("loginButton");
     const signupButton = document.getElementById("signupButton");
 
-    const accountTitle = document.getElementById("accountTitle");
-    const accountSubtitle = document.getElementById("accountSubtitle");
+    const accountTitle =
+        document.getElementById("accountTitle");
+
+    const accountSubtitle =
+        document.getElementById("accountSubtitle");
 
 
     // ========================================================
@@ -51,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // ========================================================
-    // HELPERS
+    // MESSAGE HELPERS
     // ========================================================
 
     function showMessage(element, message, type = "error") {
@@ -84,24 +89,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    function setButtonLoading(button, loading, normalText) {
+    // ========================================================
+    // BUTTON LOADING
+    // ========================================================
+
+    function setButtonLoading(
+        button,
+        loading,
+        normalText
+    ) {
 
         if (!button) return;
 
-        button.disabled = loading;
-
         if (loading) {
+
+            button.disabled = true;
+
             button.dataset.originalText =
                 button.textContent;
 
-            button.textContent = "Please wait...";
+            button.textContent =
+                "Please wait...";
+
         } else {
+
+            button.disabled = false;
+
             button.textContent =
                 button.dataset.originalText ||
                 normalText;
         }
     }
 
+
+    // ========================================================
+    // ERROR HANDLING
+    // ========================================================
 
     function friendlyAuthError(error) {
 
@@ -162,8 +185,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
 
-        return error?.message ||
-            "Something went wrong. Please try again.";
+        return (
+            error?.message ||
+            "Something went wrong. Please try again."
+        );
     }
 
 
@@ -190,12 +215,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         if (accountTitle) {
-            accountTitle.textContent = "Welcome back";
+            accountTitle.textContent =
+                "Welcome back";
         }
 
         if (accountSubtitle) {
             accountSubtitle.textContent =
-                "Sign in to continue to Spatium.";
+                "Sign in to your Spatium account.";
         }
 
         clearMessage(loginMessage);
@@ -222,7 +248,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         if (accountTitle) {
-            accountTitle.textContent = "Create your account";
+            accountTitle.textContent =
+                "Create your account";
         }
 
         if (accountSubtitle) {
@@ -272,10 +299,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     loginPassword?.value || "";
 
 
-                // ----------------------------------------------
-                // Validation
-                // ----------------------------------------------
-
                 if (!email) {
 
                     showMessage(
@@ -302,7 +325,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                if (password.length < MIN_PASSWORD_LENGTH) {
+                if (
+                    password.length <
+                    MIN_PASSWORD_LENGTH
+                ) {
 
                     showMessage(
                         loginMessage,
@@ -314,10 +340,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     return;
                 }
 
-
-                // ----------------------------------------------
-                // Login
-                // ----------------------------------------------
 
                 setButtonLoading(
                     loginButton,
@@ -331,10 +353,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const {
                         data,
                         error
-                    } = await supabase.auth.signInWithPassword({
-                        email,
-                        password
-                    });
+                    } =
+                        await supabase.auth
+                            .signInWithPassword({
+                                email,
+                                password
+                            });
 
 
                     if (error) {
@@ -346,7 +370,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                         showMessage(
                             loginMessage,
-                            "Your account needs to be confirmed before you can continue."
+                            "Unable to create a session. Please try again."
                         );
 
                         return;
@@ -360,7 +384,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     );
 
 
-                    // Give the message a moment to display.
                     setTimeout(() => {
 
                         window.location.href =
@@ -420,10 +443,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const password =
                     signupPassword?.value || "";
 
+                const passwordConfirm =
+                    signupPasswordConfirm?.value || "";
 
-                // ----------------------------------------------
-                // Username validation
-                // ----------------------------------------------
+
+                // ------------------------------------------------
+                // USERNAME
+                // ------------------------------------------------
 
                 if (!username) {
 
@@ -451,9 +477,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                // ----------------------------------------------
-                // Email validation
-                // ----------------------------------------------
+                // ------------------------------------------------
+                // EMAIL
+                // ------------------------------------------------
 
                 if (!email) {
 
@@ -468,7 +494,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                // Browser-level email validation
                 if (
                     signupEmail?.validity &&
                     !signupEmail.validity.valid
@@ -485,9 +510,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                // ----------------------------------------------
-                // Password validation
-                // ----------------------------------------------
+                // ------------------------------------------------
+                // PASSWORD
+                // ------------------------------------------------
 
                 if (!password) {
 
@@ -502,7 +527,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                if (password.length < MIN_PASSWORD_LENGTH) {
+                if (
+                    password.length <
+                    MIN_PASSWORD_LENGTH
+                ) {
 
                     showMessage(
                         signupMessage,
@@ -515,9 +543,39 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-                // ----------------------------------------------
-                // Create account
-                // ----------------------------------------------
+                // ------------------------------------------------
+                // CONFIRM PASSWORD
+                // ------------------------------------------------
+
+                if (!passwordConfirm) {
+
+                    showMessage(
+                        signupMessage,
+                        "Please confirm your password."
+                    );
+
+                    signupPasswordConfirm?.focus();
+
+                    return;
+                }
+
+
+                if (password !== passwordConfirm) {
+
+                    showMessage(
+                        signupMessage,
+                        "Passwords do not match."
+                    );
+
+                    signupPasswordConfirm?.focus();
+
+                    return;
+                }
+
+
+                // ------------------------------------------------
+                // CREATE ACCOUNT
+                // ------------------------------------------------
 
                 setButtonLoading(
                     signupButton,
@@ -531,21 +589,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const {
                         data,
                         error
-                    } = await supabase.auth.signUp({
+                    } =
+                        await supabase.auth.signUp({
 
-                        email,
-                        password,
+                            email,
+                            password,
 
-                        options: {
+                            options: {
 
-                            data: {
-                                username,
-                                display_name: username
+                                data: {
+                                    username,
+                                    display_name: username
+                                }
+
                             }
 
-                        }
-
-                    });
+                        });
 
 
                     if (error) {
@@ -553,10 +612,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
 
 
-                    // ------------------------------------------
-                    // Supabase may return a session immediately
-                    // if email confirmation is disabled.
-                    // ------------------------------------------
+                    // ------------------------------------------------
+                    // EMAIL CONFIRMATION OFF
+                    // ------------------------------------------------
 
                     if (data?.session) {
 
@@ -579,9 +637,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
 
 
-                    // ------------------------------------------
-                    // Email confirmation is enabled.
-                    // ------------------------------------------
+                    // ------------------------------------------------
+                    // EMAIL CONFIRMATION ON
+                    // ------------------------------------------------
 
                     showMessage(
                         signupMessage,
@@ -590,9 +648,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     );
 
 
-                    // Clear password after successful signup.
                     if (signupPassword) {
                         signupPassword.value = "";
+                    }
+
+                    if (signupPasswordConfirm) {
+                        signupPasswordConfirm.value = "";
                     }
 
 
@@ -625,70 +686,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // ========================================================
-    // CHECK EXISTING SESSION
+    // IMPORTANT
     // ========================================================
     //
-    // Supabase persists sessions by default when configured
-    // with persistSession: true.
+    // There is intentionally NO:
     //
-    // getUser() verifies the current user with Auth.
-    // ========================================================
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabase.auth.getUser();
-
-
-        if (
-            !error &&
-            data?.user
-        ) {
-
-            window.location.href =
-                "./chat.html";
-
-            return;
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "[Spatium] Could not check existing session:",
-            error
-        );
-
-    }
-
-
-    // ========================================================
-    // AUTH STATE LISTENER
-    // ========================================================
-
-    supabase.auth.onAuthStateChange(
-        (event, session) => {
-
-            if (
-                event === "SIGNED_IN" &&
-                session
-            ) {
-
-                // Don't redirect while already handling the
-                // signup/login redirect above.
-                //
-                // This also keeps the account page synced if
-                // another tab signs in.
-
-            }
-
-        }
-    );
-
-
-    // ========================================================
-    // DEFAULT VIEW
+    // supabase.auth.getUser()
+    //
+    // redirect here.
+    //
+    // This means account.html stays on the account page.
+    // The user only goes to chat.html after successfully
+    // signing in or creating an account.
     // ========================================================
 
     showLogin();
