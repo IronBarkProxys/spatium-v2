@@ -41,6 +41,33 @@ const accountSubtitle =
 
 
 /* =========================
+   USERNAME RULES
+========================= */
+
+function isValidUsername(username) {
+    return /^[a-zA-Z0-9_]{2,24}$/.test(username);
+}
+
+
+/*
+ * Supabase Auth normally requires an email.
+ *
+ * We hide the email completely from the user
+ * and create a consistent internal email from
+ * their username.
+ *
+ * IMPORTANT:
+ * This is only appropriate if your Supabase
+ * project is configured to allow these accounts
+ * without requiring real email verification.
+ */
+
+function usernameToAuthEmail(username) {
+    return username.toLowerCase() + "@accounts.spatium.local";
+}
+
+
+/* =========================
    TABS
 ========================= */
 
@@ -97,9 +124,9 @@ loginForm.addEventListener(
         loginMessage.textContent = "";
         loginMessage.className = "message";
 
-        const email =
+        const username =
             document
-                .getElementById("loginEmail")
+                .getElementById("loginUsername")
                 .value
                 .trim();
 
@@ -108,31 +135,60 @@ loginForm.addEventListener(
                 .getElementById("loginPassword")
                 .value;
 
-        if (!email || !password) {
+
+        /* Username validation */
+
+        if (!isValidUsername(username)) {
+
             showMessage(
                 loginMessage,
-                "Enter your email and password.",
+                "Username must be 2-24 characters and only use letters, numbers, or underscores.",
                 "error"
             );
+
             return;
         }
 
+
+        /* Password validation */
+
+        if (password.length < 6) {
+
+            showMessage(
+                loginMessage,
+                "Password must be at least 6 characters.",
+                "error"
+            );
+
+            return;
+        }
+
+
         loginButton.disabled = true;
-        loginButton.textContent = "Signing in...";
+        loginButton.textContent =
+            "Signing in...";
+
 
         try {
+
+            const email =
+                usernameToAuthEmail(username);
+
 
             const {
                 data,
                 error
-            } = await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
+            } =
+                await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
 
             if (error) {
                 throw error;
             }
+
 
             if (!data.user) {
                 throw new Error(
@@ -140,11 +196,13 @@ loginForm.addEventListener(
                 );
             }
 
+
             showMessage(
                 loginMessage,
                 "Signed in! Redirecting...",
                 "success"
             );
+
 
             setTimeout(() => {
 
@@ -152,6 +210,7 @@ loginForm.addEventListener(
                     "./chat.html";
 
             }, 700);
+
 
         } catch (error) {
 
@@ -164,7 +223,9 @@ loginForm.addEventListener(
             );
 
             loginButton.disabled = false;
-            loginButton.textContent = "Sign In";
+
+            loginButton.textContent =
+                "Sign In";
         }
 
     }
@@ -184,26 +245,29 @@ signupForm.addEventListener(
         signupMessage.textContent = "";
         signupMessage.className = "message";
 
+
         const username =
             document
                 .getElementById("signupUsername")
                 .value
                 .trim();
 
-        const email =
-            document
-                .getElementById("signupEmail")
-                .value
-                .trim();
 
         const password =
             document
                 .getElementById("signupPassword")
                 .value;
 
+
+        const confirmPassword =
+            document
+                .getElementById("signupPasswordConfirm")
+                .value;
+
+
         /* Username validation */
 
-        if (!/^[a-zA-Z0-9_]{2,24}$/.test(username)) {
+        if (!isValidUsername(username)) {
 
             showMessage(
                 signupMessage,
@@ -214,6 +278,8 @@ signupForm.addEventListener(
             return;
         }
 
+
+        /* Password length */
 
         if (password.length < 6) {
 
@@ -227,30 +293,55 @@ signupForm.addEventListener(
         }
 
 
+        /* Password confirmation */
+
+        if (password !== confirmPassword) {
+
+            showMessage(
+                signupMessage,
+                "Passwords do not match.",
+                "error"
+            );
+
+            return;
+        }
+
+
         signupButton.disabled = true;
+
         signupButton.textContent =
             "Creating account...";
 
 
         try {
 
+            const email =
+                usernameToAuthEmail(username);
+
+
             const {
                 data,
                 error
-            } = await supabaseClient.auth.signUp({
+            } =
+                await supabaseClient.auth.signUp({
 
-                email: email,
+                    email: email,
 
-                password: password,
+                    password: password,
 
-                options: {
-                    data: {
-                        username: username,
-                        display_name: username
+                    options: {
+
+                        data: {
+
+                            username: username,
+
+                            display_name: username
+
+                        }
+
                     }
-                }
 
-            });
+                });
 
 
             if (error) {
@@ -259,8 +350,8 @@ signupForm.addEventListener(
 
 
             /*
-             * If email confirmation is disabled,
-             * Supabase will normally return a session.
+             * If Supabase immediately creates
+             * a session, send them to chat.
              */
 
             if (data.session) {
@@ -271,6 +362,7 @@ signupForm.addEventListener(
                     "success"
                 );
 
+
                 setTimeout(() => {
 
                     window.location.href =
@@ -278,21 +370,25 @@ signupForm.addEventListener(
 
                 }, 700);
 
+
                 return;
             }
 
 
             /*
-             * If email confirmation is enabled.
+             * If Supabase requires confirmation,
+             * tell the user.
              */
 
             showMessage(
                 signupMessage,
-                "Account created! Check your email to confirm your account.",
+                "Account created! Your account may require confirmation before signing in.",
                 "success"
             );
 
+
             signupButton.disabled = false;
+
             signupButton.textContent =
                 "Create Account";
 
@@ -307,7 +403,9 @@ signupForm.addEventListener(
                 "error"
             );
 
+
             signupButton.disabled = false;
+
             signupButton.textContent =
                 "Create Account";
         }
@@ -326,7 +424,9 @@ function showMessage(
     type
 ) {
 
-    element.textContent = message;
+    element.textContent =
+        message;
+
     element.className =
         "message " + type;
 
@@ -340,35 +440,69 @@ function showMessage(
 function getAuthError(error) {
 
     const message =
-        String(error?.message || "").toLowerCase();
+        String(
+            error?.message || ""
+        ).toLowerCase();
 
 
-    if (message.includes("invalid login credentials")) {
-        return "Incorrect email or password.";
+    if (
+        message.includes(
+            "invalid login credentials"
+        )
+    ) {
+
+        return "Incorrect username or password.";
+
     }
 
 
-    if (message.includes("user already registered")) {
-        return "An account with that email already exists.";
+    if (
+        message.includes(
+            "user already registered"
+        )
+    ) {
+
+        return "That username is already taken.";
+
     }
 
 
-    if (message.includes("password")) {
+    if (
+        message.includes(
+            "already registered"
+        )
+    ) {
+
+        return "That username is already taken.";
+
+    }
+
+
+    if (
+        message.includes(
+            "password"
+        )
+    ) {
+
         return error.message;
+
     }
 
 
-    if (message.includes("email")) {
-        return error.message;
-    }
+    if (
+        message.includes(
+            "rate limit"
+        )
+    ) {
 
-
-    if (message.includes("rate limit")) {
         return "Too many attempts. Please wait a little and try again.";
+
     }
 
 
-    return error.message ||
-        "Something went wrong. Please try again.";
+    return (
+        error.message ||
+        "Something went wrong. Please try again."
+    );
 
 }
