@@ -1025,10 +1025,13 @@ body {
     font-size: 10px;
     font-weight: 700;
     line-height: 15px;
-    vertical-align: middle;
 }
 
 .gv-verified-check {
     display: block;
-    transform: translateY(-0.5px);
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    transform: none;
 }
