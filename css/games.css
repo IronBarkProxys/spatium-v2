@@ -1,0 +1,853 @@
+```css
+/* =========================================================
+   SPATIUM GAMES
+   ========================================================= */
+
+:root {
+    --spatium-bg: #0b0c0f;
+    --spatium-panel: #111318;
+    --spatium-panel-2: #17191f;
+
+    --spatium-border: rgba(255, 255, 255, 0.08);
+    --spatium-border-hover: rgba(184, 77, 255, 0.38);
+
+    --spatium-text: #ffffff;
+    --spatium-muted: #9296a1;
+    --spatium-dim: #626670;
+
+    --spatium-accent: #8c00ff;
+    --spatium-accent-light: #b84dff;
+
+    --spatium-success: #63df8b;
+    --spatium-danger: #ff5f67;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    color: var(--spatium-text);
+
+    background:
+        radial-gradient(
+            circle at 75% -10%,
+            rgba(140, 0, 255, 0.15),
+            transparent 32rem
+        ),
+        radial-gradient(
+            circle at 0% 30%,
+            rgba(140, 0, 255, 0.06),
+            transparent 28rem
+        ),
+        var(--spatium-bg);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    gap: 34px;
+
+    background: rgba(11, 12, 15, 0.82);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--spatium-border);
+}
+
+
+/* BRAND */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 19px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.brand-icon {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--spatium-accent),
+            var(--spatium-accent-light)
+        );
+
+    box-shadow:
+        0 0 28px rgba(140, 0, 255, 0.3);
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+/* NAVIGATION */
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.nav a {
+    padding: 9px 13px;
+
+    border-radius: 9px;
+
+    color: var(--spatium-muted);
+
+    font-size: 14px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.nav a:hover {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav a.active {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* COMMUNITY */
+
+.community-button {
+    margin-left: auto;
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(184, 77, 255, 0.35);
+
+    border-radius: 10px;
+
+    background: rgba(140, 0, 255, 0.1);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.community-button:hover {
+    background: rgba(140, 0, 255, 0.18);
+
+    border-color: rgba(184, 77, 255, 0.55);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.games-page {
+    width: min(1400px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding: 60px 0 70px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.games-hero {
+    position: relative;
+
+    min-height: 270px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 45px;
+
+    border:
+        1px solid
+        var(--spatium-border);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(140, 0, 255, 0.06)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--spatium-accent-light);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.17em;
+}
+
+.games-hero h1 {
+    margin: 12px 0 16px;
+
+    font-size: clamp(44px, 7vw, 78px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+}
+
+.games-hero h1 span {
+    color: transparent;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--spatium-accent-light)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.games-hero p {
+    margin: 0;
+
+    color: var(--spatium-muted);
+
+    font-size: 16px;
+}
+
+
+/* HERO GLOW */
+
+.hero-glow {
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    right: -130px;
+    top: -120px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(140, 0, 255, 0.35),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.game-toolbar {
+    display: flex;
+
+    gap: 12px;
+
+    margin: 25px 0;
+}
+
+
+/* SEARCH */
+
+.search-container {
+    position: relative;
+
+    flex: 1;
+}
+
+.search-icon {
+    position: absolute;
+
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-53%);
+
+    color: var(--spatium-dim);
+
+    font-size: 24px;
+
+    pointer-events: none;
+}
+
+#game-search {
+    width: 100%;
+    height: 48px;
+
+    padding:
+        0 42px
+        0 44px;
+
+    color: white;
+
+    background: var(--spatium-panel);
+
+    border:
+        1px solid
+        var(--spatium-border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#game-search::placeholder {
+    color: var(--spatium-dim);
+}
+
+#game-search:focus {
+    border-color: rgba(184, 77, 255, 0.55);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(140, 0, 255, 0.08);
+}
+
+
+/* CLEAR */
+
+.clear-search {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    transform: translateY(-50%);
+
+    display: none;
+    place-items: center;
+
+    border: 0;
+    border-radius: 8px;
+
+    color: var(--spatium-muted);
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 21px;
+}
+
+.clear-search:hover {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+/* SORT */
+
+#game-sort {
+    width: 175px;
+    height: 48px;
+
+    padding: 0 13px;
+
+    color: white;
+
+    background: var(--spatium-panel);
+
+    border:
+        1px solid
+        var(--spatium-border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+#game-sort:focus {
+    border-color: rgba(184, 77, 255, 0.55);
+}
+
+
+/* =========================================================
+   LIBRARY HEADER
+   ========================================================= */
+
+.library-header {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin:
+        36px 2px
+        17px;
+}
+
+.section-label {
+    color: var(--spatium-accent-light);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+}
+
+.library-header h2 {
+    margin: 5px 0 0;
+
+    font-size: 28px;
+
+    letter-spacing: -0.03em;
+}
+
+.game-count {
+    color: var(--spatium-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   GAME GRID
+   ========================================================= */
+
+.game-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(190px, 1fr)
+        );
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   GAME CARD
+   ========================================================= */
+
+.game-card {
+    min-width: 0;
+
+    display: block;
+
+    overflow: hidden;
+
+    background: var(--spatium-panel);
+
+    border:
+        1px solid
+        var(--spatium-border);
+
+    border-radius: 15px;
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        var(--spatium-border-hover);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28),
+        0 0 35px rgba(140, 0, 255, 0.08);
+}
+
+
+/* =========================================================
+   GAME IMAGE
+   ========================================================= */
+
+.game-icon {
+    position: relative;
+
+    aspect-ratio: 16 / 10;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #17191f,
+            #0f1014
+        );
+}
+
+.game-icon img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.game-card:hover .game-icon img {
+    transform: scale(1.045);
+}
+
+
+/* ICON FALLBACK */
+
+.game-icon-fallback {
+    width: 62px;
+    height: 62px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 17px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--spatium-accent),
+            var(--spatium-accent-light)
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(140, 0, 255, 0.25);
+
+    font-size: 25px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   GAME INFO
+   ========================================================= */
+
+.game-info {
+    padding: 13px 14px 15px;
+}
+
+.game-name {
+    overflow: hidden;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.game-meta {
+    margin-top: 6px;
+
+    overflow: hidden;
+
+    color: var(--spatium-dim);
+
+    font-size: 11px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    transition: color 0.18s ease;
+}
+
+.game-card:hover .game-meta {
+    color: var(--spatium-accent-light);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    padding: 90px 20px;
+
+    text-align: center;
+
+    color: var(--spatium-muted);
+}
+
+.empty-icon {
+    width: 54px;
+    height: 54px;
+
+    display: grid;
+    place-items: center;
+
+    margin:
+        0 auto
+        15px;
+
+    border-radius: 16px;
+
+    color: var(--spatium-accent-light);
+
+    background: var(--spatium-panel-2);
+
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.error-icon {
+    color: var(--spatium-danger);
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    color: white;
+
+    font-size: 18px;
+}
+
+.empty-state p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+.empty-state code {
+    color: var(--spatium-accent-light);
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    width: min(1400px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding:
+        22px 0
+        35px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--spatium-dim);
+
+    font-size: 12px;
+
+    border-top:
+        1px solid
+        var(--spatium-border);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .topbar {
+        height: 64px;
+
+        padding: 0 15px;
+
+        gap: 8px;
+    }
+
+    .brand {
+        font-size: 17px;
+    }
+
+    .brand-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .nav {
+        gap: 2px;
+    }
+
+    .nav a {
+        padding: 8px 9px;
+
+        font-size: 13px;
+    }
+
+    .community-button {
+        display: none;
+    }
+
+    .games-page {
+        width: calc(100% - 24px);
+
+        padding:
+            30px 0
+            50px;
+    }
+
+    .games-hero {
+        min-height: 220px;
+
+        padding: 28px 22px;
+    }
+
+    .games-hero h1 {
+        font-size: 48px;
+    }
+
+    .game-toolbar {
+        flex-direction: column;
+    }
+
+    #game-sort {
+        width: 100%;
+    }
+
+    .game-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 10px;
+    }
+
+    .game-info {
+        padding: 11px;
+    }
+
+    .game-name {
+        font-size: 13px;
+    }
+
+    .library-header h2 {
+        font-size: 24px;
+    }
+
+    .site-footer {
+        width: calc(100% - 24px);
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .nav a {
+        font-size: 12px;
+
+        padding:
+            7px 6px;
+    }
+
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+}
+```
