@@ -1,168 +1,395 @@
-/* =========================================================
-   SPATIUM ACCOUNT
-   Username + Password Authentication
-   ========================================================= */
+// ============================================================
+// SPATIUM ACCOUNT.JS
+// Email + Password Authentication
+// ============================================================
 
-(() => {
-    "use strict";
+document.addEventListener("DOMContentLoaded", async () => {
 
     const supabase = window.spatiumSupabase;
 
     if (!supabase) {
-        console.error("[Spatium Account] Supabase client not found.");
+        console.error("[Spatium] Supabase client not found.");
         return;
     }
 
-    /* =========================================================
-       ELEMENTS
-    ========================================================= */
 
-    const loginTab =
-        document.getElementById("loginTab");
+    // ========================================================
+    // ELEMENTS
+    // ========================================================
 
-    const signupTab =
-        document.getElementById("signupTab");
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
 
-    const loginForm =
-        document.getElementById("loginForm");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
 
-    const signupForm =
-        document.getElementById("signupForm");
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
 
-    const loginMessage =
-        document.getElementById("loginMessage");
+    const signupUsername = document.getElementById("signupUsername");
+    const signupEmail = document.getElementById("signupEmail");
+    const signupPassword = document.getElementById("signupPassword");
 
-    const signupMessage =
-        document.getElementById("signupMessage");
+    const loginMessage = document.getElementById("loginMessage");
+    const signupMessage = document.getElementById("signupMessage");
 
-    const loginButton =
-        document.getElementById("loginButton");
+    const loginButton = document.getElementById("loginButton");
+    const signupButton = document.getElementById("signupButton");
 
-    const signupButton =
-        document.getElementById("signupButton");
-
-    const accountTitle =
-        document.getElementById("accountTitle");
-
-    const accountSubtitle =
-        document.getElementById("accountSubtitle");
+    const accountTitle = document.getElementById("accountTitle");
+    const accountSubtitle = document.getElementById("accountSubtitle");
 
 
-    /* =========================================================
-       HELPERS
-    ========================================================= */
+    // ========================================================
+    // SETTINGS
+    // ========================================================
 
-    function showMessage(element, message, type) {
+    const MIN_PASSWORD_LENGTH = 6;
 
-        if (!element) {
-            return;
-        }
+    const USERNAME_REGEX =
+        /^[A-Za-z0-9_]{2,24}$/;
+
+
+    // ========================================================
+    // HELPERS
+    // ========================================================
+
+    function showMessage(element, message, type = "error") {
+
+        if (!element) return;
 
         element.textContent = message;
 
-        element.className =
-            "message " + type;
-    }
-
-
-    function validUsername(username) {
-
-        return /^[A-Za-z0-9_]{2,24}$/.test(
-            username
+        element.classList.remove(
+            "error",
+            "success",
+            "info"
         );
 
+        element.classList.add(type);
     }
 
 
-    function validPassword(password) {
+    function clearMessage(element) {
 
-        return password.length >= 6;
+        if (!element) return;
 
-    }
+        element.textContent = "";
 
-
-    /*
-     * Supabase Auth requires an email for its
-     * standard email/password authentication.
-     *
-     * The user never sees this address.
-     *
-     * We generate one from the username.
-     */
-
-    function usernameToEmail(username) {
-
-        return (
-            username.toLowerCase() +
-            "@spatium.internal"
+        element.classList.remove(
+            "error",
+            "success",
+            "info"
         );
-
     }
 
 
-    /* =========================================================
-       LOGIN / SIGNUP TABS
-    ========================================================= */
+    function setButtonLoading(button, loading, normalText) {
+
+        if (!button) return;
+
+        button.disabled = loading;
+
+        if (loading) {
+            button.dataset.originalText =
+                button.textContent;
+
+            button.textContent = "Please wait...";
+        } else {
+            button.textContent =
+                button.dataset.originalText ||
+                normalText;
+        }
+    }
+
+
+    function friendlyAuthError(error) {
+
+        const message =
+            String(error?.message || "").toLowerCase();
+
+
+        if (
+            message.includes("invalid login credentials") ||
+            message.includes("invalid credentials")
+        ) {
+            return "Incorrect email or password.";
+        }
+
+
+        if (
+            message.includes("email rate limit") ||
+            message.includes("rate limit")
+        ) {
+            return "Too many attempts. Please wait a little while and try again.";
+        }
+
+
+        if (
+            message.includes("user already registered") ||
+            message.includes("already registered")
+        ) {
+            return "An account with this email already exists.";
+        }
+
+
+        if (
+            message.includes("password should be at least")
+        ) {
+            return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+        }
+
+
+        if (
+            message.includes("unable to validate email") ||
+            message.includes("invalid email")
+        ) {
+            return "Please enter a valid email address.";
+        }
+
+
+        if (
+            message.includes("email not confirmed")
+        ) {
+            return "Please confirm your email address before signing in.";
+        }
+
+
+        if (
+            message.includes("too many requests")
+        ) {
+            return "Too many requests. Please wait and try again.";
+        }
+
+
+        return error?.message ||
+            "Something went wrong. Please try again.";
+    }
+
+
+    // ========================================================
+    // TAB SWITCHING
+    // ========================================================
+
+    function showLogin() {
+
+        if (loginForm) {
+            loginForm.style.display = "block";
+        }
+
+        if (signupForm) {
+            signupForm.style.display = "none";
+        }
+
+        if (loginTab) {
+            loginTab.classList.add("active");
+        }
+
+        if (signupTab) {
+            signupTab.classList.remove("active");
+        }
+
+        if (accountTitle) {
+            accountTitle.textContent = "Welcome back";
+        }
+
+        if (accountSubtitle) {
+            accountSubtitle.textContent =
+                "Sign in to continue to Spatium.";
+        }
+
+        clearMessage(loginMessage);
+        clearMessage(signupMessage);
+    }
+
+
+    function showSignup() {
+
+        if (loginForm) {
+            loginForm.style.display = "none";
+        }
+
+        if (signupForm) {
+            signupForm.style.display = "block";
+        }
+
+        if (loginTab) {
+            loginTab.classList.remove("active");
+        }
+
+        if (signupTab) {
+            signupTab.classList.add("active");
+        }
+
+        if (accountTitle) {
+            accountTitle.textContent = "Create your account";
+        }
+
+        if (accountSubtitle) {
+            accountSubtitle.textContent =
+                "Join Spatium and start playing.";
+        }
+
+        clearMessage(loginMessage);
+        clearMessage(signupMessage);
+    }
+
 
     if (loginTab) {
-
         loginTab.addEventListener(
             "click",
-            () => {
-
-                loginTab.classList.add("active");
-
-                signupTab.classList.remove(
-                    "active"
-                );
-
-                loginForm.classList.add("active");
-
-                signupForm.classList.remove(
-                    "active"
-                );
-
-                accountTitle.textContent =
-                    "Welcome back";
-
-                accountSubtitle.textContent =
-                    "Sign in to your Spatium account.";
-
-                loginMessage.textContent = "";
-                signupMessage.textContent = "";
-
-            }
+            showLogin
         );
-
     }
 
 
     if (signupTab) {
-
         signupTab.addEventListener(
             "click",
-            () => {
+            showSignup
+        );
+    }
 
-                signupTab.classList.add("active");
 
-                loginTab.classList.remove(
-                    "active"
+    // ========================================================
+    // LOGIN
+    // ========================================================
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                clearMessage(loginMessage);
+
+                const email =
+                    loginEmail?.value.trim() || "";
+
+                const password =
+                    loginPassword?.value || "";
+
+
+                // ----------------------------------------------
+                // Validation
+                // ----------------------------------------------
+
+                if (!email) {
+
+                    showMessage(
+                        loginMessage,
+                        "Please enter your email."
+                    );
+
+                    loginEmail?.focus();
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        loginMessage,
+                        "Please enter your password."
+                    );
+
+                    loginPassword?.focus();
+
+                    return;
+                }
+
+
+                if (password.length < MIN_PASSWORD_LENGTH) {
+
+                    showMessage(
+                        loginMessage,
+                        `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`
+                    );
+
+                    loginPassword?.focus();
+
+                    return;
+                }
+
+
+                // ----------------------------------------------
+                // Login
+                // ----------------------------------------------
+
+                setButtonLoading(
+                    loginButton,
+                    true,
+                    "Sign In"
                 );
 
-                signupForm.classList.add("active");
 
-                loginForm.classList.remove(
-                    "active"
-                );
+                try {
 
-                accountTitle.textContent =
-                    "Create your account";
+                    const {
+                        data,
+                        error
+                    } = await supabase.auth.signInWithPassword({
+                        email,
+                        password
+                    });
 
-                accountSubtitle.textContent =
-                    "Join the Spatium community.";
 
-                loginMessage.textContent = "";
-                signupMessage.textContent = "";
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    if (!data?.session) {
+
+                        showMessage(
+                            loginMessage,
+                            "Your account needs to be confirmed before you can continue."
+                        );
+
+                        return;
+                    }
+
+
+                    showMessage(
+                        loginMessage,
+                        "Signed in successfully. Redirecting...",
+                        "success"
+                    );
+
+
+                    // Give the message a moment to display.
+                    setTimeout(() => {
+
+                        window.location.href =
+                            "./chat.html";
+
+                    }, 400);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "[Spatium] Login error:",
+                        error
+                    );
+
+                    showMessage(
+                        loginMessage,
+                        friendlyAuthError(error)
+                    );
+
+                } finally {
+
+                    setButtonLoading(
+                        loginButton,
+                        false,
+                        "Sign In"
+                    );
+
+                }
 
             }
         );
@@ -170,319 +397,150 @@
     }
 
 
-    /* =========================================================
-       LOGIN
-    ========================================================= */
+    // ========================================================
+    // SIGN UP
+    // ========================================================
 
-    loginForm.addEventListener(
-        "submit",
-        async (event) => {
+    if (signupForm) {
 
-            event.preventDefault();
+        signupForm.addEventListener(
+            "submit",
+            async (event) => {
 
-            loginMessage.textContent = "";
-            loginMessage.className = "message";
+                event.preventDefault();
 
+                clearMessage(signupMessage);
 
-            const username =
-                document
-                    .getElementById("loginUsername")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("loginPassword")
-                    .value;
-
-
-            /* Username */
-
-            if (!validUsername(username)) {
-
-                showMessage(
-                    loginMessage,
-
-                    "Username must be 2-24 characters and only use letters, numbers, or underscores.",
-
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /* Password */
-
-            if (!validPassword(password)) {
-
-                showMessage(
-                    loginMessage,
-
-                    "Password must be at least 6 characters.",
-
-                    "error"
-                );
-
-                return;
-            }
-
-
-            loginButton.disabled = true;
-
-            loginButton.textContent =
-                "Signing in...";
-
-
-            try {
+                const username =
+                    signupUsername?.value.trim() || "";
 
                 const email =
-                    usernameToEmail(username);
+                    signupEmail?.value.trim() || "";
 
+                const password =
+                    signupPassword?.value || "";
 
-                const {
-                    data,
-                    error
-                } =
-                    await supabase.auth.signInWithPassword({
 
-                        email: email,
+                // ----------------------------------------------
+                // Username validation
+                // ----------------------------------------------
 
-                        password: password
-
-                    });
-
-
-                if (error) {
-                    throw error;
-                }
-
-
-                if (!data?.user) {
-                    throw new Error(
-                        "Sign in failed."
-                    );
-                }
-
-
-                showMessage(
-                    loginMessage,
-
-                    "Signed in! Redirecting...",
-
-                    "success"
-                );
-
-
-                setTimeout(
-                    () => {
-
-                        window.location.href =
-                            "./chat.html";
-
-                    },
-                    500
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "[Spatium Account] Login error:",
-                    error
-                );
-
-
-                showMessage(
-                    loginMessage,
-
-                    getAuthError(error),
-
-                    "error"
-                );
-
-
-                loginButton.disabled = false;
-
-                loginButton.textContent =
-                    "Sign In";
-
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       CREATE ACCOUNT
-    ========================================================= */
-
-    signupForm.addEventListener(
-        "submit",
-        async (event) => {
-
-            event.preventDefault();
-
-
-            signupMessage.textContent = "";
-
-            signupMessage.className =
-                "message";
-
-
-            const username =
-                document
-                    .getElementById("signupUsername")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("signupPassword")
-                    .value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById(
-                        "signupPasswordConfirm"
-                    )
-                    .value;
-
-
-            /* =========================
-               USERNAME VALIDATION
-            ========================= */
-
-            if (!validUsername(username)) {
-
-                showMessage(
-                    signupMessage,
-
-                    "Username must be 2-24 characters and only use letters, numbers, or underscores.",
-
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /* =========================
-               PASSWORD VALIDATION
-            ========================= */
-
-            if (!validPassword(password)) {
-
-                showMessage(
-                    signupMessage,
-
-                    "Password must be at least 6 characters.",
-
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /* =========================
-               PASSWORD CONFIRMATION
-            ========================= */
-
-            if (password !== confirmPassword) {
-
-                showMessage(
-                    signupMessage,
-
-                    "Passwords do not match.",
-
-                    "error"
-                );
-
-                return;
-            }
-
-
-            signupButton.disabled = true;
-
-            signupButton.textContent =
-                "Creating account...";
-
-
-            try {
-
-                /*
-                 * Check whether the username
-                 * is already in the profiles table.
-                 */
-
-                const {
-                    data: existingProfile,
-                    error: usernameCheckError
-                } =
-                    await supabase
-                        .from("profiles")
-                        .select("id")
-                        .eq(
-                            "username",
-                            username
-                        )
-                        .maybeSingle();
-
-
-                if (usernameCheckError) {
-
-                    throw usernameCheckError;
-
-                }
-
-
-                if (existingProfile) {
+                if (!username) {
 
                     showMessage(
                         signupMessage,
-
-                        "That username is already taken.",
-
-                        "error"
+                        "Please choose a username."
                     );
 
-                    return;
+                    signupUsername?.focus();
 
+                    return;
                 }
 
 
-                /* =========================
-                   CREATE AUTH ACCOUNT
-                ========================= */
+                if (!USERNAME_REGEX.test(username)) {
 
-                const email =
-                    usernameToEmail(username);
+                    showMessage(
+                        signupMessage,
+                        "Username must be 2-24 characters and can only contain letters, numbers, and underscores."
+                    );
+
+                    signupUsername?.focus();
+
+                    return;
+                }
 
 
-                const {
-                    data,
-                    error
-                } =
-                    await supabase.auth.signUp({
+                // ----------------------------------------------
+                // Email validation
+                // ----------------------------------------------
 
-                        email: email,
+                if (!email) {
 
-                        password: password,
+                    showMessage(
+                        signupMessage,
+                        "Please enter your email."
+                    );
+
+                    signupEmail?.focus();
+
+                    return;
+                }
+
+
+                // Browser-level email validation
+                if (
+                    signupEmail?.validity &&
+                    !signupEmail.validity.valid
+                ) {
+
+                    showMessage(
+                        signupMessage,
+                        "Please enter a valid email address."
+                    );
+
+                    signupEmail?.focus();
+
+                    return;
+                }
+
+
+                // ----------------------------------------------
+                // Password validation
+                // ----------------------------------------------
+
+                if (!password) {
+
+                    showMessage(
+                        signupMessage,
+                        "Please create a password."
+                    );
+
+                    signupPassword?.focus();
+
+                    return;
+                }
+
+
+                if (password.length < MIN_PASSWORD_LENGTH) {
+
+                    showMessage(
+                        signupMessage,
+                        `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`
+                    );
+
+                    signupPassword?.focus();
+
+                    return;
+                }
+
+
+                // ----------------------------------------------
+                // Create account
+                // ----------------------------------------------
+
+                setButtonLoading(
+                    signupButton,
+                    true,
+                    "Create Account"
+                );
+
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } = await supabase.auth.signUp({
+
+                        email,
+                        password,
 
                         options: {
 
                             data: {
-
-                                username:
-                                    username,
-
-                                display_name:
-                                    username
-
+                                username,
+                                display_name: username
                             }
 
                         }
@@ -490,92 +548,138 @@
                     });
 
 
-                if (error) {
-                    throw error;
-                }
+                    if (error) {
+                        throw error;
+                    }
 
 
-                if (!data?.user) {
+                    // ------------------------------------------
+                    // Supabase may return a session immediately
+                    // if email confirmation is disabled.
+                    // ------------------------------------------
 
-                    throw new Error(
-                        "Account creation failed."
-                    );
+                    if (data?.session) {
 
-                }
-
-
-                /*
-                 * If email confirmation is disabled,
-                 * Supabase gives us a session immediately.
-                 */
-
-                if (data.session) {
-
-                    showMessage(
-                        signupMessage,
-
-                        "Account created! Redirecting...",
-
-                        "success"
-                    );
+                        showMessage(
+                            signupMessage,
+                            "Account created. Redirecting...",
+                            "success"
+                        );
 
 
-                    setTimeout(
-                        () => {
+                        setTimeout(() => {
 
                             window.location.href =
                                 "./chat.html";
 
-                        },
-                        500
+                        }, 400);
+
+
+                        return;
+                    }
+
+
+                    // ------------------------------------------
+                    // Email confirmation is enabled.
+                    // ------------------------------------------
+
+                    showMessage(
+                        signupMessage,
+                        "Account created! Check your email to confirm your account, then sign in.",
+                        "success"
                     );
 
 
-                    return;
+                    // Clear password after successful signup.
+                    if (signupPassword) {
+                        signupPassword.value = "";
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "[Spatium] Signup error:",
+                        error
+                    );
+
+                    showMessage(
+                        signupMessage,
+                        friendlyAuthError(error)
+                    );
+
+                } finally {
+
+                    setButtonLoading(
+                        signupButton,
+                        false,
+                        "Create Account"
+                    );
 
                 }
 
+            }
+        );
 
-                /*
-                 * No session means Supabase is
-                 * requiring email confirmation.
-                 */
-
-                showMessage(
-                    signupMessage,
-
-                    "Account created, but email confirmation is required in Supabase.",
-
-                    "error"
-                );
+    }
 
 
-                signupButton.disabled = false;
+    // ========================================================
+    // CHECK EXISTING SESSION
+    // ========================================================
+    //
+    // Supabase persists sessions by default when configured
+    // with persistSession: true.
+    //
+    // getUser() verifies the current user with Auth.
+    // ========================================================
 
-                signupButton.textContent =
-                    "Create Account";
+    try {
 
-            } catch (error) {
-
-                console.error(
-                    "[Spatium Account] Signup error:",
-                    error
-                );
-
-
-                showMessage(
-                    signupMessage,
-
-                    getAuthError(error),
-
-                    "error"
-                );
+        const {
+            data,
+            error
+        } = await supabase.auth.getUser();
 
 
-                signupButton.disabled = false;
+        if (
+            !error &&
+            data?.user
+        ) {
 
-                signupButton.textContent =
-                    "Create Account";
+            window.location.href =
+                "./chat.html";
+
+            return;
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "[Spatium] Could not check existing session:",
+            error
+        );
+
+    }
+
+
+    // ========================================================
+    // AUTH STATE LISTENER
+    // ========================================================
+
+    supabase.auth.onAuthStateChange(
+        (event, session) => {
+
+            if (
+                event === "SIGNED_IN" &&
+                session
+            ) {
+
+                // Don't redirect while already handling the
+                // signup/login redirect above.
+                //
+                // This also keeps the account page synced if
+                // another tab signs in.
 
             }
 
@@ -583,129 +687,10 @@
     );
 
 
-    /* =========================================================
-       AUTH ERROR HANDLING
-    ========================================================= */
+    // ========================================================
+    // DEFAULT VIEW
+    // ========================================================
 
-    function getAuthError(error) {
+    showLogin();
 
-        const message =
-            String(
-                error?.message || ""
-            ).toLowerCase();
-
-
-        if (
-            message.includes(
-                "invalid login credentials"
-            )
-        ) {
-
-            return "Incorrect username or password.";
-
-        }
-
-
-        if (
-            message.includes(
-                "user already registered"
-            )
-        ) {
-
-            return "That username is already taken.";
-
-        }
-
-
-        if (
-            message.includes(
-                "already registered"
-            )
-        ) {
-
-            return "That username is already taken.";
-
-        }
-
-
-        if (
-            message.includes(
-                "email"
-            ) &&
-            message.includes(
-                "invalid"
-            )
-        ) {
-
-            return "The account could not be created. Check your Supabase email authentication settings.";
-
-        }
-
-
-        if (
-            message.includes(
-                "password"
-            )
-        ) {
-
-            return error.message;
-
-        }
-
-
-        if (
-            message.includes(
-                "rate limit"
-            )
-        ) {
-
-            return "Too many attempts. Please wait a little and try again.";
-
-        }
-
-
-        return (
-            error?.message ||
-            "Something went wrong. Please try again."
-        );
-
-    }
-
-
-    /* =========================================================
-       CHECK EXISTING SESSION
-    ========================================================= */
-
-    async function checkExistingSession() {
-
-        try {
-
-            const {
-                data
-            } =
-                await supabase.auth.getSession();
-
-
-            if (data?.session) {
-
-                console.log(
-                    "[Spatium Account] Existing session detected."
-                );
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "[Spatium Account] Session check failed:",
-                error
-            );
-
-        }
-
-    }
-
-
-    checkExistingSession();
-
-})();
+});
