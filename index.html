@@ -2,1027 +2,2779 @@
 <html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
 
-    <meta charset="UTF-8">
+<title>Spatium · Games</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta name="description" content="Play games online with Spatium. Discover, play, and explore a growing collection of browser games.">
+<meta name="keywords" content="Spatium, games, browser games, online games, HTML5 games">
+<meta name="author" content="Spatium">
 
-    <meta
-        name="theme-color"
-        content="#0a0b0e"
-    >
+<link rel="icon" href="./assets/favicon.svg">
 
-    <title>Spatium · Games</title>
+<!-- Fonts only. All actual site CSS is below. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <meta
-        name="title"
-        content="Spatium"
-    >
+<style>
 
-    <meta
-        name="author"
-        content="Spatium"
-    >
+/* =========================================================
+   SPATIUM — SINGLE FILE HOMEPAGE CSS
+   ========================================================= */
 
-    <meta
-        name="description"
-        content="Play games online with Spatium. Discover, play, and explore a growing collection of browser games."
-    >
+:root {
+    --bg: #08090d;
+    --bg-2: #0d0f15;
+    --bg-3: #12151d;
+    --panel: rgba(16, 18, 25, .88);
+    --panel-2: rgba(21, 24, 33, .92);
+    --border: rgba(255,255,255,.08);
+    --border-hover: rgba(255,255,255,.16);
+    --text: #f5f7fb;
+    --text-2: #a8afbd;
+    --text-3: #737b8a;
+    --accent: #8b7cff;
+    --accent-2: #6d5dfc;
+    --accent-soft: rgba(139,124,255,.14);
+    --green: #54e69a;
+    --red: #ff667d;
+    --yellow: #f6c85f;
+    --radius: 18px;
+    --radius-small: 12px;
+    --sidebar-width: 300px;
+    --nav-height: 72px;
+    --shadow: 0 20px 60px rgba(0,0,0,.28);
+}
 
-    <meta
-        name="keywords"
-        content="Spatium, games, browser games, online games, HTML5 games, play games"
-    >
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <meta
-        name="language"
-        content="English"
-    >
+html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+}
 
-    <meta
-        property="og:type"
-        content="website"
-    >
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(105, 88, 255, .13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(70, 160, 255, .07),
+            transparent 25%
+        ),
+        var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
 
-    <meta
-        property="og:title"
-        content="Spatium · Games"
-    >
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-    <meta
-        property="og:description"
-        content="Discover and play browser games on Spatium."
-    >
+button,
+input,
+select {
+    font: inherit;
+}
 
-    <meta
-        property="og:url"
-        content="https://ironbarkproxys.github.io/spatium-v2/"
-    >
+button {
+    color: inherit;
+}
 
-    <meta
-        property="og:locale"
-        content="en_US"
-    >
+img {
+    max-width: 100%;
+}
 
-    <meta
-        name="twitter:card"
-        content="summary_large_image"
-    >
+.material-icons {
+    font-size: 20px;
+    vertical-align: middle;
+}
 
-    <meta
-        name="twitter:title"
-        content="Spatium · Games"
-    >
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
 
-    <meta
-        name="twitter:description"
-        content="Discover and play browser games on Spatium."
-    >
+.bg-stage {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    overflow: hidden;
+}
 
+.grid-bg {
+    position: absolute;
+    inset: 0;
+    opacity: .23;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 80%);
+}
 
-    <!-- =========================================
-         FONTS
-    ========================================== -->
+.glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: -300px;
+    left: -180px;
+    border-radius: 50%;
+    background: rgba(104, 83, 255, .13);
+    filter: blur(100px);
+}
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+.glow.b {
+    top: 40%;
+    left: auto;
+    right: -350px;
+    background: rgba(66, 127, 255, .08);
+}
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet"
-    >
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--nav-height);
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,9,13,.82);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
 
+.nav-inner {
+    width: min(1500px, calc(100% - 36px));
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    <!-- =========================================
-         ICONS
-    ========================================== -->
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
 
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    >
+.brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(
+        135deg,
+        #7766ff,
+        #a797ff
+    );
+    box-shadow: 0 8px 25px rgba(113,96,255,.28);
+    overflow: hidden;
+}
 
-    <link
-        rel="stylesheet"
-        href="./iconcss/weather-icons.min.css"
-    >
+.brand-logo {
+    width: 23px;
+    height: 23px;
+    object-fit: contain;
+}
 
+.brand-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -.5px;
+}
 
-    <!-- =========================================
-         SPATIUM CSS
-    ========================================== -->
+.brand-tag {
+    padding: 3px 7px;
+    border-radius: 6px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    font-weight: 700;
+    background: var(--accent-soft);
+    color: #bdb5ff;
+}
 
-    <!-- Main homepage stylesheet -->
-    <link
-        rel="stylesheet"
-        href="./css/index.css"
-    >
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 28px;
+}
 
-    <!-- Existing site styles -->
-    <link
-        rel="stylesheet"
-        href="./css/main.css"
-    >
+.nav-link {
+    color: var(--text-2);
+    padding: 8px 11px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: .2s;
+}
 
-    <link
-        rel="stylesheet"
-        href="./css/animations.css"
-    >
+.nav-link:hover {
+    color: var(--text);
+    background: rgba(255,255,255,.05);
+}
 
-    <link
-        rel="stylesheet"
-        href="./css/home.css"
-    >
+.nav-link.is-active {
+    color: var(--text);
+    background: rgba(255,255,255,.07);
+}
 
-    <link
-        id="themecss"
-        rel="stylesheet"
-        href="./css/default.css"
-    >
+.nav-spacer {
+    flex: 1;
+}
 
+.nav-search {
+    height: 38px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.035);
+    border-radius: 10px;
+    color: var(--text-3);
+}
 
-    <!-- =========================================
-         FAVICON
-    ========================================== -->
+.nav-search:focus-within {
+    border-color: rgba(139,124,255,.5);
+    box-shadow: 0 0 0 3px rgba(139,124,255,.08);
+}
 
-    <link
-        rel="icon"
-        href="./assets/favicon.svg"
-    >
+.nav-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: 12px;
+}
 
+.nav-search input::placeholder {
+    color: var(--text-3);
+}
 
-    <!-- =========================================
-         STRUCTURED DATA
-    ========================================== -->
+.kbd {
+    font-size: 10px;
+    color: var(--text-3);
+    white-space: nowrap;
+}
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Spatium",
-        "description": "Play browser games on Spatium.",
-        "url": "https://ironbarkproxys.github.io/spatium-v2/"
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-2);
+    transition: .2s;
+}
+
+.icon-btn:hover {
+    color: var(--text);
+    background: rgba(255,255,255,.06);
+    border-color: var(--border);
+}
+
+.nav-menu-btn {
+    display: none;
+}
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.shell {
+    width: min(1500px, calc(100% - 36px));
+    margin: auto;
+    padding: 30px 0 60px;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(330px, .8fr);
+    gap: 18px;
+    margin-bottom: 45px;
+}
+
+.hero-spotlight,
+.hero-side {
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(31,32,47,.88),
+            rgba(13,15,21,.96)
+        );
+    box-shadow: var(--shadow);
+}
+
+.hero-spotlight {
+    position: relative;
+    min-height: 360px;
+    padding: 45px;
+    overflow: hidden;
+}
+
+.hero-brand-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    right: -100px;
+    top: -160px;
+    border-radius: 50%;
+    background: rgba(110,91,255,.18);
+    filter: blur(80px);
+}
+
+.hero-brand-logo {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .08;
+    filter: blur(1px);
+}
+
+.hero-spot-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+    min-height: 270px;
+    gap: 30px;
+}
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #aaa3ff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    margin-bottom: 12px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(84,230,154,.7);
+}
+
+.hero-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: .98;
+    letter-spacing: -3px;
+    margin-bottom: 18px;
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: var(--text-3);
+    font-size: 12px;
+}
+
+.hero-meta b {
+    color: var(--text);
+}
+
+.hero-meta .sep {
+    opacity: .4;
+}
+
+.hero-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    padding: 12px 17px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(109,93,252,.25);
+    transition: .2s;
+}
+
+.hero-play-btn:hover {
+    transform: translateY(-2px);
+    background: #9a8cff;
+    box-shadow: 0 16px 35px rgba(109,93,252,.34);
+}
+
+.hero-jumpback {
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.hero-jumpback h3 {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-bottom: 10px;
+}
+
+.hero-jumpback-list {
+    display: grid;
+    gap: 7px;
+}
+
+.hero-jump-link {
+    display: flex;
+    gap: 9px;
+    padding: 6px;
+    border-radius: 9px;
+    background: rgba(255,255,255,.035);
+    transition: .2s;
+}
+
+.hero-jump-link:hover {
+    background: rgba(255,255,255,.075);
+}
+
+.hero-jump-thumb {
+    width: 42px;
+    height: 38px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 7px;
+    background: var(--bg-3);
+}
+
+.hero-jump-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-jump-thumb-fallback {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+}
+
+.hero-jump-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-jump-name {
+    font-size: 10px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hero-jump-meta {
+    font-size: 9px;
+    color: var(--text-3);
+}
+
+/* =========================================================
+   HERO SIDE
+   ========================================================= */
+
+.hero-side {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-welcome {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-welcome h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.hero-welcome p {
+    color: var(--text-3);
+    font-size: 11px;
+}
+
+.stat {
+    text-align: right;
+}
+
+.stat .n {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.stat .l {
+    font-size: 9px;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+.hero-quick {
+    padding-top: 22px;
+}
+
+.hero-quick h3 {
+    font-size: 11px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.quick-tile {
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: rgba(255,255,255,.025);
+    color: var(--text-2);
+    font-size: 11px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.quick-tile:hover {
+    color: var(--text);
+    border-color: rgba(139,124,255,.28);
+    background: rgba(139,124,255,.08);
+    transform: translateY(-1px);
+}
+
+.qi {
+    color: #9990ff;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.section {
+    margin-top: 45px;
+}
+
+.section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 17px;
+}
+
+.section-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 25px;
+    letter-spacing: -.7px;
+}
+
+.section-sub {
+    color: var(--text-3);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.count {
+    color: var(--text-3);
+    font-family: monospace;
+    font-size: 11px;
+    margin-left: 7px;
+}
+
+.section-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.chev {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(255,255,255,.025);
+    color: var(--text-2);
+    cursor: pointer;
+}
+
+.chev:hover {
+    background: rgba(255,255,255,.07);
+    color: white;
+}
+
+.featured-section {
+    width: 100%;
+}
+
+.carousel-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 12px;
+}
+
+/* =========================================================
+   GAME CARDS
+   ========================================================= */
+
+.gameitem,
+.game-card,
+.game {
+    min-width: 0;
+}
+
+.gameitem {
+    position: relative;
+}
+
+.gameitem a {
+    display: block;
+}
+
+.gameitem img,
+.game-card img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    display: block;
+    object-fit: cover;
+    border-radius: 13px;
+    background: #11141c;
+}
+
+.gameitem,
+.game-card {
+    transition: transform .2s ease;
+}
+
+.gameitem:hover,
+.game-card:hover {
+    transform: translateY(-3px);
+}
+
+.gameitem:hover img,
+.game-card:hover img {
+    box-shadow: 0 14px 30px rgba(0,0,0,.32);
+}
+
+.gameitem .name,
+.game-card .name,
+.game-name {
+    display: block;
+    margin-top: 8px;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.gameitem .meta,
+.game-card .meta {
+    color: var(--text-3);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.loading {
+    grid-column: 1/-1;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-3);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+}
+
+/* dynamically-created game grid */
+
+#games {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    gap: 22px 13px;
+}
+
+#games .gameitem {
+    min-width: 0;
+}
+
+/* common generated card structures */
+
+#games .gameitem > a,
+#games .gameitem > div > a {
+    display: block;
+    color: inherit;
+}
+
+#games .gameitem img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: 13px;
+    background: #11141c;
+}
+
+/* =========================================================
+   CHIPS
+   ========================================================= */
+
+.chips {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.chip {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
+    color: var(--text-3);
+    padding: 7px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.chip:hover {
+    color: var(--text);
+    border-color: var(--border-hover);
+}
+
+.chip.is-active {
+    color: white;
+    border-color: rgba(139,124,255,.5);
+    background: rgba(139,124,255,.14);
+}
+
+/* =========================================================
+   SORT
+   ========================================================= */
+
+.sort select {
+    appearance: none;
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: 9px;
+    background: var(--bg-3);
+    color: var(--text-2);
+    padding: 8px 30px 8px 10px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   RECENTLY PLAYED
+   ========================================================= */
+
+.row-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 5px;
+}
+
+.row-track::-webkit-scrollbar {
+    display: none;
+}
+
+.r-card {
+    width: 180px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+    background: rgba(255,255,255,.025);
+}
+
+.r-thumb {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: var(--bg-3);
+}
+
+.r-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.r-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: white;
+    background: rgba(0,0,0,.2);
+    opacity: 0;
+    transition: .2s;
+}
+
+.r-card:hover .r-play {
+    opacity: 1;
+}
+
+.r-body {
+    padding: 9px;
+}
+
+.r-name {
+    font-size: 11px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.r-meta {
+    margin-top: 3px;
+    color: var(--text-3);
+    font-size: 9px;
+}
+
+/* =========================================================
+   COMMUNITY
+   ========================================================= */
+
+.discord-strip {
+    margin-top: 55px;
+    padding: 24px 27px;
+    border: 1px solid rgba(139,124,255,.18);
+    border-radius: 17px;
+    background:
+        linear-gradient(
+            100deg,
+            rgba(139,124,255,.09),
+            rgba(255,255,255,.025)
+        );
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.ds-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.ds-sub {
+    color: var(--text-3);
+    font-size: 11px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 15px;
+    border-radius: 9px;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.btn-primary:hover {
+    background: #9a8cff;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidenavcont {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.sidenav-dev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    transform: translateX(-105%);
+    transition: transform .28s ease;
+    background: #0b0d12;
+    border-right: 1px solid var(--border);
+    box-shadow: 30px 0 80px rgba(0,0,0,.45);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    pointer-events: auto;
+}
+
+.sidenavcont.active,
+.sidenavcont.open {
+    pointer-events: auto;
+}
+
+.sidenavcont.active .sidenav-dev,
+.sidenavcont.open .sidenav-dev {
+    transform: translateX(0);
+}
+
+.backdropside {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    opacity: 0;
+    transition: opacity .28s;
+    pointer-events: none;
+}
+
+.sidenavcont.active .backdropside,
+.sidenavcont.open .backdropside {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidenav-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.sidenav-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.sidenav-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: linear-gradient(135deg,#7161ff,#9b8fff);
+    padding: 8px;
+}
+
+.sidenav-title h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 17px;
+}
+
+.sidenav-subtitle {
+    display: block;
+    color: var(--text-3);
+    font-size: 9px;
+}
+
+.sidenav-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.sidenav-icon-btn {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: transparent;
+    color: var(--text-3);
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidenav-icon-btn:hover {
+    background: rgba(255,255,255,.06);
+    color: white;
+}
+
+.sidenav-menu {
+    padding: 17px 12px;
+    flex: 1;
+}
+
+.menu-section {
+    margin-bottom: 24px;
+}
+
+.menu-section-title {
+    padding: 0 10px 7px;
+    color: #626a79;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 43px;
+    padding: 9px 10px;
+    border-radius: 9px;
+    color: var(--text-2);
+    font-size: 11px;
+    margin-bottom: 2px;
+    transition: .18s;
+}
+
+.menu-item:hover {
+    color: white;
+    background: rgba(255,255,255,.05);
+}
+
+.menu-icon {
+    color: #858da0;
+    font-size: 18px;
+}
+
+.menu-text {
+    flex: 1;
+}
+
+.menu-arrow {
+    color: #4e5563;
+    font-size: 16px;
+}
+
+.menu-item-highlight .menu-icon {
+    color: var(--accent);
+}
+
+.menu-item-warning .menu-icon {
+    color: var(--yellow);
+}
+
+.menu-badge {
+    padding: 3px 6px;
+    border-radius: 5px;
+    background: rgba(139,124,255,.13);
+    color: #aaa0ff;
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.menu-item-secondary {
+    color: var(--text-3);
+}
+
+.sidenav-footer {
+    padding: 14px;
+    border-top: 1px solid var(--border);
+}
+
+.weather-widget {
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 11px;
+    background: rgba(255,255,255,.025);
+    cursor: pointer;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.weather-icon {
+    font-size: 24px;
+    color: #f5c85b;
+}
+
+.weather-main-info {
+    flex: 1;
+}
+
+.weather-temp {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.weather-condition {
+    font-size: 9px;
+    color: var(--text-3);
+}
+
+.weather-expand-icon {
+    color: var(--text-3);
+}
+
+.weather-expandable {
+    display: none;
+    padding-top: 10px;
+}
+
+.weather-widget.expanded .weather-expandable {
+    display: block;
+}
+
+.weather-location {
+    color: var(--text-3);
+    font-size: 9px;
+    margin-bottom: 10px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+}
+
+.weather-detail-item {
+    text-align: center;
+}
+
+.weather-detail-icon {
+    color: var(--accent);
+    font-size: 15px;
+}
+
+.weather-detail-value {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.weather-detail-label {
+    color: var(--text-3);
+    font-size: 7px;
+}
+
+.footer-text {
+    color: #464c58;
+    font-size: 8px;
+    text-align: center;
+    margin-top: 9px;
+}
+
+/* =========================================================
+   TRANSLATE / FILTER
+   ========================================================= */
+
+.translatecontainer,
+.filtercontainer {
+    position: fixed;
+    z-index: 3000;
+    display: none;
+    background: #101219;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: 15px;
+}
+
+.translatecontainer {
+    width: 330px;
+    height: 220px;
+    top: 90px;
+    right: 25px;
+    padding: 20px;
+}
+
+.filtercontainer {
+    width: 280px;
+    top: 90px;
+    right: 25px;
+    padding: 15px;
+}
+
+.translatecontainer.active,
+.translatecontainer.open,
+.filtercontainer.active,
+.filtercontainer.open {
+    display: block;
+}
+
+.lineidk {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+}
+
+.filter-radio-group {
+    display: grid;
+    gap: 5px;
+}
+
+.filter-radio-container {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px;
+    border-radius: 8px;
+    color: var(--text-2);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.filter-radio-container:hover {
+    background: rgba(255,255,255,.05);
+    color: white;
+}
+
+.filter-radio-container input {
+    accent-color: var(--accent);
+}
+
+/* =========================================================
+   COOKIE
+   ========================================================= */
+
+.notafication-v2 {
+    position: fixed;
+    z-index: 5000;
+    bottom: 18px;
+    left: 18px;
+    width: min(390px, calc(100% - 36px));
+    padding: 17px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: rgba(15,17,23,.96);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    backdrop-filter: blur(15px);
+}
+
+.notification-close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    border: 0;
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+}
+
+.notification-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.notification-icon img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.notification-title {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.notification-desc {
+    color: var(--text-3);
+    font-size: 10px;
+}
+
+.notification-btn {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 12px;
+    color: #aaa0ff;
+    font-size: 10px;
+}
+
+/* =========================================================
+   CHANGELOG
+   ========================================================= */
+
+.changelog-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.changelog-modal[hidden] {
+    display: none;
+}
+
+.changelog-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(8px);
+}
+
+.changelog-panel {
+    position: relative;
+    width: min(650px,100%);
+    max-height: 80vh;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: #101219;
+    box-shadow: 0 30px 100px rgba(0,0,0,.55);
+}
+
+.changelog-panel-header {
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.changelog-panel-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.changelog-panel-icon-wrap {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: var(--accent-soft);
+    color: #aaa0ff;
+}
+
+.changelog-panel-title {
+    font-size: 15px;
+}
+
+.changelog-panel-subtitle {
+    color: var(--text-3);
+    font-size: 9px;
+}
+
+.changelog-close-btn {
+    border: 0;
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+}
+
+.changelog-panel-body {
+    padding: 20px;
+    max-height: calc(80vh - 75px);
+    overflow-y: auto;
+}
+
+.changelog-content {
+    white-space: pre-wrap;
+    font-family: Inter, sans-serif;
+    color: var(--text-2);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 55px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--text-3);
+    font-size: 10px;
+}
+
+.foot a:hover {
+    color: white;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .nav-links {
+        display: none;
     }
-    </script>
+
+    .nav-menu-btn {
+        display: grid;
+    }
+
+    .carousel-container {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    #games {
+        grid-template-columns: repeat(4,1fr);
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-side {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 760px) {
+
+    :root {
+        --nav-height: 62px;
+    }
+
+    .nav-inner,
+    .shell {
+        width: calc(100% - 24px);
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+
+    .brand-tag {
+        display: none;
+    }
+
+    .nav-search {
+        width: auto;
+        flex: 1;
+        max-width: 200px;
+    }
+
+    .nav-search .kbd {
+        display: none;
+    }
+
+    .nav-search input::placeholder {
+        color: transparent;
+    }
+
+    .hero-spotlight {
+        padding: 28px;
+        min-height: 430px;
+    }
+
+    .hero-spot-content {
+        min-height: 350px;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .hero-title {
+        font-size: 46px;
+        letter-spacing: -2px;
+    }
+
+    .hero-brand-logo {
+        width: 190px;
+        height: 190px;
+        right: -35px;
+        top: 30%;
+    }
+
+    .hero-jumpback {
+        width: 100%;
+    }
+
+    .hero-jumpback-list {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .hero-jump-link {
+        min-width: 0;
+    }
+
+    .hero-jump-name {
+        max-width: 100%;
+    }
+
+    .hero-side {
+        padding: 20px;
+    }
+
+    .carousel-container {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    #games {
+        grid-template-columns: repeat(3,1fr);
+        gap: 18px 10px;
+    }
+
+    .section-title {
+        font-size: 21px;
+    }
+
+    .discord-strip {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .foot {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .shell {
+        padding-top: 18px;
+    }
+
+    .brand-mark {
+        width: 32px;
+        height: 32px;
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    .nav-search {
+        max-width: 145px;
+    }
+
+    .nav-inner {
+        gap: 5px;
+    }
+
+    .hero-spotlight {
+        padding: 22px;
+        border-radius: 17px;
+    }
+
+    .hero-title {
+        font-size: 39px;
+    }
+
+    .hero-meta {
+        font-size: 10px;
+    }
+
+    .hero-jumpback-list {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .carousel-container {
+        grid-template-columns: repeat(2,1fr);
+        gap: 9px;
+    }
+
+    #games {
+        grid-template-columns: repeat(2,1fr);
+        gap: 18px 9px;
+    }
+
+    .gameitem .name,
+    .game-card .name,
+    .game-name {
+        font-size: 10px;
+    }
+
+    .chips {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .chip {
+        white-space: nowrap;
+    }
+
+    .notafication-v2 {
+        left: 10px;
+        bottom: 10px;
+        width: calc(100% - 20px);
+    }
+
+}
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+
+[hidden] {
+    display: none !important;
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Spatium",
+    "description": "Play browser games on Spatium.",
+    "url": "https://ironbarkproxys.github.io/spatium-v2/"
+}
+</script>
 
 </head>
 
+<body data-spatium-theme-scripts="enabled" data-bg="mesh" data-density="cozy">
 
-<body
-    data-spatium-theme-scripts="enabled"
-    data-bg="mesh"
-    data-density="cozy"
->
+<!-- =====================================================
+     BACKGROUND
+     ===================================================== -->
+
+<div class="bg-stage" aria-hidden="true">
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+    <div class="glow b"></div>
+</div>
+
+<div id="backgroundarea"></div>
 
 
-    <!-- =========================================
-         BACKGROUND
-    ========================================== -->
+<!-- =====================================================
+     COOKIE NOTICE
+     ===================================================== -->
 
-    <div
-        class="bg-stage"
-        aria-hidden="true"
+<div id="notafication" class="notafication-v2">
+
+    <button
+        id="closenote"
+        class="notification-close"
+        aria-label="Close notification"
     >
+        <span class="material-icons">close</span>
+    </button>
 
-        <div class="grid-bg"></div>
+    <div class="notification-top">
 
-        <div class="glow"></div>
+        <div class="notification-icon">
+            <img
+                id="cookiepic"
+                src="./cookieimg.png"
+                alt="Cookie icon"
+            >
+        </div>
 
-        <div class="glow b"></div>
+        <div
+            id="notification-spinner"
+            class="notification-spinner"
+            aria-hidden="true"
+        ></div>
+
+        <div class="notification-content">
+
+            <h2
+                id="titlenote"
+                class="notification-title"
+            >
+                We Use Cookies
+            </h2>
+
+            <p
+                id="descnote"
+                class="notification-desc"
+            >
+                By using our site you agree to cookies
+                for analytics and personalization.
+            </p>
+
+        </div>
 
     </div>
 
-
     <div
-        id="backgroundarea"
-        style="
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100vh;
-            z-index:-2;
-            overflow:hidden;
-        "
-    ></div>
-
-
-
-    <!-- =========================================
-         COOKIE NOTIFICATION
-    ========================================== -->
-
-    <div
-        id="notafication"
-        class="notafication-v2"
+        id="notification-bottom"
+        class="notification-bottom"
+        style="display:none;"
     >
 
-        <button
-            id="closenote"
-            class="notification-close"
-            aria-label="Close notification"
+        <a
+            href="./privacy.html"
+            class="notification-btn"
+        >
+            <span class="material-icons">info</span>
+            Learn More
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TRANSLATE
+     ===================================================== -->
+
+<div
+    class="translatecontainer"
+    id="translateM"
+>
+
+    <p
+        style="
+            font-size:18px;
+            font-weight:500;
+            position:relative;
+            left:10px;
+        "
+    >
+        Translate
+    </p>
+
+    <span
+        class="material-icons notranslate"
+        onclick="ToggleTranslate()"
+        style="
+            float:right;
+            cursor:pointer;
+            position:relative;
+            top:-40px;
+            right:10px;
+        "
+        role="button"
+        aria-label="Close translation menu"
+        tabindex="0"
+    >
+        close
+    </span>
+
+    <div
+        class="lineidk"
+        style="margin-top:10px;"
+    ></div>
+
+    <div
+        style="
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        "
+        id="google_translate_element"
+    ></div>
+
+    <script>
+    function googleTranslateElementInit() {
+        if (
+            window.google &&
+            google.translate
+        ) {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: "en",
+                    layout:
+                        google.translate.TranslateElement
+                        .InlineLayout
+                        .SIMPLE
+                },
+                "google_translate_element"
+            );
+        }
+    }
+    </script>
+
+    <script src="./auto-translate.js"></script>
+
+</div>
+
+
+<!-- =====================================================
+     FILTER
+     ===================================================== -->
+
+<div
+    class="filtercontainer"
+    id="filterM"
+>
+
+    <div
+        style="
+            width:100%;
+            height:50px;
+            position:relative;
+        "
+    >
+
+        <span
+            class="closefilterw"
+            onclick="ToggleFilter()"
+            style="
+                position:absolute;
+                right:4px;
+                top:4px;
+                cursor:pointer;
+            "
+            role="button"
+            aria-label="Close filter menu"
+            tabindex="0"
         >
 
             <span class="material-icons">
                 close
             </span>
 
-        </button>
-
-
-        <div class="notification-top">
-
-            <div class="notification-icon">
-
-                <img
-                    id="cookiepic"
-                    src="./cookieimg.png"
-                    alt="Cookie icon"
-                >
-
-            </div>
-
-
-            <div
-                id="notification-spinner"
-                class="notification-spinner"
-                aria-hidden="true"
-            ></div>
-
-
-            <div class="notification-content">
-
-                <h2
-                    id="titlenote"
-                    class="notification-title"
-                >
-                    We Use Cookies
-                </h2>
-
-                <p
-                    id="descnote"
-                    class="notification-desc"
-                >
-                    By using our site you agree to cookies
-                    for analytics and personalization.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="notification-bottom"
-            class="notification-bottom"
-            style="display:none;"
-        >
-
-            <a
-                href="./privacy.html"
-                class="notification-btn"
-            >
-
-                <span class="material-icons">
-                    info
-                </span>
-
-                Learn More
-
-            </a>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =========================================
-         TRANSLATE
-    ========================================== -->
-
-    <div
-        class="translatecontainer"
-        id="translateM"
-    >
-
-        <p
-            style="
-                font-size:18px;
-                font-weight:500;
-                left:10px;
-                position:relative;
-            "
-        >
-            Translate
-        </p>
-
-
-        <span
-            class="material-icons notranslate"
-            onclick="ToggleTranslate()"
-            style="
-                float:right;
-                cursor:pointer;
-                position:relative;
-                top:-40.5px;
-                right:10px;
-            "
-            role="button"
-            aria-label="Close translation menu"
-            tabindex="0"
-        >
-            close
         </span>
 
+    </div>
 
-        <div
-            class="lineidk"
-            style="top:-13px;"
-        ></div>
+    <div class="filter-radio-group">
 
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="no filter"
+                checked
+                onclick="filterByTag('')"
+            >
+            No Filter
+        </label>
 
-        <div
-            style="
-                top:50%;
-                position:absolute;
-                left:50%;
-                transform:translate(-50%,-50%);
-            "
-            id="google_translate_element"
-        ></div>
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Casual"
+                onclick="filterByTag('casual')"
+            >
+            Casual
+        </label>
 
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Shooter"
+                onclick="filterByTag('shooter')"
+            >
+            Shooter
+        </label>
 
-        <script>
-        function googleTranslateElementInit() {
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Driver"
+                onclick="filterByTag('driver')"
+            >
+            Driver
+        </label>
 
-            new google.translate.TranslateElement(
-                {
-                    pageLanguage: "en",
-                    layout:
-                        google.translate.TranslateElement
-                            .InlineLayout
-                            .SIMPLE
-                },
-                "google_translate_element"
-            );
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Horror"
+                onclick="filterByTag('horror')"
+            >
+            Horror
+        </label>
 
-        }
-        </script>
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Idle"
+                onclick="filterByTag('idle')"
+            >
+            Idle
+        </label>
 
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Multiplayer"
+                onclick="filterByTag('multiplayer')"
+            >
+            Multiplayer
+        </label>
 
-        <script
-            src="./auto-translate.js"
-        ></script>
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Puzzle"
+                onclick="filterByTag('puzzle')"
+            >
+            Puzzle
+        </label>
+
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Sandbox"
+                onclick="filterByTag('sandbox')"
+            >
+            Sandbox
+        </label>
+
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Sports"
+                onclick="filterByTag('sport')"
+            >
+            Sports
+        </label>
+
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Story"
+                onclick="filterByTag('story')"
+            >
+            Story
+        </label>
+
+        <label class="filter-radio-container">
+            <input
+                type="radio"
+                name="custom-radio"
+                value="Flash"
+                onclick="filterByTag('flash')"
+            >
+            Flash
+        </label>
 
     </div>
 
+</div>
 
 
-    <!-- =========================================
-         FILTER MENU
-    ========================================== -->
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<div
+    id="sidenavcont"
+    class="sidenavcont"
+>
 
     <div
-        class="filtercontainer"
-        id="filterM"
+        id="sidenav"
+        class="sidenav-dev"
     >
 
-        <div
-            style="
-                width:100%;
-                position:relative;
-                height:70px;
-            "
-        >
+        <div class="sidenav-header">
 
-            <span
-                class="closefilterw"
-                onclick="ToggleFilter()"
+            <div class="sidenav-brand">
+
+                <img
+                    src="./assets/favicon.svg"
+                    class="sidenav-logo"
+                    alt="Spatium"
+                >
+
+                <div class="sidenav-title">
+
+                    <h2>Spatium</h2>
+
+                    <span class="sidenav-subtitle">
+                        Play. Discover. Explore.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="sidenav-controls">
+
+                <a
+                    href="./settings.html"
+                    class="sidenav-icon-btn"
+                    aria-label="Settings"
+                >
+                    <span class="material-icons">
+                        settings
+                    </span>
+                </a>
+
+                <button
+                    onclick="ToggleSideNav()"
+                    class="sidenav-icon-btn"
+                    aria-label="Close menu"
+                >
+                    <span class="material-icons">
+                        close
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidenav-menu">
+
+            <div class="menu-section">
+
+                <h3 class="menu-section-title">
+                    Navigation
+                </h3>
+
+                <a
+                    href="./index.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        home
+                    </span>
+
+                    <span class="menu-text">
+                        Home
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+                <a
+                    href="./games.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        sports_esports
+                    </span>
+
+                    <span class="menu-text">
+                        Games
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+                <a
+                    href="./chat.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        chat
+                    </span>
+
+                    <span class="menu-text">
+                        Community Chat
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+                <a
+                    href="./activity.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        history
+                    </span>
+
+                    <span class="menu-text">
+                        My Activity
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+            </div>
+
+
+            <div class="menu-section">
+
+                <h3 class="menu-section-title">
+                    Community
+                </h3>
+
+                <a
+                    href="./request-game.html"
+                    class="menu-item menu-item-highlight"
+                >
+                    <span class="material-icons menu-icon">
+                        add_circle
+                    </span>
+
+                    <span class="menu-text">
+                        Request a Game
+                    </span>
+
+                    <span class="menu-badge">
+                        New
+                    </span>
+                </a>
+
+                <a
+                    href="./report-bug.html"
+                    class="menu-item menu-item-warning"
+                >
+                    <span class="material-icons menu-icon">
+                        bug_report
+                    </span>
+
+                    <span class="menu-text">
+                        Report a Bug
+                    </span>
+                </a>
+
+            </div>
+
+
+            <div class="menu-section">
+
+                <h3 class="menu-section-title">
+                    Extras
+                </h3>
+
+                <a
+                    href="./upcoming.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        schedule
+                    </span>
+
+                    <span class="menu-text">
+                        Upcoming Games
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+                <a
+                    href="./settings.html"
+                    class="menu-item"
+                >
+                    <span class="material-icons menu-icon">
+                        settings
+                    </span>
+
+                    <span class="menu-text">
+                        Settings
+                    </span>
+
+                    <span class="material-icons menu-arrow">
+                        chevron_right
+                    </span>
+                </a>
+
+            </div>
+
+
+            <div class="menu-section">
+
+                <h3 class="menu-section-title">
+                    Legal
+                </h3>
+
+                <a
+                    href="./privacy.html"
+                    class="menu-item menu-item-secondary"
+                >
+                    <span class="material-icons menu-icon">
+                        policy
+                    </span>
+
+                    <span class="menu-text">
+                        Privacy Policy
+                    </span>
+                </a>
+
+                <a
+                    href="./terms.html"
+                    class="menu-item menu-item-secondary"
+                >
+                    <span class="material-icons menu-icon">
+                        description
+                    </span>
+
+                    <span class="menu-text">
+                        Terms of Service
+                    </span>
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <div class="sidenav-footer">
+
+            <div
+                id="weather-widget"
+                class="weather-widget"
                 role="button"
-                aria-label="Close filter menu"
                 tabindex="0"
             >
 
-                <span class="material-icons notranslate">
-                    close
-                </span>
+                <div class="weather-main">
 
+                    <i
+                        id="weather-icon"
+                        class="weather-icon material-icons"
+                    >
+                        wb_sunny
+                    </i>
+
+                    <div class="weather-main-info">
+
+                        <div
+                            id="weather-temp"
+                            class="weather-temp"
+                        >
+                            --°
+                        </div>
+
+                        <div
+                            id="weather-condition"
+                            class="weather-condition"
+                        >
+                            Loading...
+                        </div>
+
+                    </div>
+
+                    <span class="material-icons weather-expand-icon">
+                        expand_more
+                    </span>
+
+                </div>
+
+
+                <div class="weather-expandable">
+
+                    <div
+                        id="weather-location"
+                        class="weather-location"
+                    >
+                        Detecting location...
+                    </div>
+
+                    <div class="weather-details">
+
+                        <div class="weather-detail-item">
+
+                            <span
+                                class="material-icons weather-detail-icon"
+                            >
+                                water_drop
+                            </span>
+
+                            <span
+                                id="weather-humidity"
+                                class="weather-detail-value"
+                            >
+                                --%
+                            </span>
+
+                            <span class="weather-detail-label">
+                                Humidity
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-detail-item">
+
+                            <span
+                                class="material-icons weather-detail-icon"
+                            >
+                                air
+                            </span>
+
+                            <span
+                                id="weather-wind"
+                                class="weather-detail-value"
+                            >
+                                -- km/h
+                            </span>
+
+                            <span class="weather-detail-label">
+                                Wind
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-detail-item">
+
+                            <span
+                                class="material-icons weather-detail-icon"
+                            >
+                                device_thermostat
+                            </span>
+
+                            <span
+                                id="weather-feels-like"
+                                class="weather-detail-value"
+                            >
+                                --°
+                            </span>
+
+                            <span class="weather-detail-label">
+                                Feels Like
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="footer-text">
+                Powered by Open-Meteo
+            </p>
+
+        </div>
+
+    </div>
+
+    <div
+        class="backdropside"
+        id="backdropside"
+        onclick="ToggleSideNav()"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+
+<nav
+    class="nav"
+    role="navigation"
+    aria-label="Main navigation"
+>
+
+    <div class="nav-inner">
+
+        <div
+            class="brand"
+            onclick="ToggleSideNav()"
+            role="button"
+            tabindex="0"
+            onkeydown="
+                if(event.key==='Enter'||event.key===' ')
+                ToggleSideNav()
+            "
+        >
+
+            <div class="brand-mark">
+                <img
+                    src="./assets/favicon.svg"
+                    class="brand-logo"
+                    alt=""
+                >
+            </div>
+
+            <div class="brand-name">
+                Spatium
+            </div>
+
+            <span class="brand-tag">
+                Beta
             </span>
 
         </div>
 
 
-        <div class="filter-radio-group">
+        <div class="nav-links">
 
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('')"
+            <a
+                class="nav-link is-active"
+                href="./index.html"
             >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="no filter"
-                    checked
-                >
-                <span class="filter-radio-checkmark"></span>
-                No Filter
-            </label>
+                Home
+            </a>
 
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('casual')"
+            <a
+                class="nav-link"
+                href="./games.html"
             >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Casual"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Casual
-            </label>
+                Games
+            </a>
 
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('shooter')"
+            <a
+                class="nav-link"
+                href="./chat.html"
             >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Shooter"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Shooter
-            </label>
+                Chat
+            </a>
 
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('driver')"
+            <a
+                class="nav-link"
+                href="./upcoming.html"
             >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Driver"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Driver
-            </label>
+                Upcoming
+            </a>
 
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('horror')"
+            <a
+                class="nav-link"
+                href="./activity.html"
             >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Horror"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Horror
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('idle')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Idle"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Idle
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('multiplayer')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Multiplayer"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Multiplayer
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('puzzle')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Puzzle"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Puzzle
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('sandbox')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Sandbox"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Sandbox
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('sport')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Sports"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Sports
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('story')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Story"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Story
-            </label>
-
-
-            <label
-                class="filter-radio-container"
-                onclick="filterByTag('flash')"
-            >
-                <input
-                    type="radio"
-                    name="custom-radio"
-                    value="Flash"
-                >
-                <span class="filter-radio-checkmark"></span>
-                Flash
-            </label>
+                Activity
+            </a>
 
         </div>
 
-    </div>
+
+        <div class="nav-spacer"></div>
 
 
-
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
-
-    <div
-        id="sidenavcont"
-        class="sidenavcont"
-    >
-
-        <div
-            id="sidenav"
-            class="sidenav-dev"
+        <label
+            class="nav-search"
+            for="gamesearch"
         >
 
-            <div class="sidenav-header">
+            <span class="material-icons">
+                search
+            </span>
 
-                <div class="sidenav-brand">
+            <input
+                id="gamesearch"
+                type="text"
+                placeholder="Search games…"
+                aria-label="Search games"
+                autocomplete="off"
+            >
 
-                    <img
-                        src="./assets/favicon.svg"
-                        class="sidenav-logo"
-                        alt="Spatium Logo"
-                    >
+            <span class="kbd">
+                ⌘K
+            </span>
+
+        </label>
 
 
-                    <div class="sidenav-title">
+        <a
+            class="icon-btn"
+            href="./account.html"
+            title="Account"
+            aria-label="Account"
+        >
+            <span class="material-icons">
+                person
+            </span>
+        </a>
 
-                        <h2>
-                            Spatium
-                        </h2>
 
-                        <span class="sidenav-subtitle">
-                            Play. Discover. Explore.
+        <button
+            class="icon-btn"
+            id="changelogButton"
+            title="Changelog"
+            type="button"
+        >
+            <span class="material-icons">
+                history
+            </span>
+        </button>
+
+
+        <button
+            class="icon-btn nav-menu-btn"
+            title="Menu"
+            type="button"
+            onclick="ToggleSideNav()"
+            aria-label="Open menu"
+        >
+            <span class="material-icons">
+                menu
+            </span>
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="shell">
+
+    <!-- HERO -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="hero-spotlight">
+
+            <div class="hero-brand-glow"></div>
+
+            <img
+                src="./assets/favicon.svg"
+                class="hero-brand-logo"
+                alt=""
+            >
+
+            <div class="hero-spot-content">
+
+                <div class="hero-spot-main">
+
+                    <div class="hero-eyebrow">
+
+                        <span class="dot"></span>
+
+                        Browser games
+
+                    </div>
+
+                    <h1 class="hero-title">
+                        Play Anywhere.
+                    </h1>
+
+                    <div class="hero-meta">
+
+                        <span>
+                            <b id="heroGameCount">–</b>
+                            games online
+                        </span>
+
+                        <span class="sep">·</span>
+
+                        <span>
+                            HTML5 · Free · Fast
                         </span>
 
                     </div>
 
+                    <a
+                        class="hero-play-btn"
+                        href="#games-section"
+                    >
+
+                        <span class="material-icons">
+                            play_arrow
+                        </span>
+
+                        Browse Games
+
+                    </a>
+
                 </div>
 
 
-                <div class="sidenav-controls">
+                <aside
+                    class="hero-jumpback"
+                    id="heroJumpBack"
+                    hidden
+                >
 
-                    <a
-                        href="./settings.html"
-                        class="sidenav-icon-btn"
-                        aria-label="Settings"
+                    <h3>
+                        Jump back in
+                    </h3>
+
+                    <div
+                        class="hero-jumpback-list"
+                        id="heroJumpBackList"
+                    ></div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+
+        <aside class="hero-side">
+
+            <div class="hero-welcome">
+
+                <div>
+
+                    <h2 id="greeting">
+                        Welcome to Spatium.
+                    </h2>
+
+                    <p>
+                        Ready to play?
+                        Browse the catalog below.
+                    </p>
+
+                </div>
+
+                <div class="stat">
+
+                    <div
+                        class="n"
+                        id="gameCount"
                     >
-                        <span class="material-icons">
-                            settings
-                        </span>
-                    </a>
+                        –
+                    </div>
 
-
-                    <button
-                        onclick="ToggleSideNav()"
-                        class="sidenav-icon-btn"
-                        aria-label="Close menu"
-                    >
-                        <span class="material-icons">
-                            close
-                        </span>
-                    </button>
+                    <div class="l">
+                        games online
+                    </div>
 
                 </div>
 
             </div>
 
 
+            <div class="hero-quick">
 
-            <nav class="sidenav-menu">
+                <h3>
+                    Jump in
+                </h3>
 
-                <div class="menu-section">
-
-                    <h3 class="menu-section-title">
-                        Navigation
-                    </h3>
-
+                <div class="quick-grid">
 
                     <a
-                        href="./index.html"
-                        class="menu-item"
-                    >
-                        <span class="material-icons menu-icon">
-                            home
-                        </span>
-
-                        <span class="menu-text">
-                            Home
-                        </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
-                    </a>
-
-
-                    <a
+                        class="quick-tile"
                         href="./games.html"
-                        class="menu-item"
                     >
-                        <span class="material-icons menu-icon">
-                            sports_esports
+                        <span class="qi">
+                            <span class="material-icons">
+                                sports_esports
+                            </span>
                         </span>
-
-                        <span class="menu-text">
-                            Games
-                        </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
+                        Games
                     </a>
 
-
                     <a
+                        class="quick-tile"
                         href="./chat.html"
-                        class="menu-item"
                     >
-                        <span class="material-icons menu-icon">
-                            chat
+                        <span class="qi">
+                            <span class="material-icons">
+                                chat
+                            </span>
                         </span>
-
-                        <span class="menu-text">
-                            Community Chat
-                        </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
+                        Community Chat
                     </a>
 
-
                     <a
+                        class="quick-tile"
                         href="./activity.html"
-                        class="menu-item"
                     >
-                        <span class="material-icons menu-icon">
-                            history
+                        <span class="qi">
+                            <span class="material-icons">
+                                history
+                            </span>
                         </span>
+                        My Activity
+                    </a>
 
-                        <span class="menu-text">
-                            My Activity
+                    <a
+                        class="quick-tile"
+                        href="./account.html"
+                    >
+                        <span class="qi">
+                            <span class="material-icons">
+                                person
+                            </span>
                         </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
+                        Account
                     </a>
 
                 </div>
 
+            </div>
+
+        </aside>
+
+    </section>
 
 
-                <div class="menu-section">
+    <!-- FEATURED -->
 
-                    <h3 class="menu-section-title">
-                        Community
-                    </h3>
+    <section
+        class="section"
+        aria-labelledby="featTitle"
+    >
 
+        <div class="section-head">
 
-                    <a
-                        href="./request-game.html"
-                        class="menu-item menu-item-highlight"
-                    >
-                        <span class="material-icons menu-icon">
-                            add_circle
-                        </span>
+            <div>
 
-                        <span class="menu-text">
-                            Request a Game
-                        </span>
-
-                        <span class="menu-badge">
-                            New
-                        </span>
-                    </a>
-
-
-                    <a
-                        href="./report-bug.html"
-                        class="menu-item menu-item-warning"
-                    >
-                        <span class="material-icons menu-icon">
-                            bug_report
-                        </span>
-
-                        <span class="menu-text">
-                            Report a Bug
-                        </span>
-                    </a>
-
-                </div>
-
-
-
-                <div class="menu-section">
-
-                    <h3 class="menu-section-title">
-                        Extras
-                    </h3>
-
-
-                    <a
-                        href="./upcoming.html"
-                        class="menu-item"
-                    >
-                        <span class="material-icons menu-icon">
-                            schedule
-                        </span>
-
-                        <span class="menu-text">
-                            Upcoming Games
-                        </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
-                    </a>
-
-
-                    <a
-                        href="./settings.html"
-                        class="menu-item"
-                    >
-                        <span class="material-icons menu-icon">
-                            settings
-                        </span>
-
-                        <span class="menu-text">
-                            Settings
-                        </span>
-
-                        <span class="menu-arrow material-icons">
-                            chevron_right
-                        </span>
-                    </a>
-
-                </div>
-
-
-
-                <div class="menu-section">
-
-                    <h3 class="menu-section-title">
-                        Legal
-                    </h3>
-
-
-                    <a
-                        href="./privacy.html"
-                        class="menu-item menu-item-secondary"
-                    >
-                        <span class="material-icons menu-icon">
-                            policy
-                        </span>
-
-                        <span class="menu-text">
-                            Privacy Policy
-                        </span>
-                    </a>
-
-
-                    <a
-                        href="./terms.html"
-                        class="menu-item menu-item-secondary"
-                    >
-                        <span class="material-icons menu-icon">
-                            description
-                        </span>
-
-                        <span class="menu-text">
-                            Terms of Service
-                        </span>
-                    </a>
-
-                </div>
-
-            </nav>
-
-
-
-            <div class="sidenav-footer">
-
-                <div
-                    id="weather-widget"
-                    class="weather-widget"
-                    role="button"
-                    tabindex="0"
-                    aria-expanded="false"
+                <h2
+                    class="section-title"
+                    id="featTitle"
                 >
+                    Featured
+                </h2>
 
-                    <div
-                        id="weather-loading"
-                        class="weather-loading"
-                        style="display:none;"
-                    >
-                        <span class="material-icons">
-                            hourglass_empty
-                        </span>
-                    </div>
-
-
-                    <div class="weather-main">
-
-                        <i
-                            id="weather-icon"
-                            class="wi wi-day-sunny weather-icon"
-                        ></i>
-
-
-                        <div class="weather-main-info">
-
-                            <div
-                                id="weather-temp"
-                                class="weather-temp"
-                            >
-                                --°
-                            </div>
-
-
-                            <div
-                                id="weather-condition"
-                                class="weather-condition"
-                            >
-                                Loading...
-                            </div>
-
-                        </div>
-
-
-                        <span class="weather-expand-icon material-icons">
-                            expand_more
-                        </span>
-
-                    </div>
-
-
-                    <div class="weather-expandable">
-
-                        <div
-                            id="weather-location"
-                            class="weather-location"
-                        >
-                            Detecting location...
-                        </div>
-
-
-                        <div class="weather-details">
-
-                            <div class="weather-detail-item">
-
-                                <i class="wi wi-humidity weather-detail-icon"></i>
-
-                                <div class="weather-detail-content">
-
-                                    <span
-                                        id="weather-humidity"
-                                        class="weather-detail-value"
-                                    >
-                                        --%
-                                    </span>
-
-                                    <span class="weather-detail-label">
-                                        Humidity
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="weather-detail-item">
-
-                                <i class="wi wi-strong-wind weather-detail-icon"></i>
-
-                                <div class="weather-detail-content">
-
-                                    <span
-                                        id="weather-wind"
-                                        class="weather-detail-value"
-                                    >
-                                        -- km/h
-                                    </span>
-
-                                    <span class="weather-detail-label">
-                                        Wind
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="weather-detail-item">
-
-                                <i class="wi wi-thermometer weather-detail-icon"></i>
-
-                                <div class="weather-detail-content">
-
-                                    <span
-                                        id="weather-feels-like"
-                                        class="weather-detail-value"
-                                    >
-                                        --°
-                                    </span>
-
-                                    <span class="weather-detail-label">
-                                        Feels Like
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <p class="footer-text">
-                    Powered by Open-Meteo
+                <p class="section-sub">
+                    Games worth checking out
                 </p>
 
             </div>
@@ -1030,2129 +2782,932 @@
         </div>
 
 
-        <div
-            class="backdropside"
-            id="backdropside"
-        ></div>
-
-    </div>
-
-
-
-    <!-- =========================================
-         TOP NAV
-    ========================================== -->
-
-    <nav
-        class="nav"
-        role="navigation"
-        aria-label="Main navigation"
-    >
-
-        <div class="nav-inner">
-
+        <div class="featured-section">
 
             <div
-                class="brand"
-                onclick="ToggleSideNav()"
-                role="button"
-                tabindex="0"
-                aria-label="Open navigation menu"
-                style="cursor:pointer;"
-                onkeydown="
-                    if(event.key==='Enter'||event.key===' ')
-                    ToggleSideNav()
-                "
+                class="carousel-container"
+                id="carouselContainer"
             >
 
-                <div
-                    class="brand-mark"
-                    aria-hidden="true"
-                >
-                    <img
-                        src="./assets/favicon.svg"
-                        class="brand-logo"
-                        alt=""
-                    >
+                <div class="loading">
+                    Loading featured games…
                 </div>
 
-
-                <div class="brand-name">
-                    Spatium
-                </div>
-
-
-                <span class="brand-tag">
-                    Beta
-                </span>
-
             </div>
-
-
-
-            <div class="nav-links">
-
-                <a
-                    class="nav-link is-active"
-                    href="./index.html"
-                >
-                    Home
-                </a>
-
-
-                <a
-                    class="nav-link"
-                    href="./games.html"
-                >
-                    Games
-                </a>
-
-
-                <a
-                    class="nav-link"
-                    href="./chat.html"
-                >
-                    Chat
-                </a>
-
-
-                <a
-                    class="nav-link"
-                    href="./upcoming.html"
-                >
-                    Upcoming
-                </a>
-
-
-                <a
-                    class="nav-link"
-                    href="./activity.html"
-                >
-                    Activity
-                </a>
-
-            </div>
-
-
-            <div class="nav-spacer"></div>
-
-
-
-            <label
-                class="nav-search"
-                for="gamesearch"
-            >
-
-                <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                >
-
-                    <circle
-                        cx="11"
-                        cy="11"
-                        r="7"
-                    />
-
-                    <path
-                        d="m20 20-3.5-3.5"
-                    />
-
-                </svg>
-
-
-                <input
-                    id="gamesearch"
-                    type="text"
-                    placeholder="Search games…"
-                    aria-label="Search games"
-                    autocomplete="off"
-                >
-
-
-                <span
-                    class="kbd"
-                    aria-hidden="true"
-                >
-                    ⌘K
-                </span>
-
-            </label>
-
-
-
-            <a
-                class="icon-btn"
-                href="./account.html"
-                title="Account"
-                aria-label="Open account"
-            >
-                <span class="material-icons">
-                    person
-                </span>
-            </a>
-
-
-
-            <button
-                class="icon-btn"
-                title="Changelog"
-                id="changelogButton"
-                type="button"
-                aria-haspopup="dialog"
-                aria-controls="changelogModal"
-            >
-
-                <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-
-                    <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
-
-                    <path d="M3 3v5h5"/>
-
-                    <path d="M12 7v5l3 2"/>
-
-                </svg>
-
-            </button>
-
-
-
-            <button
-                class="icon-btn"
-                title="Translate"
-                type="button"
-                onclick="ToggleTranslate()"
-                aria-label="Open translate"
-            >
-
-                <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-
-                    <path d="M5 8h14"/>
-                    <path d="M9 4v2"/>
-                    <path d="M7 8s1.5 7 6 10"/>
-                    <path d="M13 8s-1 5-6 10"/>
-                    <path d="m13 20 4-9 4 9"/>
-                    <path d="M14.5 17h5"/>
-
-                </svg>
-
-            </button>
-
-
-
-            <button
-                class="icon-btn nav-menu-btn"
-                title="Menu"
-                type="button"
-                onclick="ToggleSideNav()"
-                aria-label="Open navigation menu"
-            >
-
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                >
-
-                    <path d="M4 7h16"/>
-                    <path d="M4 12h16"/>
-                    <path d="M4 17h16"/>
-
-                </svg>
-
-            </button>
 
         </div>
 
-    </nav>
+    </section>
 
 
+    <!-- RECENTLY PLAYED -->
 
-    <!-- =========================================
-         MAIN
-    ========================================== -->
+    <section
+        class="section"
+        id="recSection"
+        style="display:none;"
+    >
 
-    <main class="shell">
+        <div class="section-head">
 
+            <div>
 
-        <!-- HERO -->
+                <h2 class="section-title">
+                    Recently played
+                </h2>
 
-        <section
-            class="hero"
-            id="home"
-            aria-label="Spatium home"
-        >
+                <p class="section-sub">
+                    Pick up where you left off
+                </p>
 
-            <div class="hero-spotlight">
+            </div>
 
-                <div
-                    class="hero-brand-glow"
-                    aria-hidden="true"
-                ></div>
+            <div class="section-actions">
 
-
-                <img
-                    src="./assets/favicon.svg"
-                    alt=""
-                    class="hero-brand-logo"
-                    aria-hidden="true"
+                <button
+                    class="chev"
+                    id="recPrev"
+                    aria-label="Scroll left"
                 >
+                    ‹
+                </button>
+
+                <button
+                    class="chev"
+                    id="recNext"
+                    aria-label="Scroll right"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            class="row-track"
+            id="recTrack"
+        ></div>
+
+    </section>
 
 
-                <div class="hero-spot-content">
+    <!-- ALL GAMES -->
 
-                    <div class="hero-spot-main">
+    <section
+        class="section"
+        id="games-section"
+    >
 
-                        <div class="hero-eyebrow">
+        <div class="section-head">
 
-                            <span
-                                class="dot"
-                                aria-hidden="true"
-                            ></span>
+            <div>
 
-                            Browser games
+                <h2 class="section-title">
 
-                        </div>
+                    All Games
 
+                    <span
+                        class="count"
+                        id="gridCount"
+                    ></span>
 
-                        <h1 class="hero-title">
-                            Play Anywhere.
-                        </h1>
+                </h2>
 
+                <p class="section-sub">
+                    Browse the full Spatium catalog.
+                </p>
 
-                        <div class="hero-meta">
-
-                            <span>
-                                <b id="heroGameCount">–</b>
-                                games online
-                            </span>
-
-                            <span
-                                class="sep"
-                                aria-hidden="true"
-                            >
-                                ·
-                            </span>
-
-                            <span>
-                                HTML5 · Free · Fast
-                            </span>
-
-                        </div>
+            </div>
 
 
-                        <a
-                            class="hero-play-btn"
-                            href="#games-section"
-                        >
+            <div class="section-actions">
 
-                            <svg
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
+                <div class="sort">
 
-                            Browse Games
-
-                        </a>
-
-                    </div>
-
-
-                    <aside
-                        class="hero-jumpback"
-                        id="heroJumpBack"
-                        hidden
-                        aria-label="Recent games"
+                    <select
+                        id="sortSel"
+                        aria-label="Sort games"
                     >
 
-                        <h3>
-                            Jump back in
-                        </h3>
+                        <option value="">
+                            Sort: Default
+                        </option>
 
-                        <div
-                            class="hero-jumpback-list"
-                            id="heroJumpBackList"
-                        ></div>
+                        <option value="az">
+                            A – Z
+                        </option>
 
-                    </aside>
+                        <option value="za">
+                            Z – A
+                        </option>
+
+                    </select>
 
                 </div>
 
             </div>
 
+        </div>
 
 
-            <aside
-                class="hero-side"
-                aria-label="Quick navigation"
-            >
+        <div
+            class="chips"
+            id="chips"
+        ></div>
 
-                <div class="hero-welcome">
+
+        <div id="games"></div>
+
+    </section>
+
+
+    <!-- COMMUNITY -->
+
+    <section class="discord-strip">
+
+        <div>
+
+            <h3 class="ds-title">
+                Join the Spatium community
+            </h3>
+
+            <p class="ds-sub">
+                Chat, request games, report bugs,
+                and connect with other players.
+            </p>
+
+        </div>
+
+        <a
+            class="btn-primary"
+            href="./chat.html"
+        >
+
+            <span class="material-icons">
+                chat
+            </span>
+
+            Open Chat
+
+        </a>
+
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+    <div
+        id="changelogModal"
+        class="changelog-modal"
+        hidden
+    >
+
+        <div
+            id="changelogBackdrop"
+            class="changelog-modal-backdrop"
+        ></div>
+
+        <section
+            class="changelog-panel"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="changelog-panel-header">
+
+                <div class="changelog-panel-title-wrap">
+
+                    <span class="changelog-panel-icon-wrap">
+
+                        <span class="material-icons">
+                            update
+                        </span>
+
+                    </span>
 
                     <div>
 
-                        <h2 id="greeting">
-                            Welcome to Spatium.
+                        <h2 class="changelog-panel-title">
+                            Changelog
                         </h2>
 
-                        <p>
-                            Ready to play?
-                            Browse the catalog below.
+                        <p class="changelog-panel-subtitle">
+                            Latest Spatium updates
                         </p>
 
                     </div>
 
-
-                    <div
-                        class="stat"
-                        aria-label="Game count"
-                    >
-
-                        <div
-                            class="n"
-                            id="gameCount"
-                        >
-                            –
-                        </div>
-
-                        <div class="l">
-                            games online
-                        </div>
-
-                    </div>
-
                 </div>
 
-
-
-                <div class="hero-quick">
-
-                    <h3>
-                        Jump in
-                    </h3>
-
-
-                    <div class="quick-grid">
-
-                        <a
-                            class="quick-tile"
-                            href="./games.html"
-                        >
-
-                            <span
-                                class="qi"
-                                aria-hidden="true"
-                            >
-                                <span class="material-icons">
-                                    sports_esports
-                                </span>
-                            </span>
-
-                            Games
-
-                        </a>
-
-
-                        <a
-                            class="quick-tile"
-                            href="./chat.html"
-                        >
-
-                            <span
-                                class="qi"
-                                aria-hidden="true"
-                            >
-                                <span class="material-icons">
-                                    chat
-                                </span>
-                            </span>
-
-                            Community Chat
-
-                        </a>
-
-
-                        <a
-                            class="quick-tile"
-                            href="./activity.html"
-                        >
-
-                            <span
-                                class="qi"
-                                aria-hidden="true"
-                            >
-                                <span class="material-icons">
-                                    history
-                                </span>
-                            </span>
-
-                            My Activity
-
-                        </a>
-
-
-                        <a
-                            class="quick-tile"
-                            href="./account.html"
-                        >
-
-                            <span
-                                class="qi"
-                                aria-hidden="true"
-                            >
-                                <span class="material-icons">
-                                    person
-                                </span>
-                            </span>
-
-                            Account
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </aside>
-
-        </section>
-
-
-
-        <!-- FEATURED -->
-
-        <section
-            class="section"
-            aria-labelledby="featTitle"
-        >
-
-            <div class="section-head">
-
-                <div>
-
-                    <h2
-                        class="section-title"
-                        id="featTitle"
-                    >
-                        Featured
-                    </h2>
-
-                    <p class="section-sub">
-                        Games worth checking out
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="featured-section">
-
-                <div
-                    class="carousel-container"
-                    id="carouselContainer"
+                <button
+                    id="changelogClose"
+                    class="changelog-close-btn"
+                    type="button"
+                    aria-label="Close changelog"
                 >
 
-                    <div class="loading">
-                        Loading featured games…
-                    </div>
+                    <span class="material-icons">
+                        close
+                    </span>
 
-                </div>
+                </button>
+
+            </div>
+
+            <div class="changelog-panel-body">
+
+                <pre
+                    id="changelogContent"
+                    class="changelog-content"
+                >Loading changelog...</pre>
 
             </div>
 
         </section>
 
+    </div>
 
 
-        <!-- RECENTLY PLAYED -->
+    <!-- FOOTER -->
 
-        <section
-            class="section"
-            id="recSection"
-            aria-labelledby="recTitle"
-            style="display:none;"
-        >
+    <footer class="foot">
 
-            <div class="section-head">
-
-                <div>
-
-                    <h2
-                        class="section-title"
-                        id="recTitle"
-                    >
-                        Recently played
-                    </h2>
-
-                    <p class="section-sub">
-                        Pick up where you left off
-                    </p>
-
-                </div>
-
-
-                <div class="section-actions">
-
-                    <button
-                        class="chev"
-                        id="recPrev"
-                        aria-label="Scroll left"
-                    >
-                        ‹
-                    </button>
-
-
-                    <button
-                        class="chev"
-                        id="recNext"
-                        aria-label="Scroll right"
-                    >
-                        ›
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="row-track"
-                id="recTrack"
-            ></div>
-
-        </section>
-
-
-
-        <!-- ALL GAMES -->
-
-        <section
-            class="section"
-            id="games-section"
-            aria-labelledby="gamesTitle"
-        >
-
-            <div class="section-head">
-
-                <div>
-
-                    <h2
-                        class="section-title"
-                        id="gamesTitle"
-                    >
-                        All Games
-
-                        <span
-                            class="count"
-                            id="gridCount"
-                        ></span>
-
-                    </h2>
-
-
-                    <p class="section-sub">
-                        Browse the full Spatium catalog.
-                    </p>
-
-                </div>
-
-
-                <div class="section-actions">
-
-                    <div class="sort">
-
-                        <select
-                            id="sortSel"
-                            aria-label="Sort games"
-                        >
-
-                            <option value="">
-                                Sort: Default
-                            </option>
-
-                            <option value="az">
-                                A – Z
-                            </option>
-
-                            <option value="za">
-                                Z – A
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="chips"
-                id="chips"
-                role="group"
-                aria-label="Filter by category"
-            ></div>
-
-
-            <div id="games"></div>
-
-        </section>
-
-
-
-        <!-- COMMUNITY -->
-
-        <section
-            class="discord-strip"
-            aria-label="Spatium community"
-        >
-
-            <div>
-
-                <h3 class="ds-title">
-                    Join the Spatium community
-                </h3>
-
-                <p class="ds-sub">
-                    Chat, request games, report bugs,
-                    and connect with other players.
-                </p>
-
-            </div>
-
-
-            <a
-                class="btn-primary"
-                href="./chat.html"
-            >
-
-                <span class="material-icons">
-                    chat
-                </span>
-
-                Open Chat
-
-            </a>
-
-        </section>
-
-
-
-        <!-- CHANGELOG -->
+        <div class="foot-copy">
+            © 2026 Spatium
+        </div>
 
         <div
-            id="changelogModal"
-            class="changelog-modal"
-            hidden
-            aria-hidden="true"
+            style="
+                display:flex;
+                gap:18px;
+            "
         >
 
-            <div
-                id="changelogBackdrop"
-                class="changelog-modal-backdrop"
-            ></div>
+            <a href="./privacy.html">
+                Privacy
+            </a>
 
+            <a href="./terms.html">
+                Terms
+            </a>
 
-            <section
-                class="changelog-panel"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="changelogTitle"
+            <a
+                href="#"
+                id="footerChangelogLink"
             >
-
-                <div class="changelog-panel-header">
-
-                    <div class="changelog-panel-title-wrap">
-
-                        <span
-                            class="changelog-panel-icon-wrap"
-                            aria-hidden="true"
-                        >
-
-                            <span class="material-icons changelog-panel-icon">
-                                update
-                            </span>
-
-                        </span>
-
-
-                        <div>
-
-                            <h2
-                                id="changelogTitle"
-                                class="changelog-panel-title"
-                            >
-                                Changelog
-                            </h2>
-
-                            <p class="changelog-panel-subtitle">
-                                Latest Spatium updates
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        id="changelogClose"
-                        class="changelog-close-btn"
-                        type="button"
-                        aria-label="Close changelog"
-                    >
-
-                        <span class="material-icons">
-                            close
-                        </span>
-
-                    </button>
-
-                </div>
-
-
-                <div class="changelog-panel-body">
-
-                    <pre
-                        id="changelogContent"
-                        class="changelog-content"
-                    >Loading changelog...</pre>
-
-                </div>
-
-            </section>
+                Changelog
+            </a>
 
         </div>
 
+    </footer>
+
+</main>
 
 
-        <!-- FOOTER -->
+<!-- =====================================================
+     YOUR EXISTING JAVASCRIPT
+     ===================================================== -->
 
-        <footer class="foot">
-
-            <div class="foot-copy">
-                © 2026 Spatium
-            </div>
-
-
-            <div
-                style="
-                    display:flex;
-                    gap:18px;
-                "
-            >
-
-                <a href="./privacy.html">
-                    Privacy
-                </a>
-
-                <a href="./terms.html">
-                    Terms
-                </a>
-
-                <a
-                    href="#"
-                    id="footerChangelogLink"
-                >
-                    Changelog
-                </a>
-
-            </div>
-
-        </footer>
-
-    </main>
+<script defer src="./accessibility.js"></script>
+<script defer src="./useractivity.js"></script>
+<script defer src="./gameSearch.js"></script>
+<script defer src="./globalscripts/page-transition.js"></script>
+<script defer src="./gameloader.js"></script>
+<script defer src="./GlobalSettings.js"></script>
+<script defer src="./ftgames.js"></script>
+<script defer src="./main.js"></script>
+<script defer src="./note.js"></script>
+<script defer src="./globalscripts/homepage-init.js"></script>
 
 
+<!-- =====================================================
+     HOMEPAGE JAVASCRIPT
+     ===================================================== -->
 
-    <!-- =========================================
-         SCRIPTS
-    ========================================== -->
+<script>
 
-    <script
-        defer
-        src="./accessibility.js"
-    ></script>
+(function () {
 
-    <script
-        defer
-        src="./useractivity.js"
-    ></script>
-
-    <script
-        defer
-        src="./gameSearch.js"
-    ></script>
-
-    <script
-        defer
-        src="./globalscripts/page-transition.js"
-    ></script>
-
-    <script
-        defer
-        src="./gameloader.js"
-    ></script>
-
-    <script
-        defer
-        src="./GlobalSettings.js"
-    ></script>
-
-    <script
-        defer
-        src="./ftgames.js"
-    ></script>
-
-    <script
-        defer
-        src="./main.js"
-    ></script>
-
-    <script
-        defer
-        src="./note.js"
-    ></script>
-
-    <script
-        defer
-        src="./globalscripts/homepage-init.js"
-    ></script>
+    "use strict";
 
 
+    /* -----------------------------------------------------
+       GREETING
+       ----------------------------------------------------- */
 
-    <!-- =========================================
-         HOME FEATURES
-    ========================================== -->
+    function setGreeting() {
 
-    <script>
+        const hour = new Date().getHours();
 
-    (function () {
+        let greeting;
 
-        "use strict";
-
-
-        function setGreeting() {
-
-            var hour =
-                new Date().getHours();
-
-            var greeting;
-
-            if (hour < 5) {
-                greeting = "Still up?";
-            }
-
-            else if (hour < 12) {
-                greeting = "Good morning.";
-            }
-
-            else if (hour < 17) {
-                greeting = "Good afternoon.";
-            }
-
-            else if (hour < 21) {
-                greeting = "Good evening.";
-            }
-
-            else {
-                greeting = "Late night session?";
-            }
-
-
-            var element =
-                document.getElementById("greeting");
-
-
-            if (element) {
-                element.textContent = greeting;
-            }
-
+        if (hour < 5) {
+            greeting = "Still up?";
+        }
+        else if (hour < 12) {
+            greeting = "Good morning.";
+        }
+        else if (hour < 17) {
+            greeting = "Good afternoon.";
+        }
+        else if (hour < 21) {
+            greeting = "Good evening.";
+        }
+        else {
+            greeting = "Late night session?";
         }
 
+        const element =
+            document.getElementById("greeting");
 
-        setGreeting();
+        if (element) {
+            element.textContent = greeting;
+        }
+    }
 
 
+    setGreeting();
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
 
-                if (
-                    (event.metaKey || event.ctrlKey) &&
-                    event.key.toLowerCase() === "k"
-                ) {
+    /* -----------------------------------------------------
+       CMD / CTRL + K SEARCH
+       ----------------------------------------------------- */
 
-                    event.preventDefault();
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-                    var search =
-                        document.getElementById("gamesearch");
+            if (
+                (event.metaKey || event.ctrlKey) &&
+                event.key.toLowerCase() === "k"
+            ) {
 
-                    if (search) {
-                        search.focus();
-                    }
+                event.preventDefault();
 
+                const search =
+                    document.getElementById("gamesearch");
+
+                if (search) {
+                    search.focus();
+                    search.select();
                 }
-
             }
-        );
+        }
+    );
 
 
+    /* -----------------------------------------------------
+       CATEGORY CHIPS
+       ----------------------------------------------------- */
 
-        var categories = [
+    const categories = [
+        ["", "All"],
+        ["casual", "Casual"],
+        ["shooter", "Shooter"],
+        ["driver", "Driver"],
+        ["horror", "Horror"],
+        ["idle", "Idle"],
+        ["multiplayer", "Multiplayer"],
+        ["puzzle", "Puzzle"],
+        ["sandbox", "Sandbox"],
+        ["sport", "Sports"],
+        ["story", "Story"],
+        ["flash", "Flash"]
+    ];
 
-            {
-                id: "",
-                label: "All"
-            },
-
-            {
-                id: "casual",
-                label: "Casual"
-            },
-
-            {
-                id: "shooter",
-                label: "Shooter"
-            },
-
-            {
-                id: "driver",
-                label: "Driver"
-            },
-
-            {
-                id: "horror",
-                label: "Horror"
-            },
-
-            {
-                id: "idle",
-                label: "Idle"
-            },
-
-            {
-                id: "multiplayer",
-                label: "Multiplayer"
-            },
-
-            {
-                id: "puzzle",
-                label: "Puzzle"
-            },
-
-            {
-                id: "sandbox",
-                label: "Sandbox"
-            },
-
-            {
-                id: "sport",
-                label: "Sports"
-            },
-
-            {
-                id: "story",
-                label: "Story"
-            },
-
-            {
-                id: "flash",
-                label: "Flash"
-            }
-
-        ];
+    const chips =
+        document.getElementById("chips");
 
 
-        var chips =
-            document.getElementById("chips");
+    if (chips) {
+
+        categories.forEach(function (category) {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "chip" +
+                (
+                    category[0] === ""
+                        ? " is-active"
+                        : ""
+                );
+
+            button.textContent =
+                category[1];
 
 
-        if (chips) {
+            button.addEventListener(
+                "click",
+                function () {
 
-            categories.forEach(
-                function (category) {
+                    chips
+                        .querySelectorAll(".chip")
+                        .forEach(function (chip) {
 
-                    var button =
-                        document.createElement("button");
-
-                    button.className =
-                        "chip" +
-                        (
-                            category.id === ""
-                                ? " is-active"
-                                : ""
-                        );
-
-                    button.type = "button";
-
-                    button.textContent =
-                        category.label;
-
-
-                    button.addEventListener(
-                        "click",
-                        function () {
-
-                            chips
-                                .querySelectorAll(".chip")
-                                .forEach(
-                                    function (chip) {
-
-                                        chip.classList.remove(
-                                            "is-active"
-                                        );
-
-                                    }
-                                );
-
-
-                            button.classList.add(
+                            chip.classList.remove(
                                 "is-active"
                             );
 
-
-                            if (
-                                typeof filterByTag ===
-                                "function"
-                            ) {
-
-                                filterByTag(
-                                    category.id
-                                );
-
-                            }
+                        });
 
 
-                            updateGridCount();
-
-                        }
-                    );
-
-
-                    chips.appendChild(button);
-
-                }
-            );
-
-        }
-
-
-
-        var sortSelect =
-            document.getElementById("sortSel");
-
-
-        if (sortSelect) {
-
-            sortSelect.addEventListener(
-                "change",
-                function () {
-
-                    var value =
-                        sortSelect.value;
-
-                    var games =
-                        document.getElementById("games");
-
-
-                    if (!games) {
-                        return;
-                    }
-
-
-                    var items =
-                        Array.from(
-                            games.querySelectorAll(
-                                ".gameitem:not(.ad-item)"
-                            )
-                        );
-
-
-                    items.sort(
-                        function (a, b) {
-
-                            var aName =
-                                (
-                                    a.dataset.gameName ||
-                                    a.id ||
-                                    ""
-                                ).toLowerCase();
-
-
-                            var bName =
-                                (
-                                    b.dataset.gameName ||
-                                    b.id ||
-                                    ""
-                                ).toLowerCase();
-
-
-                            if (value === "az") {
-                                return aName.localeCompare(bName);
-                            }
-
-
-                            if (value === "za") {
-                                return bName.localeCompare(aName);
-                            }
-
-
-                            return (
-                                Number(
-                                    a.dataset.originalOrder
-                                ) || 0
-                            ) -
-                            (
-                                Number(
-                                    b.dataset.originalOrder
-                                ) || 0
-                            );
-
-                        }
-                    );
-
-
-                    items.forEach(
-                        function (item) {
-
-                            item.style.order = "";
-
-                            games.appendChild(item);
-
-                        }
+                    button.classList.add(
+                        "is-active"
                     );
 
 
                     if (
-                        typeof redistributeFeedAds ===
+                        typeof filterByTag ===
                         "function"
                     ) {
 
-                        redistributeFeedAds();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        function getCatalogCount() {
-
-            var publishedCount =
-                Number(
-                    window.spatiumCatalogGameCount
-                );
-
-
-            if (
-                Number.isFinite(publishedCount) &&
-                publishedCount > 0
-            ) {
-
-                return publishedCount;
-
-            }
-
-
-            var games =
-                document.getElementById("games");
-
-
-            if (!games) {
-                return 0;
-            }
-
-
-            return games.querySelectorAll(
-                ".gameitem:not(.ad-item)"
-            ).length;
-
-        }
-
-
-
-        function updateGridCount() {
-
-            var count =
-                getCatalogCount();
-
-
-            if (count <= 0) {
-                return;
-            }
-
-
-            var countText =
-                "— " +
-                String(count).padStart(3, "0");
-
-
-            var gridCount =
-                document.getElementById("gridCount");
-
-            var heroCount =
-                document.getElementById("heroGameCount");
-
-            var gameCount =
-                document.getElementById("gameCount");
-
-
-            if (gridCount) {
-                gridCount.textContent = countText;
-            }
-
-
-            if (heroCount) {
-                heroCount.textContent = count;
-            }
-
-
-            if (gameCount) {
-                gameCount.textContent = count;
-            }
-
-        }
-
-
-        window.addEventListener(
-            "spatium:catalog-count",
-            updateGridCount
-        );
-
-
-        window.addEventListener(
-            "qz:catalog-count",
-            updateGridCount
-        );
-
-
-
-        var games =
-            document.getElementById("games");
-
-
-        if (games) {
-
-            var observer =
-                new MutationObserver(
-                    function () {
-                        updateGridCount();
-                    }
-                );
-
-
-            observer.observe(
-                games,
-                {
-                    childList: true,
-                    subtree: false
-                }
-            );
-
-        }
-
-
-
-        var footerChangelog =
-            document.getElementById(
-                "footerChangelogLink"
-            );
-
-
-        if (footerChangelog) {
-
-            footerChangelog.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    var button =
-                        document.getElementById(
-                            "changelogButton"
+                        filterByTag(
+                            category[0]
                         );
 
-
-                    if (button) {
-                        button.click();
                     }
+
+
+                    updateGridCount();
 
                 }
             );
 
-        }
+
+            chips.appendChild(button);
+
+        });
+
+    }
 
 
+    /* -----------------------------------------------------
+       SORTING
+       ----------------------------------------------------- */
 
-        function parseTimestamp(value) {
-
-            if (
-                typeof value === "number" &&
-                Number.isFinite(value)
-            ) {
-
-                return value;
-
-            }
+    const sortSelect =
+        document.getElementById("sortSel");
 
 
-            if (
-                typeof value === "string"
-            ) {
+    if (sortSelect) {
 
-                var parsed =
-                    Date.parse(value);
+        sortSelect.addEventListener(
+            "change",
+            function () {
+
+                const value =
+                    sortSelect.value;
+
+                const games =
+                    document.getElementById("games");
+
+
+                if (!games) {
+                    return;
+                }
+
+
+                const items =
+                    Array.from(
+                        games.querySelectorAll(
+                            ".gameitem:not(.ad-item)"
+                        )
+                    );
+
+
+                items.sort(function (a, b) {
+
+                    const aName =
+                        (
+                            a.dataset.gameName ||
+                            a.id ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const bName =
+                        (
+                            b.dataset.gameName ||
+                            b.id ||
+                            ""
+                        ).toLowerCase();
+
+
+                    if (value === "az") {
+                        return aName.localeCompare(bName);
+                    }
+
+
+                    if (value === "za") {
+                        return bName.localeCompare(aName);
+                    }
+
+
+                    return (
+                        Number(
+                            a.dataset.originalOrder
+                        ) || 0
+                    ) -
+                    (
+                        Number(
+                            b.dataset.originalOrder
+                        ) || 0
+                    );
+
+                });
+
+
+                items.forEach(function (item) {
+                    games.appendChild(item);
+                });
 
 
                 if (
-                    Number.isFinite(parsed)
+                    typeof redistributeFeedAds ===
+                    "function"
                 ) {
 
-                    return parsed;
+                    redistributeFeedAds();
 
                 }
 
             }
+        );
+
+    }
 
 
-            return 0;
+    /* -----------------------------------------------------
+       GAME COUNT
+       ----------------------------------------------------- */
 
-        }
+    function getCatalogCount() {
 
-
-
-        function formatTimeAgo(timestamp) {
-
-            var difference =
-                Date.now() - timestamp;
-
-
-            if (difference < 0) {
-                difference = 0;
-            }
-
-
-            if (difference < 60000) {
-                return "just now";
-            }
-
-
-            if (difference < 3600000) {
-
-                return (
-                    Math.floor(
-                        difference / 60000
-                    ) +
-                    " min ago"
-                );
-
-            }
-
-
-            if (difference < 86400000) {
-
-                return (
-                    Math.floor(
-                        difference / 3600000
-                    ) +
-                    " hr ago"
-                );
-
-            }
-
-
-            if (difference < 172800000) {
-                return "yesterday";
-            }
-
-
-            return (
-                Math.floor(
-                    difference / 86400000
-                ) +
-                " days ago"
+        const publishedCount =
+            Number(
+                window.spatiumCatalogGameCount
             );
-
-        }
-
-
-
-        function normalizeActivityEntries(data) {
-
-            if (!data) {
-                return [];
-            }
-
-
-            if (Array.isArray(data)) {
-
-                return data
-                    .filter(
-                        function (entry) {
-
-                            return (
-                                entry &&
-                                entry.gameKey
-                            );
-
-                        }
-                    )
-                    .map(
-                        function (entry) {
-
-                            return [
-                                String(entry.gameKey),
-                                entry
-                            ];
-
-                        }
-                    );
-
-            }
-
-
-            if (
-                data.games &&
-                typeof data.games === "object"
-            ) {
-
-                return Object.entries(
-                    data.games
-                );
-
-            }
-
-
-            return [];
-
-        }
-
-
-
-        function resolveGameEntry(
-            gamesData,
-            key
-        ) {
-
-            if (
-                !gamesData ||
-                !key
-            ) {
-
-                return {
-                    id: String(key || ""),
-                    game: null
-                };
-
-            }
-
-
-            if (gamesData[key]) {
-
-                return {
-                    id: String(key),
-                    game: gamesData[key]
-                };
-
-            }
-
-
-            var normalized =
-                String(key).toLowerCase();
-
-
-            var keys =
-                Object.keys(gamesData);
-
-
-            for (
-                var i = 0;
-                i < keys.length;
-                i++
-            ) {
-
-                if (
-                    String(keys[i]).toLowerCase() ===
-                    normalized
-                ) {
-
-                    return {
-                        id: String(keys[i]),
-                        game: gamesData[keys[i]]
-                    };
-
-                }
-
-            }
-
-
-            return {
-                id: String(key),
-                game: null
-            };
-
-        }
-
-
-
-        function escapeHtml(value) {
-
-            return String(value || "")
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#39;");
-
-        }
-
-
-
-        function renderHeroJumpBack(
-            entries,
-            gamesData
-        ) {
-
-            var wrap =
-                document.getElementById(
-                    "heroJumpBack"
-                );
-
-            var list =
-                document.getElementById(
-                    "heroJumpBackList"
-                );
-
-
-            if (!wrap || !list) {
-                return;
-            }
-
-
-            if (
-                !entries ||
-                entries.length === 0
-            ) {
-
-                wrap.hidden = true;
-                list.innerHTML = "";
-
-                return;
-
-            }
-
-
-            list.innerHTML = "";
-
-
-            entries
-                .slice(0, 3)
-                .forEach(
-                    function (entry) {
-
-                        var key = entry[0];
-
-                        var activity =
-                            entry[1] || {};
-
-
-                        var resolved =
-                            resolveGameEntry(
-                                gamesData,
-                                key
-                            );
-
-
-                        var game =
-                            resolved.game;
-
-
-                        var name =
-                            game && game.name
-                                ? game.name
-                                : String(key).replace(
-                                    /[-_]+/g,
-                                    " "
-                                );
-
-
-                        var playedAt =
-                            parseTimestamp(
-                                activity.lastPlayed
-                            );
-
-
-                        var played =
-                            playedAt
-                                ? formatTimeAgo(playedAt)
-                                : "played recently";
-
-
-                        var cover =
-                            game && game.cover
-                                ? "./covers/" + game.cover
-                                : "";
-
-
-                        var link =
-                            "./games/" +
-                            encodeURIComponent(
-                                resolved.id
-                            ) +
-                            "/";
-
-
-                        var item =
-                            document.createElement("a");
-
-
-                        item.className =
-                            "hero-jump-link";
-
-                        item.href = link;
-
-                        item.dataset.gameId =
-                            resolved.id;
-
-                        item.dataset.gameName =
-                            name;
-
-
-                        item.innerHTML =
-                            '<span class="hero-jump-thumb">' +
-
-                                (
-                                    cover
-
-                                        ? '<img loading="lazy" src="' +
-                                          escapeHtml(cover) +
-                                          '" alt="' +
-                                          escapeHtml(name) +
-                                          '">'
-
-                                        : '<span class="hero-jump-thumb-fallback">▶</span>'
-                                ) +
-
-                            '</span>' +
-
-                            '<span class="hero-jump-copy">' +
-
-                                '<span class="hero-jump-name">' +
-                                    escapeHtml(name) +
-                                '</span>' +
-
-                                '<span class="hero-jump-meta">' +
-                                    escapeHtml(played) +
-                                '</span>' +
-
-                            '</span>';
-
-
-                        list.appendChild(item);
-
-                    }
-                );
-
-
-            wrap.hidden = false;
-
-        }
-
-
-
-        function renderRecentlyPlayed(
-            gamesData
-        ) {
-
-            if (
-                typeof getActivityData !==
-                "function"
-            ) {
-
-                return;
-
-            }
-
-
-            var data =
-                getActivityData();
-
-
-            var entries =
-                normalizeActivityEntries(data)
-                    .map(
-                        function (entry) {
-
-                            return [
-                                entry[0],
-                                entry[1],
-                                parseTimestamp(
-                                    entry[1] &&
-                                    entry[1].lastPlayed
-                                )
-                            ];
-
-                        }
-                    )
-                    .filter(
-                        function (entry) {
-
-                            return entry[2] > 0;
-
-                        }
-                    )
-                    .sort(
-                        function (a, b) {
-
-                            return b[2] - a[2];
-
-                        }
-                    );
-
-
-            renderHeroJumpBack(
-                entries.map(
-                    function (entry) {
-
-                        return [
-                            entry[0],
-                            entry[1]
-                        ];
-
-                    }
-                ),
-                gamesData
-            );
-
-
-            var section =
-                document.getElementById(
-                    "recSection"
-                );
-
-
-            var track =
-                document.getElementById(
-                    "recTrack"
-                );
-
-
-            if (
-                !section ||
-                !track ||
-                entries.length === 0
-            ) {
-
-                return;
-
-            }
-
-
-            track.innerHTML = "";
-
-
-            entries
-                .slice(0, 8)
-                .forEach(
-                    function (entry) {
-
-                        var resolved =
-                            resolveGameEntry(
-                                gamesData,
-                                entry[0]
-                            );
-
-
-                        var game =
-                            resolved.game;
-
-
-                        var name =
-                            game && game.name
-                                ? game.name
-                                : String(entry[0]).replace(
-                                    /[-_]+/g,
-                                    " "
-                                );
-
-
-                        var cover =
-                            game && game.cover
-                                ? "./covers/" + game.cover
-                                : null;
-
-
-                        var link =
-                            "./games/" +
-                            encodeURIComponent(
-                                resolved.id
-                            ) +
-                            "/";
-
-
-                        var card =
-                            document.createElement("a");
-
-
-                        card.className =
-                            "r-card";
-
-                        card.href = link;
-
-
-                        card.innerHTML =
-                            '<div class="r-thumb">' +
-
-                                (
-                                    cover
-
-                                        ? '<img loading="lazy" src="' +
-                                          escapeHtml(cover) +
-                                          '" alt="' +
-                                          escapeHtml(name) +
-                                          '">'
-
-                                        : '<div style="width:100%;height:100%;background:var(--bg-2);border-radius:inherit;"></div>'
-                                ) +
-
-                                '<div class="r-play">▶</div>' +
-
-                            '</div>' +
-
-                            '<div class="r-body">' +
-
-                                '<div class="r-name">' +
-                                    escapeHtml(name) +
-                                '</div>' +
-
-                                '<div class="r-meta">' +
-                                    escapeHtml(
-                                        formatTimeAgo(entry[2])
-                                    ) +
-                                '</div>' +
-
-                            '</div>';
-
-
-                        track.appendChild(card);
-
-                    }
-                );
-
-
-            section.style.display = "";
-
-
-            var previous =
-                document.getElementById(
-                    "recPrev"
-                );
-
-
-            var next =
-                document.getElementById(
-                    "recNext"
-                );
-
-
-            if (previous) {
-
-                previous.addEventListener(
-                    "click",
-                    function () {
-
-                        track.scrollBy({
-                            left:
-                                -track.clientWidth * 0.8,
-                            behavior: "smooth"
-                        });
-
-                    }
-                );
-
-            }
-
-
-            if (next) {
-
-                next.addEventListener(
-                    "click",
-                    function () {
-
-                        track.scrollBy({
-                            left:
-                                track.clientWidth * 0.8,
-                            behavior: "smooth"
-                        });
-
-                    }
-                );
-
-            }
-
-        }
-
-
-
-        function tryRenderRecentlyPlayed(
-            attempts
-        ) {
-
-            attempts =
-                attempts || 0;
-
-
-            if (
-                typeof getActivityData !==
-                "function"
-            ) {
-
-                if (attempts < 20) {
-
-                    setTimeout(
-                        function () {
-
-                            tryRenderRecentlyPlayed(
-                                attempts + 1
-                            );
-
-                        },
-                        300
-                    );
-
-                }
-
-                return;
-
-            }
-
-
-            if (!window.GameCatalog) {
-
-                if (attempts < 20) {
-
-                    setTimeout(
-                        function () {
-
-                            tryRenderRecentlyPlayed(
-                                attempts + 1
-                            );
-
-                        },
-                        300
-                    );
-
-                }
-
-                return;
-
-            }
-
-
-            if (
-                typeof window.GameCatalog.fetchGamesData !==
-                "function"
-            ) {
-
-                return;
-
-            }
-
-
-            window.GameCatalog
-                .fetchGamesData()
-                .then(
-                    function (data) {
-
-                        renderRecentlyPlayed(data);
-
-                    }
-                )
-                .catch(
-                    function () {
-
-                        renderRecentlyPlayed(null);
-
-                    }
-                );
-
-        }
-
 
 
         if (
-            document.readyState ===
-            "loading"
+            Number.isFinite(publishedCount) &&
+            publishedCount > 0
         ) {
 
-            document.addEventListener(
-                "DOMContentLoaded",
+            return publishedCount;
+
+        }
+
+
+        const games =
+            document.getElementById("games");
+
+
+        if (!games) {
+            return 0;
+        }
+
+
+        return games.querySelectorAll(
+            ".gameitem:not(.ad-item)"
+        ).length;
+
+    }
+
+
+    function updateGridCount() {
+
+        const count =
+            getCatalogCount();
+
+
+        if (count <= 0) {
+            return;
+        }
+
+
+        const gridCount =
+            document.getElementById("gridCount");
+
+        const heroCount =
+            document.getElementById("heroGameCount");
+
+        const gameCount =
+            document.getElementById("gameCount");
+
+
+        if (gridCount) {
+            gridCount.textContent =
+                "— " +
+                String(count).padStart(3, "0");
+        }
+
+
+        if (heroCount) {
+            heroCount.textContent = count;
+        }
+
+
+        if (gameCount) {
+            gameCount.textContent = count;
+        }
+
+    }
+
+
+    window.addEventListener(
+        "spatium:catalog-count",
+        updateGridCount
+    );
+
+
+    window.addEventListener(
+        "qz:catalog-count",
+        updateGridCount
+    );
+
+
+    const games =
+        document.getElementById("games");
+
+
+    if (games) {
+
+        const observer =
+            new MutationObserver(
                 function () {
-
-                    setTimeout(
-                        tryRenderRecentlyPlayed,
-                        800
-                    );
-
+                    updateGridCount();
                 }
             );
 
+
+        observer.observe(
+            games,
+            {
+                childList: true,
+                subtree: false
+            }
+        );
+
+    }
+
+
+    setTimeout(
+        updateGridCount,
+        1000
+    );
+
+
+    setTimeout(
+        updateGridCount,
+        2500
+    );
+
+
+    /* -----------------------------------------------------
+       CHANGELOG
+       ----------------------------------------------------- */
+
+    const changelogButton =
+        document.getElementById(
+            "changelogButton"
+        );
+
+    const changelogModal =
+        document.getElementById(
+            "changelogModal"
+        );
+
+    const changelogClose =
+        document.getElementById(
+            "changelogClose"
+        );
+
+    const changelogBackdrop =
+        document.getElementById(
+            "changelogBackdrop"
+        );
+
+    const footerChangelog =
+        document.getElementById(
+            "footerChangelogLink"
+        );
+
+
+    function openChangelog() {
+
+        if (!changelogModal) {
+            return;
         }
 
-        else {
+        changelogModal.hidden = false;
+        changelogModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
-            setTimeout(
-                tryRenderRecentlyPlayed,
-                800
+
+        const content =
+            document.getElementById(
+                "changelogContent"
             );
 
+
+        if (
+            content &&
+            content.textContent.trim() ===
+            "Loading changelog..."
+        ) {
+
+            content.textContent =
+`Welcome to Spatium.
+
+Latest updates:
+
+• Spatium homepage redesign
+• New games catalog
+• Community chat
+• Activity tracking
+• Game requests
+• Bug reporting
+
+More updates coming soon.`;
+
         }
 
-    })();
+    }
 
-    </script>
+
+    function closeChangelog() {
+
+        if (!changelogModal) {
+            return;
+        }
+
+        changelogModal.hidden = true;
+
+        changelogModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    if (changelogButton) {
+        changelogButton.addEventListener(
+            "click",
+            openChangelog
+        );
+    }
+
+
+    if (changelogClose) {
+        changelogClose.addEventListener(
+            "click",
+            closeChangelog
+        );
+    }
+
+
+    if (changelogBackdrop) {
+        changelogBackdrop.addEventListener(
+            "click",
+            closeChangelog
+        );
+    }
+
+
+    if (footerChangelog) {
+
+        footerChangelog.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                openChangelog();
+
+            }
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeChangelog();
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       SIDEBAR FALLBACK
+       ----------------------------------------------------- */
+
+    window.ToggleSideNav =
+        window.ToggleSideNav ||
+        function () {
+
+            const container =
+                document.getElementById(
+                    "sidenavcont"
+                );
+
+            if (!container) {
+                return;
+            }
+
+
+            container.classList.toggle(
+                "active"
+            );
+
+        };
+
+
+    window.ToggleTranslate =
+        window.ToggleTranslate ||
+        function () {
+
+            const element =
+                document.getElementById(
+                    "translateM"
+                );
+
+            if (!element) {
+                return;
+            }
+
+
+            element.classList.toggle(
+                "active"
+            );
+
+        };
+
+
+    window.ToggleFilter =
+        window.ToggleFilter ||
+        function () {
+
+            const element =
+                document.getElementById(
+                    "filterM"
+                );
+
+            if (!element) {
+                return;
+            }
+
+
+            element.classList.toggle(
+                "active"
+            );
+
+        };
+
+
+    /* -----------------------------------------------------
+       WEATHER WIDGET
+       ----------------------------------------------------- */
+
+    const weatherWidget =
+        document.getElementById(
+            "weather-widget"
+        );
+
+
+    if (weatherWidget) {
+
+        weatherWidget.addEventListener(
+            "click",
+            function () {
+
+                weatherWidget.classList.toggle(
+                    "expanded"
+                );
+
+            }
+        );
+
+    }
+
+
+})();
+
+</script>
 
 </body>
-
 </html>
