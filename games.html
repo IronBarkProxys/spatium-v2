@@ -1,0 +1,223 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0b0c0f">
+    <meta name="description" content="Play games on Spatium.">
+
+    <title>Games · Spatium</title>
+
+    <link rel="icon" href="./assets/favicon.svg">
+    <link rel="stylesheet" href="./css/games.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header class="topbar">
+
+        <a href="./index.html" class="brand">
+            <span class="brand-icon">S</span>
+            <span>Spatium</span>
+        </a>
+
+        <nav class="nav">
+            <a href="./index.html">Home</a>
+            <a href="./games.html" class="active">Games</a>
+            <a href="./chat.html">Chat</a>
+        </nav>
+
+        <a href="./chat.html" class="community-button">
+            Community
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="games-page">
+
+        <!-- HERO -->
+
+        <section class="games-hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    SPATIUM ARCADE
+                </div>
+
+                <h1>
+                    Play <span>anything.</span>
+                </h1>
+
+                <p>
+                    Browse the Spatium game library and launch a game instantly.
+                </p>
+
+            </div>
+
+            <div class="hero-glow"></div>
+
+        </section>
+
+
+        <!-- SEARCH / SORT -->
+
+        <section class="game-toolbar">
+
+            <div class="search-container">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    id="game-search"
+                    type="search"
+                    placeholder="Search games..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+
+                <button
+                    id="clear-search"
+                    class="clear-search"
+                    type="button"
+                    aria-label="Clear search"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <select id="game-sort" aria-label="Sort games">
+
+                <option value="az">
+                    Name (A-Z)
+                </option>
+
+                <option value="za">
+                    Name (Z-A)
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- LIBRARY HEADER -->
+
+        <section class="library-header">
+
+            <div>
+
+                <div class="section-label">
+                    LIBRARY
+                </div>
+
+                <h2>
+                    All Games
+                </h2>
+
+            </div>
+
+            <div
+                id="game-count"
+                class="game-count"
+            >
+                Loading...
+            </div>
+
+        </section>
+
+
+        <!-- GAME GRID -->
+
+        <section
+            id="game-grid"
+            class="game-grid"
+            aria-live="polite"
+        ></section>
+
+
+        <!-- EMPTY SEARCH RESULT -->
+
+        <section
+            id="empty-state"
+            class="empty-state hidden"
+        >
+
+            <div class="empty-icon">
+                ⌕
+            </div>
+
+            <h3>
+                No games found
+            </h3>
+
+            <p>
+                Try searching for another game.
+            </p>
+
+        </section>
+
+
+        <!-- LOADING ERROR -->
+
+        <section
+            id="error-state"
+            class="empty-state hidden"
+        >
+
+            <div class="empty-icon error-icon">
+                !
+            </div>
+
+            <h3>
+                Game library couldn't load
+            </h3>
+
+            <p>
+                Make sure <code>games/games.json</code>
+                exists and GitHub Pages is serving the site correctly.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="site-footer">
+
+        <span>
+            © <span id="current-year"></span> Spatium
+        </span>
+
+        <span>
+            Game Library
+        </span>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="./js/games.js"></script>
+
+</body>
+</html>
+```
