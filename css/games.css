@@ -1,43 +1,44 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-    width: 100%;
-    min-height: 100%;
+    background: rgb(32, 32, 32);
 }
 
 body {
-    width: 100%;
     min-height: 100vh;
 
-    background-color: rgb(32, 32, 32);
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(110, 110, 110, 0.12),
+            transparent 35%
+        ),
+        rgb(32, 32, 32);
 
-    color: #e0e0e0;
+    color: white;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
+}
 
-    overflow-x: hidden;
+a {
+    color: inherit;
 }
 
 
-/* =========================================
-   NAVIGATION
-========================================= */
+/* ==============================
+   TOP BAR
+============================== */
 
 .topbar {
     width: 100%;
     height: 64px;
-
-    position: sticky;
-    top: 0;
-
-    z-index: 50;
 
     display: flex;
     align-items: center;
@@ -45,133 +46,108 @@ body {
 
     padding: 0 30px;
 
-    background-color:
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+
+    background:
         rgba(25, 25, 25, 0.92);
 
     border-bottom:
         1px solid
         rgba(255, 255, 255, 0.08);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 }
 
-.brand {
-    color: white;
-
+.logo {
     text-decoration: none;
+
+    color: white;
 
     font-size: 21px;
 
-    font-weight: 700;
-
-    letter-spacing: -0.5px;
+    font-weight: bold;
 }
 
-.nav {
+nav {
     display: flex;
-
-    align-items: center;
 
     gap: 5px;
 }
 
-.nav a {
-    color:
-        rgba(255, 255, 255, 0.65);
-
+nav a {
     text-decoration: none;
 
-    padding:
-        9px 14px;
+    color:
+        rgba(255, 255, 255, 0.6);
+
+    padding: 9px 14px;
 
     border-radius: 6px;
 
     font-size: 14px;
 
-    transition:
-        0.2s ease;
+    transition: 0.2s;
 }
 
-.nav a:hover {
+nav a:hover {
     color: white;
 
     background:
         rgba(255, 255, 255, 0.08);
 }
 
-.nav a.active {
+nav a.active {
     color: white;
 
     background:
-        rgba(255, 255, 255, 0.11);
+        rgba(255, 255, 255, 0.12);
 }
 
 
-/* =========================================
-   MAIN
-========================================= */
-
-.games-page {
-    width: 100%;
-
-    min-height: calc(100vh - 64px);
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(100, 100, 100, 0.15),
-            transparent 35%
-        ),
-
-        rgb(32, 32, 32);
-}
-
-
-/* =========================================
+/* ==============================
    HERO
-========================================= */
+============================== */
 
 .hero {
-    width: 100%;
+    position: relative;
 
     max-width: 1200px;
 
-    margin: 0 auto;
+    margin: auto;
 
     padding:
-        90px 30px 50px;
+        85px 30px 50px;
 
     text-align: center;
 
-    position: relative;
+    overflow: hidden;
 }
 
-.gradient-bg {
+.glow {
     position: absolute;
 
-    top: 10px;
+    width: 300px;
+    height: 300px;
 
     left: 50%;
+    top: 0;
 
     transform:
         translateX(-50%);
-
-    width: 300px;
-
-    height: 300px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(100, 100, 100, 0.3),
-            rgba(80, 80, 80, 0.2),
-            transparent
+            rgba(120, 120, 120, 0.25),
+            transparent 70%
         );
 
-    filter:
-        blur(40px);
+    filter: blur(40px);
 
     pointer-events: none;
 }
@@ -179,15 +155,12 @@ body {
 .hero h1 {
     position: relative;
 
-    color: #e0e0e0;
-
     font-size:
         clamp(42px, 7vw, 72px);
 
-    font-weight: 700;
+    letter-spacing: -3px;
 
-    letter-spacing:
-        -3px;
+    color: #e0e0e0;
 
     margin-bottom: 12px;
 
@@ -207,27 +180,23 @@ body {
 }
 
 
-/* =========================================
-   SEARCH
-========================================= */
+/* ==============================
+   CONTROLS
+============================== */
 
-.search-area {
-    width: 100%;
+.controls {
+    position: relative;
 
     max-width: 900px;
 
-    margin: 0 auto;
+    margin: auto;
 
     display: flex;
 
     gap: 10px;
-
-    position: relative;
-
-    z-index: 2;
 }
 
-.search-box {
+.search {
     flex: 1;
 
     height: 48px;
@@ -235,9 +204,25 @@ body {
     position: relative;
 }
 
-.search-box input {
-    width: 100%;
+.search span {
+    position: absolute;
 
+    left: 15px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #888;
+
+    font-size: 22px;
+
+    z-index: 2;
+}
+
+.search input {
+    width: 100%;
     height: 100%;
 
     padding:
@@ -257,91 +242,56 @@ body {
     color: white;
 
     font-size: 14px;
-
-    transition:
-        0.2s ease;
 }
 
-.search-box input::placeholder {
+.search input::placeholder {
     color: #888;
 }
 
-.search-box input:focus {
-    background:
-        rgb(60, 60, 60);
-
+.search input:focus {
     border-color:
         rgba(255, 255, 255, 0.25);
 
-    box-shadow:
-        0 0 0 3px
-        rgba(255, 255, 255, 0.03);
+    background:
+        rgb(60, 60, 60);
 }
 
-.search-symbol {
+.search button {
     position: absolute;
 
-    left: 15px;
-
+    right: 8px;
     top: 50%;
 
     transform:
         translateY(-50%);
 
-    color: #888;
+    width: 30px;
+    height: 30px;
 
-    font-size: 22px;
+    border: 0;
 
-    z-index: 2;
-
-    pointer-events: none;
-}
-
-.clear-search {
-    position: absolute;
-
-    right: 10px;
-
-    top: 50%;
-
-    transform:
-        translateY(-50%);
-
-    width: 28px;
-
-    height: 28px;
-
-    padding: 0;
-
-    margin: 0;
+    border-radius: 5px;
 
     background: transparent;
 
     color: #888;
 
-    border: none;
-
     font-size: 20px;
-
-    line-height: 28px;
 
     cursor: pointer;
 }
 
-.clear-search:hover {
-    color: white;
-
+.search button:hover {
     background:
         rgba(255, 255, 255, 0.08);
+
+    color: white;
 }
 
-#game-sort {
+#sort {
     width: 145px;
 
     height: 48px;
-
-    padding:
-        0 12px;
 
     background:
         rgb(55, 55, 55);
@@ -354,70 +304,61 @@ body {
 
     color: #ddd;
 
+    padding: 0 12px;
+
     outline: none;
 
     cursor: pointer;
-
-    font-size: 14px;
 }
 
-#game-sort:hover {
-    background:
-        rgb(65, 65, 65);
-}
-
-#game-sort option {
+#sort option {
     background: #292929;
 
     color: white;
 }
 
 
-/* =========================================
+/* ==============================
    LIBRARY
-========================================= */
+============================== */
 
 .library {
-    width: 100%;
-
     max-width: 1200px;
 
-    margin: 0 auto;
+    margin: auto;
 
     padding:
         0 30px 80px;
 }
 
-.library-header {
+.library-top {
     display: flex;
 
-    align-items: center;
-
     justify-content: space-between;
+
+    align-items: center;
 
     margin-bottom: 20px;
 }
 
-.library-header h2 {
+.library-top h2 {
     color: #e0e0e0;
 
     font-size: 22px;
-
-    font-weight: 600;
 }
 
-#game-count {
+#count {
     color: #777;
 
     font-size: 13px;
 }
 
 
-/* =========================================
+/* ==============================
    GAME GRID
-========================================= */
+============================== */
 
-.game-grid {
+.games {
     display: grid;
 
     grid-template-columns:
@@ -430,14 +371,16 @@ body {
 }
 
 
-/* =========================================
-   GAME CARD
-========================================= */
+/* ==============================
+   GAME
+============================== */
 
-.game-card {
+.game {
     display: block;
 
     overflow: hidden;
+
+    text-decoration: none;
 
     background:
         linear-gradient(
@@ -452,19 +395,20 @@ body {
 
     border-radius: 9px;
 
-    text-decoration: none;
+    transition:
+        0.25s ease;
 
     box-shadow:
         0 5px 15px
         rgba(0, 0, 0, 0.25);
-
-    transition:
-        0.25s ease;
 }
 
-.game-card:hover {
+.game:hover {
     transform:
         translateY(-4px);
+
+    border-color:
+        rgba(255, 255, 255, 0.2);
 
     background:
         linear-gradient(
@@ -473,58 +417,27 @@ body {
             #292929
         );
 
-    border-color:
-        rgba(255, 255, 255, 0.18);
-
     box-shadow:
-        0 12px 28px
-        rgba(0, 0, 0, 0.4);
+        0 12px 30px
+        rgba(0, 0, 0, 0.45);
 }
 
 
-/* =========================================
-   GAME IMAGE
-========================================= */
+/* ==============================
+   GAME ICON
+============================== */
 
-.game-card-image {
+.icon {
     width: 100%;
 
-    aspect-ratio: 1 / 1;
-
-    overflow: hidden;
-
-    background: #292929;
-}
-
-.game-card-image img {
-    width: 100%;
-
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    transition:
-        0.3s ease;
-}
-
-.game-card:hover
-.game-card-image img {
-    transform:
-        scale(1.05);
-}
-
-.game-icon-fallback {
-    width: 100%;
-
-    height: 100%;
+    aspect-ratio: 1;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
+
+    overflow: hidden;
 
     background:
         radial-gradient(
@@ -533,23 +446,39 @@ body {
             #292929 70%
         );
 
-    color: #eee;
+    color: white;
 
     font-size: 42px;
 
     font-weight: bold;
 }
 
+.icon img {
+    width: 100%;
+    height: 100%;
 
-/* =========================================
-   CARD CONTENT
-========================================= */
+    object-fit: cover;
 
-.game-card-content {
+    display: block;
+
+    transition: 0.3s;
+}
+
+.game:hover .icon img {
+    transform:
+        scale(1.05);
+}
+
+
+/* ==============================
+   GAME INFO
+============================== */
+
+.info {
     padding: 14px;
 }
 
-.game-card-title {
+.info h3 {
     color: #eee;
 
     font-size: 15px;
@@ -563,120 +492,44 @@ body {
     overflow: hidden;
 
     text-overflow: ellipsis;
-
-    margin-bottom: 6px;
 }
 
-.game-card-description {
+.info p {
     color: #858585;
 
     font-size: 12px;
 
-    line-height: 1.45;
+    margin-top: 6px;
+
+    line-height: 1.4;
 
     display: -webkit-box;
 
-    -webkit-box-orient: vertical;
-
     -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
 
     overflow: hidden;
 }
 
-.game-card-category {
-    display: inline-block;
 
-    margin-top: 9px;
+/* ==============================
+   EMPTY
+============================== */
 
-    padding:
-        4px 7px;
-
-    border-radius: 4px;
-
-    background:
-        rgba(255, 255, 255, 0.07);
-
-    color: #999;
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading {
-    width: 100%;
-
-    min-height: 300px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 20px;
-}
-
-.loading.hidden {
+.empty {
     display: none;
-}
-
-.loader {
-    width: 50px;
-
-    height: 50px;
-
-    border:
-        5px solid #404040;
-
-    border-top:
-        5px solid #e0e0e0;
-
-    border-radius: 50%;
-
-    animation:
-        spin 1s linear infinite;
-}
-
-.loading-text {
-    color: #999;
-
-    font-size: 15px;
-}
-
-@keyframes spin {
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================
-   EMPTY STATE
-========================================= */
-
-.empty-state {
-    display: none;
-
-    padding:
-        80px 20px;
 
     text-align: center;
+
+    padding: 80px 20px;
 }
 
-.empty-state.show {
+.empty.show {
     display: block;
 }
 
-.empty-state h3 {
+.empty h2 {
     color: #ddd;
 
     font-size: 20px;
@@ -684,77 +537,43 @@ body {
     margin-bottom: 8px;
 }
 
-.empty-state p {
+.empty p {
     color: #777;
 
     font-size: 14px;
 }
 
 
-/* =========================================
-   ERROR
-========================================= */
-
-.error-state {
-    display: none;
-
-    padding:
-        80px 20px;
-
-    text-align: center;
-}
-
-.error-state.show {
-    display: block;
-}
-
-.error-state h3 {
-    color: #ff6b6b;
-
-    font-size: 20px;
-
-    margin-bottom: 8px;
-}
-
-.error-state p {
-    color: #888;
-
-    font-size: 14px;
-}
-
-
-/* =========================================
+/* ==============================
    FOOTER
-========================================= */
+============================== */
 
 footer {
     width: 100%;
 
     padding: 30px;
 
-    background:
-        rgb(27, 27, 27);
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
 
     border-top:
         1px solid
         rgba(255, 255, 255, 0.07);
 
-    color: #666;
-
-    text-align: center;
-
-    font-size: 12px;
+    background:
+        rgb(27, 27, 27);
 }
 
 
-/* =========================================
+/* ==============================
    SCROLLBAR
-========================================= */
+============================== */
 
 ::-webkit-scrollbar {
     width: 8px;
-
-    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -773,9 +592,9 @@ footer {
 }
 
 
-/* =========================================
+/* ==============================
    MOBILE
-========================================= */
+============================== */
 
 @media (max-width: 768px) {
 
@@ -783,9 +602,9 @@ footer {
         padding: 0 15px;
     }
 
-    .nav a {
+    nav a {
         padding:
-            8px 9px;
+            8px 8px;
 
         font-size: 12px;
     }
@@ -798,19 +617,14 @@ footer {
     .hero h1 {
         font-size: 45px;
 
-        letter-spacing:
-            -2px;
+        letter-spacing: -2px;
     }
 
-    .hero p {
-        font-size: 14px;
-    }
-
-    .search-area {
+    .controls {
         flex-direction: column;
     }
 
-    #game-sort {
+    #sort {
         width: 100%;
     }
 
@@ -819,7 +633,7 @@ footer {
             0 16px 60px;
     }
 
-    .game-grid {
+    .games {
         grid-template-columns:
             repeat(
                 2,
@@ -829,50 +643,15 @@ footer {
         gap: 10px;
     }
 
-    .game-card-content {
+    .info {
         padding: 10px;
     }
 
-    .game-card-title {
+    .info h3 {
         font-size: 13px;
     }
 
-    .game-card-description {
+    .info p {
         font-size: 11px;
-    }
-}
-
-
-/* =========================================
-   SMALL PHONES
-========================================= */
-
-@media (max-width: 420px) {
-
-    .brand {
-        font-size: 18px;
-    }
-
-    .nav {
-        gap: 0;
-    }
-
-    .nav a {
-        padding:
-            7px 6px;
-
-        font-size: 11px;
-    }
-
-    .hero h1 {
-        font-size: 38px;
-    }
-
-    .game-grid {
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0, 1fr)
-            );
     }
 }
