@@ -625,7 +625,24 @@ img {
         11px;
 }
 
+
+/* =========================================================
+   UPDATED DAY / SCHEDULE / WEATHER
+   ========================================================= */
+
 .day-right {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        10px;
 
     color:
         var(--text-3);
@@ -635,12 +652,123 @@ img {
 
     text-align:
         right;
+
+    flex-wrap:
+        wrap;
 }
 
-.day-right strong {
+.schedule-live {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        5px 8px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    white-space:
+        nowrap;
+}
+
+.schedule-live .material-icons {
+
+    font-size:
+        14px;
+
+    color:
+        #aaa1ff;
+}
+
+.schedule-period {
 
     color:
         var(--text);
+
+    font-weight:
+        700;
+}
+
+.schedule-countdown {
+
+    color:
+        var(--text-3);
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+.weather-live {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        5px 8px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    white-space:
+        nowrap;
+}
+
+.weather-live .material-icons {
+
+    font-size:
+        15px;
+
+    color:
+        #a8a1ff;
+}
+
+.weather-temp {
+
+    color:
+        var(--text);
+
+    font-weight:
+        700;
+}
+
+.weather-description {
+
+    color:
+        var(--text-3);
+}
+
+.schedule-detail {
+
+    color:
+        var(--text-3);
+
+    font-size:
+        9px;
 }
 
 
@@ -2330,6 +2458,15 @@ img {
         grid-template-columns:
             repeat(3,minmax(0,1fr));
     }
+
+    .day-right {
+
+        justify-content:
+            flex-start;
+
+        text-align:
+            left;
+    }
 }
 
 @media (max-width:560px) {
@@ -2435,13 +2572,25 @@ img {
             column;
 
         gap:
-            5px;
+            8px;
     }
 
     .day-right {
 
-        text-align:
-            left;
+        justify-content:
+            flex-start;
+
+        width:
+            100%;
+    }
+
+    .schedule-live,
+    .weather-live {
+
+        flex: 1;
+
+        justify-content:
+            center;
     }
 
     .footer {
@@ -2659,114 +2808,72 @@ img {
 
         <nav class="side-nav">
 
-            <a
-                href="./index.html"
-                class="side-link"
-            >
+            <a href="./index.html" class="side-link">
                 <span class="material-icons">home</span>
                 Home
             </a>
 
-            <a
-                href="./games.html"
-                class="side-link"
-            >
+            <a href="./games.html" class="side-link">
                 <span class="material-icons">sports_esports</span>
                 Games
             </a>
 
-            <a
-                href="./chat.html"
-                class="side-link"
-            >
+            <a href="./chat.html" class="side-link">
                 <span class="material-icons">chat</span>
                 Chat
             </a>
 
-            <a
-                href="./friends.html"
-                class="side-link"
-            >
+            <a href="./friends.html" class="side-link">
                 <span class="material-icons">people</span>
                 Friends
             </a>
 
-            <a
-                href="./leaderboard.html"
-                class="side-link"
-            >
+            <a href="./leaderboard.html" class="side-link">
                 <span class="material-icons">leaderboard</span>
                 Leaderboard
             </a>
 
-            <a
-                href="./shop.html"
-                class="side-link"
-            >
+            <a href="./shop.html" class="side-link">
                 <span class="material-icons">storefront</span>
                 Shop
             </a>
 
-            <a
-                href="./challenge.html"
-                class="side-link"
-            >
+            <a href="./challenge.html" class="side-link">
                 <span class="material-icons">flag</span>
                 Challenge
             </a>
 
-            <a
-                href="./polls.html"
-                class="side-link"
-            >
+            <a href="./polls.html" class="side-link">
                 <span class="material-icons">poll</span>
                 Polls
             </a>
 
-            <a
-                href="./schedule.html"
-                class="side-link"
-            >
+            <a href="./schedule.html" class="side-link">
                 <span class="material-icons">calendar_month</span>
                 Schedule
             </a>
 
-            <a
-                href="./status.html"
-                class="side-link"
-            >
+            <a href="./status.html" class="side-link">
                 <span class="material-icons">assignment</span>
                 Requests
             </a>
 
-            <a
-                href="./music.html"
-                class="side-link"
-            >
+            <a href="./music.html" class="side-link">
                 <span class="material-icons">music_note</span>
                 Music
             </a>
 
-            <a
-                href="./unblocker.html"
-                class="side-link"
-            >
+            <a href="./unblocker.html" class="side-link">
                 <span class="material-icons">language</span>
                 Browser
             </a>
 
-            <a
-                href="./settings.html"
-                class="side-link"
-            >
+            <a href="./settings.html" class="side-link">
                 <span class="material-icons">settings</span>
                 Settings
             </a>
 
-            <a
-                href="./saves.html"
-                class="side-link"
-            >
+            <a href="./saves.html" class="side-link">
                 <span class="material-icons">bookmark</span>
                 Saves
             </a>
@@ -2787,7 +2894,7 @@ img {
 
 
     <!-- ===================================================
-         TODAY
+         TODAY + LIVE SCHEDULE + WEATHER
          =================================================== -->
 
     <section class="daybar">
@@ -2811,17 +2918,61 @@ img {
 
         <div class="day-right">
 
-            After school
 
-            <strong>
-                00:00
-            </strong>
+            <div
+                class="schedule-live"
+                title="Current school schedule"
+            >
 
-            ends
+                <span class="material-icons">
+                    schedule
+                </span>
 
-            <strong>
-                Tomorrow
-            </strong>
+                <span
+                    class="schedule-period"
+                    id="schedulePeriod"
+                >
+                    Checking schedule...
+                </span>
+
+                <span
+                    class="schedule-countdown"
+                    id="scheduleCountdown"
+                >
+                    --
+                </span>
+
+            </div>
+
+
+            <div
+                class="weather-live"
+                title="Current weather"
+            >
+
+                <span
+                    class="material-icons"
+                    id="weatherIcon"
+                >
+                    cloud
+                </span>
+
+                <span
+                    class="weather-temp"
+                    id="weatherTemp"
+                >
+                    --°
+                </span>
+
+                <span
+                    class="weather-description"
+                    id="weatherDescription"
+                >
+                    Loading weather
+                </span>
+
+            </div>
+
 
         </div>
 
@@ -3010,10 +3161,7 @@ img {
         <div class="community-grid">
 
 
-            <a
-                href="./chat.html"
-                class="feature"
-            >
+            <a href="./chat.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3042,10 +3190,7 @@ img {
             </a>
 
 
-            <a
-                href="./friends.html"
-                class="feature"
-            >
+            <a href="./friends.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3074,10 +3219,7 @@ img {
             </a>
 
 
-            <a
-                href="./leaderboard.html"
-                class="feature"
-            >
+            <a href="./leaderboard.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3102,10 +3244,7 @@ img {
             </a>
 
 
-            <a
-                href="./shop.html"
-                class="feature"
-            >
+            <a href="./shop.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3130,10 +3269,7 @@ img {
             </a>
 
 
-            <a
-                href="./challenge.html"
-                class="feature"
-            >
+            <a href="./challenge.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3158,10 +3294,7 @@ img {
             </a>
 
 
-            <a
-                href="./polls.html"
-                class="feature"
-            >
+            <a href="./polls.html" class="feature">
 
                 <div class="feature-icon">
 
@@ -3281,6 +3414,7 @@ img {
 
 
         <div class="section-head">
+
 
             <div>
 
@@ -3854,6 +3988,921 @@ const fallbackGames = [
     }
 
 ];
+
+
+/* =========================================================
+   SCHOOL SCHEDULE
+   ========================================================= */
+
+const SCHOOL_SCHEDULES = {
+
+    regular: [
+
+        {
+            name: "P1",
+            start: "7:45",
+            end: "8:35"
+        },
+
+        {
+            name: "P2",
+            start: "8:40",
+            end: "9:30"
+        },
+
+        {
+            name: "P3",
+            start: "9:35",
+            end: "10:25"
+        },
+
+        {
+            name: "P4",
+            start: "10:30",
+            end: "11:20"
+        },
+
+        {
+            name: "P5",
+            start: "11:25",
+            end: "12:15"
+        },
+
+        {
+            name: "P6",
+            start: "12:20",
+            end: "1:10"
+        },
+
+        {
+            name: "P7",
+            start: "1:15",
+            end: "2:05"
+        },
+
+        {
+            name: "P8",
+            start: "2:10",
+            end: "3:00"
+        }
+
+    ],
+
+
+    soar: [
+
+        {
+            name: "P1",
+            start: "7:45",
+            end: "8:30"
+        },
+
+        {
+            name: "P2",
+            start: "8:35",
+            end: "9:20"
+        },
+
+        {
+            name: "SOAR",
+            start: "9:25",
+            end: "9:55"
+        },
+
+        {
+            name: "P3",
+            start: "10:00",
+            end: "10:45"
+        },
+
+        {
+            name: "P4",
+            start: "10:50",
+            end: "11:35"
+        },
+
+        {
+            name: "P5",
+            start: "11:40",
+            end: "12:25"
+        },
+
+        {
+            name: "P6",
+            start: "12:30",
+            end: "1:15"
+        },
+
+        {
+            name: "P7",
+            start: "1:20",
+            end: "2:05"
+        },
+
+        {
+            name: "P8",
+            start: "2:10",
+            end: "3:00"
+        }
+
+    ],
+
+
+    wednesday: [
+
+        {
+            name: "P1",
+            start: "8:30",
+            end: "9:10"
+        },
+
+        {
+            name: "P2",
+            start: "9:15",
+            end: "9:55"
+        },
+
+        {
+            name: "P3",
+            start: "10:00",
+            end: "10:40"
+        },
+
+        {
+            name: "P4",
+            start: "10:45",
+            end: "11:30"
+        },
+
+        {
+            name: "P5",
+            start: "11:35",
+            end: "12:20"
+        },
+
+        {
+            name: "P6",
+            start: "12:25",
+            end: "1:10"
+        },
+
+        {
+            name: "P7",
+            start: "1:15",
+            end: "2:00"
+        },
+
+        {
+            name: "P8",
+            start: "2:05",
+            end: "3:00"
+        }
+
+    ]
+
+};
+
+
+/* =========================================================
+   SCHEDULE HELPERS
+   ========================================================= */
+
+function timeToMinutes(time) {
+
+    const parts =
+        time
+            .split(":")
+            .map(Number);
+
+    let hour = parts[0];
+    const minute = parts[1];
+
+    /*
+       All schedule times are school-day times.
+       1:00–3:00 therefore means PM.
+    */
+
+    if (hour < 7) {
+        hour += 12;
+    }
+
+    if (hour >= 1 && hour <= 3) {
+        hour += 12;
+    }
+
+    return (
+        hour * 60 +
+        minute
+    );
+
+}
+
+
+function getScheduleForToday() {
+
+    const day =
+        new Date().getDay();
+
+    /*
+        Sunday = 0
+        Monday = 1
+        Tuesday = 2
+        Wednesday = 3
+        Thursday = 4
+        Friday = 5
+        Saturday = 6
+    */
+
+    if (day === 3) {
+
+        return SCHOOL_SCHEDULES.wednesday;
+
+    }
+
+    if (
+        day === 2 ||
+        day === 4
+    ) {
+
+        return SCHOOL_SCHEDULES.soar;
+
+    }
+
+    if (
+        day === 1 ||
+        day === 5
+    ) {
+
+        return SCHOOL_SCHEDULES.regular;
+
+    }
+
+    return [];
+
+}
+
+
+function getScheduleType() {
+
+    const day =
+        new Date().getDay();
+
+    if (day === 3) {
+        return "wednesday";
+    }
+
+    if (
+        day === 2 ||
+        day === 4
+    ) {
+        return "soar";
+    }
+
+    if (
+        day === 1 ||
+        day === 5
+    ) {
+        return "regular";
+    }
+
+    return "weekend";
+
+}
+
+
+function formatCountdown(totalSeconds) {
+
+    totalSeconds =
+        Math.max(
+            0,
+            Math.floor(totalSeconds)
+        );
+
+    const hours =
+        Math.floor(
+            totalSeconds / 3600
+        );
+
+    const minutes =
+        Math.floor(
+            (
+                totalSeconds % 3600
+            ) / 60
+        );
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    if (hours > 0) {
+
+        return (
+
+            String(hours)
+                .padStart(2,"0")
+
+            +
+
+            ":" +
+
+            String(minutes)
+                .padStart(2,"0")
+
+            +
+
+            ":" +
+
+            String(seconds)
+                .padStart(2,"0")
+
+        );
+
+    }
+
+
+    return (
+
+        String(minutes)
+            .padStart(2,"0")
+
+        +
+
+        ":" +
+
+        String(seconds)
+            .padStart(2,"0")
+
+    );
+
+}
+
+
+/* =========================================================
+   LIVE SCHOOL SCHEDULE
+   ========================================================= */
+
+function updateSchoolSchedule() {
+
+    const periodElement =
+        document.getElementById(
+            "schedulePeriod"
+        );
+
+    const countdownElement =
+        document.getElementById(
+            "scheduleCountdown"
+        );
+
+
+    const schedule =
+        getScheduleForToday();
+
+
+    if (!schedule.length) {
+
+        periodElement.textContent =
+            "No school";
+
+        countdownElement.textContent =
+            "Enjoy your day";
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    const currentMinutes =
+
+        now.getHours() * 60 +
+
+        now.getMinutes() +
+
+        now.getSeconds() / 60;
+
+
+    const currentSeconds =
+
+        now.getHours() * 3600 +
+
+        now.getMinutes() * 60 +
+
+        now.getSeconds();
+
+
+    /*
+       Check current class.
+    */
+
+    for (
+        const period of schedule
+    ) {
+
+        const start =
+            timeToMinutes(
+                period.start
+            );
+
+        const end =
+            timeToMinutes(
+                period.end
+            );
+
+
+        if (
+            currentMinutes >= start &&
+            currentMinutes < end
+        ) {
+
+            const endSeconds =
+                end * 60;
+
+            const remaining =
+                endSeconds -
+                currentSeconds;
+
+
+            periodElement.textContent =
+                period.name;
+
+
+            countdownElement.textContent =
+
+                "ends in " +
+
+                formatCountdown(
+                    remaining
+                );
+
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+       Before school.
+    */
+
+    const first =
+        schedule[0];
+
+
+    const firstStart =
+        timeToMinutes(
+            first.start
+        );
+
+
+    if (
+        currentMinutes <
+        firstStart
+    ) {
+
+        const secondsUntil =
+            (
+                firstStart * 60
+            ) -
+            currentSeconds;
+
+
+        periodElement.textContent =
+            "Before school";
+
+
+        countdownElement.textContent =
+
+            first.name +
+
+            " starts in " +
+
+            formatCountdown(
+                secondsUntil
+            );
+
+
+        return;
+
+    }
+
+
+    /*
+       Between periods.
+    */
+
+    for (
+        let i = 0;
+        i < schedule.length - 1;
+        i++
+    ) {
+
+        const current =
+            schedule[i];
+
+        const next =
+            schedule[i + 1];
+
+
+        const currentEnd =
+            timeToMinutes(
+                current.end
+            );
+
+        const nextStart =
+            timeToMinutes(
+                next.start
+            );
+
+
+        if (
+            currentMinutes >= currentEnd &&
+            currentMinutes < nextStart
+        ) {
+
+            const secondsUntil =
+                (
+                    nextStart * 60
+                ) -
+                currentSeconds;
+
+
+            periodElement.textContent =
+                "Passing period";
+
+
+            countdownElement.textContent =
+
+                next.name +
+
+                " in " +
+
+                formatCountdown(
+                    secondsUntil
+                );
+
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+       After school.
+    */
+
+    const last =
+        schedule[
+            schedule.length - 1
+        ];
+
+
+    const lastEnd =
+        timeToMinutes(
+            last.end
+        );
+
+
+    if (
+        currentMinutes >= lastEnd
+    ) {
+
+        periodElement.textContent =
+            "After school";
+
+        countdownElement.textContent =
+            "ends Tomorrow";
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   WEATHER
+   ========================================================= */
+
+/*
+   Fallback is approximate Hickory Hills, Illinois.
+   If the visitor grants browser location permission,
+   their coordinates are used instead.
+*/
+
+const WEATHER_FALLBACK = {
+
+    latitude:
+        41.7256,
+
+    longitude:
+        -87.8251
+
+};
+
+
+function weatherDescription(code) {
+
+    if (code === 0)
+        return "Clear";
+
+    if (
+        code === 1 ||
+        code === 2
+    )
+        return "Partly cloudy";
+
+    if (code === 3)
+        return "Cloudy";
+
+    if (
+        code === 45 ||
+        code === 48
+    )
+        return "Foggy";
+
+    if (
+        code >= 51 &&
+        code <= 57
+    )
+        return "Drizzle";
+
+    if (
+        code >= 61 &&
+        code <= 67
+    )
+        return "Rain";
+
+    if (
+        code >= 71 &&
+        code <= 77
+    )
+        return "Snow";
+
+    if (
+        code >= 80 &&
+        code <= 82
+    )
+        return "Showers";
+
+    if (
+        code === 85 ||
+        code === 86
+    )
+        return "Snow showers";
+
+    if (
+        code >= 95
+    )
+        return "Thunderstorm";
+
+    return "Weather";
+
+}
+
+
+function weatherIcon(code) {
+
+    if (code === 0)
+        return "wb_sunny";
+
+    if (
+        code === 1 ||
+        code === 2
+    )
+        return "partly_cloudy_day";
+
+    if (code === 3)
+        return "cloud";
+
+    if (
+        code === 45 ||
+        code === 48
+    )
+        return "foggy";
+
+    if (
+        code >= 51 &&
+        code <= 67
+    )
+        return "rainy";
+
+    if (
+        code >= 71 &&
+        code <= 86
+    )
+        return "ac_unit";
+
+    if (code >= 95)
+        return "thunderstorm";
+
+    return "cloud";
+
+}
+
+
+function getBrowserLocation() {
+
+    return new Promise(
+        (resolve,reject) => {
+
+            if (
+                !navigator.geolocation
+            ) {
+
+                reject(
+                    new Error(
+                        "Geolocation unavailable"
+                    )
+                );
+
+                return;
+
+            }
+
+
+            navigator
+                .geolocation
+                .getCurrentPosition(
+
+                    position => {
+
+                        resolve({
+
+                            latitude:
+                                position
+                                    .coords
+                                    .latitude,
+
+                            longitude:
+                                position
+                                    .coords
+                                    .longitude
+
+                        });
+
+                    },
+
+                    error => {
+
+                        reject(error);
+
+                    },
+
+                    {
+
+                        enableHighAccuracy:
+                            false,
+
+                        timeout:
+                            3500,
+
+                        maximumAge:
+                            600000
+
+                    }
+
+                );
+
+        }
+    );
+
+}
+
+
+async function loadWeather() {
+
+    const tempElement =
+        document.getElementById(
+            "weatherTemp"
+        );
+
+    const descriptionElement =
+        document.getElementById(
+            "weatherDescription"
+        );
+
+    const iconElement =
+        document.getElementById(
+            "weatherIcon"
+        );
+
+
+    let location =
+        WEATHER_FALLBACK;
+
+
+    try {
+
+        location =
+            await getBrowserLocation();
+
+    } catch (_) {
+
+        /*
+           Fallback remains in use.
+        */
+
+    }
+
+
+    try {
+
+        const url =
+
+            "https://api.open-meteo.com/v1/forecast" +
+
+            "?latitude=" +
+            encodeURIComponent(
+                location.latitude
+            ) +
+
+            "&longitude=" +
+            encodeURIComponent(
+                location.longitude
+            ) +
+
+            "&current=" +
+            "temperature_2m," +
+            "weather_code," +
+            "is_day" +
+
+            "&temperature_unit=fahrenheit" +
+
+            "&timezone=auto";
+
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Weather request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const current =
+            data.current;
+
+
+        const temperature =
+            Math.round(
+                current.temperature_2m
+            );
+
+
+        tempElement.textContent =
+            `${temperature}°`;
+
+
+        descriptionElement.textContent =
+            weatherDescription(
+                current.weather_code
+            );
+
+
+        iconElement.textContent =
+            weatherIcon(
+                current.weather_code
+            );
+
+
+    } catch (error) {
+
+        console.warn(
+            "Weather unavailable:",
+            error
+        );
+
+
+        tempElement.textContent =
+            "--°";
+
+
+        descriptionElement.textContent =
+            "Weather unavailable";
+
+
+        iconElement.textContent =
+            "cloud_off";
+
+    }
+
+}
 
 
 /* =========================================================
@@ -5030,13 +6079,32 @@ document
 
 updateDate();
 
+updateSchoolSchedule();
+
+loadWeather();
 
 updateChallengeTimer();
 
 
 setInterval(
+    updateSchoolSchedule,
+    1000
+);
+
+
+setInterval(
     updateChallengeTimer,
     1000
+);
+
+
+/*
+   Refresh weather every 10 minutes.
+*/
+
+setInterval(
+    loadWeather,
+    10 * 60 * 1000
 );
 
 
