@@ -1,0 +1,754 @@
+{
+  "games": [
+    {
+      "name": "1v1.lol",
+      "folder": "1v1.lol",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/58.png",
+      "featured": false
+    },
+    {
+      "name": "2048",
+      "folder": "2048",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/114.png",
+      "featured": false
+    },
+    {
+      "name": "2048 Cupcakes",
+      "folder": "2048-Cupcakes",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "99 Nights In The Forest",
+      "folder": "99-Nights-In-The-Forest",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "A Dance of Fire and Ice",
+      "folder": "A-Dance-of-Fire-and-Ice",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "A Dark Room",
+      "folder": "A-Dark-Room",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "A Game About Feeding A Black Hole",
+      "folder": "A-Game-About-Feeding-A-Black-Hole",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Adventure Capitalist",
+      "folder": "Adventure-Capitalist",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Agar.io",
+      "folder": "Agar.io",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Among Us",
+      "folder": "Among-Us",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Andy's Apple Farm",
+      "folder": "Andys-Apple-Farm",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Aviamasters",
+      "folder": "Aviamasters",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Baby Sniper in Vietnam",
+      "folder": "Baby-Sniper-in-Vietnam",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bad Parenting",
+      "folder": "Bad-Parenting",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Baldi's Basics",
+      "folder": "Baldis-Basics",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bank Robbery 1",
+      "folder": "Bank-Robbery-1",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bank Robbery 2",
+      "folder": "Bank-Robbery-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bank Robbery 3",
+      "folder": "Bank-Robbery-3",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Baseball Bros",
+      "folder": "Baseball-Bros",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Basket Bros",
+      "folder": "Basket-Bros",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Basket Random",
+      "folder": "Basket-Random",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Basketball Stars",
+      "folder": "Basketball-Stars",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bendy and the Ink Machine",
+      "folder": "Bendy-and-the-Ink-Machine",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bit Life",
+      "folder": "Bit-Life",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bit Planes",
+      "folder": "Bit-Planes",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Block Blast",
+      "folder": "Block-Blast",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Bowmasters",
+      "folder": "Bowmasters",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Buckshot Roulette",
+      "folder": "Buckshot-Roulette",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Build a Big Army",
+      "folder": "Build-a-Big-Army",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Build a Plane",
+      "folder": "Build-a-Plane",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Celeste",
+      "folder": "Celeste",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Chat Bot AI (A.I GPT)",
+      "folder": "Chat-Bot-AI",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Clover Pit",
+      "folder": "Clover-Pit",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Cookie Clicker",
+      "folder": "Cookie-Clicker",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Core Ball",
+      "folder": "Core-Ball",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Crossy Road",
+      "folder": "Crossy-Road",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Csgo Clicker",
+      "folder": "Csgo-Clicker",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Cubefield",
+      "folder": "Cubefield",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Cuphead",
+      "folder": "Cuphead",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Drift Boss",
+      "folder": "Drift-Boss",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Drift Hunters",
+      "folder": "Drift-Hunters",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Drive Mad",
+      "folder": "Drive-Mad",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Escape Road",
+      "folder": "Escape-Road",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Escape Road 2",
+      "folder": "Escape-Road-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Fears to Fathom: Home Alone",
+      "folder": "Fears-to-Fathom-Home-Alone",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights at Epstein’s",
+      "folder": "Five-Nights-at-Epsteins",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's",
+      "folder": "Five-Nights-At-Freddys",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's 2",
+      "folder": "Five-Nights-At-Freddys-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's 3",
+      "folder": "Five-Nights-At-Freddys-3",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's 4",
+      "folder": "Five-Nights-At-Freddys-4",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's 4 Halloween",
+      "folder": "Five-Nights-At-Freddys-4-Halloween",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's Pizzeria Simulator",
+      "folder": "Five-Nights-At-Freddys-Pizzeria-Simulator",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Five Nights At Freddy's: Ultimate Custom Night",
+      "folder": "Five-Nights-At-Freddys-Ultimate-Custom-Night",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Geometry Dash",
+      "folder": "Geometry-Dash",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Geometry Dash Lite",
+      "folder": "Geometry-Dash-Lite",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Geometry Dash Vibes",
+      "folder": "Geometry-Dash-Vibes",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Get Yoked",
+      "folder": "Get-Yoked",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Getaway Shootout",
+      "folder": "Getaway-Shootout",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Getting Over It",
+      "folder": "Getting-Over-It",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Hide-n-Seek",
+      "folder": "Hide-n-Seek",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Hole.io",
+      "folder": "Hole.io",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Hollow Knight",
+      "folder": "Hollow-Knight",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Hollow Knight Silksong",
+      "folder": "Hollow-Knight-Silksong",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Infinite Craft",
+      "folder": "Infinite-Craft",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Jeffrey Epstein Basics In Education And Kidnapping",
+      "folder": "Jeffrey-Epstein-Basics-In-Education-And-Kidnapping",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Jelly Drift",
+      "folder": "Jelly-Drift",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Jetpack Joyride",
+      "folder": "Jetpack-Joyride",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Johnny Trigger",
+      "folder": "Johnny-Trigger",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Karlson",
+      "folder": "Karlson",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Kindergarten",
+      "folder": "Kindergarten",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Madalin Stunt Cars 2",
+      "folder": "Madalin-Stunt-Cars-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Madalin Stunt Cars Multiplayer",
+      "folder": "Madalin-Stunt-Cars-Multiplayer",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Mage Tower Idle Defense",
+      "folder": "Mage-Tower-Idle-Defense",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Mari0",
+      "folder": "Mari0",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Mario VS Luigi Online",
+      "folder": "Mario-VS-Luigi-Online",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Melon Playground",
+      "folder": "Melon-Playground",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Merge Round Racers",
+      "folder": "Merge-Round-Racers",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Minecraft (Archimedes Client)",
+      "folder": "Minecraft-Archimedes-Client",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Minecraft 1.8.8",
+      "folder": "Minecraft-1.8.8",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Monkey Mart",
+      "folder": "Monkey-Mart",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto Road Rash",
+      "folder": "Moto-Road-Rash",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M",
+      "folder": "Moto-X3M",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M 2",
+      "folder": "Moto-X3M-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M 3",
+      "folder": "Moto-X3M-3",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M Pool Party",
+      "folder": "Moto-X3M-Pool-Party",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M Spooky Land",
+      "folder": "Moto-X3M-Spooky-Land",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Moto X3M Winter",
+      "folder": "Moto-X3M-Winter",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "OvO",
+      "folder": "OvO",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "OvO 2",
+      "folder": "OvO-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "OVO 3 Dimensions",
+      "folder": "OVO-3-Dimensions",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Bakeria",
+      "folder": "Papas-Bakeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Burgeria",
+      "folder": "Papas-Burgeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Cheeseria",
+      "folder": "Papas-Cheeseria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Cupcakeria",
+      "folder": "Papas-Cupcakeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Donuteria",
+      "folder": "Papas-Donuteria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Freezeria",
+      "folder": "Papas-Freezeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Hot Doggeria",
+      "folder": "Papas-Hot-Doggeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Pancakeria",
+      "folder": "Papas-Pancakeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Pastaria",
+      "folder": "Papas-Pastaria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Pizeria",
+      "folder": "Papas-Pizeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Scooperia",
+      "folder": "Papas-Scooperia",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Sushiria",
+      "folder": "Papas-Sushiria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa's Taco Mia",
+      "folder": "Papas-Taco-Mia",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Papa’s Wingeria",
+      "folder": "Papas-Wingeria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Paper.io",
+      "folder": "Paper.io",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Plinko",
+      "folder": "Plinko",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Ragdoll Archers",
+      "folder": "Ragdoll-Archers",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Ragdoll Hit",
+      "folder": "Ragdoll-Hit",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Retro Bowl",
+      "folder": "Retro-Bowl",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Retro Bowl College",
+      "folder": "Retro-Bowl-College",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Run 3",
+      "folder": "Run-3",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Slither.io",
+      "folder": "Slither.io",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Slope",
+      "folder": "Slope",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Slope 2",
+      "folder": "Slope-2",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Slow Roads",
+      "folder": "Slow-Roads",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Snow Rider 3D",
+      "folder": "Snow-Rider-3D",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Snowball.io",
+      "folder": "Snowball.io",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Soundboard",
+      "folder": "Soundboard",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Space Waves",
+      "folder": "Space-Waves",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Suggest Games",
+      "folder": "Suggest-Games",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Suika Game",
+      "folder": "Suika-Game",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Tag",
+      "folder": "Tag",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Terraria",
+      "folder": "Terraria",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Tiny Fishing",
+      "folder": "Tiny-Fishing",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "name": "Tomb Of The Mask",
+      "folder": "Tomb-Of-The-Mask",
+      "thumbnail": "",
+      "featured": false
+    }
+  ]
+}
