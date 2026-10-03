@@ -1,6 +1,6 @@
 /* =========================================================
    SPATIUM CHAT
-   Matches chat.html exactly
+   Message boxes + Supabase RPC chat
    ========================================================= */
 
 (() => {
@@ -9,7 +9,9 @@
     const supabase = window.spatiumSupabase;
 
     if (!supabase) {
-        console.error("[Spatium Chat] Supabase client not found.");
+        console.error(
+            "[Spatium Chat] Supabase client not found."
+        );
         return;
     }
 
@@ -24,11 +26,10 @@
     let currentUser = null;
     let currentUsername = "User";
 
-    let selectedReportMessageId = null;
-
     let pollTimer = null;
     let loadingMessages = false;
     let sendingMessage = false;
+
 
     /* =========================================================
        DOM
@@ -55,55 +56,72 @@
     const mentionList =
         document.getElementById("mentionList");
 
-    const reportModal =
-        document.getElementById("reportModal");
-
-    const closeReport =
-        document.getElementById("closeReport");
-
-    const reportReason =
-        document.getElementById("reportReason");
-
-    const submitReport =
-        document.getElementById("submitReport");
-
-    const reportError =
-        document.getElementById("reportError");
 
     /* =========================================================
-       ERROR / STATUS
+       STATUS
        ========================================================= */
 
     function showError(message) {
-        console.error("[Spatium Chat]", message);
+        console.error(
+            "[Spatium Chat]",
+            message
+        );
 
-        if (chatStatus) {
-            chatStatus.textContent = message;
-            chatStatus.classList.add("error");
-
-            setTimeout(() => {
-                chatStatus.textContent = "";
-                chatStatus.classList.remove("error");
-            }, 5000);
+        if (!chatStatus) {
+            return;
         }
-    }
 
-    function showStatus(message) {
-        if (!chatStatus) return;
+        chatStatus.textContent =
+            message;
 
-        chatStatus.textContent = message;
+        chatStatus.classList.add(
+            "error"
+        );
 
         setTimeout(() => {
-            if (chatStatus.textContent === message) {
-                chatStatus.textContent = "";
+
+            chatStatus.textContent =
+                "";
+
+            chatStatus.classList.remove(
+                "error"
+            );
+
+        }, 5000);
+    }
+
+
+    function showStatus(message) {
+
+        if (!chatStatus) {
+            return;
+        }
+
+        chatStatus.textContent =
+            message;
+
+        setTimeout(() => {
+
+            if (
+                chatStatus.textContent ===
+                message
+            ) {
+                chatStatus.textContent =
+                    "";
             }
+
         }, 3000);
     }
 
-    function setConnection(status) {
-        if (!connectionStatus) return;
 
-        connectionStatus.textContent = status;
+    function setConnection(status) {
+
+        if (!connectionStatus) {
+            return;
+        }
+
+        connectionStatus.textContent =
+            status;
 
         connectionStatus.classList.remove(
             "connected",
@@ -111,30 +129,58 @@
             "connecting"
         );
 
-        if (status === "Connected") {
-            connectionStatus.classList.add("connected");
-        } else if (status === "Connection error") {
-            connectionStatus.classList.add("error");
+        if (
+            status ===
+            "Connected"
+        ) {
+
+            connectionStatus.classList.add(
+                "connected"
+            );
+
+        } else if (
+            status ===
+            "Connection error"
+        ) {
+
+            connectionStatus.classList.add(
+                "error"
+            );
+
         } else {
-            connectionStatus.classList.add("connecting");
+
+            connectionStatus.classList.add(
+                "connecting"
+            );
+
         }
     }
+
 
     /* =========================================================
        ESCAPE HTML
        ========================================================= */
 
     function escapeHTML(value) {
-        const div = document.createElement("div");
-        div.textContent = value ?? "";
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            value ?? "";
+
         return div.innerHTML;
     }
+
 
     /* =========================================================
        USERNAME
        ========================================================= */
 
     function getUsername(user) {
+
         if (!user) {
             return "User";
         }
@@ -148,76 +194,169 @@
         );
     }
 
+
+    /*
+     * Try to get the username from whatever shape
+     * the RPC returns.
+     *
+     * This supports several common column names:
+     *
+     * username
+     * display_name
+     * name
+     * user_name
+     * author_username
+     * profile_username
+     */
+
+    function getMessageUsername(message) {
+
+        if (!message) {
+            return "User";
+        }
+
+        if (
+            currentUser &&
+            message.user_id === currentUser.id
+        ) {
+            return currentUsername;
+        }
+
+        return (
+            message.username ||
+            message.display_name ||
+            message.name ||
+            message.user_name ||
+            message.author_username ||
+            message.profile_username ||
+            message.author_name ||
+            "User"
+        );
+    }
+
+
     /* =========================================================
        TIME
        ========================================================= */
 
     function formatMessageTime(timestamp) {
+
         if (!timestamp) {
             return "";
         }
 
-        const date = new Date(timestamp);
+        const date =
+            new Date(timestamp);
 
-        if (Number.isNaN(date.getTime())) {
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
             return "";
         }
 
-        const now = new Date();
+        const now =
+            new Date();
 
         const sameDay =
-            date.getFullYear() === now.getFullYear() &&
-            date.getMonth() === now.getMonth() &&
-            date.getDate() === now.getDate();
+            date.getFullYear() ===
+                now.getFullYear() &&
+            date.getMonth() ===
+                now.getMonth() &&
+            date.getDate() ===
+                now.getDate();
 
         if (sameDay) {
-            return date.toLocaleTimeString([], {
-                hour: "numeric",
-                minute: "2-digit"
-            });
+
+            return date.toLocaleTimeString(
+                [],
+                {
+                    hour: "numeric",
+                    minute: "2-digit"
+                }
+            );
+
         }
 
-        return date.toLocaleDateString([], {
-            month: "short",
-            day: "numeric"
-        }) + " " +
-        date.toLocaleTimeString([], {
-            hour: "numeric",
-            minute: "2-digit"
-        });
+        return (
+            date.toLocaleDateString(
+                [],
+                {
+                    month: "short",
+                    day: "numeric"
+                }
+            ) +
+            " " +
+            date.toLocaleTimeString(
+                [],
+                {
+                    hour: "numeric",
+                    minute: "2-digit"
+                }
+            )
+        );
     }
+
 
     /* =========================================================
        CHARACTER COUNT
        ========================================================= */
 
     function updateCharacterCount() {
-        if (!messageInput || !characterCount) {
+
+        if (
+            !messageInput ||
+            !characterCount
+        ) {
             return;
         }
 
-        const length = messageInput.value.length;
+        const length =
+            messageInput.value.length;
 
         characterCount.textContent =
             `${length} / ${MAX_MESSAGE_LENGTH}`;
 
-        characterCount.classList.remove("warning");
-        characterCount.classList.remove("limit");
+        characterCount.classList.remove(
+            "warning"
+        );
 
-        if (length >= MAX_MESSAGE_LENGTH) {
-            characterCount.classList.add("limit");
-        } else if (length >= MAX_MESSAGE_LENGTH - 50) {
-            characterCount.classList.add("warning");
+        characterCount.classList.remove(
+            "limit"
+        );
+
+        if (
+            length >=
+            MAX_MESSAGE_LENGTH
+        ) {
+
+            characterCount.classList.add(
+                "limit"
+            );
+
+        } else if (
+            length >=
+            MAX_MESSAGE_LENGTH - 50
+        ) {
+
+            characterCount.classList.add(
+                "warning"
+            );
         }
     }
+
 
     /* =========================================================
        MENTIONS
        ========================================================= */
 
     function extractMentions(text) {
+
         const matches =
-            text.match(/@([a-zA-Z0-9_]{1,32})/g);
+            text.match(
+                /@([a-zA-Z0-9_]{1,32})/g
+            );
 
         if (!matches) {
             return [];
@@ -226,89 +365,124 @@
         return [
             ...new Set(
                 matches.map(
-                    mention => mention.substring(1)
+                    mention =>
+                        mention.substring(1)
                 )
             )
         ];
     }
 
+
     function clearMentionList() {
+
         if (mentionList) {
-            mentionList.innerHTML = "";
+            mentionList.innerHTML =
+                "";
         }
     }
 
+
     /* =========================================================
-       MESSAGE HTML
+       CREATE MESSAGE
        ========================================================= */
 
     function createMessage(message) {
-        const element =
-            document.createElement("div");
 
-        element.className = "message";
+        const element =
+            document.createElement(
+                "div"
+            );
+
+        /*
+         * Use the exact classes expected
+         * by the Spatium message CSS.
+         */
+
+        element.className =
+            "gv-msg";
 
         if (
             currentUser &&
-            message.user_id === currentUser.id
+            message.user_id ===
+                currentUser.id
         ) {
-            element.classList.add("own");
+
+            element.classList.add(
+                "own"
+            );
         }
 
         if (message.id) {
-            element.dataset.messageId =
+
+            element.dataset.id =
                 message.id;
+
         }
 
+
         const username =
-            currentUser &&
-            message.user_id === currentUser.id
-                ? currentUsername
-                : "User";
+            getMessageUsername(
+                message
+            );
+
 
         const body =
-            escapeHTML(message.body || "");
+            message.body ??
+            message.content ??
+            message.message ??
+            "";
+
 
         const time =
-            formatMessageTime(message.created_at);
+            formatMessageTime(
+                message.created_at
+            );
+
 
         element.innerHTML = `
-            <div class="message-header">
 
-                <span class="message-username">
+            <div class="gv-msg-head">
+
+                <button
+                    class="gv-msg-name"
+                    type="button"
+                    data-user-id="${escapeHTML(
+                        message.user_id || ""
+                    )}"
+                >
                     ${escapeHTML(username)}
-                </span>
+                </button>
 
-                <span class="message-time">
+                <time
+                    class="gv-msg-time"
+                    datetime="${escapeHTML(
+                        message.created_at || ""
+                    )}"
+                >
                     ${escapeHTML(time)}
-                </span>
+                </time>
 
             </div>
 
-            <div class="message-body">
-                ${body}
+            <div class="gv-msg-body">
+                ${escapeHTML(body)}
             </div>
 
-            <button
-                type="button"
-                class="message-report"
-                data-report-id="${escapeHTML(message.id || "")}"
-                aria-label="Report message"
-                title="Report message"
-            >
-                Report
-            </button>
         `;
+
 
         return element;
     }
+
 
     /* =========================================================
        RENDER MESSAGES
        ========================================================= */
 
     function renderMessages(messages) {
+
         if (!messagesEl) {
+
             console.error(
                 "[Spatium Chat] #messages was not found."
             );
@@ -316,54 +490,88 @@
             return;
         }
 
+
         const wasNearBottom =
             messagesEl.scrollHeight -
             messagesEl.scrollTop -
             messagesEl.clientHeight <
             150;
 
-        messagesEl.innerHTML = "";
 
-        if (!messages.length) {
+        messagesEl.innerHTML =
+            "";
+
+
+        if (
+            !messages ||
+            !messages.length
+        ) {
+
             messagesEl.innerHTML = `
-                <div class="loading">
-                    No messages yet. Start the conversation!
+
+                <div class="gv-chat-empty">
+
+                    No messages yet.
+                    Start the conversation!
+
                 </div>
+
             `;
 
             return;
         }
 
+
         const sortedMessages =
-            [...messages].sort((a, b) => {
-                const aTime =
-                    new Date(a.created_at).getTime();
+            [...messages].sort(
+                (a, b) => {
 
-                const bTime =
-                    new Date(b.created_at).getTime();
+                    const aTime =
+                        new Date(
+                            a.created_at
+                        ).getTime();
 
-                return aTime - bTime;
-            });
+                    const bTime =
+                        new Date(
+                            b.created_at
+                        ).getTime();
 
-        for (const message of sortedMessages) {
+                    return aTime - bTime;
+                }
+            );
+
+
+        for (
+            const message
+            of sortedMessages
+        ) {
+
             messagesEl.appendChild(
                 createMessage(message)
             );
+
         }
 
+
         if (wasNearBottom) {
+
             requestAnimationFrame(() => {
+
                 messagesEl.scrollTop =
                     messagesEl.scrollHeight;
+
             });
+
         }
     }
+
 
     /* =========================================================
        LOAD MESSAGES
        ========================================================= */
 
     async function loadMessages() {
+
         if (loadingMessages) {
             return;
         }
@@ -372,30 +580,41 @@
             return;
         }
 
-        loadingMessages = true;
+
+        loadingMessages =
+            true;
+
 
         try {
+
             console.log(
                 "[Spatium Chat] Loading messages..."
             );
 
+
             const {
                 data,
                 error
-            } = await supabase.rpc(
-                "gv_chat_recent",
-                {
-                    p_limit: MESSAGE_LIMIT
-                }
-            );
+            } =
+                await supabase.rpc(
+                    "gv_chat_recent",
+                    {
+                        p_limit:
+                            MESSAGE_LIMIT
+                    }
+                );
+
 
             if (error) {
+
                 console.error(
                     "[Spatium Chat] gv_chat_recent error:",
                     error
                 );
 
-                setConnection("Connection error");
+                setConnection(
+                    "Connection error"
+                );
 
                 showError(
                     error.message ||
@@ -405,46 +624,66 @@
                 return;
             }
 
+
             const messages =
                 Array.isArray(data)
                     ? data
                     : [];
 
+
             console.log(
                 `[Spatium Chat] Loaded ${messages.length} messages.`
             );
 
-            setConnection("Connected");
 
-            renderMessages(messages);
+            setConnection(
+                "Connected"
+            );
+
+
+            renderMessages(
+                messages
+            );
+
 
         } catch (error) {
+
             console.error(
                 "[Spatium Chat] loadMessages error:",
                 error
             );
 
-            setConnection("Connection error");
+            setConnection(
+                "Connection error"
+            );
 
             showError(
                 "Could not load chat messages."
             );
 
+
         } finally {
-            loadingMessages = false;
+
+            loadingMessages =
+                false;
+
         }
     }
+
 
     /* =========================================================
        SEND MESSAGE
        ========================================================= */
 
     async function sendMessage() {
+
         if (sendingMessage) {
             return;
         }
 
+
         if (!currentUser) {
+
             showError(
                 "Please sign in before sending a message."
             );
@@ -452,7 +691,9 @@
             return;
         }
 
+
         if (!messageInput) {
+
             showError(
                 "Message input could not be found."
             );
@@ -460,14 +701,21 @@
             return;
         }
 
+
         const body =
             messageInput.value.trim();
+
 
         if (!body) {
             return;
         }
 
-        if (body.length > MAX_MESSAGE_LENGTH) {
+
+        if (
+            body.length >
+            MAX_MESSAGE_LENGTH
+        ) {
+
             showError(
                 `Messages are limited to ${MAX_MESSAGE_LENGTH} characters.`
             );
@@ -475,33 +723,53 @@
             return;
         }
 
-        sendingMessage = true;
+
+        sendingMessage =
+            true;
+
 
         if (sendButton) {
-            sendButton.disabled = true;
-            sendButton.textContent = "Sending...";
+
+            sendButton.disabled =
+                true;
+
+            sendButton.textContent =
+                "Sending...";
+
         }
 
+
         try {
+
             const mentions =
-                extractMentions(body);
+                extractMentions(
+                    body
+                );
+
 
             console.log(
                 "[Spatium Chat] Sending message..."
             );
 
+
             const {
                 data,
                 error
-            } = await supabase.rpc(
-                "gv_chat_send",
-                {
-                    p_body: body,
-                    p_mentions: mentions
-                }
-            );
+            } =
+                await supabase.rpc(
+                    "gv_chat_send",
+                    {
+                        p_body:
+                            body,
+
+                        p_mentions:
+                            mentions
+                    }
+                );
+
 
             if (error) {
+
                 console.error(
                     "[Spatium Chat] gv_chat_send error:",
                     error
@@ -515,25 +783,33 @@
                 return;
             }
 
+
             console.log(
                 "[Spatium Chat] Message saved:",
                 data
             );
 
-            messageInput.value = "";
+
+            messageInput.value =
+                "";
+
 
             updateCharacterCount();
 
+
             clearMentionList();
 
+
             /*
-             * Reload directly from Supabase.
-             * This confirms the message was actually
-             * stored instead of just adding it visually.
+             * Reload from Supabase so the message
+             * displayed is the actual database row.
              */
+
             await loadMessages();
 
+
         } catch (error) {
+
             console.error(
                 "[Spatium Chat] sendMessage error:",
                 error
@@ -543,13 +819,23 @@
                 "Could not send message."
             );
 
+
         } finally {
-            sendingMessage = false;
+
+            sendingMessage =
+                false;
+
 
             if (sendButton) {
-                sendButton.disabled = false;
-                sendButton.textContent = "Send";
+
+                sendButton.disabled =
+                    false;
+
+                sendButton.textContent =
+                    "Send";
+
             }
+
 
             if (messageInput) {
                 messageInput.focus();
@@ -557,184 +843,15 @@
         }
     }
 
-    /* =========================================================
-       REPORT MODAL
-       ========================================================= */
-
-    function openReport(messageId) {
-        if (!messageId) {
-            return;
-        }
-
-        selectedReportMessageId =
-            messageId;
-
-        if (reportReason) {
-            reportReason.value = "";
-        }
-
-        if (reportError) {
-            reportError.textContent = "";
-        }
-
-        if (reportModal) {
-            reportModal.classList.remove("hidden");
-        }
-
-        if (reportReason) {
-            setTimeout(() => {
-                reportReason.focus();
-            }, 50);
-        }
-    }
-
-    function closeReportModal() {
-        selectedReportMessageId = null;
-
-        if (reportModal) {
-            reportModal.classList.add("hidden");
-        }
-
-        if (reportReason) {
-            reportReason.value = "";
-        }
-
-        if (reportError) {
-            reportError.textContent = "";
-        }
-    }
-
-    async function submitReportMessage() {
-        if (!currentUser) {
-            if (reportError) {
-                reportError.textContent =
-                    "You must be signed in to report a message.";
-            }
-
-            return;
-        }
-
-        if (!selectedReportMessageId) {
-            return;
-        }
-
-        const reason =
-            reportReason?.value.trim() || "";
-
-        if (!reason) {
-            if (reportError) {
-                reportError.textContent =
-                    "Please enter a reason.";
-            }
-
-            return;
-        }
-
-        if (reason.length > 500) {
-            if (reportError) {
-                reportError.textContent =
-                    "Your reason is too long.";
-            }
-
-            return;
-        }
-
-        if (submitReport) {
-            submitReport.disabled = true;
-            submitReport.textContent =
-                "Submitting...";
-        }
-
-        try {
-            const {
-                error
-            } = await supabase.rpc(
-                "gv_chat_report",
-                {
-                    p_message_id:
-                        selectedReportMessageId,
-
-                    p_reason:
-                        reason
-                }
-            );
-
-            if (error) {
-                console.error(
-                    "[Spatium Chat] Report error:",
-                    error
-                );
-
-                if (reportError) {
-                    reportError.textContent =
-                        error.message ||
-                        "Could not submit report.";
-                }
-
-                return;
-            }
-
-            closeReportModal();
-
-            showStatus(
-                "Report submitted."
-            );
-
-        } catch (error) {
-            console.error(
-                "[Spatium Chat] Report failed:",
-                error
-            );
-
-            if (reportError) {
-                reportError.textContent =
-                    "Could not submit report.";
-            }
-
-        } finally {
-            if (submitReport) {
-                submitReport.disabled = false;
-                submitReport.textContent =
-                    "Submit Report";
-            }
-        }
-    }
-
-    /* =========================================================
-       MESSAGE REPORT CLICK
-       ========================================================= */
-
-    function setupMessageReporting() {
-        if (!messagesEl) {
-            return;
-        }
-
-        messagesEl.addEventListener(
-            "click",
-            event => {
-                const reportButton =
-                    event.target.closest(
-                        ".message-report"
-                    );
-
-                if (!reportButton) {
-                    return;
-                }
-
-                const messageId =
-                    reportButton.dataset.reportId;
-
-                openReport(messageId);
-            }
-        );
-    }
 
     /* =========================================================
        INPUT
        ========================================================= */
 
     function setupInput() {
+
         if (!messageInput) {
+
             console.error(
                 "[Spatium Chat] #messageInput not found."
             );
@@ -742,36 +859,49 @@
             return;
         }
 
+
         messageInput.addEventListener(
             "input",
             () => {
+
                 updateCharacterCount();
+
             }
         );
+
 
         messageInput.addEventListener(
             "keydown",
             event => {
+
                 if (
-                    event.key === "Enter" &&
+                    event.key ===
+                        "Enter" &&
                     !event.shiftKey
                 ) {
+
                     event.preventDefault();
 
                     sendMessage();
+
                 }
+
             }
         );
 
+
         updateCharacterCount();
     }
+
 
     /* =========================================================
        SEND BUTTON
        ========================================================= */
 
     function setupSendButton() {
+
         if (!sendButton) {
+
             console.error(
                 "[Spatium Chat] #sendButton not found."
             );
@@ -779,75 +909,168 @@
             return;
         }
 
+
         sendButton.addEventListener(
             "click",
             event => {
+
                 event.preventDefault();
 
                 sendMessage();
+
             }
         );
     }
+
+
+    /* =========================================================
+       USERNAME BUTTON
+       ========================================================= */
+
+    function setupMessageUserButtons() {
+
+        if (!messagesEl) {
+            return;
+        }
+
+
+        messagesEl.addEventListener(
+            "click",
+            event => {
+
+                const usernameButton =
+                    event.target.closest(
+                        ".gv-msg-name"
+                    );
+
+
+                if (!usernameButton) {
+                    return;
+                }
+
+
+                const userId =
+                    usernameButton.dataset.userId;
+
+
+                if (!userId) {
+                    return;
+                }
+
+
+                /*
+                 * This is intentionally left as a
+                 * simple hook for profile functionality.
+                 *
+                 * You can later make clicking a username
+                 * open their profile.
+                 */
+
+                console.log(
+                    "[Spatium Chat] Username clicked:",
+                    userId
+                );
+
+            }
+        );
+    }
+
 
     /* =========================================================
        AUTH
        ========================================================= */
 
     async function updateUser() {
+
         try {
+
             const {
                 data,
                 error
-            } = await supabase.auth.getUser();
+            } =
+                await supabase.auth.getUser();
+
 
             if (error) {
                 throw error;
             }
 
+
             currentUser =
-                data?.user || null;
+                data?.user ||
+                null;
+
 
             if (!currentUser) {
-                currentUsername = "User";
+
+                currentUsername =
+                    "User";
+
 
                 if (messageInput) {
-                    messageInput.disabled = true;
+
+                    messageInput.disabled =
+                        true;
 
                     messageInput.placeholder =
                         "Sign in to send a message...";
+
                 }
+
 
                 if (sendButton) {
-                    sendButton.disabled = true;
+
+                    sendButton.disabled =
+                        true;
+
                 }
 
-                setConnection("Connected");
+
+                setConnection(
+                    "Connected"
+                );
+
 
                 return;
             }
 
+
             currentUsername =
-                getUsername(currentUser);
+                getUsername(
+                    currentUser
+                );
+
 
             console.log(
                 "[Spatium Chat] Logged in as:",
                 currentUsername
             );
 
+
             if (messageInput) {
-                messageInput.disabled = false;
+
+                messageInput.disabled =
+                    false;
 
                 messageInput.placeholder =
                     "Type a message...";
+
             }
 
+
             if (sendButton) {
-                sendButton.disabled = false;
+
+                sendButton.disabled =
+                    false;
+
             }
+
 
             await loadMessages();
 
+
         } catch (error) {
+
             console.error(
                 "[Spatium Chat] updateUser error:",
                 error
@@ -859,194 +1082,229 @@
         }
     }
 
+
     /* =========================================================
        AUTH STATE LISTENER
        ========================================================= */
 
     function setupAuthListener() {
+
         supabase.auth.onAuthStateChange(
-            async (event, session) => {
+            async (
+                event,
+                session
+            ) => {
+
                 console.log(
                     "[Spatium Chat] Auth event:",
                     event
                 );
 
+
                 currentUser =
-                    session?.user || null;
+                    session?.user ||
+                    null;
+
 
                 if (currentUser) {
+
                     currentUsername =
-                        getUsername(currentUser);
+                        getUsername(
+                            currentUser
+                        );
+
 
                     if (messageInput) {
-                        messageInput.disabled = false;
+
+                        messageInput.disabled =
+                            false;
 
                         messageInput.placeholder =
                             "Type a message...";
+
                     }
 
+
                     if (sendButton) {
-                        sendButton.disabled = false;
+
+                        sendButton.disabled =
+                            false;
+
                     }
+
 
                     await loadMessages();
 
+
                     startPolling();
 
+
                 } else {
-                    currentUsername = "User";
+
+                    currentUsername =
+                        "User";
+
 
                     if (messageInput) {
-                        messageInput.disabled = true;
+
+                        messageInput.disabled =
+                            true;
 
                         messageInput.placeholder =
                             "Sign in to send a message...";
+
                     }
 
+
                     if (sendButton) {
-                        sendButton.disabled = true;
+
+                        sendButton.disabled =
+                            true;
+
                     }
+
 
                     stopPolling();
 
+
                     if (messagesEl) {
+
                         messagesEl.innerHTML = `
-                            <div class="loading">
+
+                            <div class="gv-chat-empty">
+
                                 Sign in to view chat.
+
                             </div>
+
                         `;
+
                     }
+
                 }
+
             }
         );
     }
+
 
     /* =========================================================
        POLLING
        ========================================================= */
 
     function startPolling() {
+
         stopPolling();
 
+
         pollTimer =
-            setInterval(() => {
-                if (
-                    currentUser &&
-                    !document.hidden
-                ) {
-                    loadMessages();
-                }
-            }, POLL_INTERVAL);
+            setInterval(
+                () => {
+
+                    if (
+                        currentUser &&
+                        !document.hidden
+                    ) {
+
+                        loadMessages();
+
+                    }
+
+                },
+                POLL_INTERVAL
+            );
     }
+
 
     function stopPolling() {
+
         if (pollTimer) {
-            clearInterval(pollTimer);
-            pollTimer = null;
+
+            clearInterval(
+                pollTimer
+            );
+
+            pollTimer =
+                null;
         }
     }
 
-    /* =========================================================
-       REPORT CONTROLS
-       ========================================================= */
-
-    function setupReportControls() {
-        if (closeReport) {
-            closeReport.addEventListener(
-                "click",
-                closeReportModal
-            );
-        }
-
-        if (submitReport) {
-            submitReport.addEventListener(
-                "click",
-                submitReportMessage
-            );
-        }
-
-        if (reportModal) {
-            reportModal.addEventListener(
-                "click",
-                event => {
-                    if (
-                        event.target ===
-                        reportModal
-                    ) {
-                        closeReportModal();
-                    }
-                }
-            );
-        }
-
-        document.addEventListener(
-            "keydown",
-            event => {
-                if (
-                    event.key === "Escape" &&
-                    reportModal &&
-                    !reportModal.classList.contains(
-                        "hidden"
-                    )
-                ) {
-                    closeReportModal();
-                }
-            }
-        );
-    }
 
     /* =========================================================
        INITIALIZATION
        ========================================================= */
 
     async function initSpatiumChat() {
+
         console.log(
             "[Spatium Chat] Initializing..."
         );
 
+
         if (!messagesEl) {
+
             console.error(
                 "[Spatium Chat] #messages not found."
             );
+
         }
 
+
         if (!messageInput) {
+
             console.error(
                 "[Spatium Chat] #messageInput not found."
             );
+
         }
 
+
         if (!sendButton) {
+
             console.error(
                 "[Spatium Chat] #sendButton not found."
             );
+
         }
 
+
         setupInput();
+
         setupSendButton();
-        setupMessageReporting();
-        setupReportControls();
+
+        setupMessageUserButtons();
+
         setupAuthListener();
+
 
         await updateUser();
 
+
         startPolling();
+
 
         console.log(
             "[Spatium Chat] Ready."
         );
     }
 
+
     /* =========================================================
        PUBLIC API
        ========================================================= */
 
     window.spatiumChat = {
+
         loadMessages,
+
         sendMessage,
+
         updateUser,
+
         showError
+
     };
+
 
     /* =========================================================
        START
@@ -1056,12 +1314,16 @@
         document.readyState ===
         "loading"
     ) {
+
         document.addEventListener(
             "DOMContentLoaded",
             initSpatiumChat
         );
+
     } else {
+
         initSpatiumChat();
+
     }
 
 })();
