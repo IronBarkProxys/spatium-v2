@@ -91,17 +91,15 @@
 
             <div class="field">
 
-                <label for="loginUsername">
-                    Username
+                <label for="loginEmail">
+                    Email
                 </label>
 
                 <input
-                    id="loginUsername"
-                    type="text"
-                    placeholder="Your username"
-                    maxlength="24"
-                    minlength="2"
-                    autocomplete="username"
+                    id="loginEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
                     required
                 >
 
@@ -162,7 +160,25 @@
                     placeholder="Choose a username"
                     maxlength="24"
                     minlength="2"
+                    pattern="[A-Za-z0-9_]{2,24}"
                     autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="signupEmail">
+                    Email
+                </label>
+
+                <input
+                    id="signupEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
                     required
                 >
 
