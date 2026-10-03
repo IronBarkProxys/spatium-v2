@@ -1,173 +1,206 @@
-```javascript
-/* =========================================================
-   SPATIUM GAMES SYSTEM
-   ========================================================= */
+"use strict";
 
-const gameGrid = document.getElementById("game-grid");
-const gameSearch = document.getElementById("game-search");
-const gameSort = document.getElementById("game-sort");
-const gameCount = document.getElementById("game-count");
 
-const emptyState = document.getElementById("empty-state");
-const errorState = document.getElementById("error-state");
-const clearSearch = document.getElementById("clear-search");
-const currentYear = document.getElementById("current-year");
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const gameGrid =
+    document.getElementById("game-grid");
+
+const gameSearch =
+    document.getElementById("game-search");
+
+const gameSort =
+    document.getElementById("game-sort");
+
+const gameCount =
+    document.getElementById("game-count");
+
+const emptyState =
+    document.getElementById("empty-state");
+
+const errorState =
+    document.getElementById("error-state");
+
+const clearSearch =
+    document.getElementById("clear-search");
+
+const loading =
+    document.getElementById("loading");
+
+const currentYear =
+    document.getElementById("current-year");
+
+
+/* =========================================
+   STATE
+========================================= */
 
 let games = [];
 
 
-/* =========================================================
+/* =========================================
    YEAR
-   ========================================================= */
+========================================= */
 
-currentYear.textContent = new Date().getFullYear();
+if (currentYear) {
+    currentYear.textContent =
+        new Date().getFullYear();
+}
 
 
-/* =========================================================
-   LOAD GAME LIBRARY
-   ========================================================= */
+/* =========================================
+   LOAD GAMES
+========================================= */
 
 async function loadGames() {
 
     try {
 
-        /*
-         * Master list:
-         *
-         * games/games.json
-         *
-         * Example:
-         *
-         * [
-         *     {
-         *         "slug": "slope",
-         *         "name": "Slope"
-         *     }
-         * ]
-         */
+        hideError();
 
-        const response = await fetch(
-            "./games/games.json",
-            {
-                cache: "no-store"
-            }
-        );
+        showLoading();
+
+
+        const response =
+            await fetch(
+                "./games/games.json",
+                {
+                    cache: "no-cache"
+                }
+            );
+
 
         if (!response.ok) {
+
             throw new Error(
-                `games.json returned ${response.status}`
+                "Could not load games.json"
             );
+
         }
 
-        const gameList = await response.json();
+
+        const data =
+            await response.json();
+
+
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                "games.json must contain an array"
+            );
+
+        }
 
 
         /*
-         * Load every individual game's JSON.
+         * games.json can contain:
+         *
+         * "slope"
+         *
+         * OR
+         *
+         * {
+         *     "slug": "slope",
+         *     "name": "Slope"
+         * }
          */
 
-        games = await Promise.all(
 
-            gameList.map(
-                async entry => {
+        games =
+            data.map(
+                (game) => {
 
-                    /*
-                     * Supports either:
-                     *
-                     * "slope"
-                     *
-                     * OR
-                     *
-                     * {
-                     *     "slug": "slope",
-                     *     "name": "Slope"
-                     * }
-                     */
-
-                    const slug =
-                        typeof entry === "string"
-                            ? entry
-                            : entry.slug;
-
-                    const fallbackName =
-                        typeof entry === "string"
-                            ? entry
-                            : entry.name;
-
-
-                    try {
-
-                        const gameResponse =
-                            await fetch(
-                                `./games/${encodeURIComponent(slug)}/game.json`,
-                                {
-                                    cache: "no-store"
-                                }
-                            );
-
-
-                        if (!gameResponse.ok) {
-                            throw new Error(
-                                "game.json not found"
-                            );
-                        }
-
-
-                        const gameData =
-                            await gameResponse.json();
-
+                    if (
+                        typeof game ===
+                        "string"
+                    ) {
 
                         return {
-
-                            ...gameData,
-
-                            slug:
-                                gameData.slug ||
-                                slug,
-
-                            name:
-                                gameData.name ||
-                                fallbackName ||
-                                slug
-
-                        };
-
-                    } catch {
-
-                        /*
-                         * If a game JSON is missing,
-                         * keep the game in the library
-                         * instead of breaking the whole page.
-                         */
-
-                        return {
-
-                            name:
-                                fallbackName ||
-                                slug,
-
-                            slug,
-
-                            category:
-                                "Game",
-
-                            description:
-                                "",
-
+                            slug: game,
+                            name: game,
+                            description: "",
+                            category: "Game",
                             icon:
-                                `./assets/game-icons/${slug}.svg`
-
+                                "./assets/game-icons/"
+                                +
+                                game
+                                    .toLowerCase()
+                                    .replace(
+                                        /[^a-z0-9]+/g,
+                                        "-"
+                                    )
+                                    .replace(
+                                        /^-|-$/g,
+                                        ""
+                                    )
+                                +
+                                ".svg"
                         };
 
                     }
 
+
+                    return {
+                        slug:
+                            game.slug || "",
+
+                        name:
+                            game.name ||
+                            game.slug ||
+                            "Unnamed Game",
+
+                        description:
+                            game.description ||
+                            "",
+
+                        category:
+                            game.category ||
+                            "Game",
+
+                        icon:
+                            game.icon ||
+                            (
+                                "./assets/game-icons/"
+                                +
+                                String(
+                                    game.slug || ""
+                                )
+                                    .toLowerCase()
+                                    .replace(
+                                        /[^a-z0-9]+/g,
+                                        "-"
+                                    )
+                                    .replace(
+                                        /^-|-$/g,
+                                        ""
+                                    )
+                                +
+                                ".svg"
+                            )
+                    };
+
                 }
-            )
+            );
 
-        );
 
+        /*
+         * Remove invalid entries.
+         */
+
+        games =
+            games.filter(
+                game =>
+                    game.slug &&
+                    game.name
+            );
+
+
+        hideLoading();
 
         renderGames();
+
 
     } catch (error) {
 
@@ -176,152 +209,170 @@ async function loadGames() {
             error
         );
 
-        gameCount.textContent =
-            "Unavailable";
+        hideLoading();
 
-        errorState.classList.remove(
-            "hidden"
-        );
+        showError();
+
+        if (gameCount) {
+            gameCount.textContent =
+                "Unable to load";
+        }
 
     }
 
 }
 
 
-/* =========================================================
+/* =========================================
    RENDER
-   ========================================================= */
+========================================= */
 
 function renderGames() {
 
+    if (!gameGrid) {
+        return;
+    }
+
+
     const search =
-        gameSearch.value
-            .trim()
-            .toLowerCase();
+        gameSearch
+            ? gameSearch.value
+                .trim()
+                .toLowerCase()
+            : "";
 
 
-    /*
-     * Filter
-     */
+    let filtered =
+        games.filter(
+            game => {
 
-    let visibleGames =
-        games.filter(game => {
+                const name =
+                    String(
+                        game.name || ""
+                    ).toLowerCase();
 
-            const name =
-                String(
-                    game.name || ""
-                ).toLowerCase();
+                const description =
+                    String(
+                        game.description || ""
+                    ).toLowerCase();
 
-            const category =
-                String(
-                    game.category || ""
-                ).toLowerCase();
-
-            const description =
-                String(
-                    game.description || ""
-                ).toLowerCase();
+                const category =
+                    String(
+                        game.category || ""
+                    ).toLowerCase();
 
 
-            return (
-                name.includes(search) ||
-                category.includes(search) ||
-                description.includes(search)
-            );
+                return (
+                    name.includes(search) ||
+                    description.includes(search) ||
+                    category.includes(search)
+                );
 
-        });
+            }
+        );
 
 
     /*
      * Sort
      */
 
-    visibleGames.sort(
-        (a, b) => {
+    if (
+        gameSort &&
+        gameSort.value === "za"
+    ) {
 
-            const comparison =
-                String(a.name || "")
-                    .localeCompare(
-                        String(b.name || ""),
-                        undefined,
-                        {
-                            sensitivity: "base"
-                        }
-                    );
+        filtered.sort(
+            (a, b) =>
+                b.name.localeCompare(
+                    a.name
+                )
+        );
 
+    } else {
 
-            if (
-                gameSort.value === "za"
-            ) {
-                return -comparison;
-            }
+        filtered.sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name
+                )
+        );
 
-
-            return comparison;
-
-        }
-    );
+    }
 
 
     /*
-     * Clear current cards.
+     * Clear old cards
      */
 
     gameGrid.innerHTML = "";
 
 
     /*
-     * Count.
+     * Update count
      */
 
-    gameCount.textContent =
-        `${visibleGames.length} ${
-            visibleGames.length === 1
-                ? "game"
-                : "games"
-        }`;
+    if (gameCount) {
+
+        gameCount.textContent =
+            filtered.length +
+            (
+                filtered.length === 1
+                    ? " game"
+                    : " games"
+            );
+
+    }
 
 
     /*
-     * Empty state.
+     * Empty state
      */
 
-    emptyState.classList.toggle(
-        "hidden",
-        visibleGames.length !== 0
-    );
+    if (
+        filtered.length === 0
+    ) {
+
+        if (emptyState) {
+            emptyState.classList.add(
+                "show"
+            );
+        }
+
+        return;
+
+    }
+
+
+    if (emptyState) {
+        emptyState.classList.remove(
+            "show"
+        );
+    }
 
 
     /*
-     * Create cards.
+     * Create cards
      */
 
-    visibleGames.forEach(
+    filtered.forEach(
         game => {
 
+            const card =
+                createGameCard(game);
+
             gameGrid.appendChild(
-                createGameCard(game)
+                card
             );
 
         }
     );
 
-
-    /*
-     * Clear button.
-     */
-
-    clearSearch.style.display =
-        gameSearch.value
-            ? "grid"
-            : "none";
-
 }
 
 
-/* =========================================================
+/* =========================================
    CREATE GAME CARD
-   ========================================================= */
+========================================= */
 
 function createGameCard(game) {
 
@@ -334,143 +385,159 @@ function createGameCard(game) {
 
 
     /*
-     * Every game gets its own folder.
+     * Game URL
      *
      * Example:
      *
-     * ./games/slope/
+     * games/slope/
      */
 
     card.href =
-        `./games/${encodeURIComponent(game.slug)}/`;
+        "./games/" +
+        encodeURIComponent(
+            game.slug
+        ) +
+        "/";
 
 
     /*
-     * Prevent bad JSON from creating
-     * unexpected URLs.
+     * IMAGE
      */
 
-    card.setAttribute(
-        "aria-label",
-        `Play ${game.name}`
-    );
-
-
-    /* -----------------------------------------
-       IMAGE
-    ----------------------------------------- */
-
-    const icon =
+    const imageContainer =
         document.createElement("div");
 
-    icon.className =
-        "game-icon";
+    imageContainer.className =
+        "game-card-image";
 
 
     const image =
         document.createElement("img");
 
 
+    image.src =
+        game.icon;
+
+
+    image.alt =
+        game.name;
+
+
     image.loading =
         "lazy";
 
 
-    image.alt =
-        "";
+    image.onerror =
+        function () {
+
+            image.style.display =
+                "none";
 
 
-    /*
-     * The JSON can specify an icon.
-     *
-     * Example:
-     *
-     * "icon": "../../assets/game-icons/slope.svg"
-     *
-     * If there is no icon in the JSON,
-     * automatically use:
-     *
-     * assets/game-icons/[slug].svg
-     */
-
-    const iconPath =
-        game.icon ||
-        `./assets/game-icons/${game.slug}.svg`;
+            const fallback =
+                document.createElement(
+                    "div"
+                );
 
 
-    image.src =
-        iconPath;
+            fallback.className =
+                "game-icon-fallback";
 
 
-    image.addEventListener(
-        "error",
-        () => {
-
-            image.remove();
-
-            createFallbackIcon(
-                icon,
+            fallback.textContent =
                 game.name
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            imageContainer.appendChild(
+                fallback
             );
 
-        },
-        {
-            once: true
-        }
-    );
+        };
 
 
-    icon.appendChild(
+    imageContainer.appendChild(
         image
     );
 
 
-    /* -----------------------------------------
-       INFO
-    ----------------------------------------- */
+    /*
+     * CONTENT
+     */
 
-    const info =
+    const content =
         document.createElement("div");
 
-    info.className =
-        "game-info";
+    content.className =
+        "game-card-content";
 
 
-    const name =
+    const title =
         document.createElement("div");
 
-    name.className =
-        "game-name";
+    title.className =
+        "game-card-title";
 
-    name.textContent =
+    title.textContent =
         game.name;
 
 
-    const meta =
-        document.createElement("div");
-
-    meta.className =
-        "game-meta";
-
-    meta.textContent =
-        game.category ||
-        "Game";
-
-
-    info.appendChild(
-        name
+    content.appendChild(
+        title
     );
 
-    info.appendChild(
-        meta
-    );
+
+    if (
+        game.description
+    ) {
+
+        const description =
+            document.createElement(
+                "div"
+            );
+
+        description.className =
+            "game-card-description";
+
+        description.textContent =
+            game.description;
+
+        content.appendChild(
+            description
+        );
+
+    }
+
+
+    if (
+        game.category
+    ) {
+
+        const category =
+            document.createElement(
+                "span"
+            );
+
+        category.className =
+            "game-card-category";
+
+        category.textContent =
+            game.category;
+
+        content.appendChild(
+            category
+        );
+
+    }
 
 
     card.appendChild(
-        icon
+        imageContainer
     );
 
     card.appendChild(
-        info
+        content
     );
 
 
@@ -479,143 +546,116 @@ function createGameCard(game) {
 }
 
 
-/* =========================================================
-   FALLBACK ICON
-   ========================================================= */
+/* =========================================
+   SEARCH
+========================================= */
 
-function createFallbackIcon(
-    parent,
-    gameName
-) {
+if (gameSearch) {
 
-    /*
-     * Don't create two fallback icons.
-     */
+    gameSearch.addEventListener(
+        "input",
+        function () {
 
-    if (
-        parent.querySelector(
-            ".game-icon-fallback"
-        )
-    ) {
-        return;
-    }
+            renderGames();
 
-
-    const fallback =
-        document.createElement("div");
-
-
-    fallback.className =
-        "game-icon-fallback";
-
-
-    /*
-     * Find the first usable character.
-     */
-
-    const firstCharacter =
-        String(gameName || "S")
-            .trim()
-            .charAt(0)
-            .toUpperCase();
-
-
-    fallback.textContent =
-        firstCharacter || "S";
-
-
-    parent.appendChild(
-        fallback
+        }
     );
 
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-gameSearch.addEventListener(
-    "input",
-    () => {
-
-        renderGames();
-
-    }
-);
-
-
-/* =========================================================
+/* =========================================
    SORT
-   ========================================================= */
+========================================= */
 
-gameSort.addEventListener(
-    "change",
-    () => {
+if (gameSort) {
 
-        renderGames();
+    gameSort.addEventListener(
+        "change",
+        function () {
 
-    }
-);
+            renderGames();
+
+        }
+    );
+
+}
 
 
-/* =========================================================
+/* =========================================
    CLEAR SEARCH
-   ========================================================= */
+========================================= */
 
-clearSearch.addEventListener(
-    "click",
-    () => {
+if (clearSearch) {
 
-        gameSearch.value = "";
+    clearSearch.addEventListener(
+        "click",
+        function () {
 
-        gameSearch.focus();
+            if (gameSearch) {
 
-        renderGames();
+                gameSearch.value =
+                    "";
 
-    }
-);
+                gameSearch.focus();
+
+            }
+
+            renderGames();
+
+        }
+    );
+
+}
 
 
-/* =========================================================
+/* =========================================
    KEYBOARD SHORTCUT
-   ========================================================= */
+========================================= */
 
 document.addEventListener(
     "keydown",
-    event => {
+    function (event) {
 
         /*
-         * Cmd/Ctrl + K
+         * Cmd + K / Ctrl + K
          */
 
         if (
-            (event.metaKey ||
-                event.ctrlKey) &&
+            (
+                event.ctrlKey ||
+                event.metaKey
+            ) &&
             event.key.toLowerCase() === "k"
         ) {
 
             event.preventDefault();
 
-            gameSearch.focus();
-
-            gameSearch.select();
+            if (gameSearch) {
+                gameSearch.focus();
+            }
 
         }
 
 
         /*
-         * Escape clears search.
+         * Escape clears search
          */
 
         if (
             event.key === "Escape" &&
-            document.activeElement === gameSearch
+            document.activeElement ===
+                gameSearch
         ) {
 
-            gameSearch.value = "";
+            if (gameSearch) {
 
-            renderGames();
+                gameSearch.value =
+                    "";
+
+                renderGames();
+
+            }
 
         }
 
@@ -623,9 +663,72 @@ document.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================================
+   LOADING HELPERS
+========================================= */
+
+function showLoading() {
+
+    if (loading) {
+
+        loading.classList.remove(
+            "hidden"
+        );
+
+    }
+
+    if (gameGrid) {
+        gameGrid.innerHTML = "";
+    }
+
+}
+
+
+function hideLoading() {
+
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   ERROR HELPERS
+========================================= */
+
+function showError() {
+
+    if (errorState) {
+
+        errorState.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function hideError() {
+
+    if (errorState) {
+
+        errorState.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================
    START
-   ========================================================= */
+========================================= */
 
 loadGames();
-```
