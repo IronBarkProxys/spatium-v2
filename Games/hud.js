@@ -14,35 +14,33 @@
         #hud-wrap {
             position: fixed;
             left: 50%;
-            bottom: 14px;
+            bottom: 12px;
             transform: translateX(-50%);
             z-index: 2147483647;
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px;
-            border: 1px solid rgba(255,255,255,.09);
-            border-radius: 18px;
-            background: rgba(12,14,18,.94);
-            box-shadow: 0 10px 30px rgba(0,0,0,.42);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: opacity .2s ease, transform .2s ease;
+            padding: 5px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 16px;
+            background: rgba(0,0,0,.78);
+            box-shadow: 0 8px 28px rgba(0,0,0,.45);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             font-family: Arial, sans-serif;
         }
 
         .spatium-hud-pill {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .hud-btn {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             padding: 0;
             border: 0;
-            border-radius: 12px;
+            border-radius: 10px;
             display: grid;
             place-items: center;
             background: rgba(255,255,255,.07);
@@ -54,80 +52,71 @@
         }
 
         .hud-btn:hover {
-            background: rgba(255,255,255,.14);
+            background: rgba(255,255,255,.15);
             transform: translateY(-1px);
         }
 
         .hud-btn:active {
-            transform: scale(.93);
+            transform: scale(.92);
         }
 
         .hud-btn .material-icons {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1;
         }
 
         .hud-game {
             display: flex;
             align-items: center;
-            gap: 7px;
-            min-width: 0;
-            padding: 0 7px 0 3px;
+            justify-content: center;
+            padding: 0 4px;
         }
 
         #hud-cover {
-            width: 30px;
-            height: 30px;
-            flex: 0 0 30px;
+            width: 28px;
+            height: 28px;
             object-fit: cover;
-            border-radius: 9px;
-            background: #20232a;
+            border-radius: 8px;
+            background: #171717;
         }
 
         #game-name {
-            max-width: 120px;
-            overflow: hidden;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 1;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            display: none;
         }
 
         .hud-divider {
             width: 1px;
-            height: 22px;
+            height: 20px;
             margin: 0 2px;
-            background: rgba(255,255,255,.09);
+            background: rgba(255,255,255,.10);
         }
 
         .hud-toggle {
             position: fixed;
-            right: 14px;
-            bottom: 14px;
+            right: 12px;
+            bottom: 12px;
             z-index: 2147483647;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             padding: 0;
-            border: 1px solid rgba(255,255,255,.09);
-            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 12px;
             display: none;
             place-items: center;
-            background: rgba(12,14,18,.94);
+            background: rgba(0,0,0,.78);
             color: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,.35);
+            box-shadow: 0 8px 25px rgba(0,0,0,.4);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             cursor: pointer;
         }
 
         .hud-toggle:hover {
-            background: rgba(255,255,255,.12);
+            background: rgba(0,0,0,.9);
         }
 
         .hud-toggle .material-icons {
-            font-size: 20px;
+            font-size: 19px;
         }
 
         .hud-help-modal {
@@ -138,7 +127,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: rgba(0,0,0,.55);
+            background: rgba(0,0,0,.58);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
@@ -148,18 +137,18 @@
         }
 
         .hud-help-box {
-            width: min(400px, 100%);
+            width: min(380px, 100%);
             padding: 18px;
-            border: 1px solid rgba(255,255,255,.09);
-            border-radius: 20px;
-            background: #111318;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 18px;
+            background: rgba(0,0,0,.92);
             color: #fff;
-            box-shadow: 0 20px 60px rgba(0,0,0,.5);
+            box-shadow: 0 20px 60px rgba(0,0,0,.55);
         }
 
         .hud-help-box h2 {
             margin: 0 0 8px;
-            font-size: 18px;
+            font-size: 17px;
         }
 
         .hud-help-box p {
@@ -171,10 +160,10 @@
 
         .hud-help-close {
             width: 100%;
-            height: 36px;
+            height: 34px;
             margin-top: 14px;
             border: 0;
-            border-radius: 12px;
+            border-radius: 10px;
             background: rgba(255,255,255,.08);
             color: #fff;
             cursor: pointer;
@@ -191,53 +180,33 @@
         @media (max-width: 600px) {
             #hud-wrap {
                 bottom: 8px;
-                max-width: calc(100vw - 16px);
-                gap: 4px;
-                padding: 5px;
-                border-radius: 16px;
+                padding: 4px;
+                border-radius: 14px;
+            }
+
+            .spatium-hud-pill {
+                gap: 3px;
             }
 
             .hud-btn {
-                width: 31px;
-                height: 31px;
-                border-radius: 10px;
+                width: 30px;
+                height: 30px;
+                border-radius: 9px;
             }
 
             .hud-btn .material-icons {
-                font-size: 17px;
+                font-size: 16px;
             }
 
             #hud-cover {
-                width: 27px;
-                height: 27px;
-                flex-basis: 27px;
-                border-radius: 8px;
-            }
-
-            #game-name {
-                max-width: 80px;
-                font-size: 11px;
-            }
-
-            .hud-game {
-                gap: 5px;
-                padding-right: 4px;
+                width: 26px;
+                height: 26px;
+                border-radius: 7px;
             }
 
             .hud-divider {
-                height: 20px;
-                margin: 0;
-            }
-        }
-
-        @media (max-width: 430px) {
-            #game-name,
-            #hud-cover {
-                display: none;
-            }
-
-            .hud-game {
-                padding: 0;
+                height: 18px;
+                margin: 0 1px;
             }
         }
     `;
@@ -331,13 +300,15 @@
             }
         } catch (error) {
             console.warn(
-                "[Spatium HUD] Could not load games.json",
+                "[Spatium HUD] games.json unavailable",
                 error
             );
         }
 
         return {
-            name: folder || HUD_CONFIG.defaultTitle,
+            name:
+                folder ||
+                HUD_CONFIG.defaultTitle,
             cover: ""
         };
     }
@@ -358,8 +329,8 @@
                     class="hud-btn"
                     id="hud-back"
                     type="button"
-                    aria-label="Back to games"
-                    title="Back to games"
+                    aria-label="Back"
+                    title="Back"
                 >
                     <span class="material-icons">
                         arrow_back
@@ -373,10 +344,6 @@
                         id="hud-cover"
                         alt=""
                     >
-
-                    <span id="game-name">
-                        ${escapeHtml(gameInfo.name)}
-                    </span>
                 </div>
 
                 <div class="hud-divider"></div>
@@ -445,8 +412,8 @@
                     class="hud-btn"
                     id="hud-hide"
                     type="button"
-                    aria-label="Hide controls"
-                    title="Hide controls"
+                    aria-label="Hide HUD"
+                    title="Hide HUD"
                 >
                     <span class="material-icons">
                         expand_more
@@ -477,11 +444,8 @@
     }
 
     function createToggle() {
-        if (document.getElementById("hud-toggle")) {
-            return;
-        }
-
-        const toggle = document.createElement("button");
+        const toggle =
+            document.createElement("button");
 
         toggle.className = "hud-toggle";
         toggle.id = "hud-toggle";
@@ -507,14 +471,6 @@
     }
 
     function createHelpModal() {
-        if (
-            document.getElementById(
-                "hud-help-modal"
-            )
-        ) {
-            return;
-        }
-
         const modal =
             document.createElement("div");
 
@@ -526,17 +482,14 @@
                 class="hud-help-box"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="hud-help-title"
             >
-                <h2 id="hud-help-title">
-                    Game Controls
-                </h2>
+                <h2>Game Help</h2>
 
                 <p>
-                    Use the game's built-in controls
-                    to play. Use the HUD buttons to
-                    navigate, enter fullscreen, access
-                    settings, and get help.
+                    Use the game's normal controls
+                    to play. The HUD provides quick
+                    access to fullscreen, settings,
+                    touch controls, and navigation.
                 </p>
 
                 <button
@@ -619,15 +572,6 @@
             );
     }
 
-    function escapeHtml(value) {
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
     function Backhome() {
         window.location.href =
             HUD_CONFIG.gamesPage;
@@ -648,9 +592,7 @@
                 target.requestFullscreen
             ) {
                 await target.requestFullscreen();
-            } else if (
-                document.documentElement.requestFullscreen
-            ) {
+            } else {
                 await document.documentElement
                     .requestFullscreen();
             }
@@ -733,10 +675,7 @@
 
     function reportIssue() {
         const gameName =
-            document.getElementById(
-                "game-name"
-            )?.textContent ||
-            "Game";
+            getCurrentGameFolder();
 
         const subject =
             encodeURIComponent(
@@ -766,12 +705,11 @@
             return;
         }
 
-        const event =
+        window.dispatchEvent(
             new CustomEvent(
                 "spatium:toggle-touch-controls"
-            );
-
-        window.dispatchEvent(event);
+            )
+        );
     }
 
     window.Backhome = Backhome;
