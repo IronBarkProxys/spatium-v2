@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Chat · Qz Games</title>
+
+    <meta
+        name="description"
+        content="Talk with the Qz Games community."
+    >
+
+    <meta name="theme-color" content="#0a0b0e">
+
+    <link rel="icon" href="./assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/chat.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body
+    data-qz-theme-scripts="enabled"
+    data-bg="mesh"
+    data-density="cozy"
+>
+
+<div id="app-navbar"></div>
+
+<div id="app-sidebar"></div>
+
+<main class="page-shell chat-page">
+
+    <section class="page-header chat-page-header">
+
+        <div>
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                COMMUNITY
+            </div>
+
+            <h1>Site chat</h1>
+
+            <p>
+                One room for everyone on Qz Games.
+                Keep it friendly and school-safe.
+            </p>
+        </div>
+
+        <div class="chat-status-card">
+            <span class="status-dot online"></span>
+
+            <div>
+                <strong id="chatStatus">
+                    Connecting...
+                </strong>
+
+                <small id="chatStatusText">
+                    Checking your account
+                </small>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="chat-shell">
+
+        <aside class="chat-room-sidebar">
+
+            <div class="chat-room-title">
+                <div class="room-icon">
+                    <span class="material-icons">
+                        public
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Global Chat</strong>
+                    <small>Everyone</small>
+                </div>
+            </div>
+
+            <div class="chat-rules">
+
+                <div class="chat-rule">
+                    <span class="material-icons">school</span>
+
+                    <div>
+                        <strong>School safe</strong>
+                        <span>Rude words are blocked.</span>
+                    </div>
+                </div>
+
+                <div class="chat-rule">
+                    <span class="material-icons">timer</span>
+
+                    <div>
+                        <strong>Slow mode</strong>
+                        <span>5 seconds between messages.</span>
+                    </div>
+                </div>
+
+                <div class="chat-rule">
+                    <span class="material-icons">flag</span>
+
+                    <div>
+                        <strong>See something?</strong>
+                        <span>Report it to the site owner.</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="chat-login-box" id="chatLoginBox">
+                <span class="material-icons">lock</span>
+
+                <strong>Sign in required</strong>
+
+                <p>
+                    You need a Qz Games account
+                    to participate in chat.
+                </p>
+
+                <a href="./login.html" class="primary-btn">
+                    Sign in
+                </a>
+            </div>
+
+        </aside>
+
+
+        <section class="chat-main">
+
+            <header class="chat-header">
+
+                <div class="chat-header-room">
+
+                    <div class="room-icon small">
+                        <span class="material-icons">
+                            forum
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Global Chat</strong>
+
+                        <span id="chatMemberText">
+                            Sign in to join
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="chat-header-actions">
+
+                    <button
+                        type="button"
+                        id="chatRefresh"
+                        class="icon-btn"
+                        title="Refresh chat"
+                    >
+                        <span class="material-icons">
+                            refresh
+                        </span>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <div
+                id="chatMessages"
+                class="chat-messages"
+                aria-live="polite"
+            >
+
+                <div class="chat-loading">
+                    <div class="chat-spinner"></div>
+
+                    <span>
+                        Loading chat...
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div
+                id="chatTyping"
+                class="chat-typing"
+                aria-live="polite"
+            ></div>
+
+
+            <div
+                id="chatError"
+                class="chat-error"
+                hidden
+            ></div>
+
+
+            <form
+                id="chatForm"
+                class="chat-composer"
+                autocomplete="off"
+            >
+
+                <div class="mention-suggestions" id="mentionSuggestions"></div>
+
+                <textarea
+                    id="chatInput"
+                    maxlength="300"
+                    rows="1"
+                    placeholder="Sign in to chat..."
+                    disabled
+                ></textarea>
+
+                <div class="chat-composer-bottom">
+
+                    <div class="chat-composer-info">
+
+                        <span
+                            id="chatCharacterCount"
+                        >
+                            0 / 300
+                        </span>
+
+                        <span class="chat-hint">
+                            Enter to send · Shift+Enter for a new line
+                        </span>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="chatSend"
+                        class="chat-send-btn"
+                        disabled
+                    >
+                        <span>Send</span>
+
+                        <span class="material-icons">
+                            send
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<!-- Report modal -->
+
+<div
+    id="reportModal"
+    class="modal-backdrop"
+    hidden
+>
+
+    <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportTitle"
+    >
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeReport"
+        >
+            <span class="material-icons">close</span>
+        </button>
+
+        <div class="report-icon">
+            <span class="material-icons">flag</span>
+        </div>
+
+        <h2 id="reportTitle">
+            Report message
+        </h2>
+
+        <p>
+            Tell the site owner why this message should be reviewed.
+        </p>
+
+        <textarea
+            id="reportReason"
+            maxlength="200"
+            placeholder="Optional reason..."
+        ></textarea>
+
+        <div class="report-actions">
+
+            <button
+                type="button"
+                class="secondary-btn"
+                id="cancelReport"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="danger-btn"
+                id="submitReport"
+            >
+                Report
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="app-footer"></div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script src="./js/supabase-config.js"></script>
+<script src="./js/layout.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/chat.js"></script>
+
+</body>
+</html>
