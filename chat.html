@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -39,15 +41,23 @@
         rel="stylesheet"
         href="./css/chat.css"
     >
+
 </head>
+
 
 <body>
 
     <div class="chat-page">
 
-        <!-- HEADER -->
+
+        <!-- =========================================
+             HEADER
+        ========================================== -->
 
         <header class="chat-header">
+
+
+            <!-- BRAND -->
 
             <a
                 href="./index.html"
@@ -66,7 +76,12 @@
             </a>
 
 
-            <nav class="main-nav">
+            <!-- NAVIGATION -->
+
+            <nav
+                class="main-nav"
+                aria-label="Main navigation"
+            >
 
                 <a href="./index.html">
                     Home
@@ -86,29 +101,51 @@
             </nav>
 
 
+            <!-- HEADER ACCOUNT -->
+
             <div class="header-user">
 
-                <span id="headerUsername">
-                    Guest
-                </span>
+                <a
+                    href="./account.html"
+                    id="headerAccountLink"
+                    class="header-account"
+                >
+
+                    <span
+                        id="headerUsername"
+                    >
+                        Guest
+                    </span>
+
+                </a>
 
             </div>
 
         </header>
 
 
-        <!-- MAIN -->
+
+        <!-- =========================================
+             MAIN
+        ========================================== -->
 
         <main class="chat-layout">
 
-            <!-- SIDEBAR -->
+
+            <!-- =====================================
+                 SIDEBAR
+            ====================================== -->
 
             <aside class="chat-sidebar">
+
 
                 <div class="sidebar-title">
                     COMMUNITY
                 </div>
 
+
+
+                <!-- GLOBAL CHAT -->
 
                 <button
                     class="room active"
@@ -118,6 +155,7 @@
                     <span class="room-icon">
                         💬
                     </span>
+
 
                     <div>
 
@@ -134,25 +172,32 @@
                 </button>
 
 
+
+                <!-- RULES -->
+
                 <div class="rules">
 
                     <h3>
                         Chat rules
                     </h3>
 
+
                     <p>
                         Keep chat school-safe and
                         respectful.
                     </p>
+
 
                     <p>
                         Messages are automatically
                         filtered.
                     </p>
 
+
                     <p>
                         Spam protection is enabled.
                     </p>
+
 
                     <p>
                         Report messages that break
@@ -162,39 +207,80 @@
                 </div>
 
 
+
+                <!-- =================================
+                     ACCOUNT
+                ================================== -->
+
                 <div
                     class="account-box"
                     id="accountBox"
                 >
 
-                    <div class="account-status">
+                    <!-- SIGNED OUT -->
 
-                        <span class="status-dot"></span>
+                    <a
+                        href="./account.html"
+                        id="accountLink"
+                        class="account-button"
+                    >
 
-                        <div>
+                        <div class="account-status">
 
-                            <strong id="accountName">
-                                Not signed in
-                            </strong>
+                            <span class="status-dot"></span>
 
-                            <small id="accountStatus">
-                                Sign in to chat
-                            </small>
+
+                            <div>
+
+                                <strong
+                                    id="accountName"
+                                >
+                                    Not signed in
+                                </strong>
+
+
+                                <small
+                                    id="accountStatus"
+                                >
+                                    Create an account
+                                </small>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    </a>
+
+
+                    <!-- LOGOUT -->
+
+                    <button
+                        type="button"
+                        id="logoutButton"
+                        class="logout-button"
+                        style="display:none;"
+                    >
+                        Sign Out
+                    </button>
 
                 </div>
+
 
             </aside>
 
 
-            <!-- CHAT -->
+
+            <!-- =====================================
+                 CHAT
+            ====================================== -->
 
             <section class="chat-container">
 
+
+                <!-- CHAT TOP -->
+
                 <div class="chat-top">
+
 
                     <div>
 
@@ -204,9 +290,13 @@
                                 Global Chat
                             </h1>
 
-                            <span class="online-dot"></span>
+                            <span
+                                class="online-dot"
+                                aria-hidden="true"
+                            ></span>
 
                         </div>
+
 
                         <p>
                             Talk with the Spatium community
@@ -214,6 +304,9 @@
 
                     </div>
 
+
+
+                    <!-- CONNECTION -->
 
                     <div
                         class="connection"
@@ -225,32 +318,49 @@
                 </div>
 
 
-                <!-- MESSAGES -->
+
+                <!-- =================================
+                     MESSAGES
+                ================================== -->
 
                 <div
                     class="messages"
                     id="messages"
                     aria-live="polite"
+                    aria-label="Chat messages"
                 >
 
                     <div class="loading">
+
                         Loading chat...
+
                     </div>
 
                 </div>
 
 
-                <!-- STATUS -->
+
+                <!-- =================================
+                     STATUS
+                ================================== -->
 
                 <div
                     class="chat-status"
                     id="chatStatus"
+                    role="status"
+                    aria-live="polite"
                 ></div>
 
 
-                <!-- COMPOSER -->
+
+                <!-- =================================
+                     COMPOSER
+                ================================== -->
 
                 <div class="composer-wrapper">
+
+
+                    <!-- MENTIONS -->
 
                     <div
                         class="mention-list"
@@ -258,7 +368,11 @@
                     ></div>
 
 
+
+                    <!-- COMPOSER -->
+
                     <div class="composer">
+
 
                         <textarea
                             id="messageInput"
@@ -268,14 +382,20 @@
                             disabled
                             autocomplete="off"
                             spellcheck="true"
+                            aria-label="Message"
                         ></textarea>
+
 
 
                         <div class="composer-bottom">
 
-                            <span id="characterCount">
+
+                            <span
+                                id="characterCount"
+                            >
                                 0 / 300
                             </span>
+
 
 
                             <button
@@ -292,6 +412,7 @@
 
                 </div>
 
+
             </section>
 
         </main>
@@ -299,7 +420,10 @@
     </div>
 
 
-    <!-- REPORT MODAL -->
+
+    <!-- =========================================
+         REPORT MODAL
+    ========================================== -->
 
     <div
         class="modal hidden"
@@ -311,19 +435,26 @@
 
         <div class="modal-box">
 
+
+            <!-- CLOSE -->
+
             <button
                 class="modal-close"
                 id="closeReport"
                 type="button"
-                aria-label="Close"
+                aria-label="Close report window"
             >
                 ×
             </button>
 
 
+
+            <!-- TITLE -->
+
             <h2 id="reportTitle">
                 Report message
             </h2>
+
 
 
             <p>
@@ -332,25 +463,36 @@
             </p>
 
 
+
+            <!-- REASON -->
+
             <textarea
                 id="reportReason"
                 maxlength="500"
                 placeholder="Reason..."
+                aria-label="Report reason"
             ></textarea>
 
+
+
+            <!-- SUBMIT -->
 
             <button
                 class="report-submit"
                 id="submitReport"
                 type="button"
             >
-                Submit report
+                Submit Report
             </button>
 
+
+
+            <!-- ERROR -->
 
             <div
                 class="report-error"
                 id="reportError"
+                role="alert"
             ></div>
 
         </div>
@@ -358,15 +500,255 @@
     </div>
 
 
-    <!-- SUPABASE -->
+
+    <!-- =========================================
+         SUPABASE
+    ========================================== -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     ></script>
 
-    <script src="./js/supabase-config.js"></script>
 
-    <script src="./js/chat.js"></script>
+    <!-- SUPABASE CONFIG -->
+
+    <script
+        src="./js/supabase-config.js"
+    ></script>
+
+
+    <!-- CHAT -->
+
+    <script
+        src="./js/chat.js"
+    ></script>
+
+
+
+    <!-- =========================================
+         ACCOUNT UI
+    ========================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async () => {
+
+                const supabase =
+                    window.spatiumSupabase;
+
+
+                if (!supabase) {
+
+                    console.error(
+                        "[Spatium] Supabase is not available."
+                    );
+
+                    return;
+
+                }
+
+
+                const headerUsername =
+                    document.getElementById(
+                        "headerUsername"
+                    );
+
+
+                const accountName =
+                    document.getElementById(
+                        "accountName"
+                    );
+
+
+                const accountStatus =
+                    document.getElementById(
+                        "accountStatus"
+                    );
+
+
+                const accountLink =
+                    document.getElementById(
+                        "accountLink"
+                    );
+
+
+                const logoutButton =
+                    document.getElementById(
+                        "logoutButton"
+                    );
+
+
+
+                /* =========================
+                   UPDATE ACCOUNT UI
+                ========================= */
+
+                async function updateAccountUI() {
+
+                    try {
+
+                        const {
+                            data,
+                            error
+                        } = await supabase.auth.getUser();
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+
+                        const user =
+                            data?.user;
+
+
+                        /* SIGNED OUT */
+
+                        if (!user) {
+
+                            headerUsername.textContent =
+                                "Guest";
+
+
+                            accountName.textContent =
+                                "Not signed in";
+
+
+                            accountStatus.textContent =
+                                "Create an account";
+
+
+                            accountLink.href =
+                                "./account.html";
+
+
+                            logoutButton.style.display =
+                                "none";
+
+
+                            return;
+
+                        }
+
+
+
+                        /* USERNAME */
+
+                        const username =
+                            user.user_metadata?.username ||
+                            user.user_metadata?.display_name ||
+                            user.email?.split("@")[0] ||
+                            "User";
+
+
+                        headerUsername.textContent =
+                            username;
+
+
+                        accountName.textContent =
+                            username;
+
+
+                        accountStatus.textContent =
+                            "Signed in";
+
+
+                        accountLink.href =
+                            "./account.html";
+
+
+                        logoutButton.style.display =
+                            "block";
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "[Spatium] Account error:",
+                            error
+                        );
+
+                    }
+
+                }
+
+
+
+                /* =========================
+                   LOGOUT
+                ========================= */
+
+                logoutButton.addEventListener(
+                    "click",
+                    async () => {
+
+                        logoutButton.disabled =
+                            true;
+
+                        logoutButton.textContent =
+                            "Signing out...";
+
+
+                        const {
+                            error
+                        } =
+                            await supabase.auth.signOut();
+
+
+                        if (error) {
+
+                            console.error(
+                                "[Spatium] Logout error:",
+                                error
+                            );
+
+                            logoutButton.disabled =
+                                false;
+
+                            logoutButton.textContent =
+                                "Sign Out";
+
+                            return;
+
+                        }
+
+
+                        window.location.reload();
+
+                    }
+                );
+
+
+
+                /* =========================
+                   AUTH CHANGES
+                ========================= */
+
+                supabase.auth.onAuthStateChange(
+                    () => {
+
+                        updateAccountUI();
+
+                    }
+                );
+
+
+
+                /* =========================
+                   INITIAL STATE
+                ========================= */
+
+                await updateAccountUI();
+
+            }
+        );
+
+    </script>
+
 
 </body>
+
 </html>
