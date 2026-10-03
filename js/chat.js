@@ -25,10 +25,13 @@
 
     let currentUser = null;
     let currentUsername = "User";
+    let currentVerified = false;
 
     let pollTimer = null;
     let loadingMessages = false;
     let sendingMessage = false;
+
+    let profileCache = new Map();
 
 
     /* =========================================================
@@ -222,6 +225,18 @@
             return currentUsername;
         }
 
+        const cachedProfile =
+            profileCache.get(
+                message.user_id
+            );
+
+        if (
+            cachedProfile &&
+            cachedProfile.username
+        ) {
+            return cachedProfile.username;
+        }
+
         return (
             message.username ||
             message.display_name ||
@@ -232,6 +247,115 @@
             message.author_name ||
             "User"
         );
+    }
+
+
+    /* =========================================================
+       VERIFIED STATUS
+       ========================================================= */
+
+    function getMessageVerified(message) {
+
+        if (!message) {
+            return false;
+        }
+
+        if (
+            currentUser &&
+            message.user_id === currentUser.id
+        ) {
+            return currentVerified;
+        }
+
+        const cachedProfile =
+            profileCache.get(
+                message.user_id
+            );
+
+        if (cachedProfile) {
+            return cachedProfile.verified === true;
+        }
+
+        return (
+            message.verified === true ||
+            message.is_verified === true ||
+            message.author_verified === true
+        );
+    }
+
+
+    async function loadProfilesForMessages(
+        messages
+    ) {
+
+        if (
+            !messages ||
+            !messages.length
+        ) {
+            return;
+        }
+
+        const userIds = [
+            ...new Set(
+                messages
+                    .map(
+                        message =>
+                            message?.user_id
+                    )
+                    .filter(Boolean)
+            )
+        ];
+
+        if (!userIds.length) {
+            return;
+        }
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("profiles")
+                    .select(
+                        "id, username, display_name, verified"
+                    )
+                    .in(
+                        "id",
+                        userIds
+                    );
+
+            if (error) {
+
+                console.error(
+                    "[Spatium Chat] Could not load profiles:",
+                    error
+                );
+
+                return;
+            }
+
+            for (
+                const profile
+                of data || []
+            ) {
+
+                profileCache.set(
+                    profile.id,
+                    profile
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "[Spatium Chat] Profile loading error:",
+                error
+            );
+
+        }
     }
 
 
@@ -426,6 +550,12 @@
             );
 
 
+        const verified =
+            getMessageVerified(
+                message
+            );
+
+
         const body =
             message.body ??
             message.content ??
@@ -437,6 +567,20 @@
             formatMessageTime(
                 message.created_at
             );
+
+
+        const verifiedBadge =
+            verified
+                ? `
+                    <span
+                        class="gv-verified-badge"
+                        aria-label="Verified"
+                        title="Verified"
+                    >
+                        <span class="gv-verified-check">✓</span>
+                    </span>
+                `
+                : "";
 
 
         element.innerHTML = `
@@ -451,6 +595,7 @@
                     )}"
                 >
                     ${escapeHTML(username)}
+                    ${verifiedBadge}
                 </button>
 
                 <time
@@ -633,6 +778,11 @@
 
             console.log(
                 `[Spatium Chat] Loaded ${messages.length} messages.`
+            );
+
+
+            await loadProfilesForMessages(
+                messages
             );
 
 
@@ -1006,6 +1156,9 @@
                 currentUsername =
                     "User";
 
+                currentVerified =
+                    false;
+
 
                 if (messageInput) {
 
@@ -1045,6 +1198,70 @@
                 "[Spatium Chat] Logged in as:",
                 currentUsername
             );
+
+
+            try {
+
+                const {
+                    data: profile,
+                    error: profileError
+                } =
+                    await supabase
+                        .from("profiles")
+                        .select(
+                            "id, username, display_name, verified"
+                        )
+                        .eq(
+                            "id",
+                            currentUser.id
+                        )
+                        .maybeSingle();
+
+
+                if (profileError) {
+
+                    console.error(
+                        "[Spatium Chat] Could not load profile:",
+                        profileError
+                    );
+
+                    currentVerified =
+                        false;
+
+                } else if (profile) {
+
+                    currentUsername =
+                        profile.username ||
+                        profile.display_name ||
+                        currentUsername;
+
+                    currentVerified =
+                        profile.verified ===
+                        true;
+
+                    profileCache.set(
+                        profile.id,
+                        profile
+                    );
+
+                } else {
+
+                    currentVerified =
+                        false;
+
+                }
+
+            } catch (profileError) {
+
+                console.error(
+                    "[Spatium Chat] Profile lookup failed:",
+                    profileError
+                );
+
+                currentVerified =
+                    false;
+
+            }
 
 
             if (messageInput) {
@@ -1114,26 +1331,7 @@
                         );
 
 
-                    if (messageInput) {
-
-                        messageInput.disabled =
-                            false;
-
-                        messageInput.placeholder =
-                            "Type a message...";
-
-                    }
-
-
-                    if (sendButton) {
-
-                        sendButton.disabled =
-                            false;
-
-                    }
-
-
-                    await loadMessages();
+                    await updateUser();
 
 
                     startPolling();
@@ -1143,6 +1341,9 @@
 
                     currentUsername =
                         "User";
+
+                    currentVerified =
+                        false;
 
 
                     if (messageInput) {
