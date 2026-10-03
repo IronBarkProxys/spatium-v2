@@ -8,747 +8,876 @@
 
     <title>Chat · Spatium GameVault</title>
 
-    <meta name="description" content="Chat with the Spatium community in GameVault style.">
-    <meta property="og:title" content="Spatium Chat">
-    <meta property="og:description" content="Chat with the Spatium community in GameVault style.">
+    <meta
+        name="description"
+        content="Chat with the Spatium community in GameVault style."
+    >
 
-    <link rel="icon" href="/spatium-v2/assets/favicon.svg">
+    <link rel="icon" href="assets/favicon.svg">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
 
-    <!-- Chat CSS -->
     <link rel="stylesheet" href="css/chat.css">
 </head>
 
 <body>
 
-    <div class="chat-page">
+<div class="chat-page">
 
-        <!-- HEADER -->
-        <header class="chat-header">
+    <!-- CHAT -->
+    <div
+        class="gv-chat gv-chat-full gv-chat-in"
+        role="dialog"
+        aria-label="Chat"
+    >
 
-            <!-- BRAND -->
-            <a href="./index.html" class="brand" aria-label="Spatium Home">
-                <span class="brand-q">S</span>
-                <span>Spatium</span>
-            </a>
+        <div class="gv-chat-frame">
 
-            <!-- NAVIGATION -->
-            <nav class="main-nav" aria-label="Main navigation">
-                <a href="./index.html">Home</a>
-                <a href="./games.html">Games</a>
-                <a href="./chat.html" class="active">Chat</a>
-            </nav>
+            <!-- SIDEBAR -->
+            <aside
+                class="gv-chat-side"
+                id="chatSidebar"
+            >
 
-            <!-- HEADER ACCOUNT -->
-            <div class="header-user">
-                <a href="./account.html" id="headerAccountLink" class="header-account">
-                    <span id="headerUsername">Guest</span>
-                </a>
-            </div>
+                <div class="gv-chat-side-head">
 
-        </header>
+                    <span>Chats</span>
 
-        <!-- CHAT -->
-        <div class="gv-chat gv-chat-full gv-chat-in" role="dialog" aria-label="Chat">
-
-            <div class="gv-chat-frame">
-
-                <!-- SIDEBAR -->
-                <aside class="gv-chat-side" id="chatSidebar">
-
-                    <div class="gv-chat-side-head">
-
-                        <span>Chats</span>
-
-                        <button
-                            class="gv-chat-icon"
-                            type="button"
-                            aria-label="Pop-ups over games are on"
-                            title="Pop-ups over games are on"
+                    <button
+                        class="gv-chat-icon"
+                        type="button"
+                        aria-label="Pop-ups over games are on"
+                        title="Pop-ups over games are on"
+                    >
+                        <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
                         >
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                            </svg>
-                        </button>
+                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                        </svg>
+                    </button>
 
-                        <button
-                            class="gv-chat-icon gv-chat-close"
-                            type="button"
-                            aria-label="Close chat"
-                            title="Close chat"
-                            hidden
-                        >
-                            ×
-                        </button>
+                </div>
 
-                    </div>
 
-                    <div class="gv-chat-list">
+                <div class="gv-chat-list">
 
-                        <button
-                            class="gv-chat-row"
-                            type="button"
-                            aria-current="true"
-                        >
-                            <span class="gv-chat-dot">#</span>
-
-                            <span class="gv-chat-row-text">
-                                <span class="gv-chat-row-name">Server</span>
-                                <span
-                                    class="gv-chat-row-last"
-                                    id="sidebarLastMsg"
-                                >
-                                    Talk with everyone on Spatium
-                                </span>
-                            </span>
-
-                            <span class="gv-chat-count" hidden></span>
-                        </button>
-
-                    </div>
-
-                    <div class="gv-chat-foot">
-
-                        <button
-                            class="gv-chat-pill primary"
-                            type="button"
-                            id="composeBtn"
-                        >
-                            Compose
-                        </button>
-
-                        <button
-                            class="gv-chat-pill"
-                            type="button"
-                            id="groupChatBtn"
-                        >
-                            Group chat
-                        </button>
-
-                    </div>
-
-                </aside>
-
-                <!-- MAIN CHAT -->
-                <section class="gv-chat-main">
-
-                    <!-- CHAT HEADER -->
-                    <div class="gv-chat-head">
-
-                        <button
-                            class="gv-chat-icon gv-chat-back"
-                            id="backBtn"
-                            type="button"
-                            aria-label="All chats"
-                            title="All chats"
-                        >
-                            ←
-                        </button>
-
-                        <div class="gv-chat-title">
-                            <b>Server</b>
-                            <small>Everyone on GameVault</small>
-                        </div>
-
-                        <button
-                            class="gv-chat-icon"
-                            type="button"
-                            aria-label="Mute"
-                            title="Mute"
-                        >
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                            </svg>
-                        </button>
-
-                        <button
-                            class="gv-chat-icon"
-                            type="button"
-                            aria-label="People"
-                            title="People"
-                            hidden
-                        >
-                            ☰
-                        </button>
-
-                        <button
-                            class="gv-chat-icon gv-chat-close"
-                            type="button"
-                            aria-label="Close chat"
-                            title="Close chat"
-                        >
-                            ×
-                        </button>
-
-                    </div>
-
-                    <!-- CHAT LOG -->
-                    <div
-                        class="gv-chat-log"
-                        id="messages"
-                        role="log"
-                        aria-live="polite"
+                    <button
+                        class="gv-chat-row"
+                        type="button"
+                        aria-current="true"
                     >
 
-                        <div class="gv-msg" data-id="378">
-                            <div class="gv-msg-head">
-                                <button class="gv-msg-name" type="button">
-                                    chezwhell
-                                </button>
+                        <span class="gv-chat-dot">
+                            #
+                        </span>
 
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:03:50.008736+00:00"
-                                >
-                                    Oct 2, 12:03 PM
-                                </time>
+                        <span class="gv-chat-row-text">
 
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
-                            </div>
+                            <span class="gv-chat-row-name">
+                                Server
+                            </span>
 
-                            <div class="gv-msg-body">
-                                wait r u amargoyal
-                            </div>
-                        </div>
+                            <span
+                                class="gv-chat-row-last"
+                                id="sidebarLastMsg"
+                            >
+                                Talk with everyone on Spatium
+                            </span>
 
-                        <div class="gv-msg" data-id="379">
-                            <div class="gv-msg-head">
+                        </span>
 
-                                <button class="gv-msg-name" type="button">
-                                    Fil
-                                </button>
+                        <span
+                            class="gv-chat-count"
+                            hidden
+                        ></span>
 
-                                <svg
-                                    class="gv-chat-check"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    aria-label="Verified"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="11"
-                                        fill="#1d9bf0"
-                                    ></circle>
+                    </button>
 
-                                    <path
-                                        d="M7 12.5l3.2 3.2L17 9"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    ></path>
-                                </svg>
+                </div>
 
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:04:19.075084+00:00"
-                                >
-                                    Oct 2, 12:04 PM
-                                </time>
 
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
+                <div class="gv-chat-foot">
 
-                            </div>
+                    <button
+                        class="gv-chat-pill primary"
+                        type="button"
+                        id="composeBtn"
+                    >
+                        Compose
+                    </button>
 
-                            <div class="gv-msg-body">
-                                half of the time the scramjet doesn't work
-                            </div>
-                        </div>
+                    <button
+                        class="gv-chat-pill"
+                        type="button"
+                        id="groupChatBtn"
+                    >
+                        Group chat
+                    </button>
 
-                        <div class="gv-msg" data-id="381">
-                            <div class="gv-msg-head">
+                </div>
 
-                                <button class="gv-msg-name" type="button">
-                                    chezwhell
-                                </button>
+            </aside>
 
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:04:49.355415+00:00"
-                                >
-                                    Oct 2, 12:04 PM
-                                </time>
 
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
+            <!-- MAIN CHAT -->
+            <section class="gv-chat-main">
 
-                            </div>
+                <!-- CHAT HEADER -->
+                <div class="gv-chat-head">
 
-                            <div class="gv-msg-body">
-                                fil it gotta be on guest network
-                            </div>
-                        </div>
+                    <button
+                        class="gv-chat-icon"
+                        type="button"
+                        aria-label="Mute"
+                        title="Mute"
+                    >
+                        <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                        </svg>
+                    </button>
 
-                        <div class="gv-msg" data-id="384">
-                            <div class="gv-msg-head">
 
-                                <button class="gv-msg-name" type="button">
-                                    xyyz
-                                </button>
+                    <div class="gv-chat-title">
 
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:15:48.816457+00:00"
-                                >
-                                    Oct 2, 12:15 PM
-                                </time>
+                        <b>Server</b>
 
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
-
-                            </div>
-
-                            <div class="gv-msg-body">
-                                is
-                                <button class="gv-mention" type="button">
-                                    @fil
-                                </button>
-                                or
-                                <button class="gv-mention" type="button">
-                                    @xyz
-                                </button>
-                                Amar goyal
-                            </div>
-                        </div>
-
-                        <div class="gv-msg" data-id="385">
-                            <div class="gv-msg-head">
-
-                                <button class="gv-msg-name" type="button">
-                                    Fil
-                                </button>
-
-                                <svg
-                                    class="gv-chat-check"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    aria-label="Verified"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="11"
-                                        fill="#1d9bf0"
-                                    ></circle>
-
-                                    <path
-                                        d="M7 12.5l3.2 3.2L17 9"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    ></path>
-                                </svg>
-
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:16:07.153211+00:00"
-                                >
-                                    Oct 2, 12:16 PM
-                                </time>
-
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
-
-                            </div>
-
-                            <div class="gv-msg-body">
-                                I'm Filip bruh
-                            </div>
-                        </div>
-
-                        <div class="gv-msg" data-id="390">
-                            <div class="gv-msg-head">
-
-                                <button class="gv-msg-name" type="button">
-                                    dbivol
-                                </button>
-
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T17:30:09.37922+00:00"
-                                >
-                                    Oct 2, 12:30 PM
-                                </time>
-
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
-
-                            </div>
-
-                            <div class="gv-msg-body">
-                                <button class="gv-mention" type="button">
-                                    @xyz
-                                </button>
-                                checking out the new GameVault layout style!
-                            </div>
-                        </div>
-
-                        <div class="gv-msg" data-id="420">
-                            <div class="gv-msg-head">
-
-                                <button class="gv-msg-name" type="button">
-                                    xyz
-                                </button>
-
-                                <svg
-                                    class="gv-chat-check"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    aria-label="Verified"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="11"
-                                        fill="#1d9bf0"
-                                    ></circle>
-
-                                    <path
-                                        d="M7 12.5l3.2 3.2L17 9"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    ></path>
-                                </svg>
-
-                                <time
-                                    class="gv-msg-time"
-                                    datetime="2026-10-02T18:51:49.960258+00:00"
-                                >
-                                    Oct 2, 1:51 PM
-                                </time>
-
-                                <button class="gv-msg-report" type="button">
-                                    Report
-                                </button>
-
-                            </div>
-
-                            <div class="gv-msg-body">
-                                hello everyone! welcome to the Spatium chat
-                            </div>
-                        </div>
+                        <small>
+                            Everyone on Spatium
+                        </small>
 
                     </div>
 
-                    <!-- COMPOSER -->
-                    <div class="composer-wrapper">
 
-                        <div
-                            class="mention-list"
-                            id="mentionList"
-                        ></div>
+                    <!-- ONLY EXIT BUTTON -->
+                    <button
+                        class="gv-chat-icon gv-chat-close"
+                        id="closeChatBtn"
+                        type="button"
+                        aria-label="Close chat"
+                        title="Close chat"
+                    >
+                        ×
+                    </button>
 
-                        <div class="composer">
+                </div>
 
-                            <textarea
-                                id="messageInput"
-                                maxlength="300"
-                                placeholder="Type a message..."
-                                rows="1"
-                                autocomplete="off"
-                                spellcheck="true"
-                                aria-label="Message"
-                            ></textarea>
 
-                            <div class="composer-bottom">
+                <!-- CHAT LOG -->
+                <div
+                    class="gv-chat-log"
+                    id="messages"
+                    role="log"
+                    aria-live="polite"
+                >
 
-                                <span id="characterCount">
-                                    0 / 300
-                                </span>
+                    <!-- Messages are loaded by JavaScript -->
 
-                                <button
-                                    id="sendButton"
-                                    type="button"
-                                >
-                                    Send
-                                </button>
+                </div>
 
-                            </div>
+
+                <!-- COMPOSER -->
+                <div class="composer-wrapper">
+
+                    <div
+                        class="mention-list"
+                        id="mentionList"
+                    ></div>
+
+
+                    <div class="composer">
+
+                        <textarea
+                            id="messageInput"
+                            maxlength="300"
+                            placeholder="Type a message..."
+                            rows="1"
+                            autocomplete="off"
+                            spellcheck="true"
+                            aria-label="Message"
+                        ></textarea>
+
+
+                        <div class="composer-bottom">
+
+                            <span id="characterCount">
+                                0 / 300
+                            </span>
+
+                            <button
+                                id="sendButton"
+                                type="button"
+                            >
+                                Send
+                            </button>
 
                         </div>
 
                     </div>
 
-                </section>
+                </div>
 
-            </div>
+            </section>
 
         </div>
 
     </div>
 
-    <!-- SUPABASE -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- SUPABASE CONFIG -->
-    <script
-        src="./js/supabase-config.js"
-        onerror="console.log('Supabase config omitted, fallback mode active')"
-    ></script>
-
-    <!-- CHAT JAVASCRIPT -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-
-            const messageInput =
-                document.getElementById("messageInput");
-
-            const sendButton =
-                document.getElementById("sendButton");
-
-            const characterCount =
-                document.getElementById("characterCount");
-
-            const messagesContainer =
-                document.getElementById("messages");
-
-            const sidebarLastMsg =
-                document.getElementById("sidebarLastMsg");
-
-            const backBtn =
-                document.getElementById("backBtn");
-
-            const chatSidebar =
-                document.getElementById("chatSidebar");
+</div>
 
 
-            /* Scroll chat to bottom */
-            function scrollToBottom() {
-                if (messagesContainer) {
-                    messagesContainer.scrollTop =
-                        messagesContainer.scrollHeight;
-                }
-            }
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-            scrollToBottom();
-
-
-            /* Mobile sidebar toggle */
-            if (backBtn && chatSidebar) {
-
-                backBtn.addEventListener("click", () => {
-                    chatSidebar.classList.toggle("active");
-                });
-
-            }
+<!-- SUPABASE CONFIG -->
+<script
+    src="js/supabase-config.js"
+    onerror="console.log('Supabase config omitted, local persistence mode active')"
+></script>
 
 
-            /* Character count + textarea autosize */
-            if (messageInput) {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-                messageInput.addEventListener("input", () => {
+    const messageInput =
+        document.getElementById("messageInput");
 
-                    const len = messageInput.value.length;
+    const sendButton =
+        document.getElementById("sendButton");
 
-                    if (characterCount) {
-                        characterCount.textContent =
-                            `${len} / 300`;
-                    }
+    const characterCount =
+        document.getElementById("characterCount");
 
-                    messageInput.style.height = "auto";
+    const messagesContainer =
+        document.getElementById("messages");
 
-                    messageInput.style.height =
-                        Math.min(
-                            messageInput.scrollHeight,
-                            120
-                        ) + "px";
+    const sidebarLastMsg =
+        document.getElementById("sidebarLastMsg");
 
-                });
-
-
-                /* Enter to send */
-                messageInput.addEventListener("keydown", (e) => {
-
-                    if (e.key === "Enter" && !e.shiftKey) {
-
-                        e.preventDefault();
-
-                        sendMessage();
-
-                    }
-
-                });
-
-            }
+    const closeChatBtn =
+        document.getElementById("closeChatBtn");
 
 
-            /* Send button */
-            if (sendButton) {
-                sendButton.addEventListener(
-                    "click",
-                    sendMessage
-                );
-            }
+    /*
+    ============================================================
+    CONFIG
+    ============================================================
+    */
+
+    const STORAGE_KEY = "spatium_server_chat_messages";
 
 
-            /* Send message */
-            function sendMessage() {
+    /*
+    ============================================================
+    DEFAULT MESSAGES
+    ============================================================
+    */
 
-                if (!messageInput) return;
-
-                const text =
-                    messageInput.value.trim();
-
-                if (!text) return;
-
-
-                const msgId = Date.now();
-
-                const now = new Date();
-
-                const timeStr =
-                    now.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit"
-                    });
-
-
-                /* Format mentions */
-                const formattedBody =
-                    text.replace(
-                        /@(\w+)/g,
-                        '<button class="gv-mention" type="button">@$1</button>'
-                    );
-
-
-                const msgEl =
-                    document.createElement("div");
-
-                msgEl.className = "gv-msg";
-
-                msgEl.setAttribute(
-                    "data-id",
-                    msgId
-                );
-
-
-                msgEl.innerHTML = `
-                    <div class="gv-msg-head">
-
-                        <button
-                            class="gv-msg-name"
-                            type="button"
-                        >
-                            You
-                        </button>
-
-                        <time
-                            class="gv-msg-time"
-                            datetime="${now.toISOString()}"
-                        >
-                            ${timeStr}
-                        </time>
-
-                        <button
-                            class="gv-msg-report"
-                            type="button"
-                        >
-                            Report
-                        </button>
-
-                    </div>
-
-                    <div class="gv-msg-body">
-                        ${formattedBody}
-                    </div>
-                `;
+    const defaultMessages = [
+        {
+            id: 378,
+            username: "chezwhell",
+            message: "wait r u amargoyal",
+            time: "2026-10-02T17:03:50.008736+00:00"
+        },
+        {
+            id: 379,
+            username: "Fil",
+            verified: true,
+            message: "half of the time the scramjet doesn't work",
+            time: "2026-10-02T17:04:19.075084+00:00"
+        },
+        {
+            id: 381,
+            username: "chezwhell",
+            message: "fil it gotta be on guest network",
+            time: "2026-10-02T17:04:49.355415+00:00"
+        },
+        {
+            id: 384,
+            username: "xyyz",
+            message: "is @fil or @xyz Amar goyal",
+            time: "2026-10-02T17:15:48.816457+00:00"
+        },
+        {
+            id: 385,
+            username: "Fil",
+            verified: true,
+            message: "I'm Filip bruh",
+            time: "2026-10-02T17:16:07.153211+00:00"
+        },
+        {
+            id: 390,
+            username: "dbivol",
+            message: "@xyz checking out the new GameVault layout style!",
+            time: "2026-10-02T17:30:09.37922+00:00"
+        },
+        {
+            id: 420,
+            username: "xyz",
+            verified: true,
+            message: "hello everyone! welcome to the Spatium chat",
+            time: "2026-10-02T18:51:49.960258+00:00"
+        }
+    ];
 
 
-                messagesContainer.appendChild(msgEl);
+    /*
+    ============================================================
+    LOAD SAVED MESSAGES
+    ============================================================
+    */
 
+    function loadMessages() {
 
-                messageInput.value = "";
+        try {
 
-                messageInput.style.height = "auto";
+            const saved =
+                localStorage.getItem(STORAGE_KEY);
 
+            if (saved) {
 
-                if (characterCount) {
-                    characterCount.textContent =
-                        "0 / 300";
+                const parsed =
+                    JSON.parse(saved);
+
+                if (Array.isArray(parsed)) {
+                    return parsed;
                 }
 
-
-                if (sidebarLastMsg) {
-                    sidebarLastMsg.textContent =
-                        `You: ${text}`;
-                }
-
-
-                scrollToBottom();
-
             }
 
+        } catch (error) {
 
-            /* Report button */
-            messagesContainer.addEventListener(
-                "click",
-                (e) => {
-
-                    if (
-                        e.target.classList.contains(
-                            "gv-msg-report"
-                        )
-                    ) {
-
-                        e.target.textContent =
-                            "Reported";
-
-                        e.target.style.color =
-                            "var(--gv-green)";
-
-                        e.target.disabled = true;
-
-                    }
-
-                }
+            console.error(
+                "Could not load saved messages:",
+                error
             );
 
+        }
+
+        return defaultMessages;
+
+    }
+
+
+    /*
+    ============================================================
+    SAVE MESSAGES
+    ============================================================
+    */
+
+    function saveMessages() {
+
+        try {
+
+            const messages = [];
+
+            document
+                .querySelectorAll(".gv-msg")
+                .forEach(msg => {
+
+                    const username =
+                        msg
+                            .querySelector(".gv-msg-name")
+                            ?.textContent
+                            .trim() || "You";
+
+                    const body =
+                        msg
+                            .querySelector(".gv-msg-body")
+                            ?.textContent
+                            .trim() || "";
+
+                    const time =
+                        msg
+                            .querySelector(".gv-msg-time")
+                            ?.getAttribute("datetime") ||
+                        new Date().toISOString();
+
+                    const id =
+                        msg.getAttribute("data-id") ||
+                        Date.now();
+
+                    messages.push({
+                        id,
+                        username,
+                        message: body,
+                        time
+                    });
+
+                });
+
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(messages)
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save messages:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+    FORMAT MESSAGE
+    ============================================================
+    */
+
+    function formatMessage(text) {
+
+        const escaped =
+            text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+
+        return escaped.replace(
+            /@(\w+)/g,
+            '<button class="gv-mention" type="button">@$1</button>'
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    DISPLAY MESSAGE
+    ============================================================
+    */
+
+    function renderMessage(msg) {
+
+        const msgEl =
+            document.createElement("div");
+
+        msgEl.className =
+            "gv-msg";
+
+        msgEl.setAttribute(
+            "data-id",
+            msg.id
+        );
+
+
+        const date =
+            new Date(msg.time);
+
+
+        const timeStr =
+            date.toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit"
+            });
+
+
+        const verified =
+            msg.verified
+                ? `
+                    <svg
+                        class="gv-chat-check"
+                        viewBox="0 0 24 24"
+                        role="img"
+                        aria-label="Verified"
+                    >
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            fill="#1d9bf0"
+                        ></circle>
+
+                        <path
+                            d="M7 12.5l3.2 3.2L17 9"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-width="2.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></path>
+                    </svg>
+                `
+                : "";
+
+
+        msgEl.innerHTML = `
+            <div class="gv-msg-head">
+
+                <button
+                    class="gv-msg-name"
+                    type="button"
+                >
+                    ${escapeHTML(msg.username)}
+                </button>
+
+                ${verified}
+
+                <time
+                    class="gv-msg-time"
+                    datetime="${escapeHTML(msg.time)}"
+                >
+                    ${timeStr}
+                </time>
+
+                <button
+                    class="gv-msg-report"
+                    type="button"
+                >
+                    Report
+                </button>
+
+            </div>
+
+            <div class="gv-msg-body">
+                ${formatMessage(msg.message)}
+            </div>
+        `;
+
+
+        messagesContainer.appendChild(msgEl);
+
+    }
+
+
+    /*
+    ============================================================
+    ESCAPE HTML
+    ============================================================
+    */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /*
+    ============================================================
+    INITIALIZE CHAT
+    ============================================================
+    */
+
+    function initializeChat() {
+
+        const savedMessages =
+            loadMessages();
+
+
+        messagesContainer.innerHTML = "";
+
+
+        savedMessages.forEach(
+            renderMessage
+        );
+
+
+        if (savedMessages.length > 0) {
+
+            const last =
+                savedMessages[
+                    savedMessages.length - 1
+                ];
+
+            sidebarLastMsg.textContent =
+                `${last.username}: ${last.message}`;
+
+        }
+
+
+        scrollToBottom();
+
+    }
+
+
+    /*
+    ============================================================
+    SCROLL
+    ============================================================
+    */
+
+    function scrollToBottom() {
+
+        requestAnimationFrame(() => {
+
+            messagesContainer.scrollTop =
+                messagesContainer.scrollHeight;
+
         });
-    </script>
+
+    }
+
+
+    /*
+    ============================================================
+    SEND MESSAGE
+    ============================================================
+    */
+
+    function sendMessage() {
+
+        const text =
+            messageInput.value.trim();
+
+
+        if (!text) return;
+
+
+        const now =
+            new Date();
+
+
+        const msg = {
+
+            id:
+                Date.now(),
+
+            username:
+                "You",
+
+            message:
+                text,
+
+            time:
+                now.toISOString()
+
+        };
+
+
+        renderMessage(msg);
+
+
+        messageInput.value = "";
+
+        messageInput.style.height =
+            "auto";
+
+
+        characterCount.textContent =
+            "0 / 300";
+
+
+        sidebarLastMsg.textContent =
+            `You: ${text}`;
+
+
+        saveMessages();
+
+        scrollToBottom();
+
+    }
+
+
+    /*
+    ============================================================
+    CHARACTER COUNT
+    ============================================================
+    */
+
+    messageInput.addEventListener(
+        "input",
+        () => {
+
+            const length =
+                messageInput.value.length;
+
+
+            characterCount.textContent =
+                `${length} / 300`;
+
+
+            messageInput.style.height =
+                "auto";
+
+
+            messageInput.style.height =
+                Math.min(
+                    messageInput.scrollHeight,
+                    120
+                ) + "px";
+
+        }
+    );
+
+
+    /*
+    ============================================================
+    ENTER TO SEND
+    ============================================================
+    */
+
+    messageInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter" &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+    /*
+    ============================================================
+    SEND BUTTON
+    ============================================================
+    */
+
+    sendButton.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    /*
+    ============================================================
+    REPORT BUTTON
+    ============================================================
+    */
+
+    messagesContainer.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.classList.contains(
+                    "gv-msg-report"
+                )
+            ) {
+
+                event.target.textContent =
+                    "Reported";
+
+                event.target.style.color =
+                    "var(--gv-green)";
+
+                event.target.disabled =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    /*
+    ============================================================
+    CLOSE CHAT
+    ============================================================
+    */
+
+    closeChatBtn.addEventListener(
+        "click",
+        () => {
+
+            /*
+             * Change this to whatever page should open
+             * when the user clicks X.
+             */
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+
+    /*
+    ============================================================
+    COMPOSE BUTTON
+    ============================================================
+    */
+
+    document
+        .getElementById("composeBtn")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                messageInput.focus();
+
+            }
+        );
+
+
+    /*
+    ============================================================
+    GROUP CHAT
+    ============================================================
+    */
+
+    document
+        .getElementById("groupChatBtn")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                alert(
+                    "Group chats are coming soon."
+                );
+
+            }
+        );
+
+
+    /*
+    ============================================================
+    START
+    ============================================================
+    */
+
+    initializeChat();
+
+});
+</script>
 
 </body>
 </html>
