@@ -1736,145 +1736,19 @@ img {
    GAME LIBRARY
    ========================================================= */
 
-.games-toolbar {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    gap:
-        12px;
-
-    flex-wrap:
-        wrap;
-
-    margin-bottom:
-        18px;
-}
-
-.chips {
-
-    display:
-        flex;
-
-    gap:
-        7px;
-
-    flex-wrap:
-        wrap;
-}
-
-.chip {
-
-    border:
-        1px solid var(--border);
-
-    background:
-        rgba(255,255,255,.025);
-
-    color:
-        var(--text-3);
-
-    padding:
-        7px 12px;
-
-    border-radius:
-        999px;
-
-    cursor:
-        pointer;
-
-    font-size:
-        10px;
-
-    font-weight:
-        600;
-
-    transition:
-        .2s;
-}
-
-.chip:hover {
-
-    color:
-        var(--text);
-
-    border-color:
-        var(--border-hover);
-}
-
-.chip.active {
-
-    color:
-        white;
-
-    border-color:
-        rgba(139,124,255,.5);
-
-    background:
-        rgba(139,124,255,.14);
-}
-
-.sort select {
-
-    appearance:
-        none;
-
-    border:
-        1px solid var(--border);
-
-    outline:
-        none;
-
-    border-radius:
-        9px;
-
-    background:
-        var(--bg-3);
-
-    color:
-        var(--text-2);
-
-    padding:
-        8px 30px 8px 10px;
-
-    font-size:
-        10px;
-
-    cursor:
-        pointer;
-}
-
-#games {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(6, 128px);
-
-    gap:
-        22px 18px;
-
-    justify-content:
-        start;
-}
-
 .game-card {
 
     width:
-        128px;
+        182px;
 
     min-width:
-        128px;
+        182px;
 
     transition:
         transform .2s;
+
+    position:
+        relative;
 }
 
 .game-card:hover {
@@ -1887,15 +1761,27 @@ img {
 
     display:
         block;
+
+    position:
+        relative;
+
+    width:
+        182px;
+
+    height:
+        182px;
+
+    text-decoration:
+        none;
 }
 
 .game-thumb {
 
     width:
-        128px;
+        182px;
 
     height:
-        128px;
+        182px;
 
     display:
         grid;
@@ -1918,6 +1804,9 @@ img {
 
     border:
         none;
+
+    position:
+        relative;
 }
 
 .game-thumb img {
@@ -1930,6 +1819,9 @@ img {
 
     object-fit:
         cover;
+
+    display:
+        block;
 }
 
 .game-thumb .material-icons {
@@ -1943,20 +1835,41 @@ img {
 
 .game-name {
 
-    display:
-        block;
+    position:
+        absolute;
 
-    margin-top:
+    right:
+        9px;
+
+    bottom:
         8px;
 
+    z-index:
+        2;
+
+    max-width:
+        calc(100% - 18px);
+
+    padding:
+        5px 8px;
+
+    border-radius:
+        7px;
+
+    background:
+        rgba(0,0,0,.72);
+
     color:
-        var(--text);
+        #ffffff;
 
     font-size:
         12px;
 
     font-weight:
         600;
+
+    line-height:
+        1.2;
 
     overflow:
         hidden;
@@ -1966,42 +1879,16 @@ img {
 
     white-space:
         nowrap;
+
+    backdrop-filter:
+        blur(4px);
 }
 
 .game-meta {
 
-    color:
-        var(--text-3);
-
-    font-size:
-        10px;
-
-    margin-top:
-        3px;
-}
-
-.loading {
-
-    grid-column:
-        1 / -1;
-
-    padding:
-        60px 20px;
-
-    text-align:
-        center;
-
-    color:
-        var(--text-3);
-
-    border:
+    display:
         none;
-
-    border-radius:
-        14px;
 }
-
-
 /* =========================================================
    MOBILE SIDEBAR
    ========================================================= */
