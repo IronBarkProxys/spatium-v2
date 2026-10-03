@@ -1856,16 +1856,22 @@ img {
         grid;
 
     grid-template-columns:
-        repeat(5,minmax(0,1fr));
+        repeat(6, 128px);
 
     gap:
-        22px 13px;
+        22px 18px;
+
+    justify-content:
+        start;
 }
 
 .game-card {
 
+    width:
+        128px;
+
     min-width:
-        0;
+        128px;
 
     transition:
         transform .2s;
@@ -1886,10 +1892,10 @@ img {
 .game-thumb {
 
     width:
-        100%;
+        128px;
 
-    aspect-ratio:
-        16/10;
+    height:
+        128px;
 
     display:
         grid;
@@ -1911,7 +1917,7 @@ img {
         );
 
     border:
-        1px solid var(--border);
+        none;
 }
 
 .game-thumb img {
@@ -1989,7 +1995,7 @@ img {
         var(--text-3);
 
     border:
-        1px dashed var(--border);
+        none;
 
     border-radius:
         14px;
