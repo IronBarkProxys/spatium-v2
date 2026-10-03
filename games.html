@@ -2,126 +2,769 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0e0e0e">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0e0e0e"
+    >
 
     <title>Games · Spatium</title>
+
     <meta
         name="description"
         content="Browse and play games on Spatium."
     >
 
-    <link rel="icon" href="./assets/favicon.svg">
-    <link rel="stylesheet" href="./css/games.css">
+    <link
+        rel="icon"
+        href="./assets/favicon.svg"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/games.css"
+    >
 </head>
 
 <body>
 
-<header class="topbar">
-    <div class="nav-inner">
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
 
-        <a class="brand" href="./index.html">
-            <span class="brand-icon">S</span>
-            <span>Spatium</span>
-        </a>
+    <header class="topbar">
 
-        <nav class="nav-links">
-            <a href="./index.html">Home</a>
-            <a href="./games.html" class="active">Games</a>
-            <a href="./chat.html">Chat</a>
-            <a href="./account.html">Account</a>
-        </nav>
+        <div class="topbar-inner">
 
-    </div>
-</header>
-
-
-<main class="games-page">
-
-    <section class="games-header">
-
-        <div>
-            <div class="eyebrow">SPATIUM</div>
-
-            <h1>Games</h1>
-
-            <p class="subtitle">
-                Pick a game and start playing.
-            </p>
-        </div>
-
-        <div id="gameCount" class="games-meta">
-            Loading games...
-        </div>
-
-    </section>
-
-
-    <section class="search-section">
-
-        <label class="search-box">
-
-            <span class="search-icon">⌕</span>
-
-            <input
-                id="gameSearch"
-                type="search"
-                placeholder="Search games..."
-                autocomplete="off"
-                spellcheck="false"
+            <a
+                href="./index.html"
+                class="brand"
+                aria-label="Spatium Home"
             >
+                <span class="brand-icon">S</span>
+                <span class="brand-name">Spatium</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+
+                <a
+                    href="./index.html"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="./games.html"
+                    class="nav-link active"
+                >
+                    Games
+                </a>
+
+                <a
+                    href="./chat.html"
+                    class="nav-link"
+                >
+                    Chat
+                </a>
+
+                <a
+                    href="./account.html"
+                    class="nav-link"
+                >
+                    Account
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         MAIN
+         ======================================== -->
+
+    <main class="games-page">
+
+        <section class="games-header">
+
+            <div class="games-heading">
+
+                <span class="games-kicker">
+                    SPATIUM
+                </span>
+
+                <h1>
+                    Games
+                </h1>
+
+                <p>
+                    Pick a game and start playing.
+                </p>
+
+            </div>
+
+            <div class="games-search-wrap">
+
+                <label
+                    class="search-label"
+                    for="gameSearch"
+                >
+                    Search games
+                </label>
+
+                <div class="search-box">
+
+                    <span
+                        class="search-icon"
+                        aria-hidden="true"
+                    >
+                        ⌕
+                    </span>
+
+                    <input
+                        id="gameSearch"
+                        type="search"
+                        placeholder="Search games..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+                    <button
+                        id="clearSearch"
+                        class="clear-search"
+                        type="button"
+                        aria-label="Clear search"
+                        hidden
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             GAME STATUS
+             ======================================== -->
+
+        <div class="games-toolbar">
+
+            <span id="gameCount">
+                Loading games...
+            </span>
+
+            <span
+                id="gameStatus"
+                class="game-status"
+            ></span>
+
+        </div>
+
+
+        <!-- ========================================
+             GAME GRID
+             ======================================== -->
+
+        <section
+            id="gamesGrid"
+            class="games-grid"
+            aria-label="Games"
+        ></section>
+
+
+        <!-- ========================================
+             EMPTY STATE
+             ======================================== -->
+
+        <section
+            id="gamesEmpty"
+            class="games-empty"
+            hidden
+        >
+            <div class="empty-icon">
+                ⌕
+            </div>
+
+            <h2>
+                No games found
+            </h2>
+
+            <p>
+                Try a different search.
+            </p>
+        </section>
+
+
+        <!-- ========================================
+             ERROR STATE
+             ======================================== -->
+
+        <section
+            id="gamesError"
+            class="games-error"
+            hidden
+        >
+            <h2>
+                Games could not be loaded
+            </h2>
+
+            <p>
+                Make sure <strong>games.json</strong> is available.
+            </p>
 
             <button
-                id="clearSearch"
-                class="clear-search"
+                id="retryGames"
+                class="retry-button"
                 type="button"
-                aria-label="Clear search"
             >
-                ×
+                Try Again
             </button>
+        </section>
 
-        </label>
-
-    </section>
-
-
-    <section
-        id="gamesGrid"
-        class="games-grid"
-        aria-live="polite"
-    ></section>
+    </main>
 
 
-    <section
-        id="emptyState"
-        class="empty-state"
-        hidden
-    >
-        <h2>No games found</h2>
-        <p>Try a different search.</p>
-    </section>
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+
+    <script>
+        const GAMES_URL = "./games.json";
+
+        let allGames = [];
+
+        const gamesGrid = document.getElementById("gamesGrid");
+        const gamesEmpty = document.getElementById("gamesEmpty");
+        const gamesError = document.getElementById("gamesError");
+        const gameCount = document.getElementById("gameCount");
+        const gameStatus = document.getElementById("gameStatus");
+        const gameSearch = document.getElementById("gameSearch");
+        const clearSearch = document.getElementById("clearSearch");
+        const retryGames = document.getElementById("retryGames");
 
 
-    <section
-        id="errorState"
-        class="error-state"
-        hidden
-    >
-        <h2>Could not load games</h2>
+        /* ========================================
+           HELPERS
+           ======================================== */
 
-        <p>
-            Make sure <code>games.json</code> is in the root of Spatium.
-        </p>
-
-        <button id="retryButton" type="button">
-            Retry
-        </button>
-    </section>
-
-</main>
+        function getGameName(game) {
+            return String(
+                game?.name ||
+                game?.folder ||
+                "Untitled Game"
+            ).trim();
+        }
 
 
-<script src="./js/games.js"></script>
+        function getGameFolder(game) {
+            return String(
+                game?.folder ||
+                game?.name ||
+                ""
+            ).trim();
+        }
+
+
+        function getGameId(game) {
+            /*
+             * Your game launcher uses the game name
+             * as the ID, converted to lowercase.
+             */
+            return getGameName(game).toLowerCase();
+        }
+
+
+        function getGameUrl(game) {
+            const id = getGameId(game);
+
+            return (
+                "./Games/game.html?id=" +
+                encodeURIComponent(id)
+            );
+        }
+
+
+        function getCover(game) {
+            const thumbnail = String(
+                game?.thumbnail || ""
+            ).trim();
+
+            if (thumbnail) {
+                return thumbnail;
+            }
+
+            return createPlaceholderCover(
+                getGameName(game)
+            );
+        }
+
+
+        function escapeSvgText(text) {
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&apos;");
+        }
+
+
+        function createPlaceholderCover(name) {
+            const safeName = escapeSvgText(name);
+
+            const shortName =
+                name.length > 22
+                    ? name.substring(0, 22) + "…"
+                    : name;
+
+            const safeShortName =
+                escapeSvgText(shortName);
+
+            const svg = `
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="800"
+                    height="560"
+                    viewBox="0 0 800 560"
+                >
+                    <rect
+                        width="800"
+                        height="560"
+                        fill="#151518"
+                    />
+
+                    <rect
+                        x="24"
+                        y="24"
+                        width="752"
+                        height="512"
+                        rx="24"
+                        fill="#1c1c20"
+                        stroke="#303036"
+                        stroke-width="3"
+                    />
+
+                    <text
+                        x="400"
+                        y="270"
+                        text-anchor="middle"
+                        fill="#71717a"
+                        font-family="Arial, sans-serif"
+                        font-size="24"
+                    >
+                        ${safeName}
+                    </text>
+
+                    <text
+                        x="400"
+                        y="315"
+                        text-anchor="middle"
+                        fill="#f4f4f5"
+                        font-family="Arial, sans-serif"
+                        font-size="32"
+                        font-weight="700"
+                    >
+                        ${safeShortName}
+                    </text>
+                </svg>
+            `;
+
+            return (
+                "data:image/svg+xml;charset=UTF-8," +
+                encodeURIComponent(svg)
+            );
+        }
+
+
+        /* ========================================
+           CREATE GAME CARD
+           ======================================== */
+
+        function createGameCard(game, index) {
+
+            const name = getGameName(game);
+            const folder = getGameFolder(game);
+            const gameId = getGameId(game);
+            const gameUrl = getGameUrl(game);
+            const cover = getCover(game);
+
+            const card = document.createElement("div");
+
+            card.className = "gameitem is-visible";
+
+            /*
+             * Keeps the same style of attributes
+             * as your existing game cards.
+             */
+            card.id = name;
+
+            card.setAttribute(
+                "tags",
+                game?.tags || "games"
+            );
+
+            card.dataset.gameId = gameId;
+            card.dataset.gameName = name;
+            card.dataset.gameFolder = folder;
+            card.dataset.originalOrder = index;
+
+            card.style.setProperty(
+                "--game-index",
+                index
+            );
+
+
+            const link = document.createElement("a");
+
+            link.href = gameUrl;
+
+            link.setAttribute(
+                "aria-label",
+                `Play ${name}`
+            );
+
+
+            const title = document.createElement("div");
+
+            title.className = "gametextover";
+            title.textContent = name;
+
+
+            const image = document.createElement("img");
+
+            image.className = "gamecover";
+
+            image.src = cover;
+
+            image.alt = `${name} Cover`;
+
+            image.loading = "lazy";
+
+            image.decoding = "async";
+
+
+            /*
+             * If an external thumbnail fails,
+             * replace it with our built-in placeholder.
+             */
+            image.addEventListener(
+                "error",
+                () => {
+                    if (
+                        image.dataset.fallbackApplied === "true"
+                    ) {
+                        return;
+                    }
+
+                    image.dataset.fallbackApplied = "true";
+
+                    image.src =
+                        createPlaceholderCover(name);
+                },
+                { once: true }
+            );
+
+
+            link.appendChild(title);
+            link.appendChild(image);
+
+            card.appendChild(link);
+
+            return card;
+        }
+
+
+        /* ========================================
+           RENDER GAMES
+           ======================================== */
+
+        function renderGames(games) {
+
+            gamesGrid.innerHTML = "";
+
+            gamesEmpty.hidden = true;
+
+            if (!games.length) {
+
+                gamesEmpty.hidden = false;
+
+                gameCount.textContent =
+                    "0 games";
+
+                return;
+            }
+
+
+            const fragment =
+                document.createDocumentFragment();
+
+
+            games.forEach(
+                (game, index) => {
+
+                    fragment.appendChild(
+                        createGameCard(
+                            game,
+                            index
+                        )
+                    );
+
+                }
+            );
+
+
+            gamesGrid.appendChild(fragment);
+
+            gameCount.textContent =
+                `${games.length} ${
+                    games.length === 1
+                        ? "game"
+                        : "games"
+                }`;
+        }
+
+
+        /* ========================================
+           LOAD GAMES.JSON
+           ======================================== */
+
+        async function loadGames() {
+
+            gamesError.hidden = true;
+
+            gameStatus.textContent =
+                "Loading...";
+
+            gameCount.textContent =
+                "Loading games...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        GAMES_URL +
+                        "?t=" +
+                        Date.now()
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                /*
+                 * Supports:
+                 *
+                 * {
+                 *   "games": [...]
+                 * }
+                 *
+                 * and a direct array.
+                 */
+
+                if (Array.isArray(data)) {
+
+                    allGames = data;
+
+                } else if (
+                    Array.isArray(data.games)
+                ) {
+
+                    allGames = data.games;
+
+                } else {
+
+                    throw new Error(
+                        "games.json does not contain a games array."
+                    );
+
+                }
+
+
+                /*
+                 * Remove invalid entries.
+                 */
+
+                allGames =
+                    allGames.filter(
+                        game =>
+                            game &&
+                            (
+                                game.name ||
+                                game.folder
+                            )
+                    );
+
+
+                renderGames(allGames);
+
+                gameStatus.textContent =
+                    "";
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to load games:",
+                    error
+                );
+
+                gamesGrid.innerHTML = "";
+
+                gameCount.textContent =
+                    "Unable to load games";
+
+                gameStatus.textContent =
+                    "";
+
+                gamesError.hidden = false;
+            }
+        }
+
+
+        /* ========================================
+           SEARCH
+           ======================================== */
+
+        function searchGames() {
+
+            const query =
+                gameSearch.value
+                    .trim()
+                    .toLowerCase();
+
+
+            clearSearch.hidden =
+                query.length === 0;
+
+
+            if (!query) {
+
+                renderGames(allGames);
+
+                return;
+            }
+
+
+            const filtered =
+                allGames.filter(
+                    game => {
+
+                        const name =
+                            getGameName(game)
+                                .toLowerCase();
+
+                        const folder =
+                            getGameFolder(game)
+                                .toLowerCase();
+
+                        return (
+                            name.includes(query) ||
+                            folder.includes(query)
+                        );
+                    }
+                );
+
+
+            renderGames(filtered);
+
+
+            if (filtered.length) {
+
+                gameStatus.textContent =
+                    `${filtered.length} ${
+                        filtered.length === 1
+                            ? "result"
+                            : "results"
+                    }`;
+
+            } else {
+
+                gameStatus.textContent =
+                    "No results";
+            }
+        }
+
+
+        /* ========================================
+           SEARCH EVENTS
+           ======================================== */
+
+        gameSearch.addEventListener(
+            "input",
+            searchGames
+        );
+
+
+        clearSearch.addEventListener(
+            "click",
+            () => {
+
+                gameSearch.value = "";
+
+                gameSearch.focus();
+
+                searchGames();
+
+            }
+        );
+
+
+        gameSearch.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    gameSearch.value = "";
+
+                    searchGames();
+
+                    gameSearch.blur();
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           RETRY
+           ======================================== */
+
+        retryGames.addEventListener(
+            "click",
+            loadGames
+        );
+
+
+        /* ========================================
+           START
+           ======================================== */
+
+        loadGames();
+    </script>
 
 </body>
 </html>
