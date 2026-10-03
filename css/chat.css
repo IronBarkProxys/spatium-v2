@@ -1005,3 +1005,30 @@ body {
         padding: 10px 12px;
     }
 }
+.gv-msg-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.gv-verified-badge {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #1877f2;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 15px;
+    vertical-align: middle;
+}
+
+.gv-verified-check {
+    display: block;
+    transform: translateY(-0.5px);
+}
