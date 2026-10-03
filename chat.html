@@ -10,7 +10,7 @@
 
     <meta
         name="description"
-        content="Chat with the Spatium community in GameVault style."
+        content="Chat with the Spatium community."
     >
 
     <link rel="icon" href="assets/favicon.svg">
@@ -24,13 +24,202 @@
     >
 
     <link rel="stylesheet" href="css/chat.css">
+
+    <style>
+        /* Account required screen */
+
+        .chat-login-required {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #000;
+            padding: 24px;
+        }
+
+        .chat-login-card {
+            width: min(420px, 100%);
+
+            padding: 34px;
+
+            border: 1px solid #27272a;
+            border-radius: 18px;
+
+            background: #09090b;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 70px rgba(0, 0, 0, .55);
+        }
+
+        .chat-login-logo {
+            width: 52px;
+            height: 52px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #18181b;
+            border: 1px solid #27272a;
+
+            color: #fff;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .chat-login-card h1 {
+            margin: 0 0 9px;
+
+            color: #fff;
+
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .chat-login-card p {
+            margin: 0 auto 24px;
+
+            max-width: 330px;
+
+            color: #a1a1aa;
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .chat-login-button {
+            width: 100%;
+
+            padding: 12px 18px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: #fff;
+            color: #000;
+
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s ease,
+                opacity .15s ease;
+        }
+
+        .chat-login-button:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .chat-login-close {
+            display: block;
+
+            margin-top: 14px;
+
+            color: #71717a;
+
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .chat-login-close:hover {
+            color: #fff;
+        }
+
+        #chatApp {
+            display: none;
+        }
+
+        #chatLoading {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #000;
+
+            color: #a1a1aa;
+
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+
+            z-index: 10000;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="chat-page">
+<!-- AUTH CHECK LOADING -->
+<div id="chatLoading">
+    Checking your account...
+</div>
 
-    <!-- CHAT -->
+
+<!-- LOGIN REQUIRED -->
+<div
+    class="chat-login-required"
+    id="chatLoginRequired"
+    style="display:none;"
+>
+
+    <div class="chat-login-card">
+
+        <div class="chat-login-logo">
+            S
+        </div>
+
+        <h1>
+            Account required
+        </h1>
+
+        <p>
+            You need a Spatium account to join the community chat,
+            send messages, and interact with other users.
+        </p>
+
+        <button
+            class="chat-login-button"
+            id="goToAccount"
+            type="button"
+        >
+            Sign in / Create account
+        </button>
+
+        <a
+            href="index.html"
+            class="chat-login-close"
+        >
+            Return to Spatium
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ACTUAL CHAT -->
+<div
+    class="chat-page"
+    id="chatApp"
+>
+
     <div
         class="gv-chat gv-chat-full gv-chat-in"
         role="dialog"
@@ -47,7 +236,9 @@
 
                 <div class="gv-chat-side-head">
 
-                    <span>Chats</span>
+                    <span>
+                        Chats
+                    </span>
 
                     <button
                         class="gv-chat-icon"
@@ -64,7 +255,6 @@
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            aria-hidden="true"
                         >
                             <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
                             <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
@@ -101,11 +291,6 @@
 
                         </span>
 
-                        <span
-                            class="gv-chat-count"
-                            hidden
-                        ></span>
-
                     </button>
 
                 </div>
@@ -137,7 +322,7 @@
             <!-- MAIN CHAT -->
             <section class="gv-chat-main">
 
-                <!-- CHAT HEADER -->
+                <!-- HEADER -->
                 <div class="gv-chat-head">
 
                     <button
@@ -155,7 +340,6 @@
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            aria-hidden="true"
                         >
                             <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
                             <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
@@ -165,7 +349,9 @@
 
                     <div class="gv-chat-title">
 
-                        <b>Server</b>
+                        <b>
+                            Server
+                        </b>
 
                         <small>
                             Everyone on Spatium
@@ -188,17 +374,13 @@
                 </div>
 
 
-                <!-- CHAT LOG -->
+                <!-- MESSAGES -->
                 <div
                     class="gv-chat-log"
                     id="messages"
                     role="log"
                     aria-live="polite"
-                >
-
-                    <!-- Messages are loaded by JavaScript -->
-
-                </div>
+                ></div>
 
 
                 <!-- COMPOSER -->
@@ -208,7 +390,6 @@
                         class="mention-list"
                         id="mentionList"
                     ></div>
-
 
                     <div class="composer">
 
@@ -221,7 +402,6 @@
                             spellcheck="true"
                             aria-label="Message"
                         ></textarea>
-
 
                         <div class="composer-bottom">
 
@@ -254,15 +434,35 @@
 <!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- SUPABASE CONFIG -->
+<!-- YOUR SUPABASE CONFIG -->
 <script
     src="js/supabase-config.js"
-    onerror="console.log('Supabase config omitted, local persistence mode active')"
 ></script>
 
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    /*
+    ============================================================
+    ELEMENTS
+    ============================================================
+    */
+
+    const loading =
+        document.getElementById("chatLoading");
+
+    const loginRequired =
+        document.getElementById("chatLoginRequired");
+
+    const chatApp =
+        document.getElementById("chatApp");
+
+    const goToAccount =
+        document.getElementById("goToAccount");
+
+    const closeChatBtn =
+        document.getElementById("closeChatBtn");
 
     const messageInput =
         document.getElementById("messageInput");
@@ -279,171 +479,121 @@ document.addEventListener("DOMContentLoaded", () => {
     const sidebarLastMsg =
         document.getElementById("sidebarLastMsg");
 
-    const closeChatBtn =
-        document.getElementById("closeChatBtn");
+
+    /*
+    ============================================================
+    SUPABASE
+    ============================================================
+    */
+
+    let supabaseClient = null;
+
+    /*
+     * This supports the common config formats:
+     *
+     * window.supabaseClient
+     *
+     * OR
+     *
+     * window.SUPABASE_URL
+     * window.SUPABASE_ANON_KEY
+     */
+
+    if (
+        window.supabaseClient
+    ) {
+
+        supabaseClient =
+            window.supabaseClient;
+
+    } else if (
+        window.SUPABASE_URL &&
+        window.SUPABASE_ANON_KEY &&
+        window.supabase
+    ) {
+
+        supabaseClient =
+            window.supabase.createClient(
+                window.SUPABASE_URL,
+                window.SUPABASE_ANON_KEY
+            );
+
+    }
 
 
     /*
     ============================================================
-    CONFIG
+    ACCOUNT CHECK
     ============================================================
     */
 
-    const STORAGE_KEY = "spatium_server_chat_messages";
+    let currentUser = null;
 
 
-    /*
-    ============================================================
-    DEFAULT MESSAGES
-    ============================================================
-    */
+    async function checkAccount() {
 
-    const defaultMessages = [
-        {
-            id: 378,
-            username: "chezwhell",
-            message: "wait r u amargoyal",
-            time: "2026-10-02T17:03:50.008736+00:00"
-        },
-        {
-            id: 379,
-            username: "Fil",
-            verified: true,
-            message: "half of the time the scramjet doesn't work",
-            time: "2026-10-02T17:04:19.075084+00:00"
-        },
-        {
-            id: 381,
-            username: "chezwhell",
-            message: "fil it gotta be on guest network",
-            time: "2026-10-02T17:04:49.355415+00:00"
-        },
-        {
-            id: 384,
-            username: "xyyz",
-            message: "is @fil or @xyz Amar goyal",
-            time: "2026-10-02T17:15:48.816457+00:00"
-        },
-        {
-            id: 385,
-            username: "Fil",
-            verified: true,
-            message: "I'm Filip bruh",
-            time: "2026-10-02T17:16:07.153211+00:00"
-        },
-        {
-            id: 390,
-            username: "dbivol",
-            message: "@xyz checking out the new GameVault layout style!",
-            time: "2026-10-02T17:30:09.37922+00:00"
-        },
-        {
-            id: 420,
-            username: "xyz",
-            verified: true,
-            message: "hello everyone! welcome to the Spatium chat",
-            time: "2026-10-02T18:51:49.960258+00:00"
+        if (!supabaseClient) {
+
+            console.error(
+                "Supabase client was not found."
+            );
+
+            loading.style.display =
+                "none";
+
+            loginRequired.style.display =
+                "flex";
+
+            return false;
+
         }
-    ];
 
-
-    /*
-    ============================================================
-    LOAD SAVED MESSAGES
-    ============================================================
-    */
-
-    function loadMessages() {
 
         try {
 
-            const saved =
-                localStorage.getItem(STORAGE_KEY);
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.getUser();
 
-            if (saved) {
 
-                const parsed =
-                    JSON.parse(saved);
+            if (
+                error ||
+                !data ||
+                !data.user
+            ) {
 
-                if (Array.isArray(parsed)) {
-                    return parsed;
-                }
+                showLoginRequired();
+
+                return false;
 
             }
 
-        } catch (error) {
 
-            console.error(
-                "Could not load saved messages:",
-                error
-            );
-
-        }
-
-        return defaultMessages;
-
-    }
+            currentUser =
+                data.user;
 
 
-    /*
-    ============================================================
-    SAVE MESSAGES
-    ============================================================
-    */
+            loading.style.display =
+                "none";
 
-    function saveMessages() {
-
-        try {
-
-            const messages = [];
-
-            document
-                .querySelectorAll(".gv-msg")
-                .forEach(msg => {
-
-                    const username =
-                        msg
-                            .querySelector(".gv-msg-name")
-                            ?.textContent
-                            .trim() || "You";
-
-                    const body =
-                        msg
-                            .querySelector(".gv-msg-body")
-                            ?.textContent
-                            .trim() || "";
-
-                    const time =
-                        msg
-                            .querySelector(".gv-msg-time")
-                            ?.getAttribute("datetime") ||
-                        new Date().toISOString();
-
-                    const id =
-                        msg.getAttribute("data-id") ||
-                        Date.now();
-
-                    messages.push({
-                        id,
-                        username,
-                        message: body,
-                        time
-                    });
-
-                });
+            chatApp.style.display =
+                "block";
 
 
-            localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(messages)
-            );
+            return true;
 
         } catch (error) {
 
             console.error(
-                "Could not save messages:",
+                "Authentication check failed:",
                 error
             );
+
+            showLoginRequired();
+
+            return false;
 
         }
 
@@ -452,126 +602,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    FORMAT MESSAGE
+    LOGIN SCREEN
     ============================================================
     */
 
-    function formatMessage(text) {
+    function showLoginRequired() {
 
-        const escaped =
-            text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+        loading.style.display =
+            "none";
 
+        chatApp.style.display =
+            "none";
 
-        return escaped.replace(
-            /@(\w+)/g,
-            '<button class="gv-mention" type="button">@$1</button>'
-        );
+        loginRequired.style.display =
+            "flex";
 
     }
 
 
     /*
     ============================================================
-    DISPLAY MESSAGE
+    ACCOUNT PAGE
     ============================================================
     */
 
-    function renderMessage(msg) {
+    goToAccount.addEventListener(
+        "click",
+        () => {
 
-        const msgEl =
-            document.createElement("div");
+            window.location.href =
+                "account.html";
 
-        msgEl.className =
-            "gv-msg";
-
-        msgEl.setAttribute(
-            "data-id",
-            msg.id
-        );
-
-
-        const date =
-            new Date(msg.time);
-
-
-        const timeStr =
-            date.toLocaleTimeString([], {
-                hour: "numeric",
-                minute: "2-digit"
-            });
-
-
-        const verified =
-            msg.verified
-                ? `
-                    <svg
-                        class="gv-chat-check"
-                        viewBox="0 0 24 24"
-                        role="img"
-                        aria-label="Verified"
-                    >
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="11"
-                            fill="#1d9bf0"
-                        ></circle>
-
-                        <path
-                            d="M7 12.5l3.2 3.2L17 9"
-                            fill="none"
-                            stroke="#fff"
-                            stroke-width="2.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></path>
-                    </svg>
-                `
-                : "";
-
-
-        msgEl.innerHTML = `
-            <div class="gv-msg-head">
-
-                <button
-                    class="gv-msg-name"
-                    type="button"
-                >
-                    ${escapeHTML(msg.username)}
-                </button>
-
-                ${verified}
-
-                <time
-                    class="gv-msg-time"
-                    datetime="${escapeHTML(msg.time)}"
-                >
-                    ${timeStr}
-                </time>
-
-                <button
-                    class="gv-msg-report"
-                    type="button"
-                >
-                    Report
-                </button>
-
-            </div>
-
-            <div class="gv-msg-body">
-                ${formatMessage(msg.message)}
-            </div>
-        `;
-
-
-        messagesContainer.appendChild(msgEl);
-
-    }
+        }
+    );
 
 
     /*
@@ -594,38 +657,128 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    INITIALIZE CHAT
+    FORMAT MESSAGE
     ============================================================
     */
 
-    function initializeChat() {
+    function formatMessage(text) {
 
-        const savedMessages =
-            loadMessages();
-
-
-        messagesContainer.innerHTML = "";
+        const escaped =
+            escapeHTML(text);
 
 
-        savedMessages.forEach(
-            renderMessage
+        return escaped.replace(
+            /@(\w+)/g,
+            '<button class="gv-mention" type="button">@$1</button>'
         );
 
+    }
 
-        if (savedMessages.length > 0) {
 
-            const last =
-                savedMessages[
-                    savedMessages.length - 1
-                ];
+    /*
+    ============================================================
+    GET USERNAME
+    ============================================================
+    */
 
-            sidebarLastMsg.textContent =
-                `${last.username}: ${last.message}`;
+    function getUsername(user) {
 
+        if (!user) {
+            return "User";
         }
 
 
-        scrollToBottom();
+        return (
+            user.user_metadata?.username ||
+            user.user_metadata?.display_name ||
+            user.user_metadata?.name ||
+            user.email?.split("@")[0] ||
+            "User"
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    RENDER MESSAGE
+    ============================================================
+    */
+
+    function renderMessage(msg) {
+
+        const msgEl =
+            document.createElement("div");
+
+        msgEl.className =
+            "gv-msg";
+
+
+        msgEl.dataset.id =
+            msg.id || Date.now();
+
+
+        const date =
+            new Date(msg.created_at || msg.time);
+
+
+        const time =
+            date.toLocaleTimeString(
+                [],
+                {
+                    hour: "numeric",
+                    minute: "2-digit"
+                }
+            );
+
+
+        msgEl.innerHTML = `
+            <div class="gv-msg-head">
+
+                <button
+                    class="gv-msg-name"
+                    type="button"
+                >
+                    ${escapeHTML(
+                        msg.username ||
+                        msg.author ||
+                        "User"
+                    )}
+                </button>
+
+                <time
+                    class="gv-msg-time"
+                    datetime="${escapeHTML(
+                        msg.created_at ||
+                        msg.time ||
+                        new Date().toISOString()
+                    )}"
+                >
+                    ${time}
+                </time>
+
+                <button
+                    class="gv-msg-report"
+                    type="button"
+                >
+                    Report
+                </button>
+
+            </div>
+
+            <div class="gv-msg-body">
+                ${formatMessage(
+                    msg.message ||
+                    msg.content ||
+                    ""
+                )}
+            </div>
+        `;
+
+
+        messagesContainer.appendChild(
+            msgEl
+        );
 
     }
 
@@ -650,58 +803,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    SEND MESSAGE
+    LOAD MESSAGES
     ============================================================
     */
 
-    function sendMessage() {
+    async function loadMessages() {
 
-        const text =
-            messageInput.value.trim();
+        /*
+         * IMPORTANT:
+         *
+         * Your existing Supabase table name/columns need to
+         * match this query.
+         *
+         * Change "messages" if your old database used another
+         * table name.
+         */
 
-
-        if (!text) return;
-
-
-        const now =
-            new Date();
-
-
-        const msg = {
-
-            id:
-                Date.now(),
-
-            username:
-                "You",
-
-            message:
-                text,
-
-            time:
-                now.toISOString()
-
-        };
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("messages")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
 
 
-        renderMessage(msg);
+        if (error) {
+
+            console.error(
+                "Could not load messages:",
+                error
+            );
+
+            return;
+
+        }
 
 
-        messageInput.value = "";
-
-        messageInput.style.height =
-            "auto";
+        messagesContainer.innerHTML =
+            "";
 
 
-        characterCount.textContent =
-            "0 / 300";
+        if (!data) {
+            return;
+        }
 
 
-        sidebarLastMsg.textContent =
-            `You: ${text}`;
+        data.forEach(
+            renderMessage
+        );
 
 
-        saveMessages();
+        if (data.length) {
+
+            const last =
+                data[data.length - 1];
+
+
+            sidebarLastMsg.textContent =
+                `${last.username || "User"}: ${
+                    last.message ||
+                    last.content ||
+                    ""
+                }`;
+
+        }
+
 
         scrollToBottom();
 
@@ -710,7 +883,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    CHARACTER COUNT
+    SEND MESSAGE
+    ============================================================
+    */
+
+    async function sendMessage() {
+
+        const text =
+            messageInput.value.trim();
+
+
+        if (!text) {
+            return;
+        }
+
+
+        if (!currentUser) {
+
+            showLoginRequired();
+
+            return;
+
+        }
+
+
+        sendButton.disabled =
+            true;
+
+
+        const username =
+            getUsername(currentUser);
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("messages")
+                    .insert({
+
+                        user_id:
+                            currentUser.id,
+
+                        username:
+                            username,
+
+                        message:
+                            text
+
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "Message could not be sent:",
+                    error
+                );
+
+                alert(
+                    "Your message could not be sent."
+                );
+
+                return;
+
+            }
+
+
+            messageInput.value =
+                "";
+
+            messageInput.style.height =
+                "auto";
+
+            characterCount.textContent =
+                "0 / 300";
+
+
+            sidebarLastMsg.textContent =
+                `${username}: ${text}`;
+
+
+            await loadMessages();
+
+        } finally {
+
+            sendButton.disabled =
+                false;
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+    INPUT
     ============================================================
     */
 
@@ -742,7 +1012,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    ENTER TO SEND
+    ENTER
     ============================================================
     */
 
@@ -779,7 +1049,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    REPORT BUTTON
+    REPORT
     ============================================================
     */
 
@@ -810,18 +1080,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    CLOSE CHAT
+    CLOSE
     ============================================================
     */
 
     closeChatBtn.addEventListener(
         "click",
         () => {
-
-            /*
-             * Change this to whatever page should open
-             * when the user clicks X.
-             */
 
             window.location.href =
                 "index.html";
@@ -832,7 +1097,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    COMPOSE BUTTON
+    COMPOSE
     ============================================================
     */
 
@@ -850,31 +1115,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     ============================================================
-    GROUP CHAT
-    ============================================================
-    */
-
-    document
-        .getElementById("groupChatBtn")
-        ?.addEventListener(
-            "click",
-            () => {
-
-                alert(
-                    "Group chats are coming soon."
-                );
-
-            }
-        );
-
-
-    /*
-    ============================================================
     START
     ============================================================
     */
 
-    initializeChat();
+    const authenticated =
+        await checkAccount();
+
+
+    if (!authenticated) {
+        return;
+    }
+
+
+    await loadMessages();
 
 });
 </script>
