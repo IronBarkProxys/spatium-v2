@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0e0e0e"
+    >
+
+    <title>Account · Spatium</title>
+
+    <meta
+        name="description"
+        content="Create or sign in to your Spatium account."
+    >
+
+    <link
+        rel="icon"
+        href="./assets/favicon.svg"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/account.css"
+    >
+</head>
+
+<body>
+
+    <main class="account-page">
+
+        <div class="account-card">
+
+            <a
+                href="./index.html"
+                class="brand"
+            >
+                <span class="brand-icon">S</span>
+                <span>Spatium</span>
+            </a>
+
+
+            <div class="account-header">
+
+                <h1 id="accountTitle">
+                    Welcome back
+                </h1>
+
+                <p id="accountSubtitle">
+                    Sign in to your Spatium account.
+                </p>
+
+            </div>
+
+
+            <!-- TABS -->
+
+            <div class="account-tabs">
+
+                <button
+                    id="loginTab"
+                    class="account-tab active"
+                    type="button"
+                >
+                    Sign In
+                </button>
+
+                <button
+                    id="signupTab"
+                    class="account-tab"
+                    type="button"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <form
+                id="loginForm"
+                class="account-form active"
+            >
+
+                <div class="field">
+
+                    <label for="loginEmail">
+                        Email
+                    </label>
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        placeholder="Your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    id="loginButton"
+                    class="submit-button"
+                    type="submit"
+                >
+                    Sign In
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="message"
+                ></div>
+
+            </form>
+
+
+            <!-- SIGN UP -->
+
+            <form
+                id="signupForm"
+                class="account-form"
+            >
+
+                <div class="field">
+
+                    <label for="signupUsername">
+                        Username
+                    </label>
+
+                    <input
+                        id="signupUsername"
+                        type="text"
+                        placeholder="Choose a username"
+                        maxlength="24"
+                        minlength="2"
+                        autocomplete="nickname"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="signupEmail">
+                        Email
+                    </label>
+
+                    <input
+                        id="signupEmail"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="signupPassword">
+                        Password
+                    </label>
+
+                    <input
+                        id="signupPassword"
+                        type="password"
+                        placeholder="At least 6 characters"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    id="signupButton"
+                    class="submit-button"
+                    type="submit"
+                >
+                    Create Account
+                </button>
+
+
+                <div
+                    id="signupMessage"
+                    class="message"
+                ></div>
+
+            </form>
+
+
+            <a
+                href="./chat.html"
+                class="back-link"
+            >
+                ← Back to Chat
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="./js/supabase-config.js"></script>
+
+    <script src="./js/account.js"></script>
+
+</body>
+</html>
