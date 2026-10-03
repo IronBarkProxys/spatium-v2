@@ -6,214 +6,117 @@
 
     <title>Games · Spatium</title>
 
-    <meta
-        name="description"
-        content="Play games on Spatium."
-    >
-
-    <link
-        rel="icon"
-        href="./assets/favicon.svg"
-    >
-
-    <!-- IMPORTANT: CSS is inside /css/ -->
-    <link
-        rel="stylesheet"
-        href="./css/games.css"
-    >
+    <link rel="stylesheet" href="./css/games.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVIGATION
-    ========================== -->
+    <div class="page">
 
-    <header class="topbar">
+        <header class="topbar">
 
-        <a
-            class="brand"
-            href="./index.html"
-        >
-            Spatium
-        </a>
-
-        <nav class="nav">
-
-            <a href="./index.html">
-                Home
+            <a href="./index.html" class="logo">
+                Spatium
             </a>
 
-            <a
-                href="./games.html"
-                class="active"
-            >
-                Games
-            </a>
+            <nav>
+                <a href="./index.html">Home</a>
+                <a href="./games.html" class="active">Games</a>
+                <a href="./chat.html">Chat</a>
+            </nav>
 
-            <a href="./chat.html">
-                Chat
-            </a>
-
-        </nav>
-
-    </header>
+        </header>
 
 
-    <!-- =========================
-         PAGE
-    ========================== -->
+        <main>
 
-    <main class="games-page">
+            <section class="hero">
 
-        <!-- Hero -->
+                <div class="glow"></div>
 
-        <section class="hero">
+                <h1>Play anything.</h1>
 
-            <div class="gradient-bg"></div>
+                <p>
+                    Browse the Spatium game library.
+                </p>
 
-            <h1>
-                Play anything.
-            </h1>
+                <div class="controls">
 
-            <p>
-                Browse the Spatium game library.
-            </p>
+                    <div class="search">
 
-            <div class="search-area">
+                        <span>⌕</span>
 
-                <div class="search-box">
+                        <input
+                            id="search"
+                            type="text"
+                            placeholder="Search games..."
+                            autocomplete="off"
+                        >
 
-                    <span class="search-symbol">
-                        ⌕
+                        <button
+                            id="clear"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                    <select id="sort">
+
+                        <option value="az">
+                            A → Z
+                        </option>
+
+                        <option value="za">
+                            Z → A
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <section class="library">
+
+                <div class="library-top">
+
+                    <h2>All Games</h2>
+
+                    <span id="count">
+                        0 games
                     </span>
 
-                    <input
-                        id="game-search"
-                        type="text"
-                        placeholder="Search games..."
-                        autocomplete="off"
-                    >
-
-                    <button
-                        id="clear-search"
-                        class="clear-search"
-                        type="button"
-                        aria-label="Clear search"
-                    >
-                        ×
-                    </button>
-
                 </div>
 
-                <select id="game-sort">
 
-                    <option value="az">
-                        A → Z
-                    </option>
-
-                    <option value="za">
-                        Z → A
-                    </option>
-
-                </select>
-
-            </div>
-
-        </section>
+                <div
+                    id="games"
+                    class="games"
+                ></div>
 
 
-        <!-- =========================
-             GAMES
-        ========================== -->
-
-        <section class="library">
-
-            <div class="library-header">
-
-                <h2>
-                    All Games
-                </h2>
-
-                <span id="game-count">
-                    Loading...
-                </span>
-
-            </div>
-
-
-            <div
-                id="loading"
-                class="loading"
-            >
-
-                <div class="loader"></div>
-
-                <div class="loading-text">
-                    Loading games...
+                <div
+                    id="empty"
+                    class="empty"
+                >
+                    <h2>No games found</h2>
+                    <p>Try another search.</p>
                 </div>
 
-            </div>
+            </section>
+
+        </main>
 
 
-            <div
-                id="game-grid"
-                class="game-grid"
-            ></div>
+        <footer>
+            Spatium · <span id="year"></span>
+        </footer>
 
+    </div>
 
-            <div
-                id="empty-state"
-                class="empty-state"
-            >
-
-                <h3>
-                    No games found
-                </h3>
-
-                <p>
-                    Try searching for something else.
-                </p>
-
-            </div>
-
-
-            <div
-                id="error-state"
-                class="error-state"
-            >
-
-                <h3>
-                    Unable to load games
-                </h3>
-
-                <p>
-                    Check that games/games.json exists.
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <span>
-            © <span id="current-year"></span> Spatium
-        </span>
-
-    </footer>
-
-
-    <!-- IMPORTANT:
-         JS is inside /js/
-    -->
 
     <script src="./js/games.js"></script>
 
