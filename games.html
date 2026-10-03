@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#0b0c0f">
-    <meta name="description" content="Play games on Spatium.">
-
     <title>Games · Spatium</title>
 
-    <link rel="icon" href="./assets/favicon.svg">
-    <link rel="stylesheet" href="/css/games.css">
+    <meta
+        name="description"
+        content="Play games on Spatium."
+    >
+
+    <link
+        rel="icon"
+        href="./assets/favicon.svg"
+    >
+
+    <!-- IMPORTANT: CSS is inside /css/ -->
+    <link
+        rel="stylesheet"
+        href="./css/games.css"
+    >
 </head>
 
 <body>
@@ -21,173 +31,167 @@
 
     <header class="topbar">
 
-        <a href="./index.html" class="brand">
-            <span class="brand-icon">S</span>
-            <span>Spatium</span>
+        <a
+            class="brand"
+            href="./index.html"
+        >
+            Spatium
         </a>
 
         <nav class="nav">
-            <a href="./index.html">Home</a>
-            <a href="./games.html" class="active">Games</a>
-            <a href="./chat.html">Chat</a>
-        </nav>
 
-        <a href="./chat.html" class="community-button">
-            Community
-        </a>
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a
+                href="./games.html"
+                class="active"
+            >
+                Games
+            </a>
+
+            <a href="./chat.html">
+                Chat
+            </a>
+
+        </nav>
 
     </header>
 
 
     <!-- =========================
-         MAIN
+         PAGE
     ========================== -->
 
     <main class="games-page">
 
-        <!-- HERO -->
+        <!-- Hero -->
 
-        <section class="games-hero">
+        <section class="hero">
 
-            <div class="hero-content">
+            <div class="gradient-bg"></div>
 
-                <div class="eyebrow">
-                    SPATIUM ARCADE
+            <h1>
+                Play anything.
+            </h1>
+
+            <p>
+                Browse the Spatium game library.
+            </p>
+
+            <div class="search-area">
+
+                <div class="search-box">
+
+                    <span class="search-symbol">
+                        ⌕
+                    </span>
+
+                    <input
+                        id="game-search"
+                        type="text"
+                        placeholder="Search games..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        id="clear-search"
+                        class="clear-search"
+                        type="button"
+                        aria-label="Clear search"
+                    >
+                        ×
+                    </button>
+
                 </div>
 
-                <h1>
-                    Play <span>anything.</span>
-                </h1>
+                <select id="game-sort">
 
-                <p>
-                    Browse the Spatium game library and launch a game instantly.
-                </p>
+                    <option value="az">
+                        A → Z
+                    </option>
+
+                    <option value="za">
+                        Z → A
+                    </option>
+
+                </select>
 
             </div>
-
-            <div class="hero-glow"></div>
 
         </section>
 
 
-        <!-- SEARCH / SORT -->
+        <!-- =========================
+             GAMES
+        ========================== -->
 
-        <section class="game-toolbar">
+        <section class="library">
 
-            <div class="search-container">
-
-                <span class="search-icon">⌕</span>
-
-                <input
-                    id="game-search"
-                    type="search"
-                    placeholder="Search games..."
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-
-                <button
-                    id="clear-search"
-                    class="clear-search"
-                    type="button"
-                    aria-label="Clear search"
-                >
-                    ×
-                </button>
-
-            </div>
-
-            <select id="game-sort" aria-label="Sort games">
-
-                <option value="az">
-                    Name (A-Z)
-                </option>
-
-                <option value="za">
-                    Name (Z-A)
-                </option>
-
-            </select>
-
-        </section>
-
-
-        <!-- LIBRARY HEADER -->
-
-        <section class="library-header">
-
-            <div>
-
-                <div class="section-label">
-                    LIBRARY
-                </div>
+            <div class="library-header">
 
                 <h2>
                     All Games
                 </h2>
 
+                <span id="game-count">
+                    Loading...
+                </span>
+
             </div>
+
 
             <div
-                id="game-count"
-                class="game-count"
+                id="loading"
+                class="loading"
             >
-                Loading...
+
+                <div class="loader"></div>
+
+                <div class="loading-text">
+                    Loading games...
+                </div>
+
             </div>
 
-        </section>
+
+            <div
+                id="game-grid"
+                class="game-grid"
+            ></div>
 
 
-        <!-- GAME GRID -->
+            <div
+                id="empty-state"
+                class="empty-state"
+            >
 
-        <section
-            id="game-grid"
-            class="game-grid"
-            aria-live="polite"
-        ></section>
+                <h3>
+                    No games found
+                </h3>
 
+                <p>
+                    Try searching for something else.
+                </p>
 
-        <!-- EMPTY SEARCH RESULT -->
-
-        <section
-            id="empty-state"
-            class="empty-state hidden"
-        >
-
-            <div class="empty-icon">
-                ⌕
             </div>
 
-            <h3>
-                No games found
-            </h3>
 
-            <p>
-                Try searching for another game.
-            </p>
+            <div
+                id="error-state"
+                class="error-state"
+            >
 
-        </section>
+                <h3>
+                    Unable to load games
+                </h3>
 
+                <p>
+                    Check that games/games.json exists.
+                </p>
 
-        <!-- LOADING ERROR -->
-
-        <section
-            id="error-state"
-            class="empty-state hidden"
-        >
-
-            <div class="empty-icon error-icon">
-                !
             </div>
-
-            <h3>
-                Game library couldn't load
-            </h3>
-
-            <p>
-                Make sure <code>games/games.json</code>
-                exists and GitHub Pages is serving the site correctly.
-            </p>
 
         </section>
 
@@ -198,25 +202,20 @@
          FOOTER
     ========================== -->
 
-    <footer class="site-footer">
+    <footer>
 
         <span>
             © <span id="current-year"></span> Spatium
         </span>
 
-        <span>
-            Game Library
-        </span>
-
     </footer>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+    <!-- IMPORTANT:
+         JS is inside /js/
+    -->
 
     <script src="./js/games.js"></script>
 
 </body>
 </html>
-```
