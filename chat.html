@@ -8,350 +8,365 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Chat · Qz Games</title>
+    <meta
+        name="theme-color"
+        content="#0e0e0e"
+    >
+
+    <title>Chat · Spatium</title>
 
     <meta
         name="description"
-        content="Talk with the Qz Games community."
+        content="Chat with the Spatium community."
     >
 
-    <meta name="theme-color" content="#0a0b0e">
+    <meta
+        property="og:title"
+        content="Spatium Chat"
+    >
 
-    <link rel="icon" href="./assets/favicon.svg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta
+        property="og:description"
+        content="Chat with the Spatium community."
+    >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
-        rel="stylesheet"
+        rel="icon"
+        href="./assets/favicon.svg"
     >
 
-    <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/animations.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/sidebar.css">
-    <link rel="stylesheet" href="./css/chat.css">
-    <link rel="stylesheet" href="./css/responsive.css">
+    <link
+        rel="stylesheet"
+        href="./css/chat.css"
+    >
 </head>
 
-<body
-    data-qz-theme-scripts="enabled"
-    data-bg="mesh"
-    data-density="cozy"
->
+<body>
 
-<div id="app-navbar"></div>
+    <div class="chat-page">
 
-<div id="app-sidebar"></div>
+        <!-- HEADER -->
 
-<main class="page-shell chat-page">
+        <header class="chat-header">
 
-    <section class="page-header chat-page-header">
+            <a
+                href="./index.html"
+                class="brand"
+                aria-label="Spatium Home"
+            >
 
-        <div>
-            <div class="eyebrow">
-                <span class="status-dot"></span>
-                COMMUNITY
-            </div>
+                <span class="brand-q">
+                    S
+                </span>
 
-            <h1>Site chat</h1>
+                <span>
+                    Spatium
+                </span>
 
-            <p>
-                One room for everyone on Qz Games.
-                Keep it friendly and school-safe.
-            </p>
-        </div>
-
-        <div class="chat-status-card">
-            <span class="status-dot online"></span>
-
-            <div>
-                <strong id="chatStatus">
-                    Connecting...
-                </strong>
-
-                <small id="chatStatusText">
-                    Checking your account
-                </small>
-            </div>
-        </div>
-
-    </section>
+            </a>
 
 
-    <section class="chat-shell">
+            <nav class="main-nav">
 
-        <aside class="chat-room-sidebar">
-
-            <div class="chat-room-title">
-                <div class="room-icon">
-                    <span class="material-icons">
-                        public
-                    </span>
-                </div>
-
-                <div>
-                    <strong>Global Chat</strong>
-                    <small>Everyone</small>
-                </div>
-            </div>
-
-            <div class="chat-rules">
-
-                <div class="chat-rule">
-                    <span class="material-icons">school</span>
-
-                    <div>
-                        <strong>School safe</strong>
-                        <span>Rude words are blocked.</span>
-                    </div>
-                </div>
-
-                <div class="chat-rule">
-                    <span class="material-icons">timer</span>
-
-                    <div>
-                        <strong>Slow mode</strong>
-                        <span>5 seconds between messages.</span>
-                    </div>
-                </div>
-
-                <div class="chat-rule">
-                    <span class="material-icons">flag</span>
-
-                    <div>
-                        <strong>See something?</strong>
-                        <span>Report it to the site owner.</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="chat-login-box" id="chatLoginBox">
-                <span class="material-icons">lock</span>
-
-                <strong>Sign in required</strong>
-
-                <p>
-                    You need a Qz Games account
-                    to participate in chat.
-                </p>
-
-                <a href="./login.html" class="primary-btn">
-                    Sign in
+                <a href="./index.html">
+                    Home
                 </a>
+
+                <a href="./games.html">
+                    Games
+                </a>
+
+                <a
+                    href="./chat.html"
+                    class="active"
+                >
+                    Chat
+                </a>
+
+            </nav>
+
+
+            <div class="header-user">
+
+                <span id="headerUsername">
+                    Guest
+                </span>
+
             </div>
 
-        </aside>
+        </header>
 
 
-        <section class="chat-main">
+        <!-- MAIN -->
 
-            <header class="chat-header">
+        <main class="chat-layout">
 
-                <div class="chat-header-room">
+            <!-- SIDEBAR -->
 
-                    <div class="room-icon small">
-                        <span class="material-icons">
-                            forum
-                        </span>
-                    </div>
+            <aside class="chat-sidebar">
+
+                <div class="sidebar-title">
+                    COMMUNITY
+                </div>
+
+
+                <button
+                    class="room active"
+                    type="button"
+                >
+
+                    <span class="room-icon">
+                        💬
+                    </span>
 
                     <div>
-                        <strong>Global Chat</strong>
 
-                        <span id="chatMemberText">
-                            Sign in to join
-                        </span>
+                        <strong>
+                            Global Chat
+                        </strong>
+
+                        <small>
+                            Everyone
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <div class="rules">
+
+                    <h3>
+                        Chat rules
+                    </h3>
+
+                    <p>
+                        Keep chat school-safe and
+                        respectful.
+                    </p>
+
+                    <p>
+                        Messages are automatically
+                        filtered.
+                    </p>
+
+                    <p>
+                        Spam protection is enabled.
+                    </p>
+
+                    <p>
+                        Report messages that break
+                        the rules.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="account-box"
+                    id="accountBox"
+                >
+
+                    <div class="account-status">
+
+                        <span class="status-dot"></span>
+
+                        <div>
+
+                            <strong id="accountName">
+                                Not signed in
+                            </strong>
+
+                            <small id="accountStatus">
+                                Sign in to chat
+                            </small>
+
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="chat-header-actions">
+            </aside>
 
-                    <button
-                        type="button"
-                        id="chatRefresh"
-                        class="icon-btn"
-                        title="Refresh chat"
+
+            <!-- CHAT -->
+
+            <section class="chat-container">
+
+                <div class="chat-top">
+
+                    <div>
+
+                        <div class="chat-title-row">
+
+                            <h1>
+                                Global Chat
+                            </h1>
+
+                            <span class="online-dot"></span>
+
+                        </div>
+
+                        <p>
+                            Talk with the Spatium community
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="connection"
+                        id="connectionStatus"
                     >
-                        <span class="material-icons">
-                            refresh
-                        </span>
-                    </button>
+                        Connecting...
+                    </div>
 
                 </div>
 
-            </header>
 
+                <!-- MESSAGES -->
 
-            <div
-                id="chatMessages"
-                class="chat-messages"
-                aria-live="polite"
-            >
+                <div
+                    class="messages"
+                    id="messages"
+                    aria-live="polite"
+                >
 
-                <div class="chat-loading">
-                    <div class="chat-spinner"></div>
-
-                    <span>
+                    <div class="loading">
                         Loading chat...
-                    </span>
+                    </div>
+
                 </div>
 
-            </div>
+
+                <!-- STATUS -->
+
+                <div
+                    class="chat-status"
+                    id="chatStatus"
+                ></div>
 
 
-            <div
-                id="chatTyping"
-                class="chat-typing"
-                aria-live="polite"
-            ></div>
+                <!-- COMPOSER -->
+
+                <div class="composer-wrapper">
+
+                    <div
+                        class="mention-list"
+                        id="mentionList"
+                    ></div>
 
 
-            <div
-                id="chatError"
-                class="chat-error"
-                hidden
-            ></div>
+                    <div class="composer">
+
+                        <textarea
+                            id="messageInput"
+                            maxlength="300"
+                            placeholder="Sign in to send a message..."
+                            rows="1"
+                            disabled
+                            autocomplete="off"
+                            spellcheck="true"
+                        ></textarea>
 
 
-            <form
-                id="chatForm"
-                class="chat-composer"
-                autocomplete="off"
-            >
+                        <div class="composer-bottom">
 
-                <div class="mention-suggestions" id="mentionSuggestions"></div>
+                            <span id="characterCount">
+                                0 / 300
+                            </span>
 
-                <textarea
-                    id="chatInput"
-                    maxlength="300"
-                    rows="1"
-                    placeholder="Sign in to chat..."
-                    disabled
-                ></textarea>
 
-                <div class="chat-composer-bottom">
+                            <button
+                                id="sendButton"
+                                type="button"
+                                disabled
+                            >
+                                Send
+                            </button>
 
-                    <div class="chat-composer-info">
-
-                        <span
-                            id="chatCharacterCount"
-                        >
-                            0 / 300
-                        </span>
-
-                        <span class="chat-hint">
-                            Enter to send · Shift+Enter for a new line
-                        </span>
+                        </div>
 
                     </div>
 
-                    <button
-                        type="submit"
-                        id="chatSend"
-                        class="chat-send-btn"
-                        disabled
-                    >
-                        <span>Send</span>
-
-                        <span class="material-icons">
-                            send
-                        </span>
-                    </button>
-
                 </div>
 
-            </form>
+            </section>
 
-        </section>
+        </main>
 
-    </section>
-
-</main>
+    </div>
 
 
-<!-- Report modal -->
-
-<div
-    id="reportModal"
-    class="modal-backdrop"
-    hidden
->
+    <!-- REPORT MODAL -->
 
     <div
-        class="report-modal"
+        class="modal hidden"
+        id="reportModal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="reportTitle"
     >
 
-        <button
-            type="button"
-            class="modal-close"
-            id="closeReport"
-        >
-            <span class="material-icons">close</span>
-        </button>
-
-        <div class="report-icon">
-            <span class="material-icons">flag</span>
-        </div>
-
-        <h2 id="reportTitle">
-            Report message
-        </h2>
-
-        <p>
-            Tell the site owner why this message should be reviewed.
-        </p>
-
-        <textarea
-            id="reportReason"
-            maxlength="200"
-            placeholder="Optional reason..."
-        ></textarea>
-
-        <div class="report-actions">
+        <div class="modal-box">
 
             <button
+                class="modal-close"
+                id="closeReport"
                 type="button"
-                class="secondary-btn"
-                id="cancelReport"
+                aria-label="Close"
             >
-                Cancel
+                ×
             </button>
 
+
+            <h2 id="reportTitle">
+                Report message
+            </h2>
+
+
+            <p>
+                Tell us why you are reporting
+                this message.
+            </p>
+
+
+            <textarea
+                id="reportReason"
+                maxlength="500"
+                placeholder="Reason..."
+            ></textarea>
+
+
             <button
-                type="button"
-                class="danger-btn"
+                class="report-submit"
                 id="submitReport"
+                type="button"
             >
-                Report
+                Submit report
             </button>
+
+
+            <div
+                class="report-error"
+                id="reportError"
+            ></div>
 
         </div>
 
     </div>
 
-</div>
 
+    <!-- SUPABASE -->
 
-<div id="app-footer"></div>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
+    <script src="./js/supabase-config.js"></script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
-
-<script src="./js/supabase-config.js"></script>
-<script src="./js/layout.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/chat.js"></script>
+    <script src="./js/chat.js"></script>
 
 </body>
 </html>
