@@ -3,66 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090d">
 
-    <title>Games · Spatium</title>
+    <title>Spatium · GameVault</title>
+
+    <meta
+        name="description"
+        content="Play anything on Spatium. Discover games, challenge friends, chat, compete, and explore."
+    >
+    <meta
+        name="keywords"
+        content="Spatium, GameVault, games, browser games, online games, HTML5 games"
+    >
+    <meta name="author" content="Spatium">
+
+    <link rel="icon" href="./assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="./css/games.css">
 </head>
 
 <body>
 
-    <div class="page">
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
+    <header class="topbar">
 
-        <header class="topbar">
+        <div class="topbar-left">
 
-            <a href="./index.html" class="logo">
-                Spatium
+            <button
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Open menu"
+            >
+                <span class="material-icons">menu</span>
+            </button>
+
+            <a href="./index.html" class="brand">
+                <span class="brand-main">Spatium</span>
+                <span class="brand-divider">·</span>
+                <span class="brand-sub">GameVault</span>
             </a>
 
-            <nav>
-                <a href="./index.html">Home</a>
-                <a href="./games.html" class="active">Games</a>
-                <a href="./chat.html">Chat</a>
-            </nav>
+        </div>
 
-        </header>
+        <nav class="desktop-nav">
+
+            <a href="./index.html">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </a>
+
+            <a href="./games.html" class="active">
+                <span class="material-icons">sports_esports</span>
+                <span>Games</span>
+            </a>
+
+            <a href="./chat.html">
+                <span class="material-icons">chat</span>
+                <span>Chat</span>
+            </a>
+
+            <a href="./leaderboard.html">
+                <span class="material-icons">leaderboard</span>
+                <span>Leaderboard</span>
+            </a>
+
+        </nav>
+
+        <div class="topbar-actions">
+
+            <div class="nav-search">
+
+                <span class="material-icons">search</span>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search games..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <button
+                class="random-button"
+                id="randomGameButton"
+                type="button"
+                title="Random game"
+            >
+                <span class="material-icons">shuffle</span>
+                <span class="random-label">Random</span>
+            </button>
+
+        </div>
+
+    </header>
 
 
-        <main>
+    <!-- =========================
+         MOBILE MENU
+    ========================== -->
+    <aside class="mobile-menu" id="mobileMenu">
 
-            <section class="hero">
+        <div class="mobile-menu-header">
 
-                <div class="glow"></div>
+            <div>
+                <div class="mobile-menu-title">Spatium</div>
+                <div class="mobile-menu-subtitle">GameVault</div>
+            </div>
+
+            <button
+                id="closeMobileMenu"
+                class="close-menu-button"
+                type="button"
+                aria-label="Close menu"
+            >
+                <span class="material-icons">close</span>
+            </button>
+
+        </div>
+
+        <nav class="mobile-nav">
+
+            <a href="./index.html">
+                <span class="material-icons">home</span>
+                Home
+            </a>
+
+            <a href="./games.html" class="active">
+                <span class="material-icons">sports_esports</span>
+                Games
+            </a>
+
+            <a href="./chat.html">
+                <span class="material-icons">chat</span>
+                Chat
+            </a>
+
+            <a href="./friends.html">
+                <span class="material-icons">group</span>
+                Friends
+            </a>
+
+            <a href="./leaderboard.html">
+                <span class="material-icons">leaderboard</span>
+                Leaderboard
+            </a>
+
+            <a href="./shop.html">
+                <span class="material-icons">shopping_bag</span>
+                Shop
+            </a>
+
+            <a href="./challenge.html">
+                <span class="material-icons">bolt</span>
+                Challenge
+            </a>
+
+            <a href="./polls.html">
+                <span class="material-icons">poll</span>
+                Polls
+            </a>
+
+            <a href="./schedule.html">
+                <span class="material-icons">event</span>
+                Schedule
+            </a>
+
+            <a href="./status.html">
+                <span class="material-icons">notifications</span>
+                Requests
+            </a>
+
+            <a href="./music.html">
+                <span class="material-icons">music_note</span>
+                Music
+            </a>
+
+            <a href="./unblocker.html">
+                <span class="material-icons">language</span>
+                Browser
+            </a>
+
+            <a href="./settings.html">
+                <span class="material-icons">settings</span>
+                Settings
+            </a>
+
+            <a href="./saves.html">
+                <span class="material-icons">bookmark</span>
+                Saves
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="page">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    <span class="material-icons">sports_esports</span>
+                    GAMEVAULT
+                </div>
 
                 <h1>Play anything.</h1>
 
                 <p>
-                    Browse the Spatium game library.
+                    Discover hundreds of games, from fast-paced racers
+                    to multiplayer classics and everything in between.
                 </p>
 
-                <div class="controls">
+            </div>
 
-                    <div class="search">
+        </section>
 
-                        <span>⌕</span>
 
-                        <input
-                            id="search"
-                            type="text"
-                            placeholder="Search games..."
-                            autocomplete="off"
-                        >
+        <!-- =========================
+             GAME SEARCH
+        ========================== -->
+        <section class="game-controls">
 
-                        <button
-                            id="clear"
-                            type="button"
-                        >
-                            ×
-                        </button>
+            <div class="large-search">
 
-                    </div>
+                <span class="material-icons">search</span>
 
-                    <select id="sort">
+                <input
+                    type="text"
+                    id="gameSearch"
+                    placeholder="Search games..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="clearSearch"
+                    class="clear-search"
+                    aria-label="Clear search"
+                >
+                    <span class="material-icons">close</span>
+                </button>
+
+            </div>
+
+
+            <div class="controls-row">
+
+                <div class="filter-list" id="filterList">
+
+                    <button
+                        class="filter-button active"
+                        type="button"
+                        data-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="racing"
+                    >
+                        Racing
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="shooter"
+                    >
+                        Shooter
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="sports"
+                    >
+                        Sports
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="horror"
+                    >
+                        Horror
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="puzzle"
+                    >
+                        Puzzle
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="multiplayer"
+                    >
+                        Multiplayer
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-filter="idle"
+                    >
+                        Idle
+                    </button>
+
+                </div>
+
+
+                <div class="sort-wrapper">
+
+                    <label for="sortGames">Sort</label>
+
+                    <select id="sortGames">
+
+                        <option value="featured">
+                            Featured
+                        </option>
 
                         <option value="az">
                             A → Z
@@ -76,46 +364,122 @@
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-            <section class="library">
+        <!-- =========================
+             RESULTS HEADER
+        ========================== -->
+        <section class="results-header">
 
-                <div class="library-top">
+            <div>
 
-                    <h2>All Games</h2>
+                <h2>Games</h2>
 
-                    <span id="count">
-                        0 games
-                    </span>
+                <p id="resultCount">
+                    Loading games...
+                </p>
 
+            </div>
+
+            <button
+                class="random-large-button"
+                id="randomGameButtonLarge"
+                type="button"
+            >
+                <span class="material-icons">shuffle</span>
+                Random Game
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             GAME GRID
+        ========================== -->
+        <section class="games-section">
+
+            <div
+                class="games-grid"
+                id="games"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- Loading -->
+            <div
+                class="loading-state"
+                id="loadingState"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <p>Loading games...</p>
+
+            </div>
+
+
+            <!-- No Results -->
+            <div
+                class="no-results"
+                id="noResults"
+                hidden
+            >
+
+                <div class="no-results-icon">
+                    <span class="material-icons">search_off</span>
                 </div>
 
+                <h3>No games found</h3>
 
-                <div
-                    id="games"
-                    class="games"
-                ></div>
+                <p>
+                    Try a different search or remove some filters.
+                </p>
 
-
-                <div
-                    id="empty"
-                    class="empty"
+                <button
+                    type="button"
+                    id="resetFilters"
                 >
-                    <h2>No games found</h2>
-                    <p>Try another search.</p>
-                </div>
+                    Reset Filters
+                </button>
 
-            </section>
+            </div>
 
-        </main>
+        </section>
+
+    </main>
 
 
-        <footer>
-            Spatium · <span id="year"></span>
-        </footer>
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="footer">
 
-    </div>
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                <strong>Spatium</strong>
+                <span>· GameVault</span>
+            </div>
+
+            <div class="footer-links">
+
+                <a href="./index.html">Home</a>
+                <a href="./games.html">Games</a>
+                <a href="./chat.html">Chat</a>
+                <a href="./settings.html">Settings</a>
+
+            </div>
+
+            <div class="footer-copy">
+                © 2026 Spatium
+            </div>
+
+        </div>
+
+    </footer>
 
 
     <script src="./js/games.js"></script>
