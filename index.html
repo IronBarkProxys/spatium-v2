@@ -123,25 +123,32 @@
          SPATIUM CSS
     ========================================== -->
 
+    <!-- Main homepage stylesheet -->
     <link
         rel="stylesheet"
-        href="./main.css"
+        href="./css/index.css"
+    >
+
+    <!-- Existing site styles -->
+    <link
+        rel="stylesheet"
+        href="./css/main.css"
     >
 
     <link
         rel="stylesheet"
-        href="./animations.css"
+        href="./css/animations.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/home.css"
     >
 
     <link
         id="themecss"
         rel="stylesheet"
-        href="./styles/default.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="./home.css"
+        href="./css/default.css"
     >
 
 
@@ -160,14 +167,13 @@
     ========================================== -->
 
     <script type="application/ld+json">
-
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Spatium",
-        "description": "Play browser games on Spatium."
+        "description": "Play browser games on Spatium.",
+        "url": "https://ironbarkproxys.github.io/spatium-v2/"
     }
-
     </script>
 
 </head>
@@ -359,26 +365,26 @@
 
 
         <script>
+        function googleTranslateElementInit() {
 
-            function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: "en",
+                    layout:
+                        google.translate.TranslateElement
+                            .InlineLayout
+                            .SIMPLE
+                },
+                "google_translate_element"
+            );
 
-                new google.translate.TranslateElement(
-                    {
-                        pageLanguage: "en",
-                        layout:
-                            google.translate.TranslateElement
-                                .InlineLayout
-                                .SIMPLE
-                    },
-                    "google_translate_element"
-                );
-
-            }
-
+        }
         </script>
 
 
-        <script src="./auto-translate.js"></script>
+        <script
+            src="./auto-translate.js"
+        ></script>
 
     </div>
 
@@ -424,18 +430,14 @@
                 class="filter-radio-container"
                 onclick="filterByTag('')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="no filter"
                     checked
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 No Filter
-
             </label>
 
 
@@ -443,17 +445,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('casual')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Casual"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Casual
-
             </label>
 
 
@@ -461,17 +459,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('shooter')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Shooter"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Shooter
-
             </label>
 
 
@@ -479,17 +473,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('driver')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Driver"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Driver
-
             </label>
 
 
@@ -497,17 +487,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('horror')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Horror"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Horror
-
             </label>
 
 
@@ -515,17 +501,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('idle')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Idle"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Idle
-
             </label>
 
 
@@ -533,17 +515,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('multiplayer')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Multiplayer"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Multiplayer
-
             </label>
 
 
@@ -551,17 +529,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('puzzle')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Puzzle"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Puzzle
-
             </label>
 
 
@@ -569,17 +543,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('sandbox')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Sandbox"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Sandbox
-
             </label>
 
 
@@ -587,17 +557,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('sport')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Sports"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Sports
-
             </label>
 
 
@@ -605,17 +571,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('story')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Story"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Story
-
             </label>
 
 
@@ -623,17 +585,13 @@
                 class="filter-radio-container"
                 onclick="filterByTag('flash')"
             >
-
                 <input
                     type="radio"
                     name="custom-radio"
                     value="Flash"
                 >
-
                 <span class="filter-radio-checkmark"></span>
-
                 Flash
-
             </label>
 
         </div>
@@ -655,9 +613,6 @@
             id="sidenav"
             class="sidenav-dev"
         >
-
-
-            <!-- SIDEBAR HEADER -->
 
             <div class="sidenav-header">
 
@@ -692,11 +647,9 @@
                         class="sidenav-icon-btn"
                         aria-label="Settings"
                     >
-
                         <span class="material-icons">
                             settings
                         </span>
-
                     </a>
 
 
@@ -705,11 +658,9 @@
                         class="sidenav-icon-btn"
                         aria-label="Close menu"
                     >
-
                         <span class="material-icons">
                             close
                         </span>
-
                     </button>
 
                 </div>
@@ -718,10 +669,7 @@
 
 
 
-            <!-- SIDEBAR MENU -->
-
             <nav class="sidenav-menu">
-
 
                 <div class="menu-section">
 
@@ -734,7 +682,6 @@
                         href="./index.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             home
                         </span>
@@ -746,7 +693,6 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
 
@@ -754,7 +700,6 @@
                         href="./games.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             sports_esports
                         </span>
@@ -766,7 +711,6 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
 
@@ -774,7 +718,6 @@
                         href="./chat.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             chat
                         </span>
@@ -786,7 +729,6 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
 
@@ -794,7 +736,6 @@
                         href="./activity.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             history
                         </span>
@@ -806,14 +747,11 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
                 </div>
 
 
-
-                <!-- COMMUNITY -->
 
                 <div class="menu-section">
 
@@ -826,7 +764,6 @@
                         href="./request-game.html"
                         class="menu-item menu-item-highlight"
                     >
-
                         <span class="material-icons menu-icon">
                             add_circle
                         </span>
@@ -838,7 +775,6 @@
                         <span class="menu-badge">
                             New
                         </span>
-
                     </a>
 
 
@@ -846,7 +782,6 @@
                         href="./report-bug.html"
                         class="menu-item menu-item-warning"
                     >
-
                         <span class="material-icons menu-icon">
                             bug_report
                         </span>
@@ -854,14 +789,11 @@
                         <span class="menu-text">
                             Report a Bug
                         </span>
-
                     </a>
 
                 </div>
 
 
-
-                <!-- EXTRAS -->
 
                 <div class="menu-section">
 
@@ -874,7 +806,6 @@
                         href="./upcoming.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             schedule
                         </span>
@@ -886,7 +817,6 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
 
@@ -894,7 +824,6 @@
                         href="./settings.html"
                         class="menu-item"
                     >
-
                         <span class="material-icons menu-icon">
                             settings
                         </span>
@@ -906,14 +835,11 @@
                         <span class="menu-arrow material-icons">
                             chevron_right
                         </span>
-
                     </a>
 
                 </div>
 
 
-
-                <!-- LEGAL -->
 
                 <div class="menu-section">
 
@@ -926,7 +852,6 @@
                         href="./privacy.html"
                         class="menu-item menu-item-secondary"
                     >
-
                         <span class="material-icons menu-icon">
                             policy
                         </span>
@@ -934,7 +859,6 @@
                         <span class="menu-text">
                             Privacy Policy
                         </span>
-
                     </a>
 
 
@@ -942,7 +866,6 @@
                         href="./terms.html"
                         class="menu-item menu-item-secondary"
                     >
-
                         <span class="material-icons menu-icon">
                             description
                         </span>
@@ -950,7 +873,6 @@
                         <span class="menu-text">
                             Terms of Service
                         </span>
-
                     </a>
 
                 </div>
@@ -958,8 +880,6 @@
             </nav>
 
 
-
-            <!-- SIDEBAR FOOTER -->
 
             <div class="sidenav-footer">
 
@@ -976,11 +896,9 @@
                         class="weather-loading"
                         style="display:none;"
                     >
-
                         <span class="material-icons">
                             hourglass_empty
                         </span>
-
                     </div>
 
 
@@ -1000,6 +918,7 @@
                             >
                                 --°
                             </div>
+
 
                             <div
                                 id="weather-condition"
@@ -1029,7 +948,6 @@
 
 
                         <div class="weather-details">
-
 
                             <div class="weather-detail-item">
 
@@ -1134,8 +1052,6 @@
         <div class="nav-inner">
 
 
-            <!-- BRAND -->
-
             <div
                 class="brand"
                 onclick="ToggleSideNav()"
@@ -1153,13 +1069,11 @@
                     class="brand-mark"
                     aria-hidden="true"
                 >
-
                     <img
                         src="./assets/favicon.svg"
                         class="brand-logo"
                         alt=""
                     >
-
                 </div>
 
 
@@ -1175,8 +1089,6 @@
             </div>
 
 
-
-            <!-- NAV LINKS -->
 
             <div class="nav-links">
 
@@ -1225,8 +1137,6 @@
             <div class="nav-spacer"></div>
 
 
-
-            <!-- SEARCH -->
 
             <label
                 class="nav-search"
@@ -1278,24 +1188,18 @@
 
 
 
-            <!-- ACCOUNT -->
-
             <a
                 class="icon-btn"
                 href="./account.html"
                 title="Account"
                 aria-label="Open account"
             >
-
                 <span class="material-icons">
                     person
                 </span>
-
             </a>
 
 
-
-            <!-- CHANGELOG -->
 
             <button
                 class="icon-btn"
@@ -1317,25 +1221,17 @@
                     stroke-linejoin="round"
                 >
 
-                    <path
-                        d="M3 12a9 9 0 1 0 3-6.7L3 8"
-                    />
+                    <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
 
-                    <path
-                        d="M3 3v5h5"
-                    />
+                    <path d="M3 3v5h5"/>
 
-                    <path
-                        d="M12 7v5l3 2"
-                    />
+                    <path d="M12 7v5l3 2"/>
 
                 </svg>
 
             </button>
 
 
-
-            <!-- TRANSLATE -->
 
             <button
                 class="icon-btn"
@@ -1368,8 +1264,6 @@
             </button>
 
 
-
-            <!-- MENU -->
 
             <button
                 class="icon-btn nav-menu-btn"
@@ -1404,7 +1298,7 @@
 
 
     <!-- =========================================
-         MAIN CONTENT
+         MAIN
     ========================================== -->
 
     <main class="shell">
@@ -1417,9 +1311,6 @@
             id="home"
             aria-label="Spatium home"
         >
-
-
-            <!-- HERO LEFT -->
 
             <div class="hero-spotlight">
 
@@ -1439,9 +1330,7 @@
 
                 <div class="hero-spot-content">
 
-
                     <div class="hero-spot-main">
-
 
                         <div class="hero-eyebrow">
 
@@ -1467,14 +1356,12 @@
                                 games online
                             </span>
 
-
                             <span
                                 class="sep"
                                 aria-hidden="true"
                             >
                                 ·
                             </span>
-
 
                             <span>
                                 HTML5 · Free · Fast
@@ -1494,11 +1381,7 @@
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >
-
-                                <path
-                                    d="M8 5v14l11-7z"
-                                />
-
+                                <path d="M8 5v14l11-7z"/>
                             </svg>
 
                             Browse Games
@@ -1532,13 +1415,10 @@
 
 
 
-            <!-- HERO RIGHT -->
-
             <aside
                 class="hero-side"
                 aria-label="Quick navigation"
             >
-
 
                 <div class="hero-welcome">
 
@@ -1578,8 +1458,6 @@
 
 
 
-                <!-- QUICK LINKS -->
-
                 <div class="hero-quick">
 
                     <h3>
@@ -1588,7 +1466,6 @@
 
 
                     <div class="quick-grid">
-
 
                         <a
                             class="quick-tile"
@@ -1599,11 +1476,9 @@
                                 class="qi"
                                 aria-hidden="true"
                             >
-
                                 <span class="material-icons">
                                     sports_esports
                                 </span>
-
                             </span>
 
                             Games
@@ -1620,11 +1495,9 @@
                                 class="qi"
                                 aria-hidden="true"
                             >
-
                                 <span class="material-icons">
                                     chat
                                 </span>
-
                             </span>
 
                             Community Chat
@@ -1641,11 +1514,9 @@
                                 class="qi"
                                 aria-hidden="true"
                             >
-
                                 <span class="material-icons">
                                     history
                                 </span>
-
                             </span>
 
                             My Activity
@@ -1662,11 +1533,9 @@
                                 class="qi"
                                 aria-hidden="true"
                             >
-
                                 <span class="material-icons">
                                     person
                                 </span>
-
                             </span>
 
                             Account
@@ -1683,9 +1552,7 @@
 
 
 
-        <!-- =========================================
-             FEATURED
-        ========================================== -->
+        <!-- FEATURED -->
 
         <section
             class="section"
@@ -1731,9 +1598,7 @@
 
 
 
-        <!-- =========================================
-             RECENTLY PLAYED
-        ========================================== -->
+        <!-- RECENTLY PLAYED -->
 
         <section
             class="section"
@@ -1793,9 +1658,7 @@
 
 
 
-        <!-- =========================================
-             ALL GAMES
-        ========================================== -->
+        <!-- ALL GAMES -->
 
         <section
             class="section"
@@ -1811,7 +1674,6 @@
                         class="section-title"
                         id="gamesTitle"
                     >
-
                         All Games
 
                         <span
@@ -1860,8 +1722,6 @@
 
 
 
-            <!-- CATEGORY CHIPS -->
-
             <div
                 class="chips"
                 id="chips"
@@ -1870,18 +1730,13 @@
             ></div>
 
 
-
-            <!-- GAMES -->
-
             <div id="games"></div>
 
         </section>
 
 
 
-        <!-- =========================================
-             COMMUNITY
-        ========================================== -->
+        <!-- COMMUNITY -->
 
         <section
             class="discord-strip"
@@ -1919,9 +1774,7 @@
 
 
 
-        <!-- =========================================
-             CHANGELOG
-        ========================================== -->
+        <!-- CHANGELOG -->
 
         <div
             id="changelogModal"
@@ -1998,9 +1851,7 @@
                     <pre
                         id="changelogContent"
                         class="changelog-content"
-                    >
-Loading changelog...
-                    </pre>
+                    >Loading changelog...</pre>
 
                 </div>
 
@@ -2010,16 +1861,12 @@ Loading changelog...
 
 
 
-        <!-- =========================================
-             FOOTER
-        ========================================== -->
+        <!-- FOOTER -->
 
         <footer class="foot">
 
             <div class="foot-copy">
-
                 © 2026 Spatium
-
             </div>
 
 
@@ -2062,54 +1909,45 @@ Loading changelog...
         src="./accessibility.js"
     ></script>
 
-
     <script
         defer
         src="./useractivity.js"
     ></script>
-
 
     <script
         defer
         src="./gameSearch.js"
     ></script>
 
-
     <script
         defer
         src="./globalscripts/page-transition.js"
     ></script>
-
 
     <script
         defer
         src="./gameloader.js"
     ></script>
 
-
     <script
         defer
         src="./GlobalSettings.js"
     ></script>
-
 
     <script
         defer
         src="./ftgames.js"
     ></script>
 
-
     <script
         defer
         src="./main.js"
     ></script>
 
-
     <script
         defer
         src="./note.js"
     ></script>
-
 
     <script
         defer
@@ -2129,10 +1967,6 @@ Loading changelog...
         "use strict";
 
 
-        /* =====================================
-           GREETING
-        ===================================== */
-
         function setGreeting() {
 
             var hour =
@@ -2141,52 +1975,32 @@ Loading changelog...
             var greeting;
 
             if (hour < 5) {
-
-                greeting =
-                    "Still up?";
-
+                greeting = "Still up?";
             }
 
             else if (hour < 12) {
-
-                greeting =
-                    "Good morning.";
-
+                greeting = "Good morning.";
             }
 
             else if (hour < 17) {
-
-                greeting =
-                    "Good afternoon.";
-
+                greeting = "Good afternoon.";
             }
 
             else if (hour < 21) {
-
-                greeting =
-                    "Good evening.";
-
+                greeting = "Good evening.";
             }
 
             else {
-
-                greeting =
-                    "Late night session?";
-
+                greeting = "Late night session?";
             }
 
 
             var element =
-                document.getElementById(
-                    "greeting"
-                );
+                document.getElementById("greeting");
 
 
             if (element) {
-
-                element.textContent =
-                    greeting;
-
+                element.textContent = greeting;
             }
 
         }
@@ -2196,33 +2010,22 @@ Loading changelog...
 
 
 
-        /* =====================================
-           SEARCH SHORTCUT
-        ===================================== */
-
         document.addEventListener(
             "keydown",
             function (event) {
 
                 if (
-                    (event.metaKey ||
-                     event.ctrlKey) &&
+                    (event.metaKey || event.ctrlKey) &&
                     event.key.toLowerCase() === "k"
                 ) {
 
                     event.preventDefault();
 
-
                     var search =
-                        document.getElementById(
-                            "gamesearch"
-                        );
-
+                        document.getElementById("gamesearch");
 
                     if (search) {
-
                         search.focus();
-
                     }
 
                 }
@@ -2231,10 +2034,6 @@ Loading changelog...
         );
 
 
-
-        /* =====================================
-           CATEGORY CHIPS
-        ===================================== */
 
         var categories = [
 
@@ -2302,9 +2101,7 @@ Loading changelog...
 
 
         var chips =
-            document.getElementById(
-                "chips"
-            );
+            document.getElementById("chips");
 
 
         if (chips) {
@@ -2313,10 +2110,7 @@ Loading changelog...
                 function (category) {
 
                     var button =
-                        document.createElement(
-                            "button"
-                        );
-
+                        document.createElement("button");
 
                     button.className =
                         "chip" +
@@ -2326,10 +2120,7 @@ Loading changelog...
                                 : ""
                         );
 
-
-                    button.type =
-                        "button";
-
+                    button.type = "button";
 
                     button.textContent =
                         category.label;
@@ -2340,9 +2131,7 @@ Loading changelog...
                         function () {
 
                             chips
-                                .querySelectorAll(
-                                    ".chip"
-                                )
+                                .querySelectorAll(".chip")
                                 .forEach(
                                     function (chip) {
 
@@ -2377,9 +2166,7 @@ Loading changelog...
                     );
 
 
-                    chips.appendChild(
-                        button
-                    );
+                    chips.appendChild(button);
 
                 }
             );
@@ -2388,14 +2175,8 @@ Loading changelog...
 
 
 
-        /* =====================================
-           SORT
-        ===================================== */
-
         var sortSelect =
-            document.getElementById(
-                "sortSel"
-            );
+            document.getElementById("sortSel");
 
 
         if (sortSelect) {
@@ -2407,11 +2188,8 @@ Loading changelog...
                     var value =
                         sortSelect.value;
 
-
                     var games =
-                        document.getElementById(
-                            "games"
-                        );
+                        document.getElementById("games");
 
 
                     if (!games) {
@@ -2446,25 +2224,13 @@ Loading changelog...
                                 ).toLowerCase();
 
 
-                            if (
-                                value === "az"
-                            ) {
-
-                                return aName.localeCompare(
-                                    bName
-                                );
-
+                            if (value === "az") {
+                                return aName.localeCompare(bName);
                             }
 
 
-                            if (
-                                value === "za"
-                            ) {
-
-                                return bName.localeCompare(
-                                    aName
-                                );
-
+                            if (value === "za") {
+                                return bName.localeCompare(aName);
                             }
 
 
@@ -2486,12 +2252,9 @@ Loading changelog...
                     items.forEach(
                         function (item) {
 
-                            item.style.order =
-                                "";
+                            item.style.order = "";
 
-                            games.appendChild(
-                                item
-                            );
+                            games.appendChild(item);
 
                         }
                     );
@@ -2513,10 +2276,6 @@ Loading changelog...
 
 
 
-        /* =====================================
-           GAME COUNT
-        ===================================== */
-
         function getCatalogCount() {
 
             var publishedCount =
@@ -2526,9 +2285,7 @@ Loading changelog...
 
 
             if (
-                Number.isFinite(
-                    publishedCount
-                ) &&
+                Number.isFinite(publishedCount) &&
                 publishedCount > 0
             ) {
 
@@ -2538,9 +2295,7 @@ Loading changelog...
 
 
             var games =
-                document.getElementById(
-                    "games"
-                );
+                document.getElementById("games");
 
 
             if (!games) {
@@ -2569,51 +2324,31 @@ Loading changelog...
 
             var countText =
                 "— " +
-                String(count).padStart(
-                    3,
-                    "0"
-                );
+                String(count).padStart(3, "0");
 
 
             var gridCount =
-                document.getElementById(
-                    "gridCount"
-                );
-
+                document.getElementById("gridCount");
 
             var heroCount =
-                document.getElementById(
-                    "heroGameCount"
-                );
-
+                document.getElementById("heroGameCount");
 
             var gameCount =
-                document.getElementById(
-                    "gameCount"
-                );
+                document.getElementById("gameCount");
 
 
             if (gridCount) {
-
-                gridCount.textContent =
-                    countText;
-
+                gridCount.textContent = countText;
             }
 
 
             if (heroCount) {
-
-                heroCount.textContent =
-                    count;
-
+                heroCount.textContent = count;
             }
 
 
             if (gameCount) {
-
-                gameCount.textContent =
-                    count;
-
+                gameCount.textContent = count;
             }
 
         }
@@ -2632,14 +2367,8 @@ Loading changelog...
 
 
 
-        /* =====================================
-           GAME OBSERVER
-        ===================================== */
-
         var games =
-            document.getElementById(
-                "games"
-            );
+            document.getElementById("games");
 
 
         if (games) {
@@ -2647,9 +2376,7 @@ Loading changelog...
             var observer =
                 new MutationObserver(
                     function () {
-
                         updateGridCount();
-
                     }
                 );
 
@@ -2665,10 +2392,6 @@ Loading changelog...
         }
 
 
-
-        /* =====================================
-           CHANGELOG FOOTER
-        ===================================== */
 
         var footerChangelog =
             document.getElementById(
@@ -2692,9 +2415,7 @@ Loading changelog...
 
 
                     if (button) {
-
                         button.click();
-
                     }
 
                 }
@@ -2704,13 +2425,7 @@ Loading changelog...
 
 
 
-        /* =====================================
-           RECENTLY PLAYED
-        ===================================== */
-
-        function parseTimestamp(
-            value
-        ) {
+        function parseTimestamp(value) {
 
             if (
                 typeof value === "number" &&
@@ -2747,13 +2462,10 @@ Loading changelog...
 
 
 
-        function formatTimeAgo(
-            timestamp
-        ) {
+        function formatTimeAgo(timestamp) {
 
             var difference =
-                Date.now() -
-                timestamp;
+                Date.now() - timestamp;
 
 
             if (difference < 0) {
@@ -2761,25 +2473,16 @@ Loading changelog...
             }
 
 
-            if (
-                difference <
-                60000
-            ) {
-
+            if (difference < 60000) {
                 return "just now";
-
             }
 
 
-            if (
-                difference <
-                3600000
-            ) {
+            if (difference < 3600000) {
 
                 return (
                     Math.floor(
-                        difference /
-                        60000
+                        difference / 60000
                     ) +
                     " min ago"
                 );
@@ -2787,15 +2490,11 @@ Loading changelog...
             }
 
 
-            if (
-                difference <
-                86400000
-            ) {
+            if (difference < 86400000) {
 
                 return (
                     Math.floor(
-                        difference /
-                        3600000
+                        difference / 3600000
                     ) +
                     " hr ago"
                 );
@@ -2803,20 +2502,14 @@ Loading changelog...
             }
 
 
-            if (
-                difference <
-                172800000
-            ) {
-
+            if (difference < 172800000) {
                 return "yesterday";
-
             }
 
 
             return (
                 Math.floor(
-                    difference /
-                    86400000
+                    difference / 86400000
                 ) +
                 " days ago"
             );
@@ -2825,9 +2518,7 @@ Loading changelog...
 
 
 
-        function normalizeActivityEntries(
-            data
-        ) {
+        function normalizeActivityEntries(data) {
 
             if (!data) {
                 return [];
@@ -2851,9 +2542,7 @@ Loading changelog...
                         function (entry) {
 
                             return [
-                                String(
-                                    entry.gameKey
-                                ),
+                                String(entry.gameKey),
                                 entry
                             ];
 
@@ -2865,8 +2554,7 @@ Loading changelog...
 
             if (
                 data.games &&
-                typeof data.games ===
-                "object"
+                typeof data.games === "object"
             ) {
 
                 return Object.entries(
@@ -2900,9 +2588,7 @@ Loading changelog...
             }
 
 
-            if (
-                gamesData[key]
-            ) {
+            if (gamesData[key]) {
 
                 return {
                     id: String(key),
@@ -2917,9 +2603,7 @@ Loading changelog...
 
 
             var keys =
-                Object.keys(
-                    gamesData
-                );
+                Object.keys(gamesData);
 
 
             for (
@@ -2929,19 +2613,13 @@ Loading changelog...
             ) {
 
                 if (
-                    String(
-                        keys[i]
-                    ).toLowerCase() ===
+                    String(keys[i]).toLowerCase() ===
                     normalized
                 ) {
 
                     return {
-                        id: String(
-                            keys[i]
-                        ),
-                        game: gamesData[
-                            keys[i]
-                        ]
+                        id: String(keys[i]),
+                        game: gamesData[keys[i]]
                     };
 
                 }
@@ -2958,33 +2636,14 @@ Loading changelog...
 
 
 
-        function escapeHtml(
-            value
-        ) {
+        function escapeHtml(value) {
 
-            return String(
-                value || ""
-            )
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#39;"
-            );
+            return String(value || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
 
         }
 
@@ -3000,20 +2659,14 @@ Loading changelog...
                     "heroJumpBack"
                 );
 
-
             var list =
                 document.getElementById(
                     "heroJumpBackList"
                 );
 
 
-            if (
-                !wrap ||
-                !list
-            ) {
-
+            if (!wrap || !list) {
                 return;
-
             }
 
 
@@ -3022,19 +2675,15 @@ Loading changelog...
                 entries.length === 0
             ) {
 
-                wrap.hidden =
-                    true;
-
-                list.innerHTML =
-                    "";
+                wrap.hidden = true;
+                list.innerHTML = "";
 
                 return;
 
             }
 
 
-            list.innerHTML =
-                "";
+            list.innerHTML = "";
 
 
             entries
@@ -3042,9 +2691,7 @@ Loading changelog...
                 .forEach(
                     function (entry) {
 
-                        var key =
-                            entry[0];
-
+                        var key = entry[0];
 
                         var activity =
                             entry[1] || {};
@@ -3062,12 +2709,9 @@ Loading changelog...
 
 
                         var name =
-                            game &&
-                            game.name
+                            game && game.name
                                 ? game.name
-                                : String(
-                                    key
-                                ).replace(
+                                : String(key).replace(
                                     /[-_]+/g,
                                     " "
                                 );
@@ -3081,17 +2725,13 @@ Loading changelog...
 
                         var played =
                             playedAt
-                                ? formatTimeAgo(
-                                    playedAt
-                                )
+                                ? formatTimeAgo(playedAt)
                                 : "played recently";
 
 
                         var cover =
-                            game &&
-                            game.cover
-                                ? "./covers/" +
-                                  game.cover
+                            game && game.cover
+                                ? "./covers/" + game.cover
                                 : "";
 
 
@@ -3104,42 +2744,31 @@ Loading changelog...
 
 
                         var item =
-                            document.createElement(
-                                "a"
-                            );
+                            document.createElement("a");
 
 
                         item.className =
                             "hero-jump-link";
 
-
-                        item.href =
-                            link;
-
+                        item.href = link;
 
                         item.dataset.gameId =
                             resolved.id;
-
 
                         item.dataset.gameName =
                             name;
 
 
                         item.innerHTML =
-
                             '<span class="hero-jump-thumb">' +
 
                                 (
                                     cover
 
                                         ? '<img loading="lazy" src="' +
-                                          escapeHtml(
-                                              cover
-                                          ) +
+                                          escapeHtml(cover) +
                                           '" alt="' +
-                                          escapeHtml(
-                                              name
-                                          ) +
+                                          escapeHtml(name) +
                                           '">'
 
                                         : '<span class="hero-jump-thumb-fallback">▶</span>'
@@ -3150,30 +2779,23 @@ Loading changelog...
                             '<span class="hero-jump-copy">' +
 
                                 '<span class="hero-jump-name">' +
-                                    escapeHtml(
-                                        name
-                                    ) +
+                                    escapeHtml(name) +
                                 '</span>' +
 
                                 '<span class="hero-jump-meta">' +
-                                    escapeHtml(
-                                        played
-                                    ) +
+                                    escapeHtml(played) +
                                 '</span>' +
 
                             '</span>';
 
 
-                        list.appendChild(
-                            item
-                        );
+                        list.appendChild(item);
 
                     }
                 );
 
 
-            wrap.hidden =
-                false;
+            wrap.hidden = false;
 
         }
 
@@ -3198,37 +2820,35 @@ Loading changelog...
 
 
             var entries =
-                normalizeActivityEntries(
-                    data
-                )
-                .map(
-                    function (entry) {
+                normalizeActivityEntries(data)
+                    .map(
+                        function (entry) {
 
-                        return [
-                            entry[0],
-                            entry[1],
-                            parseTimestamp(
-                                entry[1] &&
-                                entry[1].lastPlayed
-                            )
-                        ];
+                            return [
+                                entry[0],
+                                entry[1],
+                                parseTimestamp(
+                                    entry[1] &&
+                                    entry[1].lastPlayed
+                                )
+                            ];
 
-                    }
-                )
-                .filter(
-                    function (entry) {
+                        }
+                    )
+                    .filter(
+                        function (entry) {
 
-                        return entry[2] > 0;
+                            return entry[2] > 0;
 
-                    }
-                )
-                .sort(
-                    function (a, b) {
+                        }
+                    )
+                    .sort(
+                        function (a, b) {
 
-                        return b[2] - a[2];
+                            return b[2] - a[2];
 
-                    }
-                );
+                        }
+                    );
 
 
             renderHeroJumpBack(
@@ -3269,8 +2889,7 @@ Loading changelog...
             }
 
 
-            track.innerHTML =
-                "";
+            track.innerHTML = "";
 
 
             entries
@@ -3290,22 +2909,17 @@ Loading changelog...
 
 
                         var name =
-                            game &&
-                            game.name
+                            game && game.name
                                 ? game.name
-                                : String(
-                                    entry[0]
-                                ).replace(
+                                : String(entry[0]).replace(
                                     /[-_]+/g,
                                     " "
                                 );
 
 
                         var cover =
-                            game &&
-                            game.cover
-                                ? "./covers/" +
-                                  game.cover
+                            game && game.cover
+                                ? "./covers/" + game.cover
                                 : null;
 
 
@@ -3318,34 +2932,25 @@ Loading changelog...
 
 
                         var card =
-                            document.createElement(
-                                "a"
-                            );
+                            document.createElement("a");
 
 
                         card.className =
                             "r-card";
 
-
-                        card.href =
-                            link;
+                        card.href = link;
 
 
                         card.innerHTML =
-
                             '<div class="r-thumb">' +
 
                                 (
                                     cover
 
                                         ? '<img loading="lazy" src="' +
-                                          escapeHtml(
-                                              cover
-                                          ) +
+                                          escapeHtml(cover) +
                                           '" alt="' +
-                                          escapeHtml(
-                                              name
-                                          ) +
+                                          escapeHtml(name) +
                                           '">'
 
                                         : '<div style="width:100%;height:100%;background:var(--bg-2);border-radius:inherit;"></div>'
@@ -3358,32 +2963,25 @@ Loading changelog...
                             '<div class="r-body">' +
 
                                 '<div class="r-name">' +
-                                    escapeHtml(
-                                        name
-                                    ) +
+                                    escapeHtml(name) +
                                 '</div>' +
 
                                 '<div class="r-meta">' +
                                     escapeHtml(
-                                        formatTimeAgo(
-                                            entry[2]
-                                        )
+                                        formatTimeAgo(entry[2])
                                     ) +
                                 '</div>' +
 
                             '</div>';
 
 
-                        track.appendChild(
-                            card
-                        );
+                        track.appendChild(card);
 
                     }
                 );
 
 
-            section.style.display =
-                "";
+            section.style.display = "";
 
 
             var previous =
@@ -3404,15 +3002,11 @@ Loading changelog...
                     "click",
                     function () {
 
-                        track.scrollBy(
-                            {
-                                left:
-                                    -track.clientWidth *
-                                    0.8,
-                                behavior:
-                                    "smooth"
-                            }
-                        );
+                        track.scrollBy({
+                            left:
+                                -track.clientWidth * 0.8,
+                            behavior: "smooth"
+                        });
 
                     }
                 );
@@ -3426,15 +3020,11 @@ Loading changelog...
                     "click",
                     function () {
 
-                        track.scrollBy(
-                            {
-                                left:
-                                    track.clientWidth *
-                                    0.8,
-                                behavior:
-                                    "smooth"
-                            }
-                        );
+                        track.scrollBy({
+                            left:
+                                track.clientWidth * 0.8,
+                            behavior: "smooth"
+                        });
 
                     }
                 );
@@ -3458,9 +3048,7 @@ Loading changelog...
                 "function"
             ) {
 
-                if (
-                    attempts < 20
-                ) {
+                if (attempts < 20) {
 
                     setTimeout(
                         function () {
@@ -3480,13 +3068,9 @@ Loading changelog...
             }
 
 
-            if (
-                !window.GameCatalog
-            ) {
+            if (!window.GameCatalog) {
 
-                if (
-                    attempts < 20
-                ) {
+                if (attempts < 20) {
 
                     setTimeout(
                         function () {
@@ -3521,18 +3105,14 @@ Loading changelog...
                 .then(
                     function (data) {
 
-                        renderRecentlyPlayed(
-                            data
-                        );
+                        renderRecentlyPlayed(data);
 
                     }
                 )
                 .catch(
                     function () {
 
-                        renderRecentlyPlayed(
-                            null
-                        );
+                        renderRecentlyPlayed(null);
 
                     }
                 );
