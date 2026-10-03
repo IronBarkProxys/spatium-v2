@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
     <meta name="theme-color" content="#08090d">
 
-    <title>Spatium · GameVault</title>
-
-    <meta
-        name="description"
-        content="Play anything on Spatium. Discover games, challenge friends, chat, compete, and explore."
-    >
-    <meta
-        name="keywords"
-        content="Spatium, GameVault, games, browser games, online games, HTML5 games"
-    >
-    <meta name="author" content="Spatium">
+    <title>Game · Spatium</title>
 
     <link rel="icon" href="./assets/favicon.svg">
 
@@ -32,457 +26,438 @@
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="./css/games.css">
+    <link rel="stylesheet" href="./css/game.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         TOP NAVIGATION
-    ========================== -->
-    <header class="topbar">
+    <!-- =====================================================
+         GAME HUD
+    ====================================================== -->
 
-        <div class="topbar-left">
+    <div class="hud-wrap" id="hud-wrap">
 
-            <button
-                class="mobile-menu-button"
-                id="mobileMenuButton"
-                type="button"
-                aria-label="Open menu"
-            >
-                <span class="material-icons">menu</span>
-            </button>
+        <div
+            class="hud-pill"
+            role="region"
+            aria-label="Game controls"
+        >
 
-            <a href="./index.html" class="brand">
-                <span class="brand-main">Spatium</span>
-                <span class="brand-divider">·</span>
-                <span class="brand-sub">GameVault</span>
-            </a>
+            <!-- LEFT CONTROLS -->
 
-        </div>
-
-        <nav class="desktop-nav">
-
-            <a href="./index.html">
-                <span class="material-icons">home</span>
-                <span>Home</span>
-            </a>
-
-            <a href="./games.html" class="active">
-                <span class="material-icons">sports_esports</span>
-                <span>Games</span>
-            </a>
-
-            <a href="./chat.html">
-                <span class="material-icons">chat</span>
-                <span>Chat</span>
-            </a>
-
-            <a href="./leaderboard.html">
-                <span class="material-icons">leaderboard</span>
-                <span>Leaderboard</span>
-            </a>
-
-        </nav>
-
-        <div class="topbar-actions">
-
-            <div class="nav-search">
-
-                <span class="material-icons">search</span>
-
-                <input
-                    type="text"
-                    id="globalSearch"
-                    placeholder="Search games..."
-                    autocomplete="off"
-                >
-
-            </div>
-
-            <button
-                class="random-button"
-                id="randomGameButton"
-                type="button"
-                title="Random game"
-            >
-                <span class="material-icons">shuffle</span>
-                <span class="random-label">Random</span>
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================
-         MOBILE MENU
-    ========================== -->
-    <aside class="mobile-menu" id="mobileMenu">
-
-        <div class="mobile-menu-header">
-
-            <div>
-                <div class="mobile-menu-title">Spatium</div>
-                <div class="mobile-menu-subtitle">GameVault</div>
-            </div>
-
-            <button
-                id="closeMobileMenu"
-                class="close-menu-button"
-                type="button"
-                aria-label="Close menu"
-            >
-                <span class="material-icons">close</span>
-            </button>
-
-        </div>
-
-        <nav class="mobile-nav">
-
-            <a href="./index.html">
-                <span class="material-icons">home</span>
-                Home
-            </a>
-
-            <a href="./games.html" class="active">
-                <span class="material-icons">sports_esports</span>
-                Games
-            </a>
-
-            <a href="./chat.html">
-                <span class="material-icons">chat</span>
-                Chat
-            </a>
-
-            <a href="./friends.html">
-                <span class="material-icons">group</span>
-                Friends
-            </a>
-
-            <a href="./leaderboard.html">
-                <span class="material-icons">leaderboard</span>
-                Leaderboard
-            </a>
-
-            <a href="./shop.html">
-                <span class="material-icons">shopping_bag</span>
-                Shop
-            </a>
-
-            <a href="./challenge.html">
-                <span class="material-icons">bolt</span>
-                Challenge
-            </a>
-
-            <a href="./polls.html">
-                <span class="material-icons">poll</span>
-                Polls
-            </a>
-
-            <a href="./schedule.html">
-                <span class="material-icons">event</span>
-                Schedule
-            </a>
-
-            <a href="./status.html">
-                <span class="material-icons">notifications</span>
-                Requests
-            </a>
-
-            <a href="./music.html">
-                <span class="material-icons">music_note</span>
-                Music
-            </a>
-
-            <a href="./unblocker.html">
-                <span class="material-icons">language</span>
-                Browser
-            </a>
-
-            <a href="./settings.html">
-                <span class="material-icons">settings</span>
-                Settings
-            </a>
-
-            <a href="./saves.html">
-                <span class="material-icons">bookmark</span>
-                Saves
-            </a>
-
-        </nav>
-
-    </aside>
-
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-    <main class="page">
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    <span class="material-icons">sports_esports</span>
-                    GAMEVAULT
-                </div>
-
-                <h1>Play anything.</h1>
-
-                <p>
-                    Discover hundreds of games, from fast-paced racers
-                    to multiplayer classics and everything in between.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             GAME SEARCH
-        ========================== -->
-        <section class="game-controls">
-
-            <div class="large-search">
-
-                <span class="material-icons">search</span>
-
-                <input
-                    type="text"
-                    id="gameSearch"
-                    placeholder="Search games..."
-                    autocomplete="off"
-                >
+            <div class="controls-group">
 
                 <button
-                    type="button"
-                    id="clearSearch"
-                    class="clear-search"
-                    aria-label="Clear search"
+                    class="btn"
+                    onclick="Backhome()"
+                    aria-label="Back to games"
+                    title="Back to games"
                 >
-                    <span class="material-icons">close</span>
+                    <span class="material-icons">
+                        arrow_back
+                    </span>
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="ToggleFullscreen()"
+                    aria-label="Toggle fullscreen"
+                    title="Fullscreen"
+                >
+                    <span class="material-icons">
+                        fullscreen
+                    </span>
                 </button>
 
             </div>
 
 
-            <div class="controls-row">
+            <!-- GAME COVER -->
 
-                <div class="filter-list" id="filterList">
-
-                    <button
-                        class="filter-button active"
-                        type="button"
-                        data-filter="all"
-                    >
-                        All
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="racing"
-                    >
-                        Racing
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="shooter"
-                    >
-                        Shooter
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="sports"
-                    >
-                        Sports
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="horror"
-                    >
-                        Horror
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="puzzle"
-                    >
-                        Puzzle
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="multiplayer"
-                    >
-                        Multiplayer
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        type="button"
-                        data-filter="idle"
-                    >
-                        Idle
-                    </button>
-
-                </div>
-
-
-                <div class="sort-wrapper">
-
-                    <label for="sortGames">Sort</label>
-
-                    <select id="sortGames">
-
-                        <option value="featured">
-                            Featured
-                        </option>
-
-                        <option value="az">
-                            A → Z
-                        </option>
-
-                        <option value="za">
-                            Z → A
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             RESULTS HEADER
-        ========================== -->
-        <section class="results-header">
-
-            <div>
-
-                <h2>Games</h2>
-
-                <p id="resultCount">
-                    Loading games...
-                </p>
-
-            </div>
-
-            <button
-                class="random-large-button"
-                id="randomGameButtonLarge"
-                type="button"
+            <img
+                class="hud-cover"
+                id="hud-cover"
+                src=""
+                alt="Game cover"
             >
-                <span class="material-icons">shuffle</span>
-                Random Game
-            </button>
-
-        </section>
 
 
-        <!-- =========================
-             GAME GRID
-        ========================== -->
-        <section class="games-section">
+            <!-- CENTER INFO -->
+
+            <div class="player-info">
+
+                <div
+                    class="game-title"
+                    id="game-name"
+                >
+                    Loading...
+                </div>
+
+                <div class="game-subtitle">
+                    Now Playing
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT CONTROLS -->
+
+            <div class="controls-group">
+
+                <button
+                    class="btn"
+                    onclick="reportIssue()"
+                    aria-label="Report issue"
+                    title="Report issue"
+                >
+                    <span class="material-icons">
+                        bug_report
+                    </span>
+                </button>
+
+
+                <button
+                    class="btn"
+                    onclick="toggleHelpWindow()"
+                    aria-label="Help"
+                    title="Help"
+                >
+                    <span class="material-icons">
+                        help_outline
+                    </span>
+                </button>
+
+
+                <button
+                    class="btn"
+                    id="touch-toggle-btn"
+                    onclick="
+                        window.QZGameTouchInput &&
+                        window.QZGameTouchInput.toggle()
+                    "
+                    aria-label="Touch controls"
+                    title="Touch controls"
+                    hidden
+                >
+                    <span class="material-icons">
+                        touch_app
+                    </span>
+                </button>
+
+
+                <button
+                    class="btn"
+                    onclick="toggleControllerSettings()"
+                    aria-label="Settings"
+                    title="Settings"
+                >
+                    <span class="material-icons">
+                        settings
+                    </span>
+                </button>
+
+
+                <button
+                    class="btn btn-hide"
+                    onclick="toggleHud()"
+                    aria-label="Hide controls"
+                    title="Hide controls"
+                >
+                    <span class="material-icons">
+                        expand_more
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HUD SHOW BUTTON
+    ====================================================== -->
+
+    <button
+        class="hud-show-button"
+        id="hud-show-button"
+        onclick="toggleHud()"
+        aria-label="Show controls"
+        title="Show controls"
+    >
+        <span class="material-icons">
+            expand_less
+        </span>
+    </button>
+
+
+    <!-- =====================================================
+         GAME AREA
+    ====================================================== -->
+
+    <main class="game-page">
+
+        <div
+            class="game-container"
+            id="game-container"
+        >
 
             <div
-                class="games-grid"
-                id="games"
-                aria-live="polite"
-            ></div>
-
-
-            <!-- Loading -->
-            <div
-                class="loading-state"
-                id="loadingState"
+                class="game-loading"
+                id="game-loading"
             >
 
                 <div class="loading-spinner"></div>
 
-                <p>Loading games...</p>
+                <div>
+                    <strong id="loading-game-name">
+                        Loading game...
+                    </strong>
 
-            </div>
-
-
-            <!-- No Results -->
-            <div
-                class="no-results"
-                id="noResults"
-                hidden
-            >
-
-                <div class="no-results-icon">
-                    <span class="material-icons">search_off</span>
+                    <span>
+                        Please wait
+                    </span>
                 </div>
 
-                <h3>No games found</h3>
-
-                <p>
-                    Try a different search or remove some filters.
-                </p>
-
-                <button
-                    type="button"
-                    id="resetFilters"
-                >
-                    Reset Filters
-                </button>
-
             </div>
 
-        </section>
+
+            <iframe
+                id="game-frame"
+                title="Game"
+                allow="
+                    fullscreen;
+                    autoplay;
+                    gamepad;
+                    pointer-lock;
+                    clipboard-read;
+                    clipboard-write
+                "
+                allowfullscreen
+                frameborder="0"
+            ></iframe>
+
+        </div>
 
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
-    <footer class="footer">
+    <!-- =====================================================
+         HELP WINDOW
+    ====================================================== -->
 
-        <div class="footer-inner">
+    <div
+        class="modal-overlay"
+        id="help-overlay"
+        onclick="closeHelpFromOverlay(event)"
+    >
 
-            <div class="footer-brand">
-                <strong>Spatium</strong>
-                <span>· GameVault</span>
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="help-title"
+        >
+
+            <div class="modal-header">
+
+                <div>
+                    <div
+                        class="modal-title"
+                        id="help-title"
+                    >
+                        Game Help
+                    </div>
+
+                    <div class="modal-subtitle">
+                        Spatium GameVault
+                    </div>
+                </div>
+
+                <button
+                    class="modal-close"
+                    onclick="closeHelpWindow()"
+                    aria-label="Close help"
+                >
+                    <span class="material-icons">
+                        close
+                    </span>
+                </button>
+
             </div>
 
-            <div class="footer-links">
 
-                <a href="./index.html">Home</a>
-                <a href="./games.html">Games</a>
-                <a href="./chat.html">Chat</a>
-                <a href="./settings.html">Settings</a>
+            <div class="help-content">
 
-            </div>
+                <div class="help-row">
 
-            <div class="footer-copy">
-                © 2026 Spatium
+                    <span class="material-icons">
+                        fullscreen
+                    </span>
+
+                    <div>
+                        <strong>Fullscreen</strong>
+                        <p>
+                            Expand the game to fill your screen.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="help-row">
+
+                    <span class="material-icons">
+                        arrow_back
+                    </span>
+
+                    <div>
+                        <strong>Back</strong>
+                        <p>
+                            Return to the GameVault.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="help-row">
+
+                    <span class="material-icons">
+                        settings
+                    </span>
+
+                    <div>
+                        <strong>Settings</strong>
+                        <p>
+                            Open available game controls and settings.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="help-row">
+
+                    <span class="material-icons">
+                        keyboard
+                    </span>
+
+                    <div>
+                        <strong>Keyboard</strong>
+                        <p>
+                            Game controls depend on the game you're playing.
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-    </footer>
+    </div>
 
 
-    <script src="./js/games.js"></script>
+    <!-- =====================================================
+         SETTINGS WINDOW
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="settings-overlay"
+        onclick="closeSettingsFromOverlay(event)"
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="modal-header">
+
+                <div>
+                    <div class="modal-title">
+                        Game Settings
+                    </div>
+
+                    <div class="modal-subtitle">
+                        Player controls
+                    </div>
+                </div>
+
+                <button
+                    class="modal-close"
+                    onclick="closeControllerSettings()"
+                    aria-label="Close settings"
+                >
+                    <span class="material-icons">
+                        close
+                    </span>
+                </button>
+
+            </div>
+
+
+            <div class="settings-content">
+
+                <button
+                    class="setting-button"
+                    onclick="ToggleFullscreen()"
+                >
+
+                    <span class="material-icons">
+                        fullscreen
+                    </span>
+
+                    <span>
+                        Toggle Fullscreen
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="setting-button"
+                    onclick="reloadGame()"
+                >
+
+                    <span class="material-icons">
+                        refresh
+                    </span>
+
+                    <span>
+                        Restart Game
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="setting-button"
+                    onclick="Backhome()"
+                >
+
+                    <span class="material-icons">
+                        arrow_back
+                    </span>
+
+                    <span>
+                        Back to Games
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="./js/game.js"></script>
 
 </body>
 </html>
