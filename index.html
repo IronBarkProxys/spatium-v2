@@ -1,0 +1,3578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0a0b0e"
+    >
+
+    <title>Spatium · Games</title>
+
+    <meta
+        name="title"
+        content="Spatium"
+    >
+
+    <meta
+        name="author"
+        content="Spatium"
+    >
+
+    <meta
+        name="description"
+        content="Play games online with Spatium. Discover, play, and explore a growing collection of browser games."
+    >
+
+    <meta
+        name="keywords"
+        content="Spatium, games, browser games, online games, HTML5 games, play games"
+    >
+
+    <meta
+        name="language"
+        content="English"
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:title"
+        content="Spatium · Games"
+    >
+
+    <meta
+        property="og:description"
+        content="Discover and play browser games on Spatium."
+    >
+
+    <meta
+        property="og:url"
+        content="https://ironbarkproxys.github.io/spatium-v2/"
+    >
+
+    <meta
+        property="og:locale"
+        content="en_US"
+    >
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image"
+    >
+
+    <meta
+        name="twitter:title"
+        content="Spatium · Games"
+    >
+
+    <meta
+        name="twitter:description"
+        content="Discover and play browser games on Spatium."
+    >
+
+
+    <!-- =========================================
+         FONTS
+    ========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================================
+         ICONS
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./iconcss/weather-icons.min.css"
+    >
+
+
+    <!-- =========================================
+         SPATIUM CSS
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./main.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./animations.css"
+    >
+
+    <link
+        id="themecss"
+        rel="stylesheet"
+        href="./styles/default.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./home.css"
+    >
+
+
+    <!-- =========================================
+         FAVICON
+    ========================================== -->
+
+    <link
+        rel="icon"
+        href="./assets/favicon.svg"
+    >
+
+
+    <!-- =========================================
+         STRUCTURED DATA
+    ========================================== -->
+
+    <script type="application/ld+json">
+
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Spatium",
+        "description": "Play browser games on Spatium."
+    }
+
+    </script>
+
+</head>
+
+
+<body
+    data-spatium-theme-scripts="enabled"
+    data-bg="mesh"
+    data-density="cozy"
+>
+
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
+
+    <div
+        class="bg-stage"
+        aria-hidden="true"
+    >
+
+        <div class="grid-bg"></div>
+
+        <div class="glow"></div>
+
+        <div class="glow b"></div>
+
+    </div>
+
+
+    <div
+        id="backgroundarea"
+        style="
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100vh;
+            z-index:-2;
+            overflow:hidden;
+        "
+    ></div>
+
+
+
+    <!-- =========================================
+         COOKIE NOTIFICATION
+    ========================================== -->
+
+    <div
+        id="notafication"
+        class="notafication-v2"
+    >
+
+        <button
+            id="closenote"
+            class="notification-close"
+            aria-label="Close notification"
+        >
+
+            <span class="material-icons">
+                close
+            </span>
+
+        </button>
+
+
+        <div class="notification-top">
+
+            <div class="notification-icon">
+
+                <img
+                    id="cookiepic"
+                    src="./cookieimg.png"
+                    alt="Cookie icon"
+                >
+
+            </div>
+
+
+            <div
+                id="notification-spinner"
+                class="notification-spinner"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="notification-content">
+
+                <h2
+                    id="titlenote"
+                    class="notification-title"
+                >
+                    We Use Cookies
+                </h2>
+
+                <p
+                    id="descnote"
+                    class="notification-desc"
+                >
+                    By using our site you agree to cookies
+                    for analytics and personalization.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="notification-bottom"
+            class="notification-bottom"
+            style="display:none;"
+        >
+
+            <a
+                href="./privacy.html"
+                class="notification-btn"
+            >
+
+                <span class="material-icons">
+                    info
+                </span>
+
+                Learn More
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         TRANSLATE
+    ========================================== -->
+
+    <div
+        class="translatecontainer"
+        id="translateM"
+    >
+
+        <p
+            style="
+                font-size:18px;
+                font-weight:500;
+                left:10px;
+                position:relative;
+            "
+        >
+            Translate
+        </p>
+
+
+        <span
+            class="material-icons notranslate"
+            onclick="ToggleTranslate()"
+            style="
+                float:right;
+                cursor:pointer;
+                position:relative;
+                top:-40.5px;
+                right:10px;
+            "
+            role="button"
+            aria-label="Close translation menu"
+            tabindex="0"
+        >
+            close
+        </span>
+
+
+        <div
+            class="lineidk"
+            style="top:-13px;"
+        ></div>
+
+
+        <div
+            style="
+                top:50%;
+                position:absolute;
+                left:50%;
+                transform:translate(-50%,-50%);
+            "
+            id="google_translate_element"
+        ></div>
+
+
+        <script>
+
+            function googleTranslateElementInit() {
+
+                new google.translate.TranslateElement(
+                    {
+                        pageLanguage: "en",
+                        layout:
+                            google.translate.TranslateElement
+                                .InlineLayout
+                                .SIMPLE
+                    },
+                    "google_translate_element"
+                );
+
+            }
+
+        </script>
+
+
+        <script src="./auto-translate.js"></script>
+
+    </div>
+
+
+
+    <!-- =========================================
+         FILTER MENU
+    ========================================== -->
+
+    <div
+        class="filtercontainer"
+        id="filterM"
+    >
+
+        <div
+            style="
+                width:100%;
+                position:relative;
+                height:70px;
+            "
+        >
+
+            <span
+                class="closefilterw"
+                onclick="ToggleFilter()"
+                role="button"
+                aria-label="Close filter menu"
+                tabindex="0"
+            >
+
+                <span class="material-icons notranslate">
+                    close
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <div class="filter-radio-group">
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="no filter"
+                    checked
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                No Filter
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('casual')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Casual"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Casual
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('shooter')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Shooter"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Shooter
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('driver')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Driver"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Driver
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('horror')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Horror"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Horror
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('idle')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Idle"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Idle
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('multiplayer')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Multiplayer"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Multiplayer
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('puzzle')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Puzzle"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Puzzle
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('sandbox')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Sandbox"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Sandbox
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('sport')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Sports"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Sports
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('story')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Story"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Story
+
+            </label>
+
+
+            <label
+                class="filter-radio-container"
+                onclick="filterByTag('flash')"
+            >
+
+                <input
+                    type="radio"
+                    name="custom-radio"
+                    value="Flash"
+                >
+
+                <span class="filter-radio-checkmark"></span>
+
+                Flash
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <div
+        id="sidenavcont"
+        class="sidenavcont"
+    >
+
+        <div
+            id="sidenav"
+            class="sidenav-dev"
+        >
+
+
+            <!-- SIDEBAR HEADER -->
+
+            <div class="sidenav-header">
+
+                <div class="sidenav-brand">
+
+                    <img
+                        src="./assets/favicon.svg"
+                        class="sidenav-logo"
+                        alt="Spatium Logo"
+                    >
+
+
+                    <div class="sidenav-title">
+
+                        <h2>
+                            Spatium
+                        </h2>
+
+                        <span class="sidenav-subtitle">
+                            Play. Discover. Explore.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sidenav-controls">
+
+                    <a
+                        href="./settings.html"
+                        class="sidenav-icon-btn"
+                        aria-label="Settings"
+                    >
+
+                        <span class="material-icons">
+                            settings
+                        </span>
+
+                    </a>
+
+
+                    <button
+                        onclick="ToggleSideNav()"
+                        class="sidenav-icon-btn"
+                        aria-label="Close menu"
+                    >
+
+                        <span class="material-icons">
+                            close
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SIDEBAR MENU -->
+
+            <nav class="sidenav-menu">
+
+
+                <div class="menu-section">
+
+                    <h3 class="menu-section-title">
+                        Navigation
+                    </h3>
+
+
+                    <a
+                        href="./index.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            home
+                        </span>
+
+                        <span class="menu-text">
+                            Home
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./games.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            sports_esports
+                        </span>
+
+                        <span class="menu-text">
+                            Games
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./chat.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            chat
+                        </span>
+
+                        <span class="menu-text">
+                            Community Chat
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./activity.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            history
+                        </span>
+
+                        <span class="menu-text">
+                            My Activity
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- COMMUNITY -->
+
+                <div class="menu-section">
+
+                    <h3 class="menu-section-title">
+                        Community
+                    </h3>
+
+
+                    <a
+                        href="./request-game.html"
+                        class="menu-item menu-item-highlight"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            add_circle
+                        </span>
+
+                        <span class="menu-text">
+                            Request a Game
+                        </span>
+
+                        <span class="menu-badge">
+                            New
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./report-bug.html"
+                        class="menu-item menu-item-warning"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            bug_report
+                        </span>
+
+                        <span class="menu-text">
+                            Report a Bug
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- EXTRAS -->
+
+                <div class="menu-section">
+
+                    <h3 class="menu-section-title">
+                        Extras
+                    </h3>
+
+
+                    <a
+                        href="./upcoming.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            schedule
+                        </span>
+
+                        <span class="menu-text">
+                            Upcoming Games
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./settings.html"
+                        class="menu-item"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            settings
+                        </span>
+
+                        <span class="menu-text">
+                            Settings
+                        </span>
+
+                        <span class="menu-arrow material-icons">
+                            chevron_right
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- LEGAL -->
+
+                <div class="menu-section">
+
+                    <h3 class="menu-section-title">
+                        Legal
+                    </h3>
+
+
+                    <a
+                        href="./privacy.html"
+                        class="menu-item menu-item-secondary"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            policy
+                        </span>
+
+                        <span class="menu-text">
+                            Privacy Policy
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./terms.html"
+                        class="menu-item menu-item-secondary"
+                    >
+
+                        <span class="material-icons menu-icon">
+                            description
+                        </span>
+
+                        <span class="menu-text">
+                            Terms of Service
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </nav>
+
+
+
+            <!-- SIDEBAR FOOTER -->
+
+            <div class="sidenav-footer">
+
+                <div
+                    id="weather-widget"
+                    class="weather-widget"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
+                >
+
+                    <div
+                        id="weather-loading"
+                        class="weather-loading"
+                        style="display:none;"
+                    >
+
+                        <span class="material-icons">
+                            hourglass_empty
+                        </span>
+
+                    </div>
+
+
+                    <div class="weather-main">
+
+                        <i
+                            id="weather-icon"
+                            class="wi wi-day-sunny weather-icon"
+                        ></i>
+
+
+                        <div class="weather-main-info">
+
+                            <div
+                                id="weather-temp"
+                                class="weather-temp"
+                            >
+                                --°
+                            </div>
+
+                            <div
+                                id="weather-condition"
+                                class="weather-condition"
+                            >
+                                Loading...
+                            </div>
+
+                        </div>
+
+
+                        <span class="weather-expand-icon material-icons">
+                            expand_more
+                        </span>
+
+                    </div>
+
+
+                    <div class="weather-expandable">
+
+                        <div
+                            id="weather-location"
+                            class="weather-location"
+                        >
+                            Detecting location...
+                        </div>
+
+
+                        <div class="weather-details">
+
+
+                            <div class="weather-detail-item">
+
+                                <i class="wi wi-humidity weather-detail-icon"></i>
+
+                                <div class="weather-detail-content">
+
+                                    <span
+                                        id="weather-humidity"
+                                        class="weather-detail-value"
+                                    >
+                                        --%
+                                    </span>
+
+                                    <span class="weather-detail-label">
+                                        Humidity
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="weather-detail-item">
+
+                                <i class="wi wi-strong-wind weather-detail-icon"></i>
+
+                                <div class="weather-detail-content">
+
+                                    <span
+                                        id="weather-wind"
+                                        class="weather-detail-value"
+                                    >
+                                        -- km/h
+                                    </span>
+
+                                    <span class="weather-detail-label">
+                                        Wind
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="weather-detail-item">
+
+                                <i class="wi wi-thermometer weather-detail-icon"></i>
+
+                                <div class="weather-detail-content">
+
+                                    <span
+                                        id="weather-feels-like"
+                                        class="weather-detail-value"
+                                    >
+                                        --°
+                                    </span>
+
+                                    <span class="weather-detail-label">
+                                        Feels Like
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <p class="footer-text">
+                    Powered by Open-Meteo
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="backdropside"
+            id="backdropside"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         TOP NAV
+    ========================================== -->
+
+    <nav
+        class="nav"
+        role="navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="nav-inner">
+
+
+            <!-- BRAND -->
+
+            <div
+                class="brand"
+                onclick="ToggleSideNav()"
+                role="button"
+                tabindex="0"
+                aria-label="Open navigation menu"
+                style="cursor:pointer;"
+                onkeydown="
+                    if(event.key==='Enter'||event.key===' ')
+                    ToggleSideNav()
+                "
+            >
+
+                <div
+                    class="brand-mark"
+                    aria-hidden="true"
+                >
+
+                    <img
+                        src="./assets/favicon.svg"
+                        class="brand-logo"
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div class="brand-name">
+                    Spatium
+                </div>
+
+
+                <span class="brand-tag">
+                    Beta
+                </span>
+
+            </div>
+
+
+
+            <!-- NAV LINKS -->
+
+            <div class="nav-links">
+
+                <a
+                    class="nav-link is-active"
+                    href="./index.html"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    class="nav-link"
+                    href="./games.html"
+                >
+                    Games
+                </a>
+
+
+                <a
+                    class="nav-link"
+                    href="./chat.html"
+                >
+                    Chat
+                </a>
+
+
+                <a
+                    class="nav-link"
+                    href="./upcoming.html"
+                >
+                    Upcoming
+                </a>
+
+
+                <a
+                    class="nav-link"
+                    href="./activity.html"
+                >
+                    Activity
+                </a>
+
+            </div>
+
+
+            <div class="nav-spacer"></div>
+
+
+
+            <!-- SEARCH -->
+
+            <label
+                class="nav-search"
+                for="gamesearch"
+            >
+
+                <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    />
+
+                    <path
+                        d="m20 20-3.5-3.5"
+                    />
+
+                </svg>
+
+
+                <input
+                    id="gamesearch"
+                    type="text"
+                    placeholder="Search games…"
+                    aria-label="Search games"
+                    autocomplete="off"
+                >
+
+
+                <span
+                    class="kbd"
+                    aria-hidden="true"
+                >
+                    ⌘K
+                </span>
+
+            </label>
+
+
+
+            <!-- ACCOUNT -->
+
+            <a
+                class="icon-btn"
+                href="./account.html"
+                title="Account"
+                aria-label="Open account"
+            >
+
+                <span class="material-icons">
+                    person
+                </span>
+
+            </a>
+
+
+
+            <!-- CHANGELOG -->
+
+            <button
+                class="icon-btn"
+                title="Changelog"
+                id="changelogButton"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="changelogModal"
+            >
+
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path
+                        d="M3 12a9 9 0 1 0 3-6.7L3 8"
+                    />
+
+                    <path
+                        d="M3 3v5h5"
+                    />
+
+                    <path
+                        d="M12 7v5l3 2"
+                    />
+
+                </svg>
+
+            </button>
+
+
+
+            <!-- TRANSLATE -->
+
+            <button
+                class="icon-btn"
+                title="Translate"
+                type="button"
+                onclick="ToggleTranslate()"
+                aria-label="Open translate"
+            >
+
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M5 8h14"/>
+                    <path d="M9 4v2"/>
+                    <path d="M7 8s1.5 7 6 10"/>
+                    <path d="M13 8s-1 5-6 10"/>
+                    <path d="m13 20 4-9 4 9"/>
+                    <path d="M14.5 17h5"/>
+
+                </svg>
+
+            </button>
+
+
+
+            <!-- MENU -->
+
+            <button
+                class="icon-btn nav-menu-btn"
+                title="Menu"
+                type="button"
+                onclick="ToggleSideNav()"
+                aria-label="Open navigation menu"
+            >
+
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                >
+
+                    <path d="M4 7h16"/>
+                    <path d="M4 12h16"/>
+                    <path d="M4 17h16"/>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="shell">
+
+
+        <!-- HERO -->
+
+        <section
+            class="hero"
+            id="home"
+            aria-label="Spatium home"
+        >
+
+
+            <!-- HERO LEFT -->
+
+            <div class="hero-spotlight">
+
+                <div
+                    class="hero-brand-glow"
+                    aria-hidden="true"
+                ></div>
+
+
+                <img
+                    src="./assets/favicon.svg"
+                    alt=""
+                    class="hero-brand-logo"
+                    aria-hidden="true"
+                >
+
+
+                <div class="hero-spot-content">
+
+
+                    <div class="hero-spot-main">
+
+
+                        <div class="hero-eyebrow">
+
+                            <span
+                                class="dot"
+                                aria-hidden="true"
+                            ></span>
+
+                            Browser games
+
+                        </div>
+
+
+                        <h1 class="hero-title">
+                            Play Anywhere.
+                        </h1>
+
+
+                        <div class="hero-meta">
+
+                            <span>
+                                <b id="heroGameCount">–</b>
+                                games online
+                            </span>
+
+
+                            <span
+                                class="sep"
+                                aria-hidden="true"
+                            >
+                                ·
+                            </span>
+
+
+                            <span>
+                                HTML5 · Free · Fast
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            class="hero-play-btn"
+                            href="#games-section"
+                        >
+
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+
+                                <path
+                                    d="M8 5v14l11-7z"
+                                />
+
+                            </svg>
+
+                            Browse Games
+
+                        </a>
+
+                    </div>
+
+
+                    <aside
+                        class="hero-jumpback"
+                        id="heroJumpBack"
+                        hidden
+                        aria-label="Recent games"
+                    >
+
+                        <h3>
+                            Jump back in
+                        </h3>
+
+                        <div
+                            class="hero-jumpback-list"
+                            id="heroJumpBackList"
+                        ></div>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HERO RIGHT -->
+
+            <aside
+                class="hero-side"
+                aria-label="Quick navigation"
+            >
+
+
+                <div class="hero-welcome">
+
+                    <div>
+
+                        <h2 id="greeting">
+                            Welcome to Spatium.
+                        </h2>
+
+                        <p>
+                            Ready to play?
+                            Browse the catalog below.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="stat"
+                        aria-label="Game count"
+                    >
+
+                        <div
+                            class="n"
+                            id="gameCount"
+                        >
+                            –
+                        </div>
+
+                        <div class="l">
+                            games online
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="hero-quick">
+
+                    <h3>
+                        Jump in
+                    </h3>
+
+
+                    <div class="quick-grid">
+
+
+                        <a
+                            class="quick-tile"
+                            href="./games.html"
+                        >
+
+                            <span
+                                class="qi"
+                                aria-hidden="true"
+                            >
+
+                                <span class="material-icons">
+                                    sports_esports
+                                </span>
+
+                            </span>
+
+                            Games
+
+                        </a>
+
+
+                        <a
+                            class="quick-tile"
+                            href="./chat.html"
+                        >
+
+                            <span
+                                class="qi"
+                                aria-hidden="true"
+                            >
+
+                                <span class="material-icons">
+                                    chat
+                                </span>
+
+                            </span>
+
+                            Community Chat
+
+                        </a>
+
+
+                        <a
+                            class="quick-tile"
+                            href="./activity.html"
+                        >
+
+                            <span
+                                class="qi"
+                                aria-hidden="true"
+                            >
+
+                                <span class="material-icons">
+                                    history
+                                </span>
+
+                            </span>
+
+                            My Activity
+
+                        </a>
+
+
+                        <a
+                            class="quick-tile"
+                            href="./account.html"
+                        >
+
+                            <span
+                                class="qi"
+                                aria-hidden="true"
+                            >
+
+                                <span class="material-icons">
+                                    person
+                                </span>
+
+                            </span>
+
+                            Account
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+
+        <!-- =========================================
+             FEATURED
+        ========================================== -->
+
+        <section
+            class="section"
+            aria-labelledby="featTitle"
+        >
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2
+                        class="section-title"
+                        id="featTitle"
+                    >
+                        Featured
+                    </h2>
+
+                    <p class="section-sub">
+                        Games worth checking out
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="featured-section">
+
+                <div
+                    class="carousel-container"
+                    id="carouselContainer"
+                >
+
+                    <div class="loading">
+                        Loading featured games…
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             RECENTLY PLAYED
+        ========================================== -->
+
+        <section
+            class="section"
+            id="recSection"
+            aria-labelledby="recTitle"
+            style="display:none;"
+        >
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2
+                        class="section-title"
+                        id="recTitle"
+                    >
+                        Recently played
+                    </h2>
+
+                    <p class="section-sub">
+                        Pick up where you left off
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <button
+                        class="chev"
+                        id="recPrev"
+                        aria-label="Scroll left"
+                    >
+                        ‹
+                    </button>
+
+
+                    <button
+                        class="chev"
+                        id="recNext"
+                        aria-label="Scroll right"
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="row-track"
+                id="recTrack"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             ALL GAMES
+        ========================================== -->
+
+        <section
+            class="section"
+            id="games-section"
+            aria-labelledby="gamesTitle"
+        >
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2
+                        class="section-title"
+                        id="gamesTitle"
+                    >
+
+                        All Games
+
+                        <span
+                            class="count"
+                            id="gridCount"
+                        ></span>
+
+                    </h2>
+
+
+                    <p class="section-sub">
+                        Browse the full Spatium catalog.
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <div class="sort">
+
+                        <select
+                            id="sortSel"
+                            aria-label="Sort games"
+                        >
+
+                            <option value="">
+                                Sort: Default
+                            </option>
+
+                            <option value="az">
+                                A – Z
+                            </option>
+
+                            <option value="za">
+                                Z – A
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CATEGORY CHIPS -->
+
+            <div
+                class="chips"
+                id="chips"
+                role="group"
+                aria-label="Filter by category"
+            ></div>
+
+
+
+            <!-- GAMES -->
+
+            <div id="games"></div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             COMMUNITY
+        ========================================== -->
+
+        <section
+            class="discord-strip"
+            aria-label="Spatium community"
+        >
+
+            <div>
+
+                <h3 class="ds-title">
+                    Join the Spatium community
+                </h3>
+
+                <p class="ds-sub">
+                    Chat, request games, report bugs,
+                    and connect with other players.
+                </p>
+
+            </div>
+
+
+            <a
+                class="btn-primary"
+                href="./chat.html"
+            >
+
+                <span class="material-icons">
+                    chat
+                </span>
+
+                Open Chat
+
+            </a>
+
+        </section>
+
+
+
+        <!-- =========================================
+             CHANGELOG
+        ========================================== -->
+
+        <div
+            id="changelogModal"
+            class="changelog-modal"
+            hidden
+            aria-hidden="true"
+        >
+
+            <div
+                id="changelogBackdrop"
+                class="changelog-modal-backdrop"
+            ></div>
+
+
+            <section
+                class="changelog-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="changelogTitle"
+            >
+
+                <div class="changelog-panel-header">
+
+                    <div class="changelog-panel-title-wrap">
+
+                        <span
+                            class="changelog-panel-icon-wrap"
+                            aria-hidden="true"
+                        >
+
+                            <span class="material-icons changelog-panel-icon">
+                                update
+                            </span>
+
+                        </span>
+
+
+                        <div>
+
+                            <h2
+                                id="changelogTitle"
+                                class="changelog-panel-title"
+                            >
+                                Changelog
+                            </h2>
+
+                            <p class="changelog-panel-subtitle">
+                                Latest Spatium updates
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="changelogClose"
+                        class="changelog-close-btn"
+                        type="button"
+                        aria-label="Close changelog"
+                    >
+
+                        <span class="material-icons">
+                            close
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="changelog-panel-body">
+
+                    <pre
+                        id="changelogContent"
+                        class="changelog-content"
+                    >
+Loading changelog...
+                    </pre>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- =========================================
+             FOOTER
+        ========================================== -->
+
+        <footer class="foot">
+
+            <div class="foot-copy">
+
+                © 2026 Spatium
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    gap:18px;
+                "
+            >
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+                <a href="./terms.html">
+                    Terms
+                </a>
+
+                <a
+                    href="#"
+                    id="footerChangelogLink"
+                >
+                    Changelog
+                </a>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================== -->
+
+    <script
+        defer
+        src="./accessibility.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./useractivity.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./gameSearch.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./globalscripts/page-transition.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./gameloader.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./GlobalSettings.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./ftgames.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./main.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./note.js"
+    ></script>
+
+
+    <script
+        defer
+        src="./globalscripts/homepage-init.js"
+    ></script>
+
+
+
+    <!-- =========================================
+         HOME FEATURES
+    ========================================== -->
+
+    <script>
+
+    (function () {
+
+        "use strict";
+
+
+        /* =====================================
+           GREETING
+        ===================================== */
+
+        function setGreeting() {
+
+            var hour =
+                new Date().getHours();
+
+            var greeting;
+
+            if (hour < 5) {
+
+                greeting =
+                    "Still up?";
+
+            }
+
+            else if (hour < 12) {
+
+                greeting =
+                    "Good morning.";
+
+            }
+
+            else if (hour < 17) {
+
+                greeting =
+                    "Good afternoon.";
+
+            }
+
+            else if (hour < 21) {
+
+                greeting =
+                    "Good evening.";
+
+            }
+
+            else {
+
+                greeting =
+                    "Late night session?";
+
+            }
+
+
+            var element =
+                document.getElementById(
+                    "greeting"
+                );
+
+
+            if (element) {
+
+                element.textContent =
+                    greeting;
+
+            }
+
+        }
+
+
+        setGreeting();
+
+
+
+        /* =====================================
+           SEARCH SHORTCUT
+        ===================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    (event.metaKey ||
+                     event.ctrlKey) &&
+                    event.key.toLowerCase() === "k"
+                ) {
+
+                    event.preventDefault();
+
+
+                    var search =
+                        document.getElementById(
+                            "gamesearch"
+                        );
+
+
+                    if (search) {
+
+                        search.focus();
+
+                    }
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           CATEGORY CHIPS
+        ===================================== */
+
+        var categories = [
+
+            {
+                id: "",
+                label: "All"
+            },
+
+            {
+                id: "casual",
+                label: "Casual"
+            },
+
+            {
+                id: "shooter",
+                label: "Shooter"
+            },
+
+            {
+                id: "driver",
+                label: "Driver"
+            },
+
+            {
+                id: "horror",
+                label: "Horror"
+            },
+
+            {
+                id: "idle",
+                label: "Idle"
+            },
+
+            {
+                id: "multiplayer",
+                label: "Multiplayer"
+            },
+
+            {
+                id: "puzzle",
+                label: "Puzzle"
+            },
+
+            {
+                id: "sandbox",
+                label: "Sandbox"
+            },
+
+            {
+                id: "sport",
+                label: "Sports"
+            },
+
+            {
+                id: "story",
+                label: "Story"
+            },
+
+            {
+                id: "flash",
+                label: "Flash"
+            }
+
+        ];
+
+
+        var chips =
+            document.getElementById(
+                "chips"
+            );
+
+
+        if (chips) {
+
+            categories.forEach(
+                function (category) {
+
+                    var button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.className =
+                        "chip" +
+                        (
+                            category.id === ""
+                                ? " is-active"
+                                : ""
+                        );
+
+
+                    button.type =
+                        "button";
+
+
+                    button.textContent =
+                        category.label;
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            chips
+                                .querySelectorAll(
+                                    ".chip"
+                                )
+                                .forEach(
+                                    function (chip) {
+
+                                        chip.classList.remove(
+                                            "is-active"
+                                        );
+
+                                    }
+                                );
+
+
+                            button.classList.add(
+                                "is-active"
+                            );
+
+
+                            if (
+                                typeof filterByTag ===
+                                "function"
+                            ) {
+
+                                filterByTag(
+                                    category.id
+                                );
+
+                            }
+
+
+                            updateGridCount();
+
+                        }
+                    );
+
+
+                    chips.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           SORT
+        ===================================== */
+
+        var sortSelect =
+            document.getElementById(
+                "sortSel"
+            );
+
+
+        if (sortSelect) {
+
+            sortSelect.addEventListener(
+                "change",
+                function () {
+
+                    var value =
+                        sortSelect.value;
+
+
+                    var games =
+                        document.getElementById(
+                            "games"
+                        );
+
+
+                    if (!games) {
+                        return;
+                    }
+
+
+                    var items =
+                        Array.from(
+                            games.querySelectorAll(
+                                ".gameitem:not(.ad-item)"
+                            )
+                        );
+
+
+                    items.sort(
+                        function (a, b) {
+
+                            var aName =
+                                (
+                                    a.dataset.gameName ||
+                                    a.id ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            var bName =
+                                (
+                                    b.dataset.gameName ||
+                                    b.id ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            if (
+                                value === "az"
+                            ) {
+
+                                return aName.localeCompare(
+                                    bName
+                                );
+
+                            }
+
+
+                            if (
+                                value === "za"
+                            ) {
+
+                                return bName.localeCompare(
+                                    aName
+                                );
+
+                            }
+
+
+                            return (
+                                Number(
+                                    a.dataset.originalOrder
+                                ) || 0
+                            ) -
+                            (
+                                Number(
+                                    b.dataset.originalOrder
+                                ) || 0
+                            );
+
+                        }
+                    );
+
+
+                    items.forEach(
+                        function (item) {
+
+                            item.style.order =
+                                "";
+
+                            games.appendChild(
+                                item
+                            );
+
+                        }
+                    );
+
+
+                    if (
+                        typeof redistributeFeedAds ===
+                        "function"
+                    ) {
+
+                        redistributeFeedAds();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           GAME COUNT
+        ===================================== */
+
+        function getCatalogCount() {
+
+            var publishedCount =
+                Number(
+                    window.spatiumCatalogGameCount
+                );
+
+
+            if (
+                Number.isFinite(
+                    publishedCount
+                ) &&
+                publishedCount > 0
+            ) {
+
+                return publishedCount;
+
+            }
+
+
+            var games =
+                document.getElementById(
+                    "games"
+                );
+
+
+            if (!games) {
+                return 0;
+            }
+
+
+            return games.querySelectorAll(
+                ".gameitem:not(.ad-item)"
+            ).length;
+
+        }
+
+
+
+        function updateGridCount() {
+
+            var count =
+                getCatalogCount();
+
+
+            if (count <= 0) {
+                return;
+            }
+
+
+            var countText =
+                "— " +
+                String(count).padStart(
+                    3,
+                    "0"
+                );
+
+
+            var gridCount =
+                document.getElementById(
+                    "gridCount"
+                );
+
+
+            var heroCount =
+                document.getElementById(
+                    "heroGameCount"
+                );
+
+
+            var gameCount =
+                document.getElementById(
+                    "gameCount"
+                );
+
+
+            if (gridCount) {
+
+                gridCount.textContent =
+                    countText;
+
+            }
+
+
+            if (heroCount) {
+
+                heroCount.textContent =
+                    count;
+
+            }
+
+
+            if (gameCount) {
+
+                gameCount.textContent =
+                    count;
+
+            }
+
+        }
+
+
+        window.addEventListener(
+            "spatium:catalog-count",
+            updateGridCount
+        );
+
+
+        window.addEventListener(
+            "qz:catalog-count",
+            updateGridCount
+        );
+
+
+
+        /* =====================================
+           GAME OBSERVER
+        ===================================== */
+
+        var games =
+            document.getElementById(
+                "games"
+            );
+
+
+        if (games) {
+
+            var observer =
+                new MutationObserver(
+                    function () {
+
+                        updateGridCount();
+
+                    }
+                );
+
+
+            observer.observe(
+                games,
+                {
+                    childList: true,
+                    subtree: false
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           CHANGELOG FOOTER
+        ===================================== */
+
+        var footerChangelog =
+            document.getElementById(
+                "footerChangelogLink"
+            );
+
+
+        if (footerChangelog) {
+
+            footerChangelog.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    var button =
+                        document.getElementById(
+                            "changelogButton"
+                        );
+
+
+                    if (button) {
+
+                        button.click();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           RECENTLY PLAYED
+        ===================================== */
+
+        function parseTimestamp(
+            value
+        ) {
+
+            if (
+                typeof value === "number" &&
+                Number.isFinite(value)
+            ) {
+
+                return value;
+
+            }
+
+
+            if (
+                typeof value === "string"
+            ) {
+
+                var parsed =
+                    Date.parse(value);
+
+
+                if (
+                    Number.isFinite(parsed)
+                ) {
+
+                    return parsed;
+
+                }
+
+            }
+
+
+            return 0;
+
+        }
+
+
+
+        function formatTimeAgo(
+            timestamp
+        ) {
+
+            var difference =
+                Date.now() -
+                timestamp;
+
+
+            if (difference < 0) {
+                difference = 0;
+            }
+
+
+            if (
+                difference <
+                60000
+            ) {
+
+                return "just now";
+
+            }
+
+
+            if (
+                difference <
+                3600000
+            ) {
+
+                return (
+                    Math.floor(
+                        difference /
+                        60000
+                    ) +
+                    " min ago"
+                );
+
+            }
+
+
+            if (
+                difference <
+                86400000
+            ) {
+
+                return (
+                    Math.floor(
+                        difference /
+                        3600000
+                    ) +
+                    " hr ago"
+                );
+
+            }
+
+
+            if (
+                difference <
+                172800000
+            ) {
+
+                return "yesterday";
+
+            }
+
+
+            return (
+                Math.floor(
+                    difference /
+                    86400000
+                ) +
+                " days ago"
+            );
+
+        }
+
+
+
+        function normalizeActivityEntries(
+            data
+        ) {
+
+            if (!data) {
+                return [];
+            }
+
+
+            if (Array.isArray(data)) {
+
+                return data
+                    .filter(
+                        function (entry) {
+
+                            return (
+                                entry &&
+                                entry.gameKey
+                            );
+
+                        }
+                    )
+                    .map(
+                        function (entry) {
+
+                            return [
+                                String(
+                                    entry.gameKey
+                                ),
+                                entry
+                            ];
+
+                        }
+                    );
+
+            }
+
+
+            if (
+                data.games &&
+                typeof data.games ===
+                "object"
+            ) {
+
+                return Object.entries(
+                    data.games
+                );
+
+            }
+
+
+            return [];
+
+        }
+
+
+
+        function resolveGameEntry(
+            gamesData,
+            key
+        ) {
+
+            if (
+                !gamesData ||
+                !key
+            ) {
+
+                return {
+                    id: String(key || ""),
+                    game: null
+                };
+
+            }
+
+
+            if (
+                gamesData[key]
+            ) {
+
+                return {
+                    id: String(key),
+                    game: gamesData[key]
+                };
+
+            }
+
+
+            var normalized =
+                String(key).toLowerCase();
+
+
+            var keys =
+                Object.keys(
+                    gamesData
+                );
+
+
+            for (
+                var i = 0;
+                i < keys.length;
+                i++
+            ) {
+
+                if (
+                    String(
+                        keys[i]
+                    ).toLowerCase() ===
+                    normalized
+                ) {
+
+                    return {
+                        id: String(
+                            keys[i]
+                        ),
+                        game: gamesData[
+                            keys[i]
+                        ]
+                    };
+
+                }
+
+            }
+
+
+            return {
+                id: String(key),
+                game: null
+            };
+
+        }
+
+
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value || ""
+            )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#39;"
+            );
+
+        }
+
+
+
+        function renderHeroJumpBack(
+            entries,
+            gamesData
+        ) {
+
+            var wrap =
+                document.getElementById(
+                    "heroJumpBack"
+                );
+
+
+            var list =
+                document.getElementById(
+                    "heroJumpBackList"
+                );
+
+
+            if (
+                !wrap ||
+                !list
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                !entries ||
+                entries.length === 0
+            ) {
+
+                wrap.hidden =
+                    true;
+
+                list.innerHTML =
+                    "";
+
+                return;
+
+            }
+
+
+            list.innerHTML =
+                "";
+
+
+            entries
+                .slice(0, 3)
+                .forEach(
+                    function (entry) {
+
+                        var key =
+                            entry[0];
+
+
+                        var activity =
+                            entry[1] || {};
+
+
+                        var resolved =
+                            resolveGameEntry(
+                                gamesData,
+                                key
+                            );
+
+
+                        var game =
+                            resolved.game;
+
+
+                        var name =
+                            game &&
+                            game.name
+                                ? game.name
+                                : String(
+                                    key
+                                ).replace(
+                                    /[-_]+/g,
+                                    " "
+                                );
+
+
+                        var playedAt =
+                            parseTimestamp(
+                                activity.lastPlayed
+                            );
+
+
+                        var played =
+                            playedAt
+                                ? formatTimeAgo(
+                                    playedAt
+                                )
+                                : "played recently";
+
+
+                        var cover =
+                            game &&
+                            game.cover
+                                ? "./covers/" +
+                                  game.cover
+                                : "";
+
+
+                        var link =
+                            "./games/" +
+                            encodeURIComponent(
+                                resolved.id
+                            ) +
+                            "/";
+
+
+                        var item =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        item.className =
+                            "hero-jump-link";
+
+
+                        item.href =
+                            link;
+
+
+                        item.dataset.gameId =
+                            resolved.id;
+
+
+                        item.dataset.gameName =
+                            name;
+
+
+                        item.innerHTML =
+
+                            '<span class="hero-jump-thumb">' +
+
+                                (
+                                    cover
+
+                                        ? '<img loading="lazy" src="' +
+                                          escapeHtml(
+                                              cover
+                                          ) +
+                                          '" alt="' +
+                                          escapeHtml(
+                                              name
+                                          ) +
+                                          '">'
+
+                                        : '<span class="hero-jump-thumb-fallback">▶</span>'
+                                ) +
+
+                            '</span>' +
+
+                            '<span class="hero-jump-copy">' +
+
+                                '<span class="hero-jump-name">' +
+                                    escapeHtml(
+                                        name
+                                    ) +
+                                '</span>' +
+
+                                '<span class="hero-jump-meta">' +
+                                    escapeHtml(
+                                        played
+                                    ) +
+                                '</span>' +
+
+                            '</span>';
+
+
+                        list.appendChild(
+                            item
+                        );
+
+                    }
+                );
+
+
+            wrap.hidden =
+                false;
+
+        }
+
+
+
+        function renderRecentlyPlayed(
+            gamesData
+        ) {
+
+            if (
+                typeof getActivityData !==
+                "function"
+            ) {
+
+                return;
+
+            }
+
+
+            var data =
+                getActivityData();
+
+
+            var entries =
+                normalizeActivityEntries(
+                    data
+                )
+                .map(
+                    function (entry) {
+
+                        return [
+                            entry[0],
+                            entry[1],
+                            parseTimestamp(
+                                entry[1] &&
+                                entry[1].lastPlayed
+                            )
+                        ];
+
+                    }
+                )
+                .filter(
+                    function (entry) {
+
+                        return entry[2] > 0;
+
+                    }
+                )
+                .sort(
+                    function (a, b) {
+
+                        return b[2] - a[2];
+
+                    }
+                );
+
+
+            renderHeroJumpBack(
+                entries.map(
+                    function (entry) {
+
+                        return [
+                            entry[0],
+                            entry[1]
+                        ];
+
+                    }
+                ),
+                gamesData
+            );
+
+
+            var section =
+                document.getElementById(
+                    "recSection"
+                );
+
+
+            var track =
+                document.getElementById(
+                    "recTrack"
+                );
+
+
+            if (
+                !section ||
+                !track ||
+                entries.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            track.innerHTML =
+                "";
+
+
+            entries
+                .slice(0, 8)
+                .forEach(
+                    function (entry) {
+
+                        var resolved =
+                            resolveGameEntry(
+                                gamesData,
+                                entry[0]
+                            );
+
+
+                        var game =
+                            resolved.game;
+
+
+                        var name =
+                            game &&
+                            game.name
+                                ? game.name
+                                : String(
+                                    entry[0]
+                                ).replace(
+                                    /[-_]+/g,
+                                    " "
+                                );
+
+
+                        var cover =
+                            game &&
+                            game.cover
+                                ? "./covers/" +
+                                  game.cover
+                                : null;
+
+
+                        var link =
+                            "./games/" +
+                            encodeURIComponent(
+                                resolved.id
+                            ) +
+                            "/";
+
+
+                        var card =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        card.className =
+                            "r-card";
+
+
+                        card.href =
+                            link;
+
+
+                        card.innerHTML =
+
+                            '<div class="r-thumb">' +
+
+                                (
+                                    cover
+
+                                        ? '<img loading="lazy" src="' +
+                                          escapeHtml(
+                                              cover
+                                          ) +
+                                          '" alt="' +
+                                          escapeHtml(
+                                              name
+                                          ) +
+                                          '">'
+
+                                        : '<div style="width:100%;height:100%;background:var(--bg-2);border-radius:inherit;"></div>'
+                                ) +
+
+                                '<div class="r-play">▶</div>' +
+
+                            '</div>' +
+
+                            '<div class="r-body">' +
+
+                                '<div class="r-name">' +
+                                    escapeHtml(
+                                        name
+                                    ) +
+                                '</div>' +
+
+                                '<div class="r-meta">' +
+                                    escapeHtml(
+                                        formatTimeAgo(
+                                            entry[2]
+                                        )
+                                    ) +
+                                '</div>' +
+
+                            '</div>';
+
+
+                        track.appendChild(
+                            card
+                        );
+
+                    }
+                );
+
+
+            section.style.display =
+                "";
+
+
+            var previous =
+                document.getElementById(
+                    "recPrev"
+                );
+
+
+            var next =
+                document.getElementById(
+                    "recNext"
+                );
+
+
+            if (previous) {
+
+                previous.addEventListener(
+                    "click",
+                    function () {
+
+                        track.scrollBy(
+                            {
+                                left:
+                                    -track.clientWidth *
+                                    0.8,
+                                behavior:
+                                    "smooth"
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (next) {
+
+                next.addEventListener(
+                    "click",
+                    function () {
+
+                        track.scrollBy(
+                            {
+                                left:
+                                    track.clientWidth *
+                                    0.8,
+                                behavior:
+                                    "smooth"
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+
+
+
+        function tryRenderRecentlyPlayed(
+            attempts
+        ) {
+
+            attempts =
+                attempts || 0;
+
+
+            if (
+                typeof getActivityData !==
+                "function"
+            ) {
+
+                if (
+                    attempts < 20
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            tryRenderRecentlyPlayed(
+                                attempts + 1
+                            );
+
+                        },
+                        300
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            if (
+                !window.GameCatalog
+            ) {
+
+                if (
+                    attempts < 20
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            tryRenderRecentlyPlayed(
+                                attempts + 1
+                            );
+
+                        },
+                        300
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            if (
+                typeof window.GameCatalog.fetchGamesData !==
+                "function"
+            ) {
+
+                return;
+
+            }
+
+
+            window.GameCatalog
+                .fetchGamesData()
+                .then(
+                    function (data) {
+
+                        renderRecentlyPlayed(
+                            data
+                        );
+
+                    }
+                )
+                .catch(
+                    function () {
+
+                        renderRecentlyPlayed(
+                            null
+                        );
+
+                    }
+                );
+
+        }
+
+
+
+        if (
+            document.readyState ===
+            "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
+
+                    setTimeout(
+                        tryRenderRecentlyPlayed,
+                        800
+                    );
+
+                }
+            );
+
+        }
+
+        else {
+
+            setTimeout(
+                tryRenderRecentlyPlayed,
+                800
+            );
+
+        }
+
+    })();
+
+    </script>
+
+</body>
+
+</html>
