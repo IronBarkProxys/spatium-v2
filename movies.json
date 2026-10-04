@@ -1,0 +1,8 @@
+{
+  "title": "Example Movie",
+  "name": "Example Movie",
+  "rating": 8.5,
+  "type": "Movie",
+  "category": "Action",
+  "url": "https://example.com/movie"
+}
